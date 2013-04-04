@@ -12,7 +12,7 @@
 <!--load this only for admin-->
 <script type="text/javascript">
   var App = App || {};
-  App.prefix = "<%= params[:controller] %>:<%= params[:action] %>:";
+  App.prefix = "<%= params[:controller] %>_<%= params[:action] %>_";
 </script>
 <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 </body>

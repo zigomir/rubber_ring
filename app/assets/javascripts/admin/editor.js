@@ -27,8 +27,8 @@ App.edit = App.resetEdit(null);
 $(function() {
   "use strict";
 
-  // on doubleclick of all data-cms that ends with text
-  $("body > *[data-cms$=text]").on("dblclick", function (e) {
+  // on double click of all data-cms-type="text"
+  $("body > *[data-cms-type=text]").on("dblclick", function (e) {
     var $clickedElement = $(e.currentTarget),
         value = $clickedElement.text();
 
@@ -51,13 +51,13 @@ $(function() {
 
   $("body").on("change", "input.edit", function(e) {
     var $editedValue = $(e.currentTarget),
-        key          = App.edit.element.data("cms").split(":")[0],
+        key          = App.prefix + App.edit.element.data("cms"),
         value        = $editedValue.val();
 
     console.log(key + " => " + value);
 
     // TODO client doesn't have to know routes before
-    $.post('admin/cms/save', {prefix: App.prefix, value: value}, function(data) {
+    $.post('admin/cms/save', {key: key, value: value}, function(data) {
       console.log(data);
       App.resetEdit(App.edit);
     });

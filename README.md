@@ -29,6 +29,14 @@ Please feel free to use a different markup language if you do not plan to run
 
 ## Rubber Ring documentation
 
-<p data-cms="key:text">Here is my editable content</p>
+CMS fields are made of key and data type
+class, and id are optional
 
-- TODO rails helper for this kind of tags maybeh?
+<%= editable_field(:p, {key: 'key', type: 'text', class: 'class', id: 'id'}, @content) do %>
+  Here is my editable content
+<% end %>
+
+
+# TODOs
+- somehow try to disable key duplication
+- when admin wants tu publish new changes he clicks "Publish" and this will cache page as static HTML to public folder
