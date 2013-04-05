@@ -1,8 +1,8 @@
 var App = App || {};
+App.edit = {};
 
 (function() {
   "use strict";
-
 
   function resetEdit(edit) {
     if (edit !== null && edit.element !== null && edit.input !== null) {
@@ -19,10 +19,17 @@ var App = App || {};
     };
   }
 
-  App.resetEdit = resetEdit;
-})();
+  function getKey() {
+    if (App.edit.element === undefined) {
+      console.warn("Can't get key because cms element is not even set!");
+    }
 
-App.edit = App.resetEdit(null);
+    return App.edit.element.data("cms");
+  }
+
+  App.edit.getKey = getKey;
+  App.edit.reset  = resetEdit;
+})();
 
 $(function() {
   "use strict";
@@ -35,8 +42,12 @@ $(function() {
     $clickedElement.focus();
 
     if (value.length > 0) {
-      console.log(value);
       App.edit.element = $(e.currentTarget);
+
+      console.group("Editing CMS content");
+      console.log("Content key '%s'", App.edit.getKey());
+      console.log("Content value '%s'", value);
+      console.groupEnd();
 
       // here change this to input
       App.edit.input = $('<input type="text" class="edit" value="' + value + '" />').insertAfter($clickedElement);
@@ -46,20 +57,18 @@ $(function() {
   });
 
   $("body").on("blur", "input.edit", function(e) {
-    App.resetEdit(App.edit);
+    App.edit.reset(App.edit);
   });
 
   $("body").on("change", "input.edit", function(e) {
     var $editedValue = $(e.currentTarget),
-        key          = App.prefix + App.edit.element.data("cms"),
-        value        = $editedValue.val();
-
-    console.log(key + " => " + value);
+        value        = $editedValue.val(),
+        postObject   = {page_controller: App.controller, page_action: App.action, key: App.edit.getKey(), value: value};
 
     // TODO client doesn't have to know routes before
-    $.post('admin/cms/save', {key: key, value: value}, function(data) {
+    $.post('admin/cms/save', postObject, function(data) {
       console.log(data);
-      App.resetEdit(App.edit);
+      App.edit.reset(App.edit);
     });
   });
 });

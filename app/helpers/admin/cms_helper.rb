@@ -1,8 +1,12 @@
 module Admin::CmsHelper
 
   def editable_field(tag, options = {}, content, &block)
-    key = [params[:controller], params[:action], options[:key]].join('_').to_sym
-    content_value = content[key]
+    content_value = nil
+
+    unless content.nil?
+      key = options[:key]
+      content_value = content[key]
+    end
 
     if content_value.nil?
       content_tag(tag,

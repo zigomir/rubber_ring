@@ -1,12 +1,15 @@
 class Admin::CmsController < ApplicationController
 
   def save
-    key   = params[:key]
-    value = params[:value]
+    options = {
+      controller: params[:page_controller],
+      action:     params[:page_action],
+      key:        params[:key],
+      value:      params[:value]
+    }
 
-    # TODO store with HSTORE http://railscasts.com/episodes/345-hstore
-    # or Gdoc?
-    render :json => { key: key, value: value }
+    page = Page.save_or_update(options)
+    render :json => { controller: page.controller, action: page.action, content: page.content }
   end
 
 end

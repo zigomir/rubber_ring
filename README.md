@@ -29,6 +29,8 @@ Please feel free to use a different markup language if you do not plan to run
 
 ## Rubber Ring documentation
 
+Supported content types for now will be: text (simple text) and html.
+
 CMS fields are made of key and data type
 class, and id are optional
 
@@ -38,5 +40,18 @@ class, and id are optional
 
 
 # TODOs
-- somehow try to disable key duplication
-- when admin wants tu publish new changes he clicks "Publish" and this will cache page as static HTML to public folder
+- Disable key duplication
+- Write tests!
+- Controller + Action = Unique
+- Emberize! :)
+- "Publish" will cache as static HTML which is later sent to production server
+
+## Software dependencies
+
+Postgres hstore
+
+    sudo apt-get install postgresql-contrib
+
+    sudo -u postgres psql rubber_ring_development -c 'create extension hstore;'
+    sudo -u postgres psql rubber_ring_test -c 'create extension hstore;'
+    sudo -u postgres psql rubber_ring_production -c 'create extension hstore;'
