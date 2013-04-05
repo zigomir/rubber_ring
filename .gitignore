@@ -16,3 +16,6 @@
 /tmp
 
 .idea
+
+# Woot! Public belongs to customer
+public/*

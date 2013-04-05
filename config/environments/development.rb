@@ -11,7 +11,21 @@ RubberRing::Application.configure do
 
   # Show full error reports and disable caching.
   config.consider_all_requests_local       = true
-  config.action_controller.perform_caching = false
+  config.action_controller.perform_caching = true
+  config.action_controller.page_cache_directory = Rails.root.to_s + '/public'
+
+  # testing caches
+  config.serve_static_assets = true
+  # Compress JavaScripts and CSS.
+  config.assets.js_compressor  = :uglifier
+  # config.assets.css_compressor = :sass
+  # Whether to fallback to assets pipeline if a precompiled asset is missed.
+  config.assets.compile = false
+  # Generate digests for assets URLs.
+  config.assets.digest = true
+
+
+
 
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false

@@ -1,4 +1,4 @@
-class Admin::CmsLoadController < ApplicationController
+class CmsLoadController < ApplicationController
   before_action :load_page_content
 
   def load_page_content

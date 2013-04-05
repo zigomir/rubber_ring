@@ -66,7 +66,7 @@ $(function() {
         postObject   = {page_controller: App.controller, page_action: App.action, key: App.edit.getKey(), value: value};
 
     // TODO client doesn't have to know routes before
-    $.post('admin/cms/save', postObject, function(data) {
+    $.post('cms/save', postObject, function(data) {
       console.log(data);
       App.edit.reset(App.edit);
     });
