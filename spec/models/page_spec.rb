@@ -25,4 +25,10 @@ describe Page do
     expect(page.content['key']).to eq 'value'
     expect(page.content['key2']).to eq 'value2'
   end
+
+  it 'should not create new page if one already exists' do
+    Page.create({controller: 'test', action: 'test', content: {'key' => 'value'}})
+    expect(Page.all.count).to eq 1
+    expect { Page.create({controller: 'test', action: 'test', content: {'key' => 'value'}}) }.to raise_error
+  end
 end

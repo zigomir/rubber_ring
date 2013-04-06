@@ -21,8 +21,7 @@ ActiveRecord::Schema.define(version: 20130405205121) do
     t.datetime "updated_at"
   end
 
-  add_index "pages", ["action"], name: "index_pages_on_action"
   add_index "pages", ["content"], name: "pages_gin_content"
-  add_index "pages", ["controller"], name: "index_pages_on_controller"
+  add_index "pages", ["controller", "action"], name: "index_pages_on_controller_and_action", unique: true
 
 end

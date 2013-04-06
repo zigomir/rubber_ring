@@ -36,7 +36,6 @@ class, and id are optional
 
 
 # TODOs
-- Disable key duplication
 - Write (JavaScript) tests!
 - Controller + Action = Unique
 - Emberize! :)

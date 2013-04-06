@@ -1,13 +1,11 @@
 class PageHstoreIndex < ActiveRecord::Migration
   def up
-    add_index :pages, :controller
-    add_index :pages, :action
+    add_index :pages, [:controller, :action], :unique => true
     execute 'CREATE INDEX pages_gin_content ON pages USING GIN(content)'
   end
 
   def down
-    remove_index :pages, :controller
-    remove_index :pages, :action
+    remove_index :pages, :column => [:controller, :action]
     execute 'DROP INDEX pages_gin_content'
   end
 end
