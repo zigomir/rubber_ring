@@ -1,4 +1,4 @@
-module Admin::CmsHelper
+module CmsHelper
 
   def editable_field(tag, options = {}, content, &block)
     content_value = nil
