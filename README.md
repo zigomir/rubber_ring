@@ -37,7 +37,7 @@ class, and id are optional
 
 # TODOs
 - Disable key duplication
-- Write tests!
+- Write (JavaScript) tests!
 - Controller + Action = Unique
 - Emberize! :)
 - "Publish" will cache as static HTML which is later sent to production server

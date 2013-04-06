@@ -6,8 +6,8 @@ class Page < ActiveRecord::Base
 
     if page.nil?
       new_page = create(
-        controller: params[:controller],
-        action:     params[:action],
+        controller: options[:controller],
+        action:     options[:action],
         content:    {options[:key] => options[:value]}
       )
       new_page
