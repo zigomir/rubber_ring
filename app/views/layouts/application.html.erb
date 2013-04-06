@@ -2,20 +2,24 @@
 <html>
 <head>
   <title>RubberRing</title>
-  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
+  <% unless @page_caching %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  <% end %>
 </head>
 <body>
 
 <%= yield %>
 
 <!--load this only for admin-->
-<script type="text/javascript">
-  var App = App || {};
-  App.controller = "<%= params[:controller] %>";
-  App.action     = "<%= params[:action] %>";
-//  App.prefix     = App.controller + "_" + App.action;
+<% unless @page_caching %>
+  <script type="text/javascript">
+    var App = App || {};
+    App.controller = "<%= params[:controller] %>";
+    App.action     = "<%= params[:action] %>";
 </script>
+<a href="?cache=1" target="_blank">Preview and prepare for publish!</a>
 <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+<% end %>
 </body>
 </html>

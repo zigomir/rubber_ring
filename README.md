@@ -42,10 +42,12 @@ class, and id are optional
 # TODOs
 - Pull request for actionpack-page_caching gem in readme about config.action_controller.page_cache_directory = Rails.root.to_s + '/public'
 
+- assets => assets precompile to deploy
+
 - Disable key duplication
 - Write tests!
 - Controller + Action = Unique
-- Emberize! :)
+- Emberize backend! :)
 - "Publish" will cache as static HTML which is later sent to production server
 
 # Benefits
