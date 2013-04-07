@@ -1,4 +1,4 @@
-class CmsController < ApplicationController
+class RubberRing::CmsController < ApplicationController
   before_action :load_page_content
   before_filter :cache?
 
@@ -11,7 +11,7 @@ class CmsController < ApplicationController
     }
 
     page = Page.save_or_update(options)
-    expire_page(controller: params[:page_controller], action: params[:page_action])
+    expire_page(controller: '/' + params[:page_controller], action: params[:page_action])
 
     render :json => { controller: page.controller, action: page.action, content: page.content }
   end

@@ -2,8 +2,10 @@
 <html>
 <head>
   <title>RubberRing</title>
+  <%= stylesheet_link_tag 'all', media: 'all' %>
+
   <% unless @page_caching %>
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= stylesheet_link_tag 'rubber_ring/cms', media: 'all' %>
     <%= csrf_meta_tags %>
   <% end %>
 </head>
@@ -17,9 +19,10 @@
     var App = App || {};
     App.controller = "<%= params[:controller] %>";
     App.action     = "<%= params[:action] %>";
-</script>
-<a href="?cache=1" target="_blank">Preview and prepare for publish!</a>
-<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  </script>
+  <a href="?cache=1" target="_blank">Preview and prepare for publish!</a>
+  <%= javascript_include_tag 'rubber_ring/editor' %>
 <% end %>
+<%= javascript_include_tag 'main' %>
 </body>
 </html>

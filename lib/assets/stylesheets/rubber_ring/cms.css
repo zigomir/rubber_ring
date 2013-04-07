@@ -1,0 +1,4 @@
+*[data-cms-type="text"] {
+  border: dashed green 1px;
+  cursor: pointer;
+}

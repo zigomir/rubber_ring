@@ -17,5 +17,9 @@
 
 .idea
 
-# Woot! Public belongs to customer
-public/*
+# Public and public deploy belongs to customer
+public
+
+# Ignore site specific files
+site/
+site_controller.rb

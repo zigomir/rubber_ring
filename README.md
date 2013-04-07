@@ -36,12 +36,18 @@ class, and id are optional
 
 
 # TODOs
+- Assets!
+- rename deploy to build -> try minification there with grunt
 - Write (JavaScript) tests!
-- Controller + Action = Unique
 - Emberize! :)
 - "Publish" will cache as static HTML which is later sent to production server
 - Extract to Rails Engine (+ ruby gem:)
 - generator for new pages
+
+## Usage
+
+Generate site controller. (TODO generator)
+Create views/site/site.html.erb view, views/layouts/site/layout.html.erb for layout.
 
 ## Benefits
 
