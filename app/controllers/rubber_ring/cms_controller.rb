@@ -28,6 +28,7 @@ class RubberRing::CmsController < ApplicationController
   def cache?
     if params[:cache] == '1'
       @page_caching = true
+      system("#{Rails.root.to_s}/build.sh")
     end
   end
 

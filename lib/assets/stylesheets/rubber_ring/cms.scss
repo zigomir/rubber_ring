@@ -1,0 +1,21 @@
+/**
+ * rubber ring specific styles. Here you shall not use any general elements or selectors at all.
+ */
+*[data-cms-type="text"] {
+  border: dashed green 1px;
+  cursor: pointer;
+}
+.rubber_cache_preview {
+  font-family: calibri,tahoma,arial,sans-serif;
+  position: fixed;
+  right: 0;
+  top: 0;
+
+  a {
+    color: green;
+
+    &:visited {
+      color: green;
+    }
+  }
+}

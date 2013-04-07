@@ -38,11 +38,12 @@ class, and id are optional
 
 
 # TODOs
-- Assets!
-- rename deploy to build -> try minification there with grunt
+- Assets:
+  - minify assets with grunt from build script
+- firefox + ie editing is not as good as in chrome (webkit)
 - Write (JavaScript) tests!
 - Emberize! :)
-- "Publish" will cache as static HTML which is later sent to production server
+
 - Extract to Rails Engine (+ ruby gem:)
 - generator for new pages
 
@@ -50,6 +51,12 @@ class, and id are optional
 
 Generate site controller. (TODO generator)
 Create views/site/site.html.erb view, views/layouts/site/layout.html.erb for layout.
+
+## Deploy site to production
+
+`Preview and prepare` => cache to `public/deploy`
+
+`Publish` => `rsync` or `capistrano` to server (TODO)
 
 ## Benefits
 

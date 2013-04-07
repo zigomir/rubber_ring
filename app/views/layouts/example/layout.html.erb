@@ -13,14 +13,15 @@
 
 <%= yield %>
 
-<!--load this only for admin-->
 <% unless @page_caching %>
   <script type="text/javascript">
     var App = App || {};
     App.controller = "<%= params[:controller] %>";
     App.action     = "<%= params[:action] %>";
   </script>
-  <a href="?cache=1" target="_blank">Preview and prepare for publish!</a>
+  <div class="rubber_cache_preview">
+    <a href="?cache=1" target="_blank">Preview and prepare for publish!</a>
+  </div>
   <%= javascript_include_tag 'rubber_ring/editor' %>
 <% end %>
 <%= javascript_include_tag 'main' %>
