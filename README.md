@@ -8,7 +8,7 @@
 
 ### Database creation:
 
-	rake db:create
+	  rake db:create
     sudo -u postgres psql rubber_ring_development -c 'create extension hstore;'
     sudo -u postgres psql rubber_ring_test -c 'create extension hstore;'
     rake db:migrate RAILS_ENV=development
@@ -17,7 +17,9 @@
 
 * Database initialization
 
-* How to run the test suite
+### Running tests
+
+    rspec spec
 
 * Services (job queues, cache servers, search engines, etc.)
 
