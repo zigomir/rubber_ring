@@ -1,29 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>RubberRing</title>
+  <title>Example page</title>
   <%= stylesheet_link_tag 'all', media: 'all' %>
-
-  <% unless @page_caching %>
-    <%= stylesheet_link_tag 'rubber_ring/cms', media: 'all' %>
-    <%= csrf_meta_tags %>
-  <% end %>
+  <%= render 'rubber_ring/head' %>
 </head>
 <body>
 
 <%= yield %>
 
-<% unless @page_caching %>
-  <script type="text/javascript">
-    var App = App || {};
-    App.controller = "<%= params[:controller] %>";
-    App.action     = "<%= params[:action] %>";
-  </script>
-  <div class="rubber_cache_preview">
-    <a href="?cache=1" target="_blank">Preview and prepare for publish!</a>
-  </div>
-  <%= javascript_include_tag 'rubber_ring/editor' %>
-<% end %>
+<%= render 'rubber_ring/application' %>
 <%= javascript_include_tag 'main' %>
 </body>
 </html>
