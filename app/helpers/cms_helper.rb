@@ -19,7 +19,7 @@ module CmsHelper
       )
     else
       content_tag(tag,
-                  content_value,
+                  raw(content_value),
                   :class            => options[:class],
                   :id               => options[:id],
                   'data-cms'        => options[:key],

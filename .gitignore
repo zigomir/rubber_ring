@@ -17,8 +17,9 @@
 
 .idea
 
-# Public and public deploy belongs to customer
-public
+# public/build goes to customer
+public/build/*
+!public/build/.gitkeep
 
 # Ignore site specific files
 site/
