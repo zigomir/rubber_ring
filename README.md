@@ -8,6 +8,12 @@
 
 ### Database creation:
 
+Postgres hstore
+
+    sudo apt-get install postgresql-contrib
+
+Rails + Postgres commands
+
 	rake db:create
     sudo -u postgres psql rubber_ring_development -c 'create extension hstore;'
     sudo -u postgres psql rubber_ring_test -c 'create extension hstore;'
@@ -64,8 +70,6 @@ Create views/site/site.html.erb view, views/layouts/site/layout.html.erb for lay
 - customer doesn't need application server and/or database. Only apache/nginx for static HTML serving 
 
 ## Postgres hstore
-
-    sudo apt-get install postgresql-contrib
 
 
 ## Future may bring?
