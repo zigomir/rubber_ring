@@ -52,6 +52,10 @@ class, and id are optional
 - Extract to Rails Engine (+ ruby gem:)
 - generator for new pages
 
+## Bugs or edge cases
+
+Paragraphs should not be multiline.
+
 ## Usage
 
 Generate site controller. (TODO generator)

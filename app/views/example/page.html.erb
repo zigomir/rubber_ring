@@ -4,7 +4,7 @@
   Welcome to Rubber Ring - CMS that doesn't make you think about it.
 <% end %>
 
-<%= editable_field(:p, {key: 'first_paragraph', type: 'text'}, @content) do %>
+<%= editable_field(:div, {key: 'first_content', type: 'text', class: 'multi-line'}, @content) do %>
   Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna
   aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut
   aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat,
