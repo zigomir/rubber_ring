@@ -6,34 +6,6 @@
   cursor: pointer;
 }
 
-//Better to show if user pasting newlines - find a way to disable pasting newlines
-//[contenteditable="true"] {
-//  white-space: nowrap;
-//  overflow: hidden;
-//}
-//[contenteditable="true"] br {
-//  display:none;
-//}
-//[contenteditable="true"] * {
-//  display:inline;
-//  white-space:nowrap;
-//}
-
-
-[contenteditable="true"].multi-line {
-  white-space:normal;
-  overflow: visible;
-}
-[contenteditable="true"].multi-line br {
-  display:block;
-}
-[contenteditable="true"].multi-line * {
-  display:block;
-  white-space:normal;
-}
-input.clear {
-  float: right;
-}
 .rubber_cache_preview {
   font-family: calibri,tahoma,arial,sans-serif;
   position: fixed;

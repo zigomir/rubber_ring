@@ -18,7 +18,7 @@ class RubberRing::CmsController < ApplicationController
 
   def load_page_content
     page = Page.where(controller: params[:controller],
-                      action: params[:action])
+                      action:     params[:action])
 
     @content = page.first.content unless page.empty?
   end

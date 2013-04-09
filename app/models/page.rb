@@ -4,15 +4,18 @@ class Page < ActiveRecord::Base
     page = where(controller: options[:controller],
                  action:     options[:action]).first
 
+    key   = options[:key]
+    value = options[:value]
+
     if page.nil?
       new_page = create(
         controller: options[:controller],
         action:     options[:action],
-        content:    {options[:key] => options[:value]}
+        content:    {key => value}
       )
       new_page
     else
-      page.content = (page.content || {}).merge({options[:key] => options[:value]})
+      page.content = (page.content || {}).merge({key => value})
       page.save
       page
     end
