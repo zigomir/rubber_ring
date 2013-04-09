@@ -73,9 +73,34 @@ Create views/site/site.html.erb view, views/layouts/site/layout.html.erb for lay
 - simple to use for customers
 - customer doesn't need application server and/or database. Only apache/nginx for static HTML serving 
 
-## Postgres hstore
-
-
 ## Future may bring?
 
 - service where user page (html + assets) (before must add right attributes to elements she wants to be editable) and than she can start editing her page right away (use grammar for parsing html or at leas really good library)
+
+
+## Similar CMS-es
+
+### Copybar
+
+[Site](https://copybar.io) & [Documentation](https://copybar.io/documentation#quickstartUsers)
+
+#### Advantages
+- really easy to set up and use
+
+#### Disadvantages
+- every time loading content from servers (dependencies)
+- not free (only for 5 elements, which is not enough)
+
+### Perch
+[Site](http://grabaperch.com/)
+
+#### Advantages
+- looks easy
+
+#### Disadvantages
+- not free
+- hosted only
+
+### Other CMS-es for inspiration
+- [CopyCopter](http://copycopter.com) - opensource, ruby
+- [SimpleCMS](http://www.simplecms.com) - not free, service
