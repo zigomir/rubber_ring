@@ -20,16 +20,18 @@ $ ->
   # it is important to sanitize htmlValue or else we will get more and more broken html from database
   # we need to remove any new lines like \r and \n
   $contentEditable.change (e) ->
+    content = {}
     key = $(e.currentTarget).data("cms")
     htmlValue = $(e.currentTarget).html().trim().replace(/[\r\n]/g, '')
+    content[key] = htmlValue
+
     postObject =
       page_controller: App.controller
       page_action: App.action
-      key: key
-      value: htmlValue
+      content: content
 
     console.group "Sending CMS content to server..."
-    console.log "'%s' => '%s'", postObject.key, postObject.value
+    console.log "'%s' => '%s'", key, htmlValue
     console.groupEnd()
     $.post App.save_path, postObject, (data) ->
       console.log data

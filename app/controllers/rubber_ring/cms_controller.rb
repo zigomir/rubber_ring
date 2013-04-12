@@ -16,9 +16,7 @@ class RubberRing::CmsController < ApplicationController
     options = {
       controller: params[:page_controller],
       action:     params[:page_action],
-      duplicable: params[:duplicable],
-      key:        params[:key],
-      value:      params[:value]
+      content:    params[:content]
     }
 
     page = Page.save_or_update(options)
