@@ -17,9 +17,11 @@ $ ->
       $this.trigger "change"
     $this
 
+  # it is important to sanitize htmlValue or else we will get more and more broken html from database
+  # we need to remove any new lines like \r and \n
   $contentEditable.change (e) ->
     key = $(e.currentTarget).data("cms")
-    htmlValue = e.currentTarget.innerHTML
+    htmlValue = $(e.currentTarget).html().trim().replace(/[\r\n]/g, '')
     postObject =
       page_controller: App.controller
       page_action: App.action

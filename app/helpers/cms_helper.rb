@@ -1,8 +1,5 @@
 module CmsHelper
 
-  # it is important to capture and strip block before
-  # when I was passing $block as last argument it would end like clutter because of whitespaces (indentation)
-  # you add in ERB file inside this helper definition
   def editable_field(tag, options = {}, content, &block)
     content_value = nil
 
@@ -20,19 +17,15 @@ module CmsHelper
     }
 
     # if no content yet in database for current key
-    if content_value.nil?
-      content_value = capture(&block).strip
-    else
-      content_value = raw(content_value)
-    end
+    content_value = capture(&block) if content_value.nil?
 
-    content_tag(tag, content_value, content_tag_options)
+    content_tag(tag, raw(content_value), content_tag_options)
   end
 
-  # default to 3 time repeat
   def duplicable_editable_field(tag, options = {}, content, &block)
+    # defaults
     duplications = options[:duplications] || 3
-    child_tag    = options[:child_tag] || 'div'
+    child_tag    = options[:child_tag] || (tag == :ul || tag == :ol) ? 'li' : 'div'
 
     content_tag(tag, {class: 'duplicable_holder'}) do
       duplications.times do |i|
