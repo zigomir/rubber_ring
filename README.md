@@ -2,9 +2,7 @@
 
 * Ruby version: 2.0.0-p0
 
-* System dependencies: postgres
-
-* Configuration
+* DB: postgres
 
 ### Database creation:
 
@@ -44,17 +42,18 @@ class, and id are optional
 
 
 # TODOs
+- duplicable content
+- images
 - Assets:
   - minify assets with grunt from build script
-- firefox + ie editing is not as good as in chrome (webkit)
 - Write (JavaScript) tests!
-- Ember APP for images
 - Extract to Rails Engine (+ ruby gem:)
 - generator for new pages
 
-## Bugs or edge cases
+## Philosophy
 
-Paragraphs should not be multiline.
+* you can not build robust system without limitations
+* system may stretch only to certain point until it breaks. Like a rubber ring!
 
 ## Usage
 

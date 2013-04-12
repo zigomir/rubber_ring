@@ -1,10 +1,7 @@
 <img src="/images/rubber_ring.jpg" alt="" />
 
-<%= editable_field(:h1, {key: 'header', type: 'text'}, @content) do %>
-  Welcome to Rubber Ring - CMS that doesn't make you think about it.
-<% end %>
-
-<!--Freaking problem if block is in new line and with indentation :/-->
-<%= editable_field(:div, {key: 'first_content', type: 'text', class: 'multi-line'}, @content) do %>
-  Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
+<h2>Check out duplicable stuff</h2>
+<!-- 3 is initial duplications, we will let user change it with nice GUI -->
+<%= duplicable_editable_field(:ul, {group: 'blog_posts', child_tag: 'li'}, @content) do %>
+  test
 <% end %>

@@ -6,6 +6,7 @@ class Page < ActiveRecord::Base
 
     key   = options[:key]
     value = options[:value]
+    #times = options[:]
 
     if page.nil?
       new_page = create(
