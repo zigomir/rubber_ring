@@ -6,7 +6,7 @@ class @ImageDragger
     drag_items = document.querySelectorAll(drag_selector);
     for drag_item in drag_items
       addEvent drag_item, 'dragstart', (event) ->
-        event.dataTransfer.setData('src', this.src)
+        event.dataTransfer.setData('src', $(this).attr("src"))
 
     drop_image = document.querySelector(drop_selector);
     # Tells the browser that we *can* drop on this target
