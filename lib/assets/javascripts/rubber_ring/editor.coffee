@@ -1,10 +1,12 @@
 #= require jquery
 #= require jquery_ujs
 #= require dropzone
+#= require bootstrap.min
 #= require h5utils
 #= require ./persistence_manager
 #= require ./image_uploader
 #= require ./image_dragger
+#= require ./image_manager
 
 # jQuery start
 $ ->
@@ -12,8 +14,6 @@ $ ->
   pm = new PersistenceManager()
   $contentEditable = $("[contenteditable]")
   $duplicables     = $(".duplicable")
-  new ImageUploader($(".image_upload_box"))
-  new ImageDragger("[draggable=true]", ".rubber_ring_image")
 
   # register change event for HTML5 content editable
   $("body").on "focus", "[contenteditable]", ->
@@ -62,13 +62,3 @@ $ ->
       $removingField = $(e.currentTarget)
       pm.remove($removingField)
       $removingField.remove()
-
-  # remove all unused images action
-  $(".remove_not_used_images").on "click", ->
-    uploaded_images = ($(item).attr("src") for item in $(".already_uploaded_images img"))
-    used_images     = ($(item).attr("src") for item in $(".rubber_ring_image"))
-
-    for uploaded_image in uploaded_images
-      if uploaded_image not in used_images
-        pm.remove_image(uploaded_image)
-        $(".already_uploaded_images img[src=\"#{uploaded_image}\"]").remove()

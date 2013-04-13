@@ -1,13 +1,25 @@
 /**
  * rubber ring specific styles. Here you shall not use any general elements or selectors at all.
+ *= require bootstrap.min
  */
 *[contenteditable] {
   border: dashed green 1px;
   cursor: pointer;
 }
 
-.rubber_ring {
-  margin: 5px;
+.images-manager {
+  display: none; // hide by default
+
+  .already_uploaded_images {
+    margin-top: 35px;
+    img {
+      width: 65px;
+    }
+  }
+
+  .remove_not_used_images {
+    margin-top: 7px;
+  }
   
   .image_upload_box {
     display: -webkit-flex;
@@ -41,4 +53,9 @@
       }
     }
   }
+}
+
+// bootstrap overrides
+.navbar {
+  margin-bottom: 0;
 }
