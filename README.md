@@ -33,11 +33,13 @@ Rails + Postgres commands
 
 Supported content types for now will be: text (simple text) and html.
 
-CMS fields are made of tag, key and @page. `class`, and `id` are optional
+CMS fields are made of tag, key and `@page` which holds content for all the page keys. `class`, and `id` are optional
 	
 	<%= editable_field(:h1, {key: 'header'}, @page) do %>
 	  Welcome to Rubber Ring - CMS that doesn't make you think about it.
 	<% end %>
+
+	<%= editable_image({key: 'header_image', src: '/images/rubber_ring.jpg'}, @page) %>
 	
 	<%= editable_field(:div, {key: 'first_content', class: 'multi-line'}, @page) do %>
 	  Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
@@ -49,8 +51,11 @@ CMS fields are made of tag, key and @page. `class`, and `id` are optional
 
 
 # TODOs
+- remove images on middle click
+- images resize with imagemagick
+	- disable dragging bigger images on smaller
+- application menu drop
 - better and more consistent naming conventions
-- images selection (+ imagemagick!)
 - duplicable order change
 - nice tutorial (game like)
 - integration tests with phantom js driver

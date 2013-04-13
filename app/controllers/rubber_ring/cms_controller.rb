@@ -67,8 +67,10 @@ class RubberRing::CmsController < ApplicationController
   end
 
   def get_image_directories(params)
-    src_dir = "images/upload/#{params[:controller]}/#{params[:action]}"
-    dir = "public/#{src_dir}"
+    controller = params[:page_controller] || params[:controller]
+    action     = params[:page_action]     || params[:action]
+    src_dir    = "images/upload/#{controller}/#{action}"
+    dir        = "public/#{src_dir}"
     return dir, src_dir
   end
 

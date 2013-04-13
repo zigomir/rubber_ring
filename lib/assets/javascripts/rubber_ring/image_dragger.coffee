@@ -17,6 +17,7 @@ class @ImageDragger
       # stops the browser from redirecting off to the text.
       e.preventDefault() if (e.preventDefault)
       this.src = e.dataTransfer.getData('src')
+      save($(this))
       false
 
   cancel: (e) ->

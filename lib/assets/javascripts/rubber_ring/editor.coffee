@@ -5,6 +5,35 @@
 #= require ./image_uploader
 #= require ./image_dragger
 
+@save = (content) ->
+  post_object =
+    page_controller: App.controller
+    page_action: App.action
+    content: {}
+
+  tag = content.context.localName
+
+  key = content.attr("data-cms") # data wont work here because of cloning dom
+  # it is important to sanitize htmlValue or else we will get more and more broken html from database
+  # we need to remove any new lines like \r and \n
+  value = content.html().trim().replace(/[\r\n]/g, '')
+  value = content.attr("src") if tag is 'img'
+
+  post_object.content[key] = value
+  path = App.save_path
+
+  console.log "Sending CMS content to server..."
+  console.log post_object
+  if content.attr("data-cms-remove")
+    console.log "Removing of key %s content", key
+    path = App.remove_path.replace(':key', key)
+
+  $.post path, post_object, (data) ->
+    console.log data
+    # reload if value was empty - to clear contenteditable br and div tags
+    # TODO orly?
+    window.location.reload true if post_object.value is ""
+
 # jQuery start
 $ ->
   # init
@@ -28,31 +57,6 @@ $ ->
   $contentEditable.change (e) ->
     $content = $(e.currentTarget)
     save($content)
-
-  save = (content) ->
-    post_object =
-      page_controller: App.controller
-      page_action: App.action
-      content: {}
-
-    # it is important to sanitize htmlValue or else we will get more and more broken html from database
-    # we need to remove any new lines like \r and \n
-    htmlValue = content.html().trim().replace(/[\r\n]/g, '')
-    key = content.attr("data-cms") # data wont work here because of cloning dom
-    post_object.content[key] = htmlValue
-
-    path = App.save_path
-
-    console.log "Sending CMS content to server..."
-    console.log post_object
-    if content.attr("data-cms-remove")
-      console.log "Removing of key %s content", key
-      path = App.remove_path.replace(':key', key)
-
-    $.post path, post_object, (data) ->
-      console.log data
-      # reload if value was empty - to clear contenteditable br and div tags
-      window.location.reload true if post_object.value is ""
 
   # disable enter in single line editor
   $contentEditable.not(".multi-line").keydown (e) ->
@@ -87,3 +91,6 @@ $ ->
       # save field to remove it from db
       save($removingField)
       $removingField.remove()
+
+  $(".rubber_ring_image").on "change", (e) ->
+    console.log "save new image source ;) as #{e.currentTarget.src}"
