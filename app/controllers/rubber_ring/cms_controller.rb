@@ -42,10 +42,11 @@ class RubberRing::CmsController < ApplicationController
     render :json => { src: File.join(src_dir, name) }
   end
 
-  # TODO
   def image_remove
-    dir, src_dir = get_image_directories(params)
+    file_to_remove = "public/#{params[:src_to_remove]}"
+    FileUtils.rm(file_to_remove)
 
+    render :json => { src: params[:src_to_remove] }
   end
 
   private

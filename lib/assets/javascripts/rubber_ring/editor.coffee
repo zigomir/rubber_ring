@@ -55,7 +55,6 @@ $ ->
     temp_key[0] = $(".duplicable").length - 1
     temp_key.reverse().join("_")
 
-  # TODO not working properly, again
   # removing keys
   $duplicables.on "mouseup", (e) ->
     if e.which == 2 # middle click for removing elements
@@ -65,9 +64,11 @@ $ ->
       $removingField.remove()
 
   # remove all unused images action
-  $(".remove_not_used_images").on "click", (e) ->
+  $(".remove_not_used_images").on "click", ->
     uploaded_images = ($(item).attr("src") for item in $(".already_uploaded_images img"))
     used_images     = ($(item).attr("src") for item in $(".rubber_ring_image"))
 
     for uploaded_image in uploaded_images
-      console.log uploaded_image if uploaded_image not in used_images
+      if uploaded_image not in used_images
+        pm.remove_image(uploaded_image)
+        $(".already_uploaded_images img[src=\"#{uploaded_image}\"]").remove()

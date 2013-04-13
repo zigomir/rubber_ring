@@ -43,9 +43,9 @@ module CmsHelper
   def duplicable_editable_field(tag, options = {}, page, &block)
     # defaults
     # add duplicable class
-    classes      = options[:class].nil? || options[:class].length == 0 ? 'duplicable' : "#{options[:class]} duplicable"
-    options      = options.merge({class: classes})
-    child_tag    = options[:child_tag] || (tag == :ul || tag == :ol) ? 'li' : 'div'
+    classes   = options[:class].nil? || options[:class].length == 0 ? 'duplicable' : "#{options[:class]} duplicable"
+    options   = options.merge({class: classes})
+    child_tag = options[:child_tag] || (tag == :ul || tag == :ol) ? 'li' : 'div'
 
     group_keys = []
     group_keys = page.group_keys(options[:group]) unless page.nil?
