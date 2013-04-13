@@ -34,17 +34,15 @@ $ ->
     key = content.attr("data-cms") # data wont work here because of cloning dom
     post_object.content[key] = htmlValue
 
-    save_path = App.save_path
+    path = App.save_path
 
-    console.group "Sending CMS content to server..."
+    console.log "Sending CMS content to server..."
     console.log post_object
-    unless content.attr("data-cms-remove") == null
+    if content.attr("data-cms-remove")
       console.log "Removing of key %s content", key
-      save_path += "?remove=1"
+      path = App.remove_path.replace(':key', key)
 
-    console.groupEnd()
-
-    $.post save_path, post_object, (data) ->
+    $.post path, post_object, (data) ->
       console.log data
       # reload if value was empty - to clear contenteditable br and div tags
       window.location.reload true if post_object.value is ""
@@ -56,28 +54,28 @@ $ ->
   # creating new elements
   # save it as soon it is created so deletition will work also like this
   $duplicables.on "dblclick", (e) ->
-    $duplicableField = $(e.currentTarget)
-    $parent = $duplicableField.parent()
+    $editField = $(e.currentTarget)
+    # save parent first because it is possible that it is not yet saved
+    # and we will have problem with counting keys in group
+    save($editField)
     # clone with data and events
-    $clone = $duplicableField.clone(true).appendTo($parent)
+    $clone = $editField.clone(true).appendTo($editField.parent())
 
-    # TODO extract and test
-    temp_key = $clone.data("cms").split("_").reverse()
-    temp_key[0] = $(".duplicable").length - 1
-    new_key = temp_key.reverse().join("_")
+    new_key = generate_new_group_key($clone)
     $clone.attr("data-cms", new_key)
     # save the clone
     save($clone)
 
-  $duplicables.on "click", (e) ->
-    if e.which == 2
+  generate_new_group_key = (element) ->
+    temp_key = element.data("cms").split("_").reverse()
+    temp_key[0] = $(".duplicable").length - 1
+    temp_key.reverse().join("_")
+
+  $duplicables.on "mouseup", (e) ->
+    if e.which == 2 # middle click for removing elements
       e.preventDefault()
       $removingField = $(e.currentTarget)
-      key_to_remove = $removingField.attr("data-cms") # jquery .data is doing too much caching to use it here
       $removingField.attr("data-cms-remove", "true")
-
-      # todo remove this log
-      console.log key_to_remove
 
       # save field to remove it from db
       save($removingField)

@@ -10,19 +10,32 @@ class RubberRing::CmsController < ApplicationController
   end
 
   def save
-    options = {
-      controller: params[:page_controller],
-      action:     params[:page_action],
-      content:    params[:content]
-    }
+    options = get_options_from_params(params)
+    page = Page.save_or_update(options)
+    expire_page(controller: '/' + params[:page_controller], action: params[:page_action])
 
-    page = Page.save_or_update(options, params[:remove] == '1')
+    render :json => { controller: page.controller, action: page.action, content: page.content }
+  end
+
+  def remove
+    options = get_options_from_params(params)
+    key_to_remove = options[:content].keys[0]
+
+    page = Page.remove(options, key_to_remove)
     expire_page(controller: '/' + params[:page_controller], action: params[:page_action])
 
     render :json => { controller: page.controller, action: page.action, content: page.content }
   end
 
   private
+
+  def get_options_from_params(params)
+    {
+      controller: params[:page_controller],
+      action:     params[:page_action],
+      content:    params[:content]
+    }
+  end
 
   def cache?
     if params[:cache] == '1'

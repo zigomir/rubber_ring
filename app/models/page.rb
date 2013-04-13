@@ -1,8 +1,7 @@
 class Page < ActiveRecord::Base
 
-  def self.save_or_update(options, remove_key = false)
-    page = where(controller: options[:controller],
-                 action:     options[:action]).first
+  def self.save_or_update(options)
+    page = load_first_page(options)
 
     if page.nil?
       new_page = create(
@@ -13,13 +12,16 @@ class Page < ActiveRecord::Base
       new_page
     else
       page.content = (page.content || {}).merge(options[:content])
-      if remove_key
-        key_to_remove = options[:content].keys[0]
-        page.content = (page.content || {}).except(key_to_remove)
-      end
       page.save
       page
     end
+  end
+
+  def self.remove(options, key_to_remove)
+    page = load_first_page(options)
+    page.content = (page.content || {}).except(key_to_remove)
+    page.save
+    page
   end
 
   # group key is prefix
@@ -28,6 +30,12 @@ class Page < ActiveRecord::Base
   # this method will match all keys which starts with blog_posts and count them
   def times_duplicable_key(group_key)
     (content.select { |key, _| key.match(group_key) }).keys.length
+  end
+
+  private
+
+  def self.load_first_page(options)
+    where(controller: options[:controller], action: options[:action]).first
   end
 
 end

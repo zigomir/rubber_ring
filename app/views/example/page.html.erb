@@ -10,7 +10,7 @@
 
 <h2>Check out duplicable stuff</h2>
 <!-- 3 is initial duplications, we will let user change it with nice GUI -->
-<%= duplicable_editable_field(:ul, {group: 'blog_posts', child_tag: 'li'}, @page) do %>
+<%= duplicable_editable_field(:ul, {group: 'blog_posts', child_tag: 'li', class: 'multi-line'}, @page) do %>
   Text
   <h3>h3</h3>
   <span>span</span>

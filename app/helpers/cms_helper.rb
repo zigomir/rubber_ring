@@ -29,9 +29,11 @@ module CmsHelper
     # add duplicable class
     classes      = options[:class].nil? || options[:class].length == 0 ? 'duplicable' : "#{options[:class]} duplicable"
     options      = options.merge({class: classes})
-    duplications = options[:duplications] || 1
+    child_tag    = options[:child_tag] || (tag == :ul || tag == :ol) ? 'li' : 'div'
+
+    duplications = 1
     duplications = page.times_duplicable_key(options[:group]) unless page.nil?
-    child_tag    = options[:child_tag]    || (tag == :ul || tag == :ol) ? 'li' : 'div'
+    duplications = 1 if duplications == 0 # at least one
 
     content_tag(tag, {class: 'duplicable_holder'}) do
       duplications.times do |i|

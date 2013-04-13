@@ -1,6 +1,7 @@
 RubberRing::Application.routes.draw do
   namespace :rubber_ring do
-    post 'cms/save', :to => 'cms#save'
+    post 'cms/save',        :to => 'cms#save',   :as => 'cms_save'
+    post 'cms/remove/:key', :to => 'cms#remove', :as => 'cms_remove'
   end
 
   root to: 'example#page'
