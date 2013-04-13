@@ -1,5 +1,4 @@
 # TODO
-- remove images on middle click
 - images resize with imagemagick
 	- disable dragging bigger images on smaller
 - application menu drop

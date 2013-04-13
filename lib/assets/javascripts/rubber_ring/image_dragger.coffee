@@ -16,8 +16,10 @@ class @ImageDragger
     addEvent drop_image, 'drop', (e) ->
       # stops the browser from redirecting off to the text.
       e.preventDefault() if (e.preventDefault)
+
+      pm = new PersistenceManager()
       this.src = e.dataTransfer.getData('src')
-      save($(this))
+      pm.save($(this))
       false
 
   cancel: (e) ->

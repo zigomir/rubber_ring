@@ -17,7 +17,9 @@
       <div class="image_upload_text">Drop new images here</div>
     </div>
     <div class="already_uploaded_images">
-      <button class="remove_not_used_images">Remove not used images</button>
+      <% unless @images.empty? %>
+        <button class="remove_not_used_images">Remove not used images</button>
+      <% end %>
       <% @images.each do |src| %>
         <img src="<%= src %>" draggable="true" />
       <% end %>
