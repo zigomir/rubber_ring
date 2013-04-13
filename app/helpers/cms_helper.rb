@@ -3,7 +3,7 @@ module CmsHelper
   def editable_field(tag, options = {}, page, &block)
     content_value = nil
 
-    unless page.content.nil?
+    unless page.nil?
       key = options[:key]
       content_value = page.content[key]
     end
@@ -24,10 +24,13 @@ module CmsHelper
     content_tag(tag, raw(content_value), content_tag_options)
   end
 
-  # TODO
   def duplicable_editable_field(tag, options = {}, page, &block)
     # defaults
-    duplications = options[:duplications] || page.times_duplicable_key(options[:group])
+    # add duplicable class
+    classes      = options[:class].nil? || options[:class].length == 0 ? 'duplicable' : "#{options[:class]} duplicable"
+    options      = options.merge({class: classes})
+    duplications = options[:duplications] || 1
+    duplications = page.times_duplicable_key(options[:group]) unless page.nil?
     child_tag    = options[:child_tag]    || (tag == :ul || tag == :ol) ? 'li' : 'div'
 
     content_tag(tag, {class: 'duplicable_holder'}) do

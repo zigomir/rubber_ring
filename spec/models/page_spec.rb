@@ -47,24 +47,17 @@ describe Page do
         controller: 'test_controller',
         action:     'test_action',
         content: {
-          'group_key' => {
-            'child_key_1' => 'child_value_1',
-            'child_key_2' => 'child_value_2'
-          }
+          'child_key_0' => 'child_value_0',
+          'child_key_1' => 'child_value_1'
         }
       }
 
       @page = Page.save_or_update(options)
     end
 
-    it 'should have value under grouped key' do
-     expect(@page.group_key?('group_key')).to be_true
-     expect(@page.group_key?('group_key_fake')).to be_false
-
-     #expect(@page.content['group_key'].keys.length).to eq 2
-     expect(@page.times_duplicable_key('group_key')).to eq 2
-
-     expect(@page.content['group_key']['child_key_1']).to eq 'child_value_1'
+    it 'should be in a group of two' do
+     expect(@page.times_duplicable_key('child_key')).to eq 2
+     expect(@page.content['child_key_1']).to eq 'child_value_1'
     end
   end
 

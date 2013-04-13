@@ -33,9 +33,7 @@ Rails + Postgres commands
 
 Supported content types for now will be: text (simple text) and html.
 
-CMS fields are made of key and data type
-class, and id are optional
-
+CMS fields are made of tag, key and @page. `class`, and `id` are optional
 	
 	<%= editable_field(:h1, {key: 'header'}, @page) do %>
 	  Welcome to Rubber Ring - CMS that doesn't make you think about it.
@@ -51,12 +49,12 @@ class, and id are optional
 
 
 # TODOs
-- duplicable content
+- removing duplicable fields with drag and drop outside of window
 - images
-- Assets:
-  - minify assets with grunt from build script
+- integration tests with phantom js driver
 - Write (JavaScript) tests!
 - Extract to Rails Engine (+ ruby gem:)
+- minify assets with grunt from build script
 - generator for new pages
 
 ## Philosophy

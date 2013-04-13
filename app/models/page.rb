@@ -18,10 +18,6 @@ class Page < ActiveRecord::Base
     end
   end
 
-  def group_key?(key)
-    true if content[key].class == Hash
-  end
-
   # group key is prefix
   # example group key: blog_posts
   # real keys are then: blog_posts_0, blog_posts_1, blog_posts_3, ...

@@ -4,6 +4,7 @@
 # jQuery start
 $ ->
   $contentEditable = $("[contenteditable]")
+  $duplicables     = $(".duplicable")
 
   # register change event for HTML5 content editable
   $("body").on "focus", "[contenteditable]", ->
@@ -27,7 +28,7 @@ $ ->
       page_action: App.action
       content: {}
 
-    key = $content.data("cms")
+    key = $content.attr("data-cms") # data wont work here because of cloning dom
     htmlValue = $content.html().trim().replace(/[\r\n]/g, '')
     post_object.content[key] = htmlValue
 
@@ -43,3 +44,16 @@ $ ->
   # disable enter in single line editor
   $contentEditable.not(".multi-line").keydown (e) ->
     e.preventDefault()  if e.keyCode is 13
+
+
+  # creating new elements
+  $duplicables.on "dblclick", (e) ->
+    $duplicableField = $(e.currentTarget)
+    $parent = $duplicableField.parent()
+    # clone with data and events
+    $clone = $duplicableField.clone(true).appendTo($parent)
+
+    temp_key = $clone.data("cms").split("_").reverse()
+    temp_key[0] = $(".duplicable").length - 1
+    new_key = temp_key.reverse().join("_")
+    $clone.attr("data-cms", new_key)
