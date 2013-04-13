@@ -6,10 +6,7 @@ class RubberRing::CmsController < ApplicationController
     page = Page.where(controller: params[:controller],
                       action:     params[:action])
 
-    unless page.empty?
-      @content = page.first.content
-      @content[:duplications] = 1
-    end
+    @page = page.first unless page.empty?
   end
 
   def save

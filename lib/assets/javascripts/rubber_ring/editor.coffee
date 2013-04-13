@@ -20,23 +20,25 @@ $ ->
   # it is important to sanitize htmlValue or else we will get more and more broken html from database
   # we need to remove any new lines like \r and \n
   $contentEditable.change (e) ->
-    content = {}
-    key = $(e.currentTarget).data("cms")
-    htmlValue = $(e.currentTarget).html().trim().replace(/[\r\n]/g, '')
-    content[key] = htmlValue
+    $content = $(e.currentTarget)
 
-    postObject =
+    post_object =
       page_controller: App.controller
       page_action: App.action
-      content: content
+      content: {}
+
+    key = $content.data("cms")
+    htmlValue = $content.html().trim().replace(/[\r\n]/g, '')
+    post_object.content[key] = htmlValue
 
     console.group "Sending CMS content to server..."
-    console.log "'%s' => '%s'", key, htmlValue
+    console.log post_object
     console.groupEnd()
-    $.post App.save_path, postObject, (data) ->
+
+    $.post App.save_path, post_object, (data) ->
       console.log data
       # reload if value was empty - to clear contenteditable br and div tags
-      window.location.reload true if postObject.value is ""
+      window.location.reload true if post_object.value is ""
 
   # disable enter in single line editor
   $contentEditable.not(".multi-line").keydown (e) ->

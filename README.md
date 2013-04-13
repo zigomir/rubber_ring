@@ -36,9 +36,18 @@ Supported content types for now will be: text (simple text) and html.
 CMS fields are made of key and data type
 class, and id are optional
 
-	<%= editable_field(:p, {key: 'key', type: 'text', class: 'class', id: 'id'}, @content) do %>
-  		Here is my editable content
+	
+	<%= editable_field(:h1, {key: 'header'}, @page) do %>
+	  Welcome to Rubber Ring - CMS that doesn't make you think about it.
 	<% end %>
+	
+	<%= editable_field(:div, {key: 'first_content', class: 'multi-line'}, @page) do %>
+	  Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
+	<% end %>
+	
+	<%= duplicable_editable_field(:ul, {group: 'blog_posts'}, @page) do %>
+	<%= duplicable_editable_field(:ul, {group: 'blog_posts', duplications: 2}, @page) do %>
+	<%= duplicable_editable_field(:ul, {group: 'blog_posts', child_tag: 'li', duplications: 2}, @page) do %>
 
 
 # TODOs

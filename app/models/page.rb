@@ -4,9 +4,6 @@ class Page < ActiveRecord::Base
     page = where(controller: options[:controller],
                  action:     options[:action]).first
 
-    #key   = options[:key]
-    #value = options[:value]
-
     if page.nil?
       new_page = create(
         controller: options[:controller],
@@ -25,8 +22,12 @@ class Page < ActiveRecord::Base
     true if content[key].class == Hash
   end
 
-  def times_duplicable_key(key)
-    group_key?(key) ? content[key].keys.length : 0
+  # group key is prefix
+  # example group key: blog_posts
+  # real keys are then: blog_posts_0, blog_posts_1, blog_posts_3, ...
+  # this method will match all keys which starts with blog_posts and count them
+  def times_duplicable_key(group_key)
+    (content.select { |key, _| key.match(group_key) }).keys.length
   end
 
 end
