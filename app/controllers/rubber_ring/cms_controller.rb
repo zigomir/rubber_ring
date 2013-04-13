@@ -7,6 +7,7 @@ class RubberRing::CmsController < ApplicationController
                       action:     params[:action])
 
     @page = page.first unless page.empty?
+    @images = load_images_for_page(params)
   end
 
   def save
@@ -19,12 +20,33 @@ class RubberRing::CmsController < ApplicationController
 
   def remove
     options = get_options_from_params(params)
-    key_to_remove = options[:content].keys[0]
+    key_to_remove = params[:key_to_remove]
 
     page = Page.remove(options, key_to_remove)
     expire_page(controller: '/' + params[:page_controller], action: params[:page_action])
 
     render :json => { controller: page.controller, action: page.action, content: page.content }
+  end
+
+  def image_add
+    dir, src_dir = get_image_directories(params)
+    name = params[:file].original_filename
+
+    unless File.directory?(dir)
+      FileUtils.mkdir_p(dir)
+    end
+
+    path = File.join(dir, name)
+    File.open(path, 'wb') { |f| f.write(params[:file].read) }
+
+    render :json => { src: File.join(src_dir, name) }
+  end
+
+  def image_remove
+    file_to_remove = "public/#{params[:src_to_remove]}"
+    FileUtils.rm(file_to_remove)
+
+    render :json => { src: params[:src_to_remove] }
   end
 
   private
@@ -35,6 +57,28 @@ class RubberRing::CmsController < ApplicationController
       action:     params[:page_action],
       content:    params[:content]
     }
+  end
+
+  def load_images_for_page(params)
+    images = []
+    dir, src_dir = get_image_directories(params)
+
+    if File.directory?(dir)
+      Dir.foreach(dir) do |file|
+        next if file == '.' or file == '..'
+        images << File.join(src_dir, file)
+      end
+    end
+
+    images
+  end
+
+  def get_image_directories(params)
+    controller = params[:page_controller] || params[:controller]
+    action     = params[:page_action]     || params[:action]
+    src_dir    = "images/upload/#{controller}/#{action}"
+    dir        = "public/#{src_dir}"
+    return dir, src_dir
   end
 
   def cache?

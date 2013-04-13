@@ -2,14 +2,14 @@
 <html>
 <head>
   <title>Example page</title>
-  <%= stylesheet_link_tag 'all', media: 'all' %>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <%= render 'rubber_ring/head' %>
+  <%= stylesheet_link_tag 'all', media: 'all' %>
 </head>
 <body>
-
-<%= yield %>
-
 <%= render 'rubber_ring/application' %>
+<!-- page content start -->
+<%= yield %>
 <%= javascript_include_tag 'main' %>
 </body>
 </html>

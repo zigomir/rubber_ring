@@ -1,3 +1,16 @@
+# TODO
+- images resize with imagemagick
+	- disable dragging bigger images on smaller
+- application menu drop
+- better and more consistent naming conventions
+- duplicable order change
+- nice tutorial (game like)
+- integration tests with phantom js driver
+- Write (JavaScript) tests!
+- Extract to Rails Engine (+ ruby gem:)
+- minify assets with grunt from build script
+- generator for new pages
+
 ## Docs
 
 * Ruby version: 2.0.0-p0
@@ -33,11 +46,13 @@ Rails + Postgres commands
 
 Supported content types for now will be: text (simple text) and html.
 
-CMS fields are made of tag, key and @page. `class`, and `id` are optional
+CMS fields are made of tag, key and `@page` which holds content for all the page keys. `class`, and `id` are optional
 	
 	<%= editable_field(:h1, {key: 'header'}, @page) do %>
 	  Welcome to Rubber Ring - CMS that doesn't make you think about it.
 	<% end %>
+
+	<%= editable_image({key: 'header_image', src: '/images/rubber_ring.jpg'}, @page) %>
 	
 	<%= editable_field(:div, {key: 'first_content', class: 'multi-line'}, @page) do %>
 	  Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
@@ -46,17 +61,6 @@ CMS fields are made of tag, key and @page. `class`, and `id` are optional
 	<%= duplicable_editable_field(:ul, {group: 'blog_posts'}, @page) do %>
 	<%= duplicable_editable_field(:ul, {group: 'blog_posts', duplications: 2}, @page) do %>
 	<%= duplicable_editable_field(:ul, {group: 'blog_posts', child_tag: 'li', duplications: 2}, @page) do %>
-
-
-# TODOs
-- removing duplicable fields with middle click
-- nice tutorial
-- images w/ http://www.dropzonejs.com/
-- integration tests with phantom js driver
-- Write (JavaScript) tests!
-- Extract to Rails Engine (+ ruby gem:)
-- minify assets with grunt from build script
-- generator for new pages
 
 ## Philosophy
 
