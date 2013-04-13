@@ -7,12 +7,18 @@
     App.remove_path    = "<%= rubber_ring_cms_remove_path(':key') %>";
     App.add_image_path = "<%= rubber_ring_cms_image_add_path %>";
   </script>
+  <!--TODO whole rubber_ring admin as dropdown menu-->
   <div class="rubber_ring">
     <div class="rubber_cache_preview">
       <a href="?cache=1" target="_blank">Preview and prepare for publish!</a>
     </div>
     <div class="image_upload_box">
       <div class="image_upload_text">Drop new images here</div>
+    </div>
+    <div class="already_uploaded_images">
+      <% @images.each do |src| %>
+        <img src="<%= src %>" />
+      <% end %>
     </div>
   </div>
   <%= javascript_include_tag 'rubber_ring/editor' %>

@@ -25,14 +25,18 @@ module CmsHelper
   end
 
   def editable_image(options = {}, page)
+    image_source = nil
+
+    unless page.nil?
+      key = options[:key]
+      image_source = page.content[key]
+    end
+
     content_tag_options = {
-      :class     => 'rr_uploaded_image',
-      :src       => options[:src],
+      :class     => 'rubber_ring_image',
+      :src       => image_source || options[:src],
       'data-cms' => options[:key]
     }
-    #options = options.merge({class: 'rr_uploaded_image'})
-    #editable_field(:img, options, page)
-    #image_tag()
     content_tag(:img, nil, content_tag_options)
   end
 

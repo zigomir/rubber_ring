@@ -7,6 +7,7 @@ class RubberRing::CmsController < ApplicationController
                       action:     params[:action])
 
     @page = page.first unless page.empty?
+    @images = load_images_for_page(params)
   end
 
   def save
@@ -29,10 +30,15 @@ class RubberRing::CmsController < ApplicationController
 
   def image_add
     name = params[:file].original_filename
-    path = File.join('public/images/upload', name)
+    dir = "public/images/upload/#{params[:page_controller]}/#{params[:page_action]}"
+    unless File.directory?(dir)
+      FileUtils.mkdir_p(dir)
+    end
+
+    path = File.join(dir, name)
     File.open(path, 'wb') { |f| f.write(params[:file].read) }
 
-    render :json => { message: 'Image uploaded!' }
+    render :json => { message: "Image (#{name}) uploaded to #{dir}" }
   end
 
   private
@@ -43,6 +49,21 @@ class RubberRing::CmsController < ApplicationController
       action:     params[:page_action],
       content:    params[:content]
     }
+  end
+
+  def load_images_for_page(params)
+    images = []
+    src_dir = "images/upload/#{params[:controller]}/#{params[:action]}"
+    dir = "public/#{src_dir}"
+
+    if File.directory?(dir)
+      Dir.foreach(dir) do |file|
+        next if file == '.' or file == '..'
+        images << File.join(src_dir, file)
+      end
+    end
+
+    images
   end
 
   def cache?

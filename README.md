@@ -49,9 +49,10 @@ CMS fields are made of tag, key and @page. `class`, and `id` are optional
 
 
 # TODOs
-- images w/ http://www.dropzonejs.com/
-- duplicable order
-- nice tutorial
+- better and more consistent naming conventions
+- images selection (+ imagemagick!)
+- duplicable order change
+- nice tutorial (game like)
 - integration tests with phantom js driver
 - Write (JavaScript) tests!
 - Extract to Rails Engine (+ ruby gem:)
