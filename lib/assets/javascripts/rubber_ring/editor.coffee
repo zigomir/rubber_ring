@@ -1,10 +1,13 @@
 #= require jquery
 #= require jquery_ujs
+#= require dropzone
+#= require ./image_uploader
 
 # jQuery start
 $ ->
   $contentEditable = $("[contenteditable]")
   $duplicables     = $(".duplicable")
+  new ImageUploader($(".image_upload_box"))
 
   # register change event for HTML5 content editable
   $("body").on "focus", "[contenteditable]", ->

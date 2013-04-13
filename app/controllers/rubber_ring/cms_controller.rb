@@ -27,6 +27,14 @@ class RubberRing::CmsController < ApplicationController
     render :json => { controller: page.controller, action: page.action, content: page.content }
   end
 
+  def image_add
+    name = params[:file].original_filename
+    path = File.join('public/images/upload', name)
+    File.open(path, 'wb') { |f| f.write(params[:file].read) }
+
+    render :json => { message: 'Image uploaded!' }
+  end
+
   private
 
   def get_options_from_params(params)

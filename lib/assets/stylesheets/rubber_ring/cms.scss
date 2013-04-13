@@ -6,17 +6,51 @@
   cursor: pointer;
 }
 
-.rubber_cache_preview {
-  font-family: calibri,tahoma,arial,sans-serif;
-  position: fixed;
-  right: 0;
-  top: 0;
+.rubber_ring {
+  margin: 5px;
+  
+  .image_upload_box {
+    display: -webkit-flex;
+    display: flex;
+    height: 75px;
+    border: dashed green 1px;
 
-  a {
-    color: green;
+    &.drag-hover {
+      background-color: #abee9b;
+    }
 
-    &:visited {
+    .preview {
+      -webkit-flex: initial;
+      flex: initial;
+    }
+
+    .image_upload_text {
+      margin: auto;
+    }
+    // hide dropzone stuff we don't want to see
+    .image-preview {
+      .progress { display: none }
+      .success-mark { display: none }
+      .error-mark { display: none }
+      .error-message { display: none }
+      .details {
+        img { display: none }
+      }
+    }
+  }
+
+  .rubber_cache_preview {
+    font-family: calibri,tahoma,arial,sans-serif;
+    position: fixed;
+    right: 0;
+    top: 0;
+
+    a {
       color: green;
+
+      &:visited {
+        color: green;
+      }
     }
   }
 }
