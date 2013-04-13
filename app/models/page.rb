@@ -1,6 +1,6 @@
 class Page < ActiveRecord::Base
 
-  def self.save_or_update(options)
+  def self.save_or_update(options, remove_key = false)
     page = where(controller: options[:controller],
                  action:     options[:action]).first
 
@@ -13,6 +13,10 @@ class Page < ActiveRecord::Base
       new_page
     else
       page.content = (page.content || {}).merge(options[:content])
+      if remove_key
+        key_to_remove = options[:content].keys[0]
+        page.content = (page.content || {}).except(key_to_remove)
+      end
       page.save
       page
     end

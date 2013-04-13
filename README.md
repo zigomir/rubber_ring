@@ -49,8 +49,9 @@ CMS fields are made of tag, key and @page. `class`, and `id` are optional
 
 
 # TODOs
-- removing duplicable fields with drag and drop outside of window
-- images
+- removing duplicable fields with middle click
+- nice tutorial
+- images w/ http://www.dropzonejs.com/
 - integration tests with phantom js driver
 - Write (JavaScript) tests!
 - Extract to Rails Engine (+ ruby gem:)

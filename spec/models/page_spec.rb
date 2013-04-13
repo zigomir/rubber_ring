@@ -40,7 +40,6 @@ describe Page do
     expect { Page.create({controller: 'test', action: 'test', content: {'key' => 'value'}}) }.to raise_error
   end
 
-  # TODO implement on front
   describe 'grouping keys for duplicable content' do
     before do
       options = {

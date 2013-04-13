@@ -16,7 +16,7 @@ class RubberRing::CmsController < ApplicationController
       content:    params[:content]
     }
 
-    page = Page.save_or_update(options)
+    page = Page.save_or_update(options, params[:remove] == '1')
     expire_page(controller: '/' + params[:page_controller], action: params[:page_action])
 
     render :json => { controller: page.controller, action: page.action, content: page.content }
