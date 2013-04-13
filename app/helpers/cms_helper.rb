@@ -47,13 +47,13 @@ module CmsHelper
     options      = options.merge({class: classes})
     child_tag    = options[:child_tag] || (tag == :ul || tag == :ol) ? 'li' : 'div'
 
-    duplications = 1
-    duplications = page.times_duplicable_key(options[:group]) unless page.nil?
-    duplications = 1 if duplications == 0 # at least one
+    group_keys = []
+    group_keys = page.group_keys(options[:group]) unless page.nil?
+    group_keys << "#{options[:group]}_0" if group_keys.empty? # at least one
 
     content_tag(tag, {class: 'duplicable_holder'}) do
-      duplications.times do |i|
-        options[:key] = "#{options[:group]}_#{i}"
+      group_keys.each do |group_key|
+        options[:key] = group_key
         element = editable_field(child_tag.to_sym, options, page, &block)
         concat(element)
       end

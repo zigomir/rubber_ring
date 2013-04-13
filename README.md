@@ -1,3 +1,17 @@
+# TODO
+- remove images on middle click
+- images resize with imagemagick
+	- disable dragging bigger images on smaller
+- application menu drop
+- better and more consistent naming conventions
+- duplicable order change
+- nice tutorial (game like)
+- integration tests with phantom js driver
+- Write (JavaScript) tests!
+- Extract to Rails Engine (+ ruby gem:)
+- minify assets with grunt from build script
+- generator for new pages
+
 ## Docs
 
 * Ruby version: 2.0.0-p0
@@ -48,21 +62,6 @@ CMS fields are made of tag, key and `@page` which holds content for all the page
 	<%= duplicable_editable_field(:ul, {group: 'blog_posts'}, @page) do %>
 	<%= duplicable_editable_field(:ul, {group: 'blog_posts', duplications: 2}, @page) do %>
 	<%= duplicable_editable_field(:ul, {group: 'blog_posts', child_tag: 'li', duplications: 2}, @page) do %>
-
-
-# TODOs
-- remove images on middle click
-- images resize with imagemagick
-	- disable dragging bigger images on smaller
-- application menu drop
-- better and more consistent naming conventions
-- duplicable order change
-- nice tutorial (game like)
-- integration tests with phantom js driver
-- Write (JavaScript) tests!
-- Extract to Rails Engine (+ ruby gem:)
-- minify assets with grunt from build script
-- generator for new pages
 
 ## Philosophy
 

@@ -55,7 +55,7 @@ describe Page do
     end
 
     it 'should be in a group of two' do
-     expect(@page.times_duplicable_key('child_key')).to eq 2
+     expect(@page.group_keys('child_key')).to eq %w(child_key_0 child_key_1)
      expect(@page.content['child_key_1']).to eq 'child_value_1'
     end
   end

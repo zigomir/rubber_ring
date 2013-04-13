@@ -11,6 +11,7 @@
   
   .image_upload_box {
     display: -webkit-flex;
+    display: -moz-flex;
     display: flex;
     height: 75px;
     border: dashed green 1px;
@@ -18,16 +19,9 @@
     &.drag-hover {
       background-color: #abee9b;
     }
-
-    .preview {
-      -webkit-flex: initial;
-      flex: initial;
-    }
-
     .image_upload_text {
       margin: auto;
     }
-    // hide dropzone stuff we don't want to see
     .image-preview {
       display: none;
     }

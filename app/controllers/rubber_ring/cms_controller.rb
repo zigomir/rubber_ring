@@ -20,7 +20,7 @@ class RubberRing::CmsController < ApplicationController
 
   def remove
     options = get_options_from_params(params)
-    key_to_remove = options[:content].keys[0]
+    key_to_remove = params[:key_to_remove]
 
     page = Page.remove(options, key_to_remove)
     expire_page(controller: '/' + params[:page_controller], action: params[:page_action])
@@ -40,6 +40,12 @@ class RubberRing::CmsController < ApplicationController
     File.open(path, 'wb') { |f| f.write(params[:file].read) }
 
     render :json => { src: File.join(src_dir, name) }
+  end
+
+  # TODO
+  def image_remove
+    dir, src_dir = get_image_directories(params)
+
   end
 
   private
