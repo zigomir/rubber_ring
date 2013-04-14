@@ -5,7 +5,8 @@ $ ->
 
   $("#images-manager").on "click", (e) ->
     $link = $(e.currentTarget)
-    $(".images-manager").toggle()
+    $(".images-manager").slideToggle()
+    # bootstra's well is preventing smooth animation
     $link.parent().toggleClass("active")
 
   # remove all unused images action

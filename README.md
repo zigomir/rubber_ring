@@ -1,13 +1,13 @@
 # TODO
+- Extract to Rails Engine (+ ruby gem:)
+- GOOD DEMO! Sprüngli maybe
 - images resize with imagemagick
 	- disable dragging bigger images on smaller
-- application menu drop
 - better and more consistent naming conventions
 - duplicable order change
 - nice tutorial (game like)
 - integration tests with phantom js driver
 - Write (JavaScript) tests!
-- Extract to Rails Engine (+ ruby gem:)
 - minify assets with grunt from build script
 - generator for new pages
 

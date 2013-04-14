@@ -23,7 +23,6 @@
   
   .image_upload_box {
     display: -webkit-flex;
-    display: -moz-flex;
     display: flex;
     height: 75px;
     border: dashed green 1px;
@@ -58,4 +57,8 @@
 // bootstrap overrides
 .navbar {
   margin-bottom: 0;
+}
+// for smooth slide animation
+.well {
+  min-height: 0;
 }
