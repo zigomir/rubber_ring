@@ -1,5 +1,6 @@
 module RubberRing
   class Page < ActiveRecord::Base
+    attr_accessor :edit_mode
 
     def self.save_or_update(options)
       page = load_first_page(options)
@@ -27,6 +28,14 @@ module RubberRing
 
     def group_keys(group_key)
       (content.select { |key, _| key.match(group_key) }).keys
+    end
+
+    def edit_mode?
+      @edit_mode
+    end
+
+    def edit_mode=(edit)
+      @edit_mode = edit
     end
 
     private

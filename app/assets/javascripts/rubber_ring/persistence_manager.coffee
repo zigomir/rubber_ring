@@ -6,6 +6,7 @@ class @PersistenceManager
   post_object:
     page_controller: App.controller
     page_action: App.action
+    page_path: document.location.pathname
 
   constructor: ->
     @save_path         = App.save_path

@@ -1,5 +1,5 @@
 module RubberRing
-  module ApplicationHelper
+  module CmsHelper
 
     def editable_field(tag, options = {}, page, &block)
       content_value = nil
@@ -13,9 +13,9 @@ module RubberRing
         :class            => options[:class],
         :id               => options[:id],
         'data-cms'        => options[:key],
-        'data-cms-group'  => options[:group] || '',
-        'contenteditable' => 'true'
+        'data-cms-group'  => options[:group] || ''
       }
+      content_tag_options['contenteditable'] = 'true' if page and page.edit_mode?
 
       # if no content passed from @content (view - controller - model)
       # this means it is not yet in database and we will create tag with

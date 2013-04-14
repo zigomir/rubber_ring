@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+# TODO remove this script directory when you have RubyMine 5.4.1
+
+APP_PATH = File.expand_path('../../config/application',  __FILE__)
+require_relative '../config/boot'
+require 'rails/commands'

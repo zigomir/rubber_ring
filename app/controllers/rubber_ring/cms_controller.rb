@@ -8,15 +8,17 @@ module RubberRing
       page = Page.where(controller: params[:controller],
                         action:     params[:action])
 
-      @page = page.first unless page.empty?
+      unless page.empty?
+        @page = page.first
+        @page.edit_mode = true
+      end
       @images = load_images_for_page(params)
     end
 
     def save
       options = get_options_from_params(params)
       page = Page.save_or_update(options)
-      # TODO pass named path
-      expire_page("#{main_app.example_page_path}")
+      expire_page(params[:page_path])
 
       render :json => { controller: page.controller, action: page.action, content: page.content }
     end
@@ -26,8 +28,7 @@ module RubberRing
       key_to_remove = params[:key_to_remove]
 
       page = Page.remove(options, key_to_remove)
-      # TODO pass named path
-      expire_page("#{main_app.example_page_path}")
+      expire_page(params[:page_path])
 
       render :json => { controller: page.controller, action: page.action, content: page.content }
     end
@@ -87,7 +88,8 @@ module RubberRing
 
     def cache?
       if params[:cache] == '1'
-        @page_caching = true
+        @page_caching   = true
+        @page.edit_mode = false unless @page.nil?
         system("#{Rails.root.to_s}/build.sh")
       end
     end
