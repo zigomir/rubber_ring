@@ -1,3 +1,4 @@
+# This migration comes from rubber_ring (originally 20130405204838)
 class CreatePages < ActiveRecord::Migration
   def change
     create_table :rubber_ring_pages do |t|

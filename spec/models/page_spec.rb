@@ -1,43 +1,22 @@
 require 'spec_helper'
 
-describe Page do
-  it 'should create new page' do
-    page = FactoryGirl.create(:page)
-    expect(page.controller).to eq 'test'
-    expect(page.action).to eq 'test'
-    expect(page.content['key']).to eq 'value'
-    expect(Page.all.count).to eq 1
-  end
-
+describe RubberRing::Page do
   it 'should create new page with content' do
-    page = Page.save_or_update({
+    page = RubberRing::Page.save_or_update({
        controller: 'test',
        action: 'test',
        content: { 'key' => 'value' }
      })
 
-    expect(Page.all.count).to eq 1
+    expect(RubberRing::Page.all.count).to eq 1
     expect(page.content['key']).to eq 'value'
     expect(page.content['key2']).to eq nil
   end
 
-  it 'should add new key to content if page already exist' do
-    FactoryGirl.create(:page)
-    page = Page.save_or_update({
-      controller: 'test',
-      action: 'test',
-      content: { 'key2' => 'value2' }
-    })
-
-    expect(Page.all.count).to eq 1
-    expect(page.content['key']).to eq 'value'
-    expect(page.content['key2']).to eq 'value2'
-  end
-
   it 'should not create new page if one already exists' do
-    Page.create({controller: 'test', action: 'test', content: {'key' => 'value'}})
-    expect(Page.all.count).to eq 1
-    expect { Page.create({controller: 'test', action: 'test', content: {'key' => 'value'}}) }.to raise_error
+    RubberRing::Page.create({controller: 'test', action: 'test', content: {'key' => 'value'}})
+    expect(RubberRing::Page.all.count).to eq 1
+    expect { RubberRing::Page.create({controller: 'test', action: 'test', content: {'key' => 'value'}}) }.to raise_error
   end
 
   describe 'grouping keys for duplicable content' do
@@ -51,7 +30,7 @@ describe Page do
         }
       }
 
-      @page = Page.save_or_update(options)
+      @page = RubberRing::Page.save_or_update(options)
     end
 
     it 'should be in a group of two' do

@@ -3,10 +3,10 @@
     var App = App || {};
     App.controller        = "<%= params[:controller] %>";
     App.action            = "<%= params[:action] %>";
-    App.save_path         = "<%= rubber_ring_cms_save_path %>";
-    App.remove_path       = "<%= rubber_ring_cms_remove_path(':key') %>";
-    App.add_image_path    = "<%= rubber_ring_cms_image_add_path %>";
-    App.remove_image_path = "<%= rubber_ring_cms_image_remove_path %>";
+    App.save_path         = "<%= rubber_ring.cms_save_path %>";
+    App.remove_path       = "<%= rubber_ring.cms_remove_path(':key') %>";
+    App.add_image_path    = "<%= rubber_ring.cms_image_add_path %>";
+    App.remove_image_path = "<%= rubber_ring.cms_image_remove_path %>";
   </script>
 
   <div class="navbar">
@@ -38,5 +38,5 @@
     </div>
   </div>
 
-  <%= javascript_include_tag 'rubber_ring/editor' %>
+  <%= javascript_include_tag 'rubber_ring/application' %>
 <% end %>

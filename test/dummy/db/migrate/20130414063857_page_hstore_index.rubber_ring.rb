@@ -1,3 +1,4 @@
+# This migration comes from rubber_ring (originally 20130405205121)
 class PageHstoreIndex < ActiveRecord::Migration
   def up
     add_index :rubber_ring_pages, [:controller, :action], :unique => true
