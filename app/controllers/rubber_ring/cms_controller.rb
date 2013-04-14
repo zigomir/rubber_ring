@@ -1,5 +1,9 @@
+#include 'services/rubber_ring/build'
+
 module RubberRing
   class CmsController < ActionController::Base
+    include Build
+
     layout 'rubber_ring/application'
     before_action :load_page_content
     before_filter :cache?
@@ -88,7 +92,7 @@ module RubberRing
       if params[:cache] == '1'
         @page_caching   = true
         @page.edit_mode = false unless @page.nil?
-        system("#{Rails.root.to_s}/build.sh")
+        Build.assets!
       end
     end
   end
