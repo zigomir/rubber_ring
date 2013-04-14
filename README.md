@@ -6,14 +6,24 @@ This project rocks and uses MIT-LICENSE.
 
 * DB: postgres 9.1 with hstore
 
-Postgres hstore on Ubuntu
+
+## Install
+
+Add this to Gemfile
+
+	gem 'rubber_ring', path: '../gems/rubber_ring'
+	gem 'actionpack-page_caching'
+
+Run `bundle`
+
+Postgres `hstore` on `Ubuntu`
 
     sudo apt-get install postgresql-contrib
 
-## Usage
 
-    rake db:create
-    sudo -u postgres psql rubber_ring_gem_development -c 'create extension hstore;'
+Create/migrate database
+
+    sudo -u postgres psql your_site_db_development -c 'create extension hstore;'
     rake rubber_ring:install:migrations
     rake db:migrate
 
@@ -21,6 +31,10 @@ Postgres hstore on Ubuntu
 Add this route to your `routes.rb`
 
     mount RubberRing::Engine => '/rubber_ring', :as => 'rubber_ring'
+
+## Usage
+- generate controller which extends `RubberRing::CmsController`
+- use `rubber ring helpers` in your views
 
 ## Testing Engine:
 
@@ -31,9 +45,7 @@ Add this route to your `routes.rb`
     cd ../..
     rspec spec
 
-## Rubber Ring documentation
-
-Supported content types for now will be: text (simple text) and html.
+## Rubber Ring helpers
 
 CMS fields are made of tag, key and `@page` which holds content for all the page keys. `class`, and `id` are optional
 

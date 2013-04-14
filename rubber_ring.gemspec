@@ -9,9 +9,9 @@ Gem::Specification.new do |s|
   s.version     = RubberRing::VERSION
   s.authors     = ['Žiga Vidic']
   s.email       = ['zigomir@gmail.com']
-  s.homepage    = 'TODO'
-  s.summary     = 'TODO: Summary of RubberRing.'
-  s.description = 'TODO: Description of RubberRing.'
+  s.homepage    = 'https://github.com/zigomir/rubber_ring' # TODO
+  s.summary     = 'Rubber Ring - easy and limited CMS'
+  s.description = 'Rubber Ring helps your customers edit their web sites. It helps developers to quickly build new ones.'
 
   s.files = Dir['{app,config,db,lib}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.md']
   s.test_files = Dir['test/**/*', 'spec/**/*']

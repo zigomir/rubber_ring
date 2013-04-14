@@ -13,7 +13,6 @@
 - integration tests with phantom js driver
 - Write (JavaScript) tests!
 - minify assets with grunt from build script
-- generator for new pages
 
 
 ## Other
@@ -21,3 +20,6 @@
 - release gem
 - test fresh rails app with this gem
 - nice tutorial (game like)
+- generator for new pages (which extends `RubberRing::CmsController`) and adds `caches_page` like in dummy application
+- generator for public assets (for now just `all.css` and `main.js`)
+- figure out how to move `actionpack-page_caching` dependency to gem only
