@@ -2,12 +2,9 @@ module RubberRing
   module CmsHelper
 
     def editable_field(tag, options = {}, page, &block)
+      key = options[:key]
       content_value = nil
-
-      unless page.nil?
-        key = options[:key]
-        content_value = page.content[key]
-      end
+      content_value = page.content[key] unless page.content.nil?
 
       content_tag_options = {
         :class            => options[:class],
@@ -26,12 +23,9 @@ module RubberRing
     end
 
     def editable_image(options = {}, page)
+      key = options[:key]
       image_source = nil
-
-      unless page.nil?
-        key = options[:key]
-        image_source = page.content[key]
-      end
+      image_source = page.content[key] unless page.content.nil?
 
       content_tag_options = {
         :class     => 'rubber_ring_image',

@@ -27,6 +27,7 @@ module RubberRing
     end
 
     def group_keys(group_key)
+      return [] if content.nil?
       (content.select { |key, _| key.match(group_key) }).keys
     end
 

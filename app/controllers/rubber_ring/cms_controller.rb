@@ -8,10 +8,8 @@ module RubberRing
       page = Page.where(controller: params[:controller],
                         action:     params[:action])
 
-      unless page.empty?
-        @page = page.first
-        @page.edit_mode = true
-      end
+      @page = page.empty? ? Page.new : page.first
+      @page.edit_mode = true
       @images = load_images_for_page(params)
     end
 

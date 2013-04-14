@@ -36,11 +36,15 @@ Add this route to your `routes.rb`
 - generate controller which extends `RubberRing::CmsController`
 - use `rubber ring helpers` in your views
 
-## Testing Engine:
+## Testing/developing Engine:
 
     cd test/dummy
+    sudo -u postgres psql rubber_ring_gem_development -c 'create extension hstore;'
     sudo -u postgres psql rubber_ring_gem_test -c 'create extension hstore;'
+    rake db:migrate
     rake db:migrate RAILS_ENV=test
+
+Running tests
 
     cd ../..
     rspec spec
