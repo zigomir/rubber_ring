@@ -2,6 +2,7 @@
 
 ## Features
 - set page title through RR menu
+- set image size in markup and than mantian it whenever new image is dragged on it
 - images resize with imagemagick
 	- disable dragging bigger images on smaller
 
