@@ -1,0 +1,12 @@
+Description:
+    This generator will help you generate new Rubber Ring editable pages
+
+Example:
+    rails generate rubber_ring:page home action1 action2
+
+    This will create:
+        create  app/controllers/home_controller.rb
+        create  app/views/home/action1.html.erb
+        create  app/views/home/action2.html.erb
+         route  get 'home/action1'
+         route  get 'home/action2'

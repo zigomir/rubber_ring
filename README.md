@@ -33,23 +33,12 @@ Add this route to your `routes.rb`
     mount RubberRing::Engine => '/rubber_ring', :as => 'rubber_ring'
 
 ## Usage
-- generate controller which extends `RubberRing::CmsController`
-- use `rubber ring helpers` in your views
 
-## Testing/developing Engine:
+Rails generator for new pages
 
-    cd test/dummy
-    sudo -u postgres psql rubber_ring_gem_development -c 'create extension hstore;'
-    sudo -u postgres psql rubber_ring_gem_test -c 'create extension hstore;'
-    rake db:migrate
-    rake db:migrate RAILS_ENV=test
+    rails g rubber_ring:page home index edit
 
-Running tests
-
-    cd ../..
-    rspec spec
-
-## Rubber Ring helpers
+### Rubber Ring helpers
 
 CMS fields are made of tag, key and `@page` which holds content for all the page keys. `class`, and `id` are optional
 
@@ -67,15 +56,24 @@ CMS fields are made of tag, key and `@page` which holds content for all the page
 	<%= duplicable_editable_field(:ul, {group: 'blog_posts', duplications: 2}, @page) do %>
 	<%= duplicable_editable_field(:ul, {group: 'blog_posts', child_tag: 'li', duplications: 2}, @page) do %>
 
+
+## Testing/developing Engine:
+
+    cd test/dummy
+    sudo -u postgres psql rubber_ring_gem_development -c 'create extension hstore;'
+    sudo -u postgres psql rubber_ring_gem_test -c 'create extension hstore;'
+    rake db:migrate
+    rake db:migrate RAILS_ENV=test
+
+Running tests
+
+    cd ../..
+    rspec spec
+
 ## Philosophy
 
 * you can not build robust system without limitations
 * system may stretch only to certain point until it breaks. Like a rubber ring!
-
-## Usage
-
-Generate site controller. (TODO generator)
-Create views/site/site.html.erb view, views/layouts/site/layout.html.erb for layout.
 
 ## Deploy site to production
 

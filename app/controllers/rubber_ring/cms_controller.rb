@@ -1,5 +1,3 @@
-#include 'services/rubber_ring/build'
-
 module RubberRing
   class CmsController < ActionController::Base
     include Build

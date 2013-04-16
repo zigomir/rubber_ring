@@ -2,9 +2,10 @@
 
 ## Features
 - set page title through RR menu
-- set image size in markup and than mantian it whenever new image is dragged on it
+- set image size in markup and than maintain it whenever new image is dragged on it
 - images resize with imagemagick
 	- disable dragging bigger images on smaller
+- publish build to server
 
 ## Refactoring
 - better and more consistent naming conventions
@@ -19,6 +20,5 @@
 - release gem
 - test fresh rails app with this gem
 - nice tutorial (game like)
-- generator for new pages (which extends `RubberRing::CmsController`) and adds `caches_page` like in dummy application
 - generator for public assets (for now just `all.css` and `main.js`)
 - figure out how to move `actionpack-page_caching` dependency to gem only
