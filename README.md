@@ -60,6 +60,7 @@ CMS fields are made of tag, key and `@page` which holds content for all the page
 ## Testing/developing Engine:
 
     cd test/dummy
+    rake db:create
     sudo -u postgres psql rubber_ring_gem_development -c 'create extension hstore;'
     sudo -u postgres psql rubber_ring_gem_test -c 'create extension hstore;'
     rake db:migrate
