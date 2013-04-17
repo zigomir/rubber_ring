@@ -4,7 +4,7 @@ module RubberRing
 
     layout 'rubber_ring/application'
     before_action :load_page_content
-    before_filter :cache?
+    before_filter :admin?, :cache? # check if admin before cache
 
     def load_page_content
       page = Page.where(controller: params[:controller],
@@ -54,7 +54,7 @@ module RubberRing
       render :json => { src: params[:src_to_remove] }
     end
 
-    private
+  private
 
     def get_options_from_params(params)
       {
@@ -86,10 +86,20 @@ module RubberRing
       return dir, src_dir
     end
 
+    def admin?
+      if session[:password] == 'temporal'
+        @admin = true
+        @page.edit_mode = true
+      else
+        @admin = false
+        @page.edit_mode = false
+      end
+    end
+
     def cache?
       if params[:cache] == '1'
         @page_caching   = true
-        @page.edit_mode = false unless @page.nil?
+        @page.edit_mode = false
         Build.assets!
       end
     end

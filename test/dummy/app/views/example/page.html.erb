@@ -1,16 +1,26 @@
-<%= editable_image({key: 'header_image', src: '/images/rubber_ring.jpg'}, @page) %>
+<%= editable_image({key: 'header_image', src: '/images/baws.jpg'}, @page) %>
 
 <%= editable_field(:h1, {key: 'header'}, @page) do %>
-  Welcome to Rubber Ring - CMS that doesn't make you think about it.
+  rubber ring cms...easy as fuck
 <% end %>
 
 <%= editable_field(:div, {key: 'first_content', class: 'multi-line'}, @page) do %>
-  Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
+  editing page content right away
 <% end %>
 
-<h2>Check out duplicable stuff</h2>
+<h3>i can haz dynamicz!</h3>
+<form method="post" action="<%= form_path %>">
+  <input name="value" value="" placeholder="Wait, what?" />
+  <input type="submit" value="Post this data already" />
+</form>
+
+<% if flash[:message] %>
+<h4>Son of a gun, you've just typed: "<%= flash[:message] %>"</h4>
+<% end %>
+
+<h3>double click stuff under me and it will reproduce like rabbits</h3>
 <%= duplicable_editable_field(:ul, {group: 'blog_posts', child_tag: 'li', class: 'multi-line'}, @page) do %>
-  Text
-  <h3>h3</h3>
-  <span>span</span>
+  i am so alone, no one is wrapping me
+  <h3>i'm hanging with h3, i'm more important and cooler than you are</h3>
+  <span>i'm wrapped in a span element</span>
 <% end %>
