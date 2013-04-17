@@ -87,9 +87,7 @@ module RubberRing
     end
 
     def admin?
-      # paste in browser's console or do a bookmarklet, yuck
-      # javascript:(function() {document.cookie='rubber_ring_admin=extra_spicy;path=/;';})()
-      if cookies[:rubber_ring_admin] == 'extra_spicy'
+      if session[:password] == 'temporal'
         @admin = true
         @page.edit_mode = true
       else
