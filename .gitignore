@@ -11,6 +11,12 @@ test/dummy/.sass-cache
 .idea
 .vagrant
 Vagrantfile
+vagrantconfig_local.yml
+
+# http://yehudakatz.com/2010/12/16/clarifying-the-roles-of-the-gemspec-and-gemfile/
+Gemfile.lock
+
+
 test/dummy/public/images/upload
 
 # public/build goes to customer

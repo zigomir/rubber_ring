@@ -1,6 +1,7 @@
 # TODOs
 
 ## Must
+- middle click on Mac!
 - set page title through RR menu
 - set image size in markup and than maintain it whenever new image is dragged on it
 - images resize with imagemagick
@@ -20,4 +21,3 @@
 
 ## Could
 - generator for public assets (for now just `all.css` and `main.js`)
-- figure out how to move `actionpack-page_caching` dependency to gem only
