@@ -12,7 +12,6 @@ This project rocks and uses MIT-LICENSE.
 Add this to Gemfile
 
 	gem 'rubber_ring', path: '../gems/rubber_ring'
-	gem 'actionpack-page_caching'
 
 Run `bundle`
 
@@ -46,7 +45,7 @@ CMS fields are made of tag, key and `@page` which holds content for all the page
 	  Welcome to Rubber Ring - CMS that doesn't make you think about it.
 	<% end %>
 
-	<%= editable_image({key: 'header_image', src: '/images/rubber_ring.jpg'}, @page) %>
+	<%= editable_image({key: 'header_image', src: '/assets/baws.jpg'}, @page) %>
 
 	<%= editable_field(:div, {key: 'first_content', class: 'multi-line'}, @page) do %>
 	  Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut

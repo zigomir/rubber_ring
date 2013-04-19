@@ -54,10 +54,14 @@
 }
 
 // bootstrap overrides
-.navbar {
+.tbs * {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.tbs .navbar {
   margin-bottom: 0;
+  font-size: 15px;
 }
 // for smooth slide animation
-.well {
+.tbs .well {
   min-height: 0;
 }
