@@ -1,28 +1,20 @@
-# RubberRing
+# Rubber Ring
 
 This project rocks and uses MIT-LICENSE.
 
-* Ruby version: 2.0.0-p0
-
-* DB: postgres 9.1 with hstore
-
+* Ruby version: `2.0.0-p0`
+* DB: postgres 9.1 with `hstore`
+* to install `hstore` on `Ubuntu` run `sudo apt-get install postgresql-contrib`
 
 ## Install
 
-Add this to Gemfile
+Create new rails project and add this to `Gemfile` and run `bundle`
 
-	gem 'rubber_ring', path: '../gems/rubber_ring'
-
-Run `bundle`
-
-Postgres `hstore` on `Ubuntu`
-
-    sudo apt-get install postgresql-contrib
-
+	gem 'rubber_ring', path: '../gems/rubber_ring' # TODO change this line after publishing gem
 
 Create/migrate database
 
-    sudo -u postgres psql your_site_db_development -c 'create extension hstore;'
+    sudo -u postgres psql your_db_dev -c 'create extension hstore;'
     rake rubber_ring:install:migrations
     rake db:migrate
 
@@ -31,7 +23,16 @@ Add this route to your `routes.rb`
 
     mount RubberRing::Engine => '/rubber_ring', :as => 'rubber_ring'
 
+Update `development.rb` and `production.rb` files with this two lines
+
+	config.action_controller.perform_caching = true
+  	config.action_controller.page_cache_directory = "#{Rails.root.to_s}/public/build"
+
+This will enable you to output your pages to plain old `HTML` files that can be later on uploaded to plain web server for serving them.
+
 ## Usage
+
+### Developers
 
 Rails generator for new pages
 
@@ -55,20 +56,13 @@ CMS fields are made of tag, key and `@page` which holds content for all the page
 	<%= duplicable_editable_field(:ul, {group: 'blog_posts', duplications: 2}, @page) do %>
 	<%= duplicable_editable_field(:ul, {group: 'blog_posts', child_tag: 'li', duplications: 2}, @page) do %>
 
+### Customers - content editing
 
-## Testing/developing Engine:
+Login on URL `/rubber_ring` with `temporal` password. (TODO - set password through config)
 
-    cd test/dummy
-    rake db:create
-    sudo -u postgres psql rubber_ring_gem_development -c 'create extension hstore;'
-    sudo -u postgres psql rubber_ring_gem_test -c 'create extension hstore;'
-    rake db:migrate
-    rake db:migrate RAILS_ENV=test
+Editing content is easy as clicking inside green boxes and start editing. Some fields can be duplicated with a middle mouse click. Developer decides what can be duplicable/repeatable and what not.
 
-Running tests
-
-    cd ../..
-    rspec spec
+For changing images just click on `Image manager` in the upper menu. Drop the image you need to drop zone. After uploading the image you can drag and drop it on the image you wanted to change.
 
 ## Philosophy
 
@@ -84,15 +78,14 @@ Running tests
 ## Benefits
 
 - optimized for developers and quick setup
-- simple to use for customers
-- customer doesn't need application server and/or database. Only apache/nginx for static HTML serving
+- simple to use for customers. True WSYIWYG.
+- customer doesn't need application server and/or database. Only plain web server for static HTML serving.
 
-## Future may bring?
+## Future ideas
 
 - service where user page (html + assets) (before must add right attributes to elements she wants to be editable) and than she can start editing her page right away (use grammar for parsing html or at leas really good library)
 
-
-## Similar CMS-es
+## Similar CMS
 
 ### Copybar
 

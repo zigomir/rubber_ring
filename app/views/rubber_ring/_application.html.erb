@@ -40,8 +40,4 @@
     App.remove_image_path = "<%= rubber_ring.cms_image_remove_path %>";
   </script>
   <%= javascript_include_tag 'rubber_ring/application' %>
-<% else %>
-  <%# Including jQuery for custom pages here, because else we have clashes with rails-jquery which can not be copied to %>
-  <%# build because it is inside gem directory %>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <% end %>
