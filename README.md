@@ -6,7 +6,7 @@ This project rocks and uses MIT-LICENSE.
 * DB: postgres 9.1 with `hstore`
 * to install `hstore` on `Ubuntu` run `sudo apt-get install postgresql-contrib`
 
-## Install
+# Install
 
 Create new rails project and add this to `Gemfile` and run `bundle`
 
@@ -33,9 +33,8 @@ Set admin password with creating `app/config/initializers/rubber_ring.rb` file a
 
 This will enable you to output your pages to plain old `HTML` files that can be later on uploaded to plain web server for serving them.
 
-## Usage
-
-### Developers
+# Usage
+## Developers
 
 Rails generator for new pages
 
@@ -43,50 +42,79 @@ Rails generator for new pages
 
 ### Rubber Ring helpers
 
-CMS fields are made of tag, key and `@page` which holds content for all the page keys. `class`, and `id` are optional
+CMS fields are made of tag, key and `@page` which holds content for all the page keys.
+
+Example
+
+	<%= editable_image({key: 'header_image', src: '/assets/baws.jpg'}, @page) %>
 
 	<%= editable_field(:h1, {key: 'header'}, @page) do %>
 	  Welcome to Rubber Ring - CMS that doesn't make you think about it.
 	<% end %>
 
-	<%= editable_image({key: 'header_image', src: '/assets/baws.jpg'}, @page) %>
-
 	<%= editable_field(:div, {key: 'first_content', class: 'multi-line'}, @page) do %>
 	  Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
 	<% end %>
 
-	<%= duplicable_editable_field(:ul, {group: 'blog_posts'}, @page) do %>
-	<%= duplicable_editable_field(:ul, {group: 'blog_posts', duplications: 2}, @page) do %>
-	<%= duplicable_editable_field(:ul, {group: 'blog_posts', child_tag: 'li', duplications: 2}, @page) do %>
+	<%= duplicable_editable_field(:ul, {group: 'blog_posts', child_tag: 'li', class: 'multi-line'}, @page) do %>
+	  i am so alone, no one is wrapping me
+	  <h3>i'm hanging with h3, i'm more important and cooler than you are</h3>
+	  <span>i'm wrapped in a span element</span>
+	<% end %>
 
-### Customers - content editing
+### Helper options
+
+Each helper need's to specify unique `key`. These are holding values in the database. Also each helper needs to include `@page` object as their last parameter. This object holds all the page's editable content in a hash data structure.
+
+#### helper arguments for all the fields
+- `key` unique key to hold the value
+- `class` html class attribute (optional)
+	- class value with `multi-line` will enable editing in multi lines
+- `id` html id attribute (optional)
+- `@page` object for holding page content
+
+#### specific arguments for each field
+- `editable_image`
+	- `src` image source attribute
+- `editable_field`
+	- no specific arguments
+- `duplicable_editable_field`
+	- `group` is used to specify group's key prefix. Example: `grup: blog_posts` will produce keys `blog_posts_1`, `blog_posts_2`, `blog_posts_3`, ... based on how many duplication user will do with middle clicking on duplicable field.
+	- `child_tag` will set child element tag for `duplicable_editable_field`
+
+### Assets (stylesheets and javascripts)
+
+You can use Sprockets include assets to your app. `app/assets/javascripts/application.js` and `app/assets/stylesheets/application.css` are already included. Please remove `//= require jquery` and `//= require jquery_ujs` from `application.js` because `rubber ring` is already including `jquery` which you can reuse in your pages as well.
+
+#### jQuery
+
+`jQuery` is the one exception. It must not be included in your `application.js` file through Sprockets `require` command. For now, `jQuery` is included by default, right before your other `javascript` files.
+
+## Customers - content editing
 
 Login on URL `/rubber_ring` with password which was set by developer in the install stage.
 
-Editing content is easy as clicking inside green boxes and start editing. Some fields can be duplicated with a middle mouse click. Developer decides what can be duplicable/repeatable and what not.
+Editing content is easy as clicking inside green boxes and start editing. Some fields can be duplicated with a double mouse click and removed with middle mouse click. Developer decides what can be duplicable/repeatable and what not.
 
 For changing images just click on `Image manager` in the upper menu. Drop the image you need to drop zone. After uploading the image you can drag and drop it on the image you wanted to change.
+
+## Build site
+
+`Preview and prepare for publish!` option in the menu will output entire page to `public/build` directory. If you do this for every page you should be able to just upload entire `public/build` directory to your production server and use it.
+
+## So this is OK for static HTML sites, what about dynamic ones?
+You can of course integrate Rubber Ring your Rails application as well and use it only for site content editing. This only means that you won't need to click `Preview and prepare for publish!`.
 
 ## Philosophy
 
 * you can not build robust system without limitations
 * system may stretch only to certain point until it breaks. Like a rubber ring!
 
-## Deploy site to production
-
-`Preview and prepare` => cache to `public/build`
-
-`Publish` => `rsync` or `capistrano` to staging server server
-
 ## Benefits
 
 - optimized for developers and quick setup
 - simple to use for customers. True WSYIWYG.
 - customer doesn't need application server and/or database. Only plain web server for static HTML serving.
-
-## Future ideas
-
-- service where user page (html + assets) (before must add right attributes to elements she wants to be editable) and than she can start editing her page right away (use grammar for parsing html or at leas really good library)
 
 ## Similar CMS
 
