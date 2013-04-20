@@ -32,7 +32,16 @@ module RubberRing
         :src       => image_source || options[:src],
         'data-cms' => options[:key]
       }
-      content_tag(:img, nil, content_tag_options)
+
+      unless options[:width].nil?
+        content_tag_options.merge!({width: options[:width]})
+      end
+
+      unless options[:height].nil?
+        content_tag_options.merge!({height: options[:height]})
+      end
+
+      tag(:img, content_tag_options)
     end
 
     def duplicable_editable_field(tag, options = {}, page, &block)

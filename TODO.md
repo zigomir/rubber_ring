@@ -3,10 +3,8 @@
 ## Must
 - config:
 	- admin password
-	- set build directory?
 - middle click on Mac!
 - set page title through app menu
-- set image size in markup and than maintain it whenever new image is dragged on it
 - images resize with imagemagick
 	- disable dragging bigger images on smaller
 - publish build to server
@@ -17,6 +15,11 @@
 - write about including assets into app/assets
 - write about including site's assets using asset pipeline
 - use semantic [versioning](http://semver.org/)
+
+## Document
+- cms helpers
+	- `multi-line` class
+	- `group` and `child_tag` for `duplicable_editable_field`
 
 ## Should
 - better and more consistent naming conventions
