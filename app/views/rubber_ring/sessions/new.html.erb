@@ -1,5 +1,8 @@
-<h2>Login form</h2>
+<h2>Login</h2>
 <form method="post" action="<%= login_path %>">
   <input name="password" type="password" value="" tabindex="0" />
   <input type="submit" value="Login" />
 </form>
+<% if flash[:wrong_password] %>
+  <%= flash[:wrong_password] %>
+<% end %>

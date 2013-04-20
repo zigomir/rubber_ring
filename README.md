@@ -18,7 +18,6 @@ Create/migrate database
     rake rubber_ring:install:migrations
     rake db:migrate
 
-
 Add this route to your `routes.rb`
 
     mount RubberRing::Engine => '/rubber_ring', :as => 'rubber_ring'
@@ -27,6 +26,10 @@ Update `development.rb` and `production.rb` files with this two lines
 
 	config.action_controller.perform_caching = true
   	config.action_controller.page_cache_directory = "#{Rails.root.to_s}/public/build"
+
+Set admin password with creating `app/config/initializers/rubber_ring.rb` file and set it like this
+
+	RubberRing.admin_password = 'secret'
 
 This will enable you to output your pages to plain old `HTML` files that can be later on uploaded to plain web server for serving them.
 
@@ -58,7 +61,7 @@ CMS fields are made of tag, key and `@page` which holds content for all the page
 
 ### Customers - content editing
 
-Login on URL `/rubber_ring` with `temporal` password. (TODO - set password through config)
+Login on URL `/rubber_ring` with password which was set by developer in the install stage.
 
 Editing content is easy as clicking inside green boxes and start editing. Some fields can be duplicated with a middle mouse click. Developer decides what can be duplicable/repeatable and what not.
 

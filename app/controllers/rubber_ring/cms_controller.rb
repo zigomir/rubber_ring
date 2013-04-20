@@ -87,7 +87,7 @@ module RubberRing
     end
 
     def admin?
-      if session[:password] == 'temporal'
+      if session[:password] == RubberRing.admin_password
         @admin = true
         @page.edit_mode = true
       else
