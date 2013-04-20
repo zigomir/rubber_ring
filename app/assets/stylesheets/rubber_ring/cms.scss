@@ -1,0 +1,67 @@
+/**
+ * rubber ring specific styles. Here you shall not use any general elements or selectors at all.
+ */
+*[contenteditable] {
+  border: dashed green 1px;
+  cursor: pointer;
+}
+
+.images-manager {
+  display: none; // hide by default
+
+  .already_uploaded_images {
+    margin-top: 35px;
+    img {
+      width: 65px;
+    }
+  }
+
+  .remove_not_used_images {
+    margin-top: 7px;
+  }
+  
+  .image_upload_box {
+    display: -webkit-flex;
+    display: flex;
+    height: 75px;
+    border: dashed green 1px;
+
+    &.drag-hover {
+      background-color: #abee9b;
+    }
+    .image_upload_text {
+      margin: auto;
+    }
+    .image-preview {
+      display: none;
+    }
+  }
+
+  .rubber_cache_preview {
+    font-family: calibri,tahoma,arial,sans-serif;
+    position: fixed;
+    right: 0;
+    top: 0;
+
+    a {
+      color: green;
+
+      &:visited {
+        color: green;
+      }
+    }
+  }
+}
+
+// bootstrap overrides
+.tbs * {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.tbs .navbar {
+  margin-bottom: 0;
+  font-size: 15px;
+}
+// for smooth slide animation
+.tbs .well {
+  min-height: 0;
+}

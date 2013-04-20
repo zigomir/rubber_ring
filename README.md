@@ -1,76 +1,73 @@
-# TODO
-- Extract to Rails Engine (+ ruby gem:)
-- GOOD DEMO! Sprüngli maybe
-- images resize with imagemagick
-	- disable dragging bigger images on smaller
-- better and more consistent naming conventions
-- duplicable order change
-- nice tutorial (game like)
-- integration tests with phantom js driver
-- Write (JavaScript) tests!
-- minify assets with grunt from build script
-- generator for new pages
+# Rubber Ring
 
-## Docs
+This project rocks and uses MIT-LICENSE.
 
-* Ruby version: 2.0.0-p0
+* Ruby version: `2.0.0-p0`
+* DB: postgres 9.1 with `hstore`
+* to install `hstore` on `Ubuntu` run `sudo apt-get install postgresql-contrib`
 
-* DB: postgres
+## Install
 
-### Database creation:
+Create new rails project and add this to `Gemfile` and run `bundle`
 
-Postgres hstore
+	gem 'rubber_ring', path: '../gems/rubber_ring' # TODO change this line after publishing gem
 
-    sudo apt-get install postgresql-contrib
+Create/migrate database
 
-Rails + Postgres commands
-
-	rake db:create
-    sudo -u postgres psql rubber_ring_development -c 'create extension hstore;'
-    sudo -u postgres psql rubber_ring_test -c 'create extension hstore;'
-    rake db:migrate RAILS_ENV=development
-    rake db:migrate RAILS_ENV=test
+    sudo -u postgres psql your_db_dev -c 'create extension hstore;'
+    rake rubber_ring:install:migrations
+    rake db:migrate
 
 
-* Database initialization
+Add this route to your `routes.rb`
 
-### Running tests
+    mount RubberRing::Engine => '/rubber_ring', :as => 'rubber_ring'
 
-    rspec spec
+Update `development.rb` and `production.rb` files with this two lines
 
-* Services (job queues, cache servers, search engines, etc.)
+	config.action_controller.perform_caching = true
+  	config.action_controller.page_cache_directory = "#{Rails.root.to_s}/public/build"
 
-* Deployment instructions
+This will enable you to output your pages to plain old `HTML` files that can be later on uploaded to plain web server for serving them.
 
-## Rubber Ring documentation
+## Usage
 
-Supported content types for now will be: text (simple text) and html.
+### Developers
+
+Rails generator for new pages
+
+    rails g rubber_ring:page home index edit
+
+### Rubber Ring helpers
 
 CMS fields are made of tag, key and `@page` which holds content for all the page keys. `class`, and `id` are optional
-	
+
 	<%= editable_field(:h1, {key: 'header'}, @page) do %>
 	  Welcome to Rubber Ring - CMS that doesn't make you think about it.
 	<% end %>
 
-	<%= editable_image({key: 'header_image', src: '/images/rubber_ring.jpg'}, @page) %>
-	
+	<%= editable_image({key: 'header_image', src: '/assets/baws.jpg'}, @page) %>
+
 	<%= editable_field(:div, {key: 'first_content', class: 'multi-line'}, @page) do %>
 	  Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
 	<% end %>
-	
+
 	<%= duplicable_editable_field(:ul, {group: 'blog_posts'}, @page) do %>
 	<%= duplicable_editable_field(:ul, {group: 'blog_posts', duplications: 2}, @page) do %>
 	<%= duplicable_editable_field(:ul, {group: 'blog_posts', child_tag: 'li', duplications: 2}, @page) do %>
+
+### Customers - content editing
+
+Login on URL `/rubber_ring` with `temporal` password. (TODO - set password through config)
+
+Editing content is easy as clicking inside green boxes and start editing. Some fields can be duplicated with a middle mouse click. Developer decides what can be duplicable/repeatable and what not.
+
+For changing images just click on `Image manager` in the upper menu. Drop the image you need to drop zone. After uploading the image you can drag and drop it on the image you wanted to change.
 
 ## Philosophy
 
 * you can not build robust system without limitations
 * system may stretch only to certain point until it breaks. Like a rubber ring!
-
-## Usage
-
-Generate site controller. (TODO generator)
-Create views/site/site.html.erb view, views/layouts/site/layout.html.erb for layout.
 
 ## Deploy site to production
 
@@ -81,15 +78,14 @@ Create views/site/site.html.erb view, views/layouts/site/layout.html.erb for lay
 ## Benefits
 
 - optimized for developers and quick setup
-- simple to use for customers
-- customer doesn't need application server and/or database. Only apache/nginx for static HTML serving 
+- simple to use for customers. True WSYIWYG.
+- customer doesn't need application server and/or database. Only plain web server for static HTML serving.
 
-## Future may bring?
+## Future ideas
 
 - service where user page (html + assets) (before must add right attributes to elements she wants to be editable) and than she can start editing her page right away (use grammar for parsing html or at leas really good library)
 
-
-## Similar CMS-es
+## Similar CMS
 
 ### Copybar
 

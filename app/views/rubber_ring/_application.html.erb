@@ -1,42 +1,43 @@
-<% unless @page_caching %>
+<% if @admin and not @page_caching %>
+  <div class="tbs" id="rubber-ring-application">
+    <div class="navbar">
+      <div class="navbar-inner">
+        <span class="brand">Rubber Ring</span>
+        <ul class="nav">
+          <!-- add or remove active class; do it with css transitions -->
+          <li>
+            <a id="images-manager" href="javascript:void(0);">Image manager</a>
+          </li>
+          <li>
+            <a href="?cache=1" target="_blank">Preview and prepare for publish!</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="images-manager well">
+      <div class="image_upload_box">
+        <div class="image_upload_text">Drop new images here</div>
+      </div>
+      <% unless @images.empty? %>
+        <button class="btn pull-right remove_not_used_images">Remove not used images</button>
+      <% end %>
+      <div class="already_uploaded_images">
+        <% @images.each do |src| %>
+          <img src="<%= src %>" draggable="true" class="img-polaroid" />
+        <% end %>
+      </div>
+    </div>
+  </div>
+
   <script type="text/javascript">
     var App = App || {};
     App.controller        = "<%= params[:controller] %>";
     App.action            = "<%= params[:action] %>";
-    App.save_path         = "<%= rubber_ring_cms_save_path %>";
-    App.remove_path       = "<%= rubber_ring_cms_remove_path(':key') %>";
-    App.add_image_path    = "<%= rubber_ring_cms_image_add_path %>";
-    App.remove_image_path = "<%= rubber_ring_cms_image_remove_path %>";
+    App.save_path         = "<%= rubber_ring.cms_save_path %>";
+    App.remove_path       = "<%= rubber_ring.cms_remove_path(':key') %>";
+    App.add_image_path    = "<%= rubber_ring.cms_image_add_path %>";
+    App.remove_image_path = "<%= rubber_ring.cms_image_remove_path %>";
   </script>
-
-  <div class="navbar">
-    <div class="navbar-inner">
-      <span class="brand">Rubber Ring</span>
-      <ul class="nav">
-        <!-- add or remove active class; do it with css transitions -->
-        <li>
-          <a id="images-manager" href="javascript:void(0);">Image manager</a>
-        </li>
-        <li>
-          <a href="?cache=1" target="_blank">Preview and prepare for publish!</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="images-manager well">
-    <div class="image_upload_box">
-      <div class="image_upload_text">Drop new images here</div>
-    </div>
-    <% unless @images.empty? %>
-      <button class="btn pull-right remove_not_used_images">Remove not used images</button>
-    <% end %>
-    <div class="already_uploaded_images">
-      <% @images.each do |src| %>
-        <img src="<%= src %>" draggable="true" class="img-polaroid" />
-      <% end %>
-    </div>
-  </div>
-
-  <%= javascript_include_tag 'rubber_ring/editor' %>
+  <%= javascript_include_tag 'rubber_ring/application' %>
 <% end %>
