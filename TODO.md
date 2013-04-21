@@ -1,8 +1,7 @@
 ## Features
 - middle click on Mac
-- set page title through app menu
 - GOOD DEMO! (Sprüngli)
-- images resize with imagemagick
+- images resize with imagemagick - [image_sorcery](https://github.com/EricR/image_sorcery)
 	- resize image while dropping / read the size from img width/height attributes
 - publish build to server (use maybe rysinc or capistrano?)
 - release gem

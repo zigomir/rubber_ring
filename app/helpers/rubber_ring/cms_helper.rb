@@ -22,6 +22,10 @@ module RubberRing
       content_tag(tag, raw(content_value), content_tag_options)
     end
 
+    def title(page, &block)
+      editable_field('span', {key: 'page_title'}, page, &block)
+    end
+
     def editable_image(options = {}, page)
       key = options[:key]
       image_source = nil

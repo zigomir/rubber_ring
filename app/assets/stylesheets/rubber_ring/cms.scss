@@ -53,6 +53,10 @@
   }
 }
 
+.page-title-manager {
+  display: none; // hide by default
+}
+
 // bootstrap overrides
 .tbs * {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;

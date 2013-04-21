@@ -66,6 +66,10 @@ Example
 
 Each helper need's to specify unique `key`. These are holding values in the database. Also each helper needs to include `@page` object as their last parameter. This object holds all the page's editable content in a hash data structure.
 
+Already used keys which you must **not** use:
+
+- `page_title`
+
 #### helper arguments for all the fields
 - `key` unique key to hold the value
 - `class` html class attribute (optional)

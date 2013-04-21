@@ -3,12 +3,6 @@ $ ->
   new ImageUploader($(".image_upload_box"))
   new ImageDragger("[draggable=true]", ".rubber_ring_image")
 
-  $("#images-manager").on "click", (e) ->
-    $link = $(e.currentTarget)
-    $(".images-manager").slideToggle()
-    # bootstra's well is preventing smooth animation
-    $link.parent().toggleClass("active")
-
   # remove all unused images action
   $(".remove_not_used_images").on "click", ->
     pm = new PersistenceManager()

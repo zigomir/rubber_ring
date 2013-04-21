@@ -1,6 +1,6 @@
 module RubberRing
   class Page < ActiveRecord::Base
-    attr_accessor :edit_mode
+    attr_accessor :edit_mode, :title
 
     def self.save_or_update(options)
       page = load_first_page(options)
@@ -35,11 +35,11 @@ module RubberRing
       @edit_mode
     end
 
-    def edit_mode=(edit)
-      @edit_mode = edit
+    def title
+      self.content['page_title'] unless self.content.nil?
     end
 
-    private
+  private
 
     def self.load_first_page(options)
       where(controller: options[:controller], action: options[:action]).first
