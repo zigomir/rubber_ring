@@ -21,7 +21,7 @@ class @ImageDragger
       if $(this).attr("src") != e.dataTransfer.getData("src")
         pm = new PersistenceManager()
         this.src = e.dataTransfer.getData("src")
-        pm.save($(this))
+        pm.save_image($(this))
 
       false
 

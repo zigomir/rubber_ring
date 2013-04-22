@@ -16,18 +16,31 @@ module RubberRing
     end
 
     def save
-      options = get_options_from_params(params)
-      page = Page.save_or_update(options)
-      expire_page(params[:page_path])
+      page = save_page_content(params)
+
+      render :json => { controller: page.controller, action: page.action, content: page.content }
+    end
+
+    def save_image
+      page = save_page_content(params)
+      width  = params[:width] || ''
+      height = params[:height] || ''
+
+      unless width == '' and height == ''
+        key = params[:content].keys.first
+        path = "public/#{page.content[key]}"
+        image = ImageSorcery.new(path)
+        #http://www.imagemagick.org/script/command-line-processing.php#geometry
+        #widthxheight>	Shrinks an image with dimension(s) larger than the corresponding width and/or height argument(s).
+        image.convert(path, quality: 90, resize: "#{width}x#{height}>")
+      end
 
       render :json => { controller: page.controller, action: page.action, content: page.content }
     end
 
     def remove
       options = get_options_from_params(params)
-      key_to_remove = params[:key_to_remove]
-
-      page = Page.remove(options, key_to_remove)
+      page = Page.remove(options, params[:key_to_remove])
       expire_page(params[:page_path])
 
       render :json => { controller: page.controller, action: page.action, content: page.content }
@@ -36,13 +49,7 @@ module RubberRing
     def image_add
       dir, src_dir = get_image_directories(params)
       name = params[:file].original_filename
-
-      unless File.directory?(dir)
-        FileUtils.mkdir_p(dir)
-      end
-
-      path = File.join(dir, name)
-      File.open(path, 'wb') { |f| f.write(params[:file].read) }
+      save_file_to_fs(dir, name)
 
       render :json => { src: File.join(src_dir, name) }
     end
@@ -55,6 +62,21 @@ module RubberRing
     end
 
   private
+
+    def save_page_content(params)
+      options = get_options_from_params(params)
+      page = Page.save_or_update(options)
+      expire_page(params[:page_path])
+      page
+    end
+
+    def save_file_to_fs(dir, name)
+      unless File.directory?(dir)
+        FileUtils.mkdir_p(dir)
+      end
+
+      File.open(File.join(dir, name), 'wb') { |f| f.write(params[:file].read) }
+    end
 
     def get_options_from_params(params)
       {

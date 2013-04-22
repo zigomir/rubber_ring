@@ -4,7 +4,12 @@ This project rocks and uses MIT-LICENSE.
 
 * Ruby version: `2.0.0-p0`
 * DB: postgres 9.1 with `hstore`
-* to install `hstore` on `Ubuntu` run `sudo apt-get install postgresql-contrib`
+* imagemagick
+
+To install `hstore` and `imagemagick` on `Ubuntu`
+	
+	sudo apt-get install postgresql-contrib
+	sudo apt-get install imagemagick
 
 # Install
 
@@ -38,7 +43,15 @@ This will enable you to output your pages to plain old `HTML` files that can be 
 
 Rails generator for new pages
 
-    rails g rubber_ring:page home index edit
+    rails generate rubber_ring:page home action1 action2
+
+This will create files and new routes to `routes.rb` file
+
+    create  app/controllers/home_controller.rb
+    create  app/views/home/action1.html.erb
+    create  app/views/home/action2.html.erb
+    route  get 'home/action1'
+    route  get 'home/action2'
 
 ### Rubber Ring helpers
 
@@ -46,7 +59,7 @@ CMS fields are made of tag, key and `@page` which holds content for all the page
 
 Example
 
-	<%= editable_image({key: 'header_image', src: '/assets/baws.jpg'}, @page) %>
+	<%= editable_image({key: 'header_image', src: '/assets/baws.jpg', height: '360'}, @page) %>
 
 	<%= editable_field(:h1, {key: 'header'}, @page) do %>
 	  Welcome to Rubber Ring - CMS that doesn't make you think about it.
@@ -80,6 +93,8 @@ Already used keys which you must **not** use:
 #### specific arguments for each field
 - `editable_image`
 	- `src` image source attribute
+	- `width` image width
+	- `height` image height
 - `editable_field`
 	- no specific arguments
 - `duplicable_editable_field`
@@ -100,7 +115,7 @@ Login on URL `/rubber_ring` with password which was set by developer in the inst
 
 Editing content is easy as clicking inside green boxes and start editing. Some fields can be duplicated with a double mouse click and removed with middle mouse click. Developer decides what can be duplicable/repeatable and what not.
 
-For changing images just click on `Image manager` in the upper menu. Drop the image you need to drop zone. After uploading the image you can drag and drop it on the image you wanted to change.
+For changing images just click on `Image manager` in the upper menu. Drop the image you need to drop zone. After uploading the image you can drag and drop it on the image you wanted to change. Image will be automatically resized to the size developer set for it.
 
 ## Build site
 
