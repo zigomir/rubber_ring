@@ -2,13 +2,10 @@
 - middle click on Mac
 - GOOD DEMO! (Sprüngli)
 - publish build to server (use maybe rysinc or capistrano?)
-- release gem
+- release gem and open source it
 	- use [semantic versioning](http://semver.org/)
 - duplicable order change with drag and drop
-- nice tutorial (game like)
-
-### Neat 'should/could' features
-- publish on specific time [cool lib for timepicking](http://amsul.ca/pickadate.js)
+- screen cast tutorial
 
 ## Document
 - document regular
@@ -22,7 +19,7 @@
 	- integration tests with phantom js driver
 - minify assets with grunt or sprockets from build script
 
-## Future
-- open-source it
+## Future / neat features
+- publish on specific time [cool lib for timepicking](http://amsul.ca/pickadate.js)
 - use shadow dom for encapsulating application menu [link](http://www.html5rocks.com/en/tutorials/webcomponents/shadowdom/)
 - service where user page (html + assets) (before must add right attributes to elements she wants to be editable) and than she can start editing her page right away (use grammar for parsing html or at least really good library - check https://github.com/flavorjones/loofah)

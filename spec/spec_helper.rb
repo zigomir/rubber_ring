@@ -35,4 +35,8 @@ RSpec.configure do |config|
   # the seed, which is printed after each run.
   #     --seed 1234
   config.order = 'random'
+
+  # routes
+  config.include Rails.application.routes.url_helpers
+  config.before(:each) { @routes = RubberRing::Engine.routes }
 end
