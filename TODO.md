@@ -7,6 +7,7 @@
 
 ## Bug fixes
 - middle click on Mac
+- sometimes publish won't get cached html ... maybe because of threading -> investigate
 
 ## Documentation
 - document regular

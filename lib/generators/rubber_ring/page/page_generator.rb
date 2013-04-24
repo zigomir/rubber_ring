@@ -22,10 +22,9 @@ module RubberRing
         end
       end
 
-      private
+    private
+
       def page_name
-        #"rr_#{class_name.underscore}"
-        #'home'
         class_name.underscore
       end
     end

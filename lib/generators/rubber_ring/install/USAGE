@@ -1,0 +1,9 @@
+Description:
+    This generator will create two files. One for setting up admin password and another setting up publish server
+
+Example:
+    rails generate rubber_ring:install
+
+    This will create
+        create app/config/publish.yml
+        create app/config/initializers/rubber_ring.rb
