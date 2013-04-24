@@ -45,11 +45,17 @@ Update `development.rb` and `production.rb` files with this two lines
 	config.action_controller.perform_caching = true
   	config.action_controller.page_cache_directory = "#{Rails.root.to_s}/public/build"
 
-Set admin password with creating `app/config/initializers/rubber_ring.rb` file and set it like this
+### Setup config files
+Generate password file for admin and settings for publishing pages on production server
 
-	RubberRing.admin_password = 'secret'
+	rails generate rubber_ring:install
 
-This will enable you to output your pages to plain old `HTML` files that can be later on uploaded to plain web server for serving them.
+This will generate
+
+	app/config/publish.yml
+	app/config/initializers/rubber_ring.rb
+
+Set admin password in `app/config/initializers/rubber_ring.rb` file and remote production server in `app/config/publish.yml`.
 
 # Usage
 ## Developers
@@ -60,11 +66,11 @@ Rails generator for new pages
 
 This will create files and new routes to `routes.rb` file
 
-    create  app/controllers/home_controller.rb
-    create  app/views/home/action1.html.erb
-    create  app/views/home/action2.html.erb
-    route  get 'home/action1'
-    route  get 'home/action2'
+    create app/controllers/home_controller.rb
+    create app/views/home/action1.html.erb
+    create app/views/home/action2.html.erb
+    route get 'home/action1'
+    route get 'home/action2'
 
 ### Rubber Ring helpers
 
@@ -126,12 +132,12 @@ Editing content is easy as clicking inside green boxes and start editing. Some f
 
 For changing images click on `Image manager` in the upper menu. Drag&Drop the image you need to drop zone. After uploading the image you can drag and drop it on the image you wanted to change. Image will be automatically resized to the size that was set by developer or page designer.
 
-## Build site
+## Build and publish your pages
 
-`Preview and prepare for publish!` option in the menu will output entire page to `public/build` directory. If you do this for every page you should be able to just upload entire `public/build` directory to your production server and use it.
+`Preview` option in the menu will output entire page to `public/build` directory. `Publish` will also build current page and it will also upload it to your production server.
 
 ## So this is OK for static HTML sites, what about dynamic ones?
-You can of course integrate Rubber Ring your Rails application as well and use it only for site content editing. This only means that you won't need to click `Preview and prepare for publish!`.
+You can of course integrate Rubber Ring with your Rails application as well and use it only for site content editing. But then you won't need `preview` and `publish` features.
 
 ## Philosophy
 
@@ -150,6 +156,7 @@ You can of course integrate Rubber Ring your Rails application as well and use i
 - [Perch](http://grabaperch.com/)
 - [CopyCopter](http://copycopter.com)
 - [SimpleCMS](http://www.simplecms.com)
+- [Squarespace](http://www.squarespace.com/)
 
 ---
 This project uses MIT-LICENSE. Copyright 2013 Žiga Vidic
