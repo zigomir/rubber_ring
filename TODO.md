@@ -1,6 +1,5 @@
 ## Features
-- publish build to server (use [rr_publish](https://github.com/zigomir/rr_publish) gem)
-- release gem and open source it
+- release gem and open source the project
 	- use [semantic versioning](http://semver.org/)
 - duplicable order change with drag and drop
 - screen cast tutorial
@@ -15,6 +14,7 @@
 - use [YARD](http://yardoc.org/) for documenting code
 
 ## Development
+- extract to image related from `cms_controller` to `image_controller`
 - better and more consistent naming conventions
 - maybe ditch hstore so that all databases could be used?
 	- if sqlite3 can be used, I should write Rails Girls guide too

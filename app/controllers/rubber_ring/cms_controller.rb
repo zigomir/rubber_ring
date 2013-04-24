@@ -1,10 +1,11 @@
 module RubberRing
   class CmsController < ActionController::Base
     include Build
+    include Publish
 
     layout 'rubber_ring/application'
     before_action :load_page_content
-    before_filter :admin?, :cache? # check if admin before cache
+    before_filter :admin?, :cache?, :publish? # check if admin before cache
 
     def load_page_content
       page = Page.where(controller: params[:controller],
@@ -119,11 +120,23 @@ module RubberRing
     end
 
     def cache?
-      if params[:cache] == '1'
-        @page_caching   = true
-        @page.edit_mode = false
-        Build.assets!
+      cache_and_build if params[:cache] == '1'
+    end
+
+    def publish?
+      if params[:publish] == '1'
+        cache_and_build
+        Thread::new{
+          Publish.assets!
+        }
       end
     end
+
+    def cache_and_build
+      @page_caching = true
+      @page.edit_mode = false
+      Build.assets!
+    end
+
   end
 end

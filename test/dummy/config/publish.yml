@@ -1,0 +1,9 @@
+# you need to copy your server's keys to destination server authorized_keys
+
+site:
+  server:
+    source: public/build/*
+    destination: root@enslaved:/var/www
+#    exclude:
+#      - .git
+#      - /site/config/database.yml

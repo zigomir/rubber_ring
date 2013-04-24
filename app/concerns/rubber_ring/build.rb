@@ -1,7 +1,6 @@
 module RubberRing
   module Build
 
-    # TODO read upload/build dir from settings
     def Build.assets!
       # clear old assets and copy new ones
       assets_dir = "#{Rails.root.to_s}/public/build/assets"

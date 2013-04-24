@@ -126,12 +126,20 @@ Editing content is easy as clicking inside green boxes and start editing. Some f
 
 For changing images click on `Image manager` in the upper menu. Drag&Drop the image you need to drop zone. After uploading the image you can drag and drop it on the image you wanted to change. Image will be automatically resized to the size that was set by developer or page designer.
 
-## Build site
+## Build and publish your pages
 
-`Preview and prepare for publish!` option in the menu will output entire page to `public/build` directory. If you do this for every page you should be able to just upload entire `public/build` directory to your production server and use it.
+`Preview` option in the menu will output entire page to `public/build` directory. `Publish` will also build current page and it will also upload it to your production server. Settings where to publish your site needs to be in `config/publish.yml` file.
+
+Example `config/publish.yml` file
+
+	# you need to copy your server's keys to destination server authorized_keys
+	site:
+  		server:
+    		source: public/build/*
+    		destination: root@enslaved:/var/www
 
 ## So this is OK for static HTML sites, what about dynamic ones?
-You can of course integrate Rubber Ring your Rails application as well and use it only for site content editing. This only means that you won't need to click `Preview and prepare for publish!`.
+You can of course integrate Rubber Ring with your Rails application as well and use it only for site content editing. But then you won't need `preview` and `publish` features.
 
 ## Philosophy
 
@@ -150,6 +158,7 @@ You can of course integrate Rubber Ring your Rails application as well and use i
 - [Perch](http://grabaperch.com/)
 - [CopyCopter](http://copycopter.com)
 - [SimpleCMS](http://www.simplecms.com)
+- [Squarespace](http://www.squarespace.com/)
 
 ---
 This project uses MIT-LICENSE. Copyright 2013 Žiga Vidic

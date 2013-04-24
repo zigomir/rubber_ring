@@ -24,6 +24,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'jquery-rails'
   s.add_dependency 'actionpack-page_caching'
   s.add_dependency 'image_sorcery'
+  s.add_dependency 'rr_publish'
 
   s.add_development_dependency 'rspec-rails'
 end
