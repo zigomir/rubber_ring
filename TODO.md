@@ -1,23 +1,26 @@
 ## Features
-- middle click on Mac
-- GOOD DEMO! (Sprüngli)
-- publish build to server (use maybe rysinc or capistrano?)
+- publish build to server (use [rr_publish](https://github.com/zigomir/rr_publish) gem)
 - release gem and open source it
 	- use [semantic versioning](http://semver.org/)
 - duplicable order change with drag and drop
 - screen cast tutorial
+- minify assets with grunt or sprockets from build script
 
-## Document
+## Bug fixes
+- middle click on Mac
+
+## Documentation
 - document regular
 - revise README and write it more clearly
 - use [YARD](http://yardoc.org/) for documenting code
 
 ## Development
 - better and more consistent naming conventions
+- maybe ditch hstore so that all databases could be used?
+	- if sqlite3 can be used, I should write Rails Girls guide too
 - move vendor assets to vendor directory [link](http://prioritized.net/blog/gemify-assets-for-rails/)
 - Write (JavaScript) tests!
 	- integration tests with phantom js driver
-- minify assets with grunt or sprockets from build script
 
 ## Future / neat features
 - publish on specific time [cool lib for timepicking](http://amsul.ca/pickadate.js)

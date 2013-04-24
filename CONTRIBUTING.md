@@ -4,6 +4,8 @@ Please read `TODO.md` file and find something you would like there. Or just add 
 
 ## Developing Rails Engine
 
+First install software dependencies, listed in [README.md](README.md#deps) file.
+
     cd test/dummy
     rake db:create
     sudo -u postgres psql rubber_ring_gem_development -c 'create extension hstore;'
