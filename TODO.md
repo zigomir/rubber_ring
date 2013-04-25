@@ -1,27 +1,24 @@
 ## Features
-- release gem and open source the project
+- release gem and open source the project - after at least one successfully tested project with it (probably DASO for Astina)
 	- use [semantic versioning](http://semver.org/)
 - duplicable order change with drag and drop
 - screen cast tutorial
 - minify assets with grunt or sprockets from build script
 
-## Bug fixes
+## Known issues
 - middle click on Mac
 - sometimes publish won't get cached html ... maybe because of threading -> investigate
 
 ## Documentation
-- document regular
-- revise README and write it more clearly
+- document and revise documentation regularly
 - use [YARD](http://yardoc.org/) for documenting code
 
 ## Development
-- extract to image related from `cms_controller` to `image_controller`
 - better and more consistent naming conventions
 - maybe ditch hstore so that all databases could be used?
 	- if sqlite3 can be used, I should write Rails Girls guide too
 - move vendor assets to vendor directory [link](http://prioritized.net/blog/gemify-assets-for-rails/)
-- Write (JavaScript) tests!
-	- integration tests with phantom js driver
+- add JavaScript tests
 
 ## Future / neat features
 - publish on specific time [cool lib for timepicking](http://amsul.ca/pickadate.js)

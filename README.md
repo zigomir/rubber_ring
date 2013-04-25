@@ -6,6 +6,12 @@ Named by The Smiths [song](http://www.youtube.com/watch?v=Cpf6gJU3520).
 
 This CMS helps you build editable pages fast. You define which content (`image`, `text`, `html`) should be editable for your users. Limitation, that only developer sets what page parts are editable is good for keeping the design intact.
 
+## Benefits
+
+- optimized for developers and quick setup
+- simple to use for customers. True WSYIWYG.
+- customer doesn't need application server and/or database. Only plain web server for static HTML serving will do.
+
 ### This CMS is not good for
 sites, where editor wants to create new pages and control each part of every page.
 
@@ -143,12 +149,6 @@ You can of course integrate Rubber Ring with your Rails application as well and 
 
 * you can not build robust system without limitations
 * system may stretch only to certain point until it breaks. Like a rubber ring!
-
-## Benefits
-
-- optimized for developers and quick setup
-- simple to use for customers. True WSYIWYG.
-- customer doesn't need application server and/or database. Only plain web server for static HTML serving.
 
 ## Inspired by
 

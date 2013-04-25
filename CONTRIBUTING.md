@@ -1,6 +1,6 @@
 # Where to start
 
-Please read `TODO.md` file and find something you would like there. Or just add whatever you might think is useful to this project.
+Please read `TODO.md` file and find something you would like there. Or just add whatever you might think would be useful.
 
 ## Developing Rails Engine
 
