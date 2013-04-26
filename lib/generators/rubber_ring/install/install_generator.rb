@@ -8,7 +8,7 @@ module RubberRing
       end
 
       def generate_password_file
-        copy_file 'admin_password_template.rb', 'config/initializers/rubber_ring.rb'
+        copy_file 'settings_template.rb', 'config/initializers/rubber_ring.rb'
       end
     end
   end

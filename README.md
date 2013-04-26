@@ -52,7 +52,7 @@ Update `development.rb` and `production.rb` files with this two lines
   	config.action_controller.page_cache_directory = "#{Rails.root.to_s}/public/build"
 
 ### Setup config files
-Generate password file for admin and settings for publishing pages on production server
+Generate initialize settings file for admin and settings for publishing pages on production server
 
 	rails generate rubber_ring:install
 
@@ -61,10 +61,29 @@ This will generate
 	app/config/publish.yml
 	app/config/initializers/rubber_ring.rb
 
-Set admin password in `app/config/initializers/rubber_ring.rb` file and remote production server in `app/config/publish.yml`.
+Set admin password and `app/config/initializers/rubber_ring.rb`
+
+### Static pages or Rails application?
+
+* If you only want to use Rubber Ring to generate static pages, leave `RubberRing.static_only = true` intact. This will leave you with options to `preview` and `publish` html pages and other assets to production server
+* If you want to use Rubber Ring to edit content for your Rails application, than just set `RubberRing.static_only` to false
+* Set remote production server in `app/config/publish.yml` if you are using `static_only` mode
 
 # Usage
-## Developers
+
+## As an editor I want to easily edit content on my site
+
+Login (`/rubber_ring`) with password which was set by developer in the install stage.
+
+Editing content is easy as clicking inside green boxes and start editing. Some fields can be duplicated with a double mouse click and removed with middle mouse click. Developer decides what can be duplicable/repeatable and what not.
+
+For changing images click on `Image manager` in the upper menu. Drag&Drop the image you need to drop zone. After uploading the image you can drag and drop it on the image you wanted to change. Image will be automatically resized to the size that was set by developer or page designer.
+
+### Build and publish your pages
+
+`Preview` option in the menu will output entire page to `public/build` directory. `Publish` will upload current page to your production server, set in `publish.yml` file.
+
+## As a developer I want to have quickly setup editable pages
 
 Rails generator for new pages
 
@@ -87,17 +106,18 @@ Examples
 	<%= editable_image({key: 'header_image', src: '/assets/baws.jpg', height: '360'}, @page) %>
 
 	<%= editable_field(:h1, {key: 'header'}, @page) do %>
-	  Welcome to Rubber Ring - CMS that doesn't make you think about it.
+	  I'm editable content in one line.
 	<% end %>
 
 	<%= editable_field(:div, {key: 'first_content', class: 'multi-line'}, @page) do %>
-	  Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
+	  I'm editable content in 
+	  multi lines...
 	<% end %>
 
 	<%= duplicable_editable_field(:ul, {group: 'blog_posts', child_tag: 'li', class: 'multi-line'}, @page) do %>
-	  i am so alone, no one is wrapping me
-	  <h3>i'm hanging with h3, i'm more important and cooler than you are</h3>
-	  <span>i'm wrapped in a span element</span>
+	  I'm text only
+	  <h3>I'm hanging with h3, i'm more important and cooler than you are</h3>
+	  <span>I'm wrapped in a span element</span>
 	<% end %>
 
 ### Helper options
@@ -129,21 +149,6 @@ Each helper need's to specify unique `key`. These are holding values in the data
 ### Assets (stylesheets and javascripts)
 
 You can use, like in any other new Rails application, [Sprockets directives](https://github.com/sstephenson/sprockets#the-directive-processor) to include assets to your app. Please remove `//= require jquery` and `//= require jquery_ujs` from `application.js` because `rubber ring` is already including `jquery` which you can reuse in your pages as well.
-
-## Editors
-
-Login (`/rubber_ring`) with password which was set by developer in the install stage.
-
-Editing content is easy as clicking inside green boxes and start editing. Some fields can be duplicated with a double mouse click and removed with middle mouse click. Developer decides what can be duplicable/repeatable and what not.
-
-For changing images click on `Image manager` in the upper menu. Drag&Drop the image you need to drop zone. After uploading the image you can drag and drop it on the image you wanted to change. Image will be automatically resized to the size that was set by developer or page designer.
-
-## Build and publish your pages
-
-`Preview` option in the menu will output entire page to `public/build` directory. `Publish` will also build current page and it will also upload it to your production server.
-
-## So this is OK for static HTML sites, what about dynamic ones?
-You can of course integrate Rubber Ring with your Rails application as well and use it only for site content editing. But then you won't need `preview` and `publish` features.
 
 ## Philosophy
 

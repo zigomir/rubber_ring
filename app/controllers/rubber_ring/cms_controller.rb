@@ -45,22 +45,27 @@ module RubberRing
     end
 
     def cache?
-      cache_and_build if params[:cache] == '1'
+      if params[:cache] == '1' and params[:publish].nil?
+        disable_edit_mode
+        Thread::new{
+          Build.assets!
+        }
+      end
     end
 
     def publish?
-      if params[:publish] == '1'
-        cache_and_build
+      if params[:publish] == '1' and params[:cache] == '1'
+        disable_edit_mode
         Thread::new{
+          Build.assets!
           Publish.assets!
         }
       end
     end
 
-    def cache_and_build
+    def disable_edit_mode
       @page_caching = true
       @page.edit_mode = false
-      Build.assets!
     end
 
   end

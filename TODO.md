@@ -7,11 +7,10 @@
 
 ## Known issues
 - middle click on Mac
-- sometimes publish won't get cached html ... maybe because of threading -> investigate
 
 ## Documentation
 - document and revise documentation regularly
-- use [YARD](http://yardoc.org/) for documenting code
+- maybe use [YARD](http://yardoc.org/) for documenting code
 
 ## Development
 - better and more consistent naming conventions
@@ -23,4 +22,4 @@
 ## Future / neat features
 - publish on specific time [cool lib for timepicking](http://amsul.ca/pickadate.js)
 - use shadow dom for encapsulating application menu [link](http://www.html5rocks.com/en/tutorials/webcomponents/shadowdom/)
-- service where user page (html + assets) (before must add right attributes to elements she wants to be editable) and than she can start editing her page right away (use grammar for parsing html or at least really good library - check https://github.com/flavorjones/loofah)
+- much better GUI design
