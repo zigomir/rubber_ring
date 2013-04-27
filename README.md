@@ -129,7 +129,7 @@ Each helper need's to specify unique `key`. These are holding values in the data
 - `page_title`
 
 #### helper arguments for all editable fields
-- `key` unique key to hold the value
+- `key` key to hold the value **(must be unique)**
 - `class` html class attribute (optional)
 	- class value with `multi-line` will enable editing in multi lines
 - `id` html id attribute (optional)
@@ -143,7 +143,7 @@ Each helper need's to specify unique `key`. These are holding values in the data
 - `editable_field`
 	- no specific arguments
 - `duplicable_editable_field`
-	- `group` is used to specify group's key prefix. Example: `grup: blog_posts` will produce keys `blog_posts_1`, `blog_posts_2`, `blog_posts_3`, ... based on how many duplication user will do
+	- `group` is used to specify group's key prefix. Example: `grup: blog_posts` will produce keys `blog_posts_1`, `blog_posts_2`, `blog_posts_3`, ... based on how many duplication user will do **(must be unique)**
 	- `child_tag` will set tag for child elements of `duplicable_editable_field`
 
 ### Assets (stylesheets and javascripts)

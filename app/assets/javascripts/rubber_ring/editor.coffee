@@ -8,9 +8,12 @@ $ ->
   pm = new PersistenceManager(links_to_sanitize)
   $contentEditable = $("[contenteditable]")
 
+  add_reset_link_to_first_in_duplicable_group = () ->
+    $(".duplicable_holder .duplicable:first").append(reset_link) if $(".duplicable_holder .duplicable").length == 1
+
   # append content editable with buttons
   $("[contenteditable]").not(".duplicable").append(reset_link)
-  $(".duplicable:first").append(reset_link)
+  add_reset_link_to_first_in_duplicable_group()
   $("body").on "click", ".reset-content", (e) ->
     $content_to_remove = $(e.currentTarget).parent()
     if window.confirm "Really want to reset content?"
@@ -24,7 +27,7 @@ $ ->
     duplicate($content_to_duplicate)
 
   # only alow to remove non-first of duplicables
-  $(".duplicable").not(":first").append(remove_duplicat)
+  $(".duplicable_holder .duplicable").not(":first").append(remove_duplicat)
   $("body").on "click", ".remove-duplicat", (e) ->
     $duplicat_to_remove = $(e.currentTarget).parent()
     duplicat_to_remove($duplicat_to_remove)
@@ -58,10 +61,12 @@ $ ->
     # clone with data and events
     $clone = $editField.clone(true).appendTo($editField.parent())
 
-    new_key = generate_new_group_key($clone)
+    new_key = generate_new_group_key($editField)
     $clone.attr("data-cms", new_key)
     # remove some actions from non-first elements
-    $(".duplicable").not(":first").find(".duplicate-content, .reset-content").remove()
+    $(".duplicable_holder .duplicable").not(":first").find(".duplicate-content, .reset-content").remove()
+    $(".duplicable_holder .duplicable:first").find(".reset-content").remove()
+
     $clone.append(remove_duplicat)
     # save the clone
     pm.save($clone)
@@ -69,8 +74,18 @@ $ ->
   duplicat_to_remove = ($duplicat) ->
     pm.remove($duplicat)
     $duplicat.remove()
+    add_reset_link_to_first_in_duplicable_group()
 
-  generate_new_group_key = (element) ->
-    temp_key = element.data("cms").split("_").reverse()
-    temp_key[0] = $(".duplicable").length - 1
-    temp_key.reverse().join("_")
+  generate_new_group_key = ($editField) ->
+    temp_key = $editField.attr("data-cms").split("_").reverse()
+    temp_key[0] = $editField.siblings().length
+    new_key = temp_key.reverse().join("_")
+
+    # check if key is already taken
+    if $("[data-cms=#{new_key}]").length != 0
+      # take the key of last sibling
+      temp_key = $editField.siblings().last().attr("data-cms").split("_").reverse()
+      temp_key[0] = parseInt(temp_key[0], 10) + 1
+      new_key = temp_key.reverse().join("_")
+
+    new_key

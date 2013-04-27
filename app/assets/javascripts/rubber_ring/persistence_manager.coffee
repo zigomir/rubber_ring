@@ -40,18 +40,13 @@ class @PersistenceManager
 
   remove: (content) ->
     key = content.attr("data-cms")
-    console.log "Removing of key %s content", key
     path = @remove_path.replace(':key', key)
     @post_object.key_to_remove = key
     @post_to_backend(path, @post_object)
 
   remove_image: (src) ->
-    console.log "Removing image with src = %s", src
     @post_object.src_to_remove = src
     @post_to_backend(@remove_image_path, @post_object)
 
   post_to_backend: (path, post_object) ->
-    console.log "Sending CMS content to server..."
-    console.log post_object
-    $.post path, post_object, (data) ->
-      console.log data
+    $.post path, post_object

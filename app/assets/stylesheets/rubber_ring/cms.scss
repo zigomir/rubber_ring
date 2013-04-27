@@ -4,6 +4,14 @@
 *[contenteditable] {
   outline: dashed green 1px;
   cursor: pointer;
+
+  // disable selection of those action links
+  .reset-content, .duplicate-content, .remove-duplicat {
+    user-select:none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+  }
 }
 .reset-content {
   background: url("/assets/glyphicons-halflings.png") no-repeat -217px -25px;;

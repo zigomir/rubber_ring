@@ -12,6 +12,7 @@
 - maybe use [YARD](http://yardoc.org/) for documenting code
 
 ## Development
+- TEST multiple duplicables!
 - refactor jQuery and other ugly coffeescript code (reset, duplicate, remove duplicate links should use data-action and classes with DRYed out CSS)
 - better and more consistent naming conventions
 - maybe ditch hstore so that all databases could be used?
