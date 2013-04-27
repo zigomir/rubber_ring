@@ -75,7 +75,7 @@ Set admin password and `app/config/initializers/rubber_ring.rb`
 
 Login (`/rubber_ring`) with password which was set by developer in the install stage.
 
-Editing content is easy as clicking inside green boxes and start editing. Some fields can be duplicated with a double mouse click and removed with middle mouse click. Developer decides what can be duplicable/repeatable and what not.
+Editing content is easy as clicking inside green boxes and start editing. Developer decides what can be duplicable/repeatable and what not.
 
 For changing images click on `Image manager` in the upper menu. Drag&Drop the image you need to drop zone. After uploading the image you can drag and drop it on the image you wanted to change. Image will be automatically resized to the size that was set by developer or page designer.
 

@@ -1,18 +1,18 @@
 ## Features
-- release gem and open source the project - after at least one successfully tested project with it (probably DASO for Astina)
+- release gem and open source the project
+	- remove bad words before release
+	- recreate simed site before release this weekend
 	- use [semantic versioning](http://semver.org/)
 - duplicable order change with drag and drop
 - screen cast tutorial
 - minify assets with grunt or sprockets from build script
-
-## Known issues
-- middle click on Mac
 
 ## Documentation
 - document and revise documentation regularly
 - maybe use [YARD](http://yardoc.org/) for documenting code
 
 ## Development
+- refactor jQuery and other ugly coffeescript code (reset, duplicate, remove duplicate links should use data-action and classes with DRYed out CSS)
 - better and more consistent naming conventions
 - maybe ditch hstore so that all databases could be used?
 	- if sqlite3 can be used, I should write Rails Girls guide too
