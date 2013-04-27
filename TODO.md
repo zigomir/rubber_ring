@@ -12,9 +12,10 @@
 - maybe use [YARD](http://yardoc.org/) for documenting code
 
 ## Development
-- TEST multiple duplicables!
-- refactor jQuery and other ugly coffeescript code (reset, duplicate, remove duplicate links should use data-action and classes with DRYed out CSS)
-- better and more consistent naming conventions
+- Multiple duplicables (page2) - DONE, only these issues for now:
+	- order is different on reload (because of _id's)
+	- buttons are not nice aligned yet
+		- when appending links to DOM do calculation in foreach for every element differently
 - maybe ditch hstore so that all databases could be used?
 	- if sqlite3 can be used, I should write Rails Girls guide too
 - move vendor assets to vendor directory [link](http://prioritized.net/blog/gemify-assets-for-rails/)

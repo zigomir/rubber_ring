@@ -1,32 +1,31 @@
 class @DuplicableEditor
 
-  duplicate_link  = '<a class="duplicate-content"></a>'
-  remove_duplicat = '<a class="remove-duplicat"></a>'
-  links_to_sanitize = [duplicate_link, remove_duplicat]
-
-  first_duplicable_selector = ".duplicable_holder .duplicable:first"
-  duplicable_selector       = ".duplicable_holder .duplicable"
-
-  constructor: (@reset_link) ->
-    @add_reset_link_to_first_in_duplicable_group()
-    links_to_sanitize.push @reset_link
+  constructor: (@duplicate_link, @remove_duplicate_link, @reset_link) ->
+    links_to_sanitize = [duplicate_link, remove_duplicate_link, reset_link]
+    @add_reset_link_to_first_in_duplicable_group(null)
     @pm = new PersistenceManager(links_to_sanitize)
 
   init: ->
     # only alow to reset first link of duplicables
-    $(first_duplicable_selector).append(duplicate_link)
+    #$(first_duplicable_selector).append(duplicate_link)
+    $(".duplicable_holder").find(".duplicable:first").append(@duplicate_link)
     $("body").on "click", ".duplicate-content", (e) =>
       $content_to_duplicate = $(e.currentTarget).parent()
       @duplicate($content_to_duplicate)
 
     # only alow to remove non-first of duplicables
-    $(duplicable_selector).not(":first").append(remove_duplicat)
+#    $(duplicable_selector).not(":first").append(remove_duplicat)
+    $(".duplicable_holder").find(".duplicable:first").siblings().append(@remove_duplicate_link)
     $("body").on "click", ".remove-duplicat", (e) =>
       $duplicat_to_remove = $(e.currentTarget).parent()
       @remove_duplicate($duplicat_to_remove)
 
-  add_reset_link_to_first_in_duplicable_group: ->
-    $(first_duplicable_selector).append(@reset_link) if $(duplicable_selector).length == 1
+  add_reset_link_to_first_in_duplicable_group: ($duplicat) ->
+    if $duplicat is null
+      $(".duplicable_holder").find(".duplicable:first").append(@reset_link)
+    else
+      # only one which we are currently removing
+      $duplicat.append(@reset_link) if $duplicat.siblings().length == 1
 
   # creating new elements
   # save it as soon it is created so deletition will work also like this
@@ -40,17 +39,17 @@ class @DuplicableEditor
     new_key = generate_new_group_key($editField)
     $clone.attr("data-cms", new_key)
     # remove some actions from non-first elements
-    $(duplicable_selector).not(":first").find(".duplicate-content, .reset-content").remove()
-    $(first_duplicable_selector).find(".reset-content").remove()
+    $editField.parent().children().not(":first").find(".duplicate-content, .reset-content").remove()
+    $editField.find(".reset-content").remove()
 
-    $clone.append(remove_duplicat)
+    $clone.append(@remove_duplicate_link)
     # save the clone
     @pm.save($clone)
 
   remove_duplicate: ($duplicat) ->
     @pm.remove($duplicat)
+    @add_reset_link_to_first_in_duplicable_group($duplicat.siblings().first())
     $duplicat.remove()
-    @add_reset_link_to_first_in_duplicable_group()
 
   generate_new_group_key = ($editField) ->
     temp_key = $editField.attr("data-cms").split("_").reverse()

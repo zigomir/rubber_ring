@@ -1,0 +1,15 @@
+<h2>News</h2>
+<%= duplicable_editable_field(:ul, {group: 'news', child_tag: 'li', class: 'multi-line'}, @page) do %>
+    <p>News 1</p>
+    <p>News 1</p>
+    <p>News 1</p>
+    <p>News 1</p>
+    <p>News 1</p>
+    <p>News 1</p>
+    <p>News 1</p>
+<% end %>
+
+<h2>Blog</h2>
+<%= duplicable_editable_field(:ul, {group: 'blog_posts', child_tag: 'li', class: 'multi-line'}, @page) do %>
+    <p>Blog post 1</p>
+<% end %>

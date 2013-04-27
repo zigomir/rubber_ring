@@ -1,12 +1,15 @@
 $ ->
   # init
-  reset_link = '<a class="reset-content"></a>'
+  reset_link            = '<a class="reset-content"></a>'
+  duplicate_link        = '<a class="duplicate-content"></a>'
+  remove_duplicate_link = '<a class="remove-duplicat"></a>'
+  links_to_sanitize     = [duplicate_link, remove_duplicate_link, reset_link]
 
-  pm = new PersistenceManager([reset_link])
-  de = new DuplicableEditor([reset_link])
+  pm = new PersistenceManager(links_to_sanitize)
+  de = new DuplicableEditor(duplicate_link, remove_duplicate_link, reset_link)
   de.init()
 
-  $contentEditable = $("[contenteditable]")
+  $editable_content = $("[contenteditable]")
 
   # append content editable with buttons
   $("[contenteditable]").not(".duplicable").append(reset_link)
@@ -28,10 +31,10 @@ $ ->
       $this.trigger "change"
     $this
 
-  $contentEditable.change (e) ->
+  $editable_content.change (e) ->
     $content = $(e.currentTarget)
     pm.save($content)
 
   # disable enter in single line editor
-  $contentEditable.not(".multi-line").keydown (e) ->
+  $editable_content.not(".multi-line").keydown (e) ->
     e.preventDefault()  if e.keyCode is 13

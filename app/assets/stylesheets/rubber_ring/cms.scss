@@ -13,6 +13,7 @@
     -ms-user-select: none;
   }
 }
+// TODO dynamic margins for all these buttons
 .reset-content {
   background: url("/assets/glyphicons-halflings.png") no-repeat -217px -25px;;
   width: 12px;
@@ -20,6 +21,10 @@
   display: inline-block;
   float: right;
   outline: none;
+  margin-top: -31px;
+}
+.duplicable .reset-content {
+  margin-right: 13px;
 }
 .duplicate-content {
   background: url("/assets/glyphicons-halflings.png") no-repeat -1px -97px;
@@ -28,6 +33,7 @@
   display: inline-block;
   float: right;
   outline: none;
+  margin-top: -31px;
 }
 .remove-duplicat {
   background: url("/assets/glyphicons-halflings.png") no-repeat -25px -97px;
@@ -36,6 +42,7 @@
   display: inline-block;
   float: right;
   outline: none;
+  margin-top: -31px;
 }
 
 .images-manager {
