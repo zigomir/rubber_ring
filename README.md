@@ -4,7 +4,7 @@ Named by The Smiths [song](http://www.youtube.com/watch?v=Cpf6gJU3520).
 
 ## About
 
-This CMS helps you build editable pages fast. You define which content (`image`, `text`, `html`) should be editable for your users. Limitation, that only developer sets what page parts are editable is good for keeping the design intact.
+This CMS helps you build editable pages fast. You define which content (`image`, `text`, `link`) should be editable for your users. Limitation, that only developer sets what page parts are editable is good for keeping the design intact. It is basically backend for `contenteditable`.
 
 ## Benefits
 
@@ -152,6 +152,7 @@ You can use, like in any other new Rails application, [Sprockets directives](htt
 
 ## Philosophy
 
+* user should not be able to break design
 * you can not build robust system without limitations
 * system may stretch only to certain point until it breaks. Like a rubber ring!
 
@@ -162,6 +163,7 @@ You can use, like in any other new Rails application, [Sprockets directives](htt
 - [CopyCopter](http://copycopter.com)
 - [SimpleCMS](http://www.simplecms.com)
 - [Squarespace](http://www.squarespace.com/)
+- [contenteditable editors](http://stackoverflow.com/questions/6756407/what-contenteditable-editors-are-there)
 
 ---
 This project uses MIT-LICENSE. Copyright 2013 Žiga Vidic

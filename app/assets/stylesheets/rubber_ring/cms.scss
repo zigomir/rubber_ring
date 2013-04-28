@@ -4,6 +4,7 @@
 *[contenteditable] {
   outline: dashed green 1px;
   cursor: pointer;
+  position: relative;
 
   // disable selection of those action links
   .reset-content, .duplicate-content, .remove-duplicat {
@@ -11,40 +12,27 @@
     -moz-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
+
+    width: 12px;
+    height: 13px;
+    display: inline-block;
+    outline: none;
+    right: 1px;
+    top: 1px;
+    position: absolute;
+  }
+
+  .reset-content {
+    background: url("/assets/glyphicons-halflings.png") no-repeat -217px -25px;;
+  }
+  .duplicate-content {
+    background: url("/assets/glyphicons-halflings.png") no-repeat -1px -97px;
+    margin-right: 13px;
+  }
+  .remove-duplicat {
+    background: url("/assets/glyphicons-halflings.png") no-repeat -25px -97px;
   }
 }
-// TODO dynamic margins for all these buttons
-.reset-content {
-  background: url("/assets/glyphicons-halflings.png") no-repeat -217px -25px;;
-  width: 12px;
-  height: 13px;
-  display: inline-block;
-  float: right;
-  outline: none;
-  margin-top: -31px;
-}
-.duplicable .reset-content {
-  margin-right: 13px;
-}
-.duplicate-content {
-  background: url("/assets/glyphicons-halflings.png") no-repeat -1px -97px;
-  width: 12px;
-  height: 13px;
-  display: inline-block;
-  float: right;
-  outline: none;
-  margin-top: -31px;
-}
-.remove-duplicat {
-  background: url("/assets/glyphicons-halflings.png") no-repeat -25px -97px;
-  width: 12px;
-  height: 13px;
-  display: inline-block;
-  float: right;
-  outline: none;
-  margin-top: -31px;
-}
-
 .images-manager {
   display: none; // hide by default
 

@@ -7,14 +7,12 @@ class @DuplicableEditor
 
   init: ->
     # only alow to reset first link of duplicables
-    #$(first_duplicable_selector).append(duplicate_link)
     $(".duplicable_holder").find(".duplicable:first").append(@duplicate_link)
     $("body").on "click", ".duplicate-content", (e) =>
       $content_to_duplicate = $(e.currentTarget).parent()
       @duplicate($content_to_duplicate)
 
     # only alow to remove non-first of duplicables
-#    $(duplicable_selector).not(":first").append(remove_duplicat)
     $(".duplicable_holder").find(".duplicable:first").siblings().append(@remove_duplicate_link)
     $("body").on "click", ".remove-duplicat", (e) =>
       $duplicat_to_remove = $(e.currentTarget).parent()
@@ -22,13 +20,13 @@ class @DuplicableEditor
 
   add_reset_link_to_first_in_duplicable_group: ($duplicat) ->
     if $duplicat is null
-      $(".duplicable_holder").find(".duplicable:first").append(@reset_link)
+      $(".duplicable_holder").find(".duplicable:first").each (index, element) =>
+        $(element).append(@reset_link) if $(element).siblings().length == 0
     else
       # only one which we are currently removing
       $duplicat.append(@reset_link) if $duplicat.siblings().length == 1
 
   # creating new elements
-  # save it as soon it is created so deletition will work also like this
   duplicate: ($editField) ->
     # save parent first because it is possible that it is not yet saved
     # and we will have problem with counting keys in group
