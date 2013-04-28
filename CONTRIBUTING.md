@@ -4,7 +4,7 @@ Please read `TODO.md` file and find something you would like there. Or just add 
 
 ## Developing Rails Engine
 
-First install software dependencies, listed in [README.md](README.md#deps) file.
+First install software dependencies, listed in [README.md](README.md#dependencies) file.
 
     cd test/dummy
     rake db:create

@@ -25,7 +25,7 @@ sites, where **editor** wants to create new pages and control each part of every
 
 ## Setup
 
-### <a id="deps"></a>Dependencies
+### Dependencies
 To install `hstore` and `imagemagick` on `Ubuntu`
 	
 	sudo apt-get install postgresql-contrib
