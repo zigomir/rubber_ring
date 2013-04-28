@@ -3,7 +3,6 @@
  */
 *[contenteditable] {
   outline: dashed green 1px;
-  cursor: pointer;
   position: relative;
 
   // disable selection of those action links
@@ -20,6 +19,8 @@
     right: 1px;
     top: 1px;
     position: absolute;
+    border: 0;
+    cursor: pointer;
   }
 
   .reset-content {
@@ -33,55 +34,67 @@
     background: url("/assets/glyphicons-halflings.png") no-repeat -25px -97px;
   }
 }
-.images-manager {
-  display: none; // hide by default
 
-  .already_uploaded_images {
-    margin-top: 35px;
-    img {
-      width: 65px;
+#rubber-ring-application {
+
+  .images-manager {
+    display: none; // hide by default
+
+    .already_uploaded_images {
+      margin-top: 35px;
+      img {
+        width: 65px;
+      }
     }
-  }
 
-  .remove_not_used_images {
-    margin-top: 7px;
-  }
-  
-  .image_upload_box {
-    display: -webkit-flex;
-    display: flex;
-    height: 75px;
-    border: dashed green 1px;
-
-    &.drag-hover {
-      background-color: #abee9b;
+    .remove_not_used_images {
+      margin-top: 7px;
     }
-    .image_upload_text {
-      margin: auto;
+
+    .image_upload_box {
+      display: -webkit-flex;
+      display: flex;
+      height: 75px;
+      border: dashed green 1px;
+
+      &.drag-hover {
+        background-color: #abee9b;
+      }
+      .image_upload_text {
+        margin: auto;
+      }
+      .preview {
+        display: none;
+      }
     }
-    .preview {
-      display: none;
-    }
-  }
 
-  .rubber_cache_preview {
-    font-family: calibri,tahoma,arial,sans-serif;
-    position: fixed;
-    right: 0;
-    top: 0;
+    .rubber_cache_preview {
+      font-family: calibri,tahoma,arial,sans-serif;
+      position: fixed;
+      right: 0;
+      top: 0;
 
-    a {
-      color: green;
-
-      &:visited {
+      a {
         color: green;
+
+        &:visited {
+          color: green;
+        }
       }
     }
   }
-}
 
-.page-title-manager {
-  display: none; // hide by default
+  .page-title-manager {
+    display: none; // hide by default
+  }
+
+  #edit-link {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+  }
 }
 
 // bootstrap overrides

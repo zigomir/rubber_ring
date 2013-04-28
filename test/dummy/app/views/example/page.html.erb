@@ -1,26 +1,28 @@
 <%= editable_image({key: 'header_image', src: '/images/baws.jpg', height: '360'}, @page) %>
 
 <%= editable_field(:h1, {key: 'header'}, @page) do %>
-  rubber ring cms...easy as fuck
+  rubber ring cms
 <% end %>
 
 <%= editable_field(:div, {key: 'first_content', class: 'multi-line'}, @page) do %>
   editing page content right away
 <% end %>
 
-<h3>i can haz dynamicz!</h3>
+<h3>Dynamic site? check your ruber_ring.rb initializer</h3>
 <form method="post" action="<%= form_path %>">
-  <input name="value" value="" placeholder="Wait, what?" />
-  <input type="submit" value="Post this data already" />
+  <input name="value" value="" placeholder="Something" />
+  <input type="submit" value="Post this" />
 </form>
 
 <% if flash[:message] %>
-<h4>Son of a gun, you've just typed: "<%= flash[:message] %>"</h4>
+<h4>Oh my, you typed "<%= flash[:message] %>"</h4>
 <% end %>
 
-<h3>double click stuff under me and it will reproduce like rabbits</h3>
+<h2>Blog</h2>
 <%= duplicable_editable_field(:ul, {group: 'blog_posts', child_tag: 'li', class: 'multi-line'}, @page) do %>
-  i am so alone, no one is wrapping me
-  <h3>i'm hanging with h3, i'm more important and cooler than you are</h3>
-  <span>i'm wrapped in a span element</span>
+  <h3>First time live</h3>
+  <p>
+    Rubber Ring wants to be easy to use. You can listen to me here <a href="http://www.youtube.com/watch?v=Cpf6gJU3520">Rubber Ring</a>
+  </p>
+  <span>post by zigomir</span>
 <% end %>

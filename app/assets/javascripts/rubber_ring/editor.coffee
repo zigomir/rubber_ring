@@ -1,18 +1,21 @@
 $ ->
   # init
-  reset_link            = '<a class="reset-content"></a>'
-  duplicate_link        = '<a class="duplicate-content"></a>'
-  remove_duplicate_link = '<a class="remove-duplicat"></a>'
+  reset_link            = '<button class="reset-content"></button>'
+  duplicate_link        = '<button class="duplicate-content"></button>'
+  remove_duplicate_link = '<button class="remove-duplicat"></button>'
   links_to_sanitize     = [duplicate_link, remove_duplicate_link, reset_link]
+  reset_link_exclusions = ".duplicable, [data-cms=page_title]"
+
+  $editable_content     = $("[contenteditable]")
 
   pm = new PersistenceManager(links_to_sanitize)
   de = new DuplicableEditor(duplicate_link, remove_duplicate_link, reset_link)
+  le = new LinkEditor($editable_content)
   de.init()
-
-  $editable_content = $("[contenteditable]")
+  le.init()
 
   # append content editable with buttons
-  $("[contenteditable]").not(".duplicable").append(reset_link)
+  $("[contenteditable]").not(reset_link_exclusions).append(reset_link)
   $("body").on "click", ".reset-content", (e) ->
     $content_to_remove = $(e.currentTarget).parent()
     if window.confirm "Really want to reset content?"

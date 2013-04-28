@@ -1,19 +1,19 @@
-# Rubber Ring - simple CMS
+# Rubber Ring - simple content editable CMS
 
 Named by The Smiths [song](http://www.youtube.com/watch?v=Cpf6gJU3520).
 
 ## About
 
-This CMS helps you build editable pages fast. You define which content (`image`, `text`, `link`) should be editable for your users. Limitation, that only developer sets what page parts are editable is good for keeping the design intact. It is basically backend for `contenteditable`.
+This CMS helps you build editable pages fast. You define which content (`image` or `text`) should be editable for your users. Limitation, that only developer sets what page parts are editable is good for keeping the design intact. It is basically backend for simple `contenteditable`. When done editing, only static assets will be published to production server.
 
-## Benefits
+## Benefits over other content editable editors
 
 - optimized for developers and quick setup
-- simple to use for customers. True WSYIWYG.
+- simple to use for customers. They should not be able to break design (a lot).
 - customer doesn't need application server and/or database. Only plain web server for static HTML serving will do.
 
 ### This CMS is not good for
-sites, where editor wants to create new pages and control each part of every page.
+sites, where **editor** wants to create new pages and control each part of every page.
 
 ## Used software
 *Current software prerequisites; made with*
@@ -158,6 +158,8 @@ You can use, like in any other new Rails application, [Sprockets directives](htt
 
 ## Inspired by
 
+- [Mercury Editor](http://jejacks0n.github.io/mercury/)
+- [Raptor Editor](http://www.raptor-editor.com/)
 - [Copybar](https://copybar.io)
 - [Perch](http://grabaperch.com/)
 - [CopyCopter](http://copycopter.com)

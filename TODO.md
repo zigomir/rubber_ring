@@ -1,7 +1,6 @@
 ## Features
-- release gem and open source the project
-	- remove bad words before release
-	- recreate simed site before release this weekend
+- release gem
+	- recreate site before release of gem
 	- use [semantic versioning](http://semver.org/)
 - duplicable order change with drag and drop
 - screen cast tutorial
@@ -12,7 +11,6 @@
 - maybe use [YARD](http://yardoc.org/) for documenting code
 
 ## Development
-- Edit Links [cool demo](http://jsbin.com/ikeqe/8/edit)
 - Multiple duplicables (page2) - DONE, only these issues for now:
 	- order is different on reload (because of _id's)
 - maybe ditch hstore so that all databases could be used?
