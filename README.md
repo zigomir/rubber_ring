@@ -19,7 +19,7 @@ sites, where **editor** wants to create new pages and control each part of every
 *Current software prerequisites; made with*
 
 * Ruby `2.0.0-p0`
-* Rails 4.0.0.beta1
+* Rails 4.0.0.rc1
 * Postgres 9.1 with `hstore`
 * imagemagick
 
