@@ -1,30 +1,29 @@
 class @DuplicableEditor
 
-  constructor: (@duplicate_link, @remove_duplicate_link, @reset_link) ->
-    links_to_sanitize = [duplicate_link, remove_duplicate_link, reset_link]
-    @add_reset_link_to_first_in_duplicable_group(null)
-    @pm = new PersistenceManager(links_to_sanitize)
+  constructor: (@action_btns) ->
+    @add_reset_btn_to_first_in_duplicable_group(null)
+    @pm = new PersistenceManager(action_btns)
 
   init: ->
     # only alow to reset first link of duplicables
-    $(".duplicable_holder").find(".duplicable:first").append(@duplicate_link)
+    $(".duplicable_holder").find(".duplicable:first").append(@action_btns.duplicate_btn)
     $("body").on "click", ".duplicate-content", (e) =>
       $content_to_duplicate = $(e.currentTarget).parent()
       @duplicate($content_to_duplicate)
 
     # only alow to remove non-first of duplicables
-    $(".duplicable_holder").find(".duplicable:first").siblings().append(@remove_duplicate_link)
+    $(".duplicable_holder").find(".duplicable:first").siblings().append(@action_btns.remove_duplicate_btn)
     $("body").on "click", ".remove-duplicat", (e) =>
       $duplicat_to_remove = $(e.currentTarget).parent()
       @remove_duplicate($duplicat_to_remove)
 
-  add_reset_link_to_first_in_duplicable_group: ($duplicat) ->
+  add_reset_btn_to_first_in_duplicable_group: ($duplicat) ->
     if $duplicat is null
       $(".duplicable_holder").find(".duplicable:first").each (index, element) =>
-        $(element).append(@reset_link) if $(element).siblings().length == 0
+        $(element).append(@action_btns.reset_btn) if $(element).siblings().length == 0
     else
       # only one which we are currently removing
-      $duplicat.append(@reset_link) if $duplicat.siblings().length == 1
+      $duplicat.append(@action_btns.reset_btn) if $duplicat.siblings().length == 1
 
   # creating new elements
   duplicate: ($editField) ->
@@ -40,13 +39,13 @@ class @DuplicableEditor
     $editField.parent().children().not(":first").find(".duplicate-content, .reset-content").remove()
     $editField.find(".reset-content").remove()
 
-    $clone.append(@remove_duplicate_link)
+    $clone.append(@action_btns.remove_duplicate_btn)
     # save the clone
     @pm.save($clone)
 
   remove_duplicate: ($duplicat) ->
     @pm.remove($duplicat)
-    @add_reset_link_to_first_in_duplicable_group($duplicat.siblings().first())
+    @add_reset_btn_to_first_in_duplicable_group($duplicat.siblings().first())
     $duplicat.remove()
 
   generate_new_group_key = ($editField) ->

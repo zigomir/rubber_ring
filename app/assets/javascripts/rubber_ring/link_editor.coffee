@@ -38,5 +38,6 @@ class @LinkEditor
   getSelectionStartNode = ->
     if window.getSelection
       node = window.getSelection().anchorNode
-      startNode = ((if node.nodeName is "#text" then node.parentNode else node))
-      startNode
+      if node != null && node.nodeName is "#text"
+      then node.parentNode
+      else node

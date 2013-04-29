@@ -8,7 +8,7 @@ class @PersistenceManager
     page_action: App.action
     page_path: document.location.pathname
 
-  constructor: (@links_to_sanitize) ->
+  constructor: (@action_btns) ->
     @save_path         = App.save_path
     @save_image_path   = App.save_image_path
     @remove_path       = App.remove_path
@@ -35,7 +35,7 @@ class @PersistenceManager
     # it is important to sanitize htmlValue or else we will get more and more broken html from database
     # we need to remove any new lines like \r and \n
     content = content.html().trim().replace(/[\r\n]/g, '')
-    content = content.replace(link, '') for link in @links_to_sanitize
+    content = content.replace(value, '') for key, value of @action_btns
     content
 
   remove: (content) ->
