@@ -7,10 +7,12 @@
 
   // disable selection of those action links
   .reset-content, .duplicate-content, .remove-duplicat {
-    user-select:none;
-    -moz-user-select: none;
+    // https://bugzilla.mozilla.org/show_bug.cgi?id=739396
+    // doesn't work in firefox for "ctrl + a" at the moment. So in firefox user can delete buttons with ctrl + a
     -webkit-user-select: none;
+    -moz-user-select: none;
     -ms-user-select: none;
+    user-select: none;
 
     width: 12px;
     height: 13px;
@@ -36,6 +38,15 @@
 }
 
 #rubber-ring-application {
+
+  a {
+    outline: none; // FF
+  }
+
+  // this is better than to set page_title as div (because of possible <br> with enter
+  [data-cms="page_title"] {
+    display: block;
+  }
 
   .images-manager {
     display: none; // hide by default
@@ -108,4 +119,17 @@
 // for smooth slide animation
 .tbs .well {
   min-height: 0;
+}
+
+.tbs .alert-saved .alert {
+  padding: 0;
+  margin: 9px 0;
+  font-weight: bold;
+
+  opacity: 0;
+  transition: opacity 1s ease-in;
+
+  &.show {
+    opacity: 1;
+  }
 }

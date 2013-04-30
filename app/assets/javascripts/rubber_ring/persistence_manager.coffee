@@ -1,8 +1,10 @@
 class @PersistenceManager
-  save_path: null
-  save_image_path: null
-  remove_path: null
-  remove_image_path: null
+  save_path:          null
+  save_image_path:    null
+  remove_path:        null
+  remove_image_path:  null
+  $alert:             null
+
   post_object:
     page_controller: App.controller
     page_action: App.action
@@ -13,6 +15,10 @@ class @PersistenceManager
     @save_image_path   = App.save_image_path
     @remove_path       = App.remove_path
     @remove_image_path = App.remove_image_path
+    @$alert            = $(".alert-saved div")
+
+    @$alert.bind 'transitionend webkitTransitionEnd', =>
+      @$alert.removeClass("show")
 
   save: (content) ->
     key = content.attr("data-cms") # data wont work here because of cloning dom
@@ -48,5 +54,6 @@ class @PersistenceManager
     @post_object.src_to_remove = src
     @post_to_backend(@remove_image_path, @post_object)
 
-  post_to_backend: (path, post_object) ->
-    $.post path, post_object
+  post_to_backend: (path, post_object) =>
+    $.post path, post_object, =>
+      @$alert.addClass("show")
