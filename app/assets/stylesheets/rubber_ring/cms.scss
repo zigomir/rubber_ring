@@ -52,9 +52,18 @@
     display: none; // hide by default
 
     .uploaded-images {
-      margin-top: 35px;
       img {
         width: 65px;
+        cursor: -webkit-grab;
+        cursor: -moz-grab;
+      }
+    }
+
+    .uploaded-attachments {
+      a {
+        text-decoration: none;
+        cursor: -webkit-grab;
+        cursor: -moz-grab;
       }
     }
 
@@ -132,4 +141,8 @@
   &.show {
     opacity: 1;
   }
+}
+
+.tbs [class^="icon-"], .tbs [class*=" icon-"] {
+  margin: 3px 0 0 5px;
 }

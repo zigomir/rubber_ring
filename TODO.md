@@ -1,5 +1,4 @@
 ## Features
-- attachments (file downloads)
 - release gem
 	- recreate site before release of gem
 	- use [semantic versioning](http://semver.org/)

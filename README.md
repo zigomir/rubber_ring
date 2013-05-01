@@ -103,8 +103,6 @@ CMS fields are made of tag, key and `@page` which holds content for all the page
 
 Examples
 
-	<%= editable_image({key: 'header_image', src: '/assets/baws.jpg', height: '360'}, @page) %>
-
 	<%= editable_field(:h1, {key: 'header'}, @page) do %>
 	  I'm editable content in one line.
 	<% end %>
@@ -119,6 +117,14 @@ Examples
 	  <h3>I'm hanging with h3, i'm more important and cooler than you are</h3>
 	  <span>I'm wrapped in a span element</span>
 	<% end %>
+
+	<%= attachment({key: 'software-architecture', href: '/docs/test.pdf'}, @page) do %>
+	  <%= editable_field(:span, {key: 'link_title'}, @page) do %>Link to PDF<% end %>
+	<% end %>
+
+
+	<%= editable_image({key: 'header_image', src: '/assets/baws.jpg', height: '360'}, @page) %>
+
 
 ### Helper options
 
@@ -145,6 +151,8 @@ Each helper need's to specify unique `key`. These are holding values in the data
 - `duplicable_editable_field`
 	- `group` is used to specify group's key prefix. Example: `grup: blog_posts` will produce keys `blog_posts_1`, `blog_posts_2`, `blog_posts_3`, ... based on how many duplication user will do **(must be unique)**
 	- `child_tag` will set tag for child elements of `duplicable_editable_field`
+- `attachment`
+	- `href` specifies link to attached file
 
 ### Assets (stylesheets and javascripts)
 

@@ -19,8 +19,8 @@ class @ImageUploader
       if response.type == "image"
         $(".uploaded-images").append("<img src='#{response.src}' draggable='true' class='img-polaroid' />")
         # append drag listeners to newly uploaded image
-        new AttachmentDragger("[draggable=true]", ".rubber_ring_image", "src")
+        new AttachmentDragger("img[draggable=true]", ".rubber_ring_image", "src")
       else
         $(".uploaded-attachments").append("<a href='#{response.src}' draggable='true' download>#{response.src.split('/').reverse()[0]}</a>")
         # append drag listeners to newly uploaded attachment
-        new AttachmentDragger("[draggable=true]", ".rubber_ring_attachment", "href")
+        new AttachmentDragger("a[draggable=true]", ".rubber_ring_attachment", "href")
