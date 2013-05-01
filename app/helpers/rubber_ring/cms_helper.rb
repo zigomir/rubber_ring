@@ -23,7 +23,7 @@ module RubberRing
     end
 
     def title(page, &block)
-      editable_field('span', {key: 'page_title'}, page, &block)
+      editable_field(:span, {key: 'page_title'}, page, &block)
     end
 
     def attachment(options = {}, page, &block)
@@ -38,7 +38,7 @@ module RubberRing
         'data-cms' => key,
         'download' => ''
       }
-      content_value = capture(&block) if content_value.nil?
+      content_value = capture(&block)
 
       content_tag(:a, raw(content_value), content_tag_options)
     end
