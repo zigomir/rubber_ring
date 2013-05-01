@@ -49,15 +49,14 @@ class @DuplicableEditor
     $duplicat.remove()
 
   generate_new_group_key = ($editField) ->
+    max_id = 0
     temp_key = $editField.attr("data-cms").split("_").reverse()
-    temp_key[0] = $editField.siblings().length
-    new_key = temp_key.reverse().join("_")
 
-    # check if key is already taken
-    if $("[data-cms=#{new_key}]").length != 0
-      # take the key of last sibling
-      temp_key = $editField.siblings().last().attr("data-cms").split("_").reverse()
-      temp_key[0] = parseInt(temp_key[0], 10) + 1
-      new_key = temp_key.reverse().join("_")
+    # find new max key to keep order
+    $editField.siblings().each (index, value) ->
+      temp_key = $(value).attr("data-cms").split("_").reverse()
+      id = parseInt(temp_key[0], 10)
+      max_id = id if id > max_id
+      temp_key[0] = max_id + 1
 
-    new_key
+    temp_key.reverse().join("_")
