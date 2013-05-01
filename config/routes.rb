@@ -6,8 +6,11 @@ RubberRing::Engine.routes.draw do
   post 'cms/save',         :to => 'cms#save',   :as => 'cms_save'
   post 'cms/remove/:key',  :to => 'cms#remove', :as => 'cms_remove'
 
-  post 'cms/save_image',   :to => 'images#save_image',   :as => 'cms_save_image' # convert and set image to page content
-  post 'cms/image/add',    :to => 'images#image_add',    :as => 'cms_image_add'  # upload image
-  post 'cms/image/remove', :to => 'images#image_remove', :as => 'cms_image_remove'
+
+  post 'cms/save_image',      :to => 'attachments#save_image',      :as => 'cms_save_image' # convert and set image to page content
+  post 'cms/save_attachment', :to => 'attachments#save_attachment', :as => 'cms_save_attachment'
+
+  post 'cms/attachments/add',    :to => 'attachments#add',    :as => 'cms_add_attachment'
+  post 'cms/attachments/remove', :to => 'attachments#remove', :as => 'cms_remove_attachment'
 
 end

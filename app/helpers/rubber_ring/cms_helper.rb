@@ -9,7 +9,7 @@ module RubberRing
       content_tag_options = {
         :class            => options[:class],
         :id               => options[:id],
-        'data-cms'        => options[:key],
+        'data-cms'        => key,
         'data-cms-group'  => options[:group] || ''
       }
       content_tag_options['contenteditable'] = 'true' if page and page.edit_mode?
@@ -24,6 +24,23 @@ module RubberRing
 
     def title(page, &block)
       editable_field('span', {key: 'page_title'}, page, &block)
+    end
+
+    def attachment(options = {}, page, &block)
+      key = options[:key]
+      attachment_href = nil
+      attachment_href = page.content[key] unless page.content.nil?
+
+      content_tag_options = {
+        :class     => 'rubber_ring_attachment',
+        :id        => options[:id],
+        :href      => attachment_href || options[:href],
+        'data-cms' => key,
+        'download' => ''
+      }
+      content_value = capture(&block) if content_value.nil?
+
+      content_tag(:a, raw(content_value), content_tag_options)
     end
 
     def editable_image(options = {}, page)

@@ -1,12 +1,12 @@
 # r0x http://jsbin.com/uzovu/1357/edit (http://html5doctor.com/native-drag-and-drop/)
 
-class @ImageDragger
+class @AttachmentDragger
 
-  constructor: (drag_selector, drop_selector) ->
+  constructor: (drag_selector, drop_selector, @attribute) ->
     drag_items = document.querySelectorAll(drag_selector)
     for drag_item in drag_items
       addEvent drag_item, "dragstart", (event) ->
-        event.dataTransfer.setData("src", $(this).attr("src"))
+        event.dataTransfer.setData(attribute, $(this).attr(attribute))
 
     drop_image = document.querySelector(drop_selector)
     # Tells the browser that we *can* drop on this target
@@ -18,14 +18,15 @@ class @ImageDragger
       e.preventDefault() if e.preventDefault
 
       # this is for chrome so it won't do request if we're trying to drop same image
-      if $(this).attr("src") != e.dataTransfer.getData("src")
+      if $(this).attr(attribute) != e.dataTransfer.getData(attribute)
         pm = new PersistenceManager()
-        this.src = e.dataTransfer.getData("src")
-        pm.save_image($(this))
+        this[attribute] = e.dataTransfer.getData(attribute)
+        pm.save_image($(this)) if attribute == "src"
+        pm.save_attachment($(this)) if attribute == "href"
 
       false
 
-  cancel: (e) ->
+  cancel: (e) =>
     # this only works correct in FF :/
-    e.preventDefault() if e.preventDefault and $(this).attr("src") != e.dataTransfer.getData("src")
+    e.preventDefault() if e.preventDefault and $(this).attr(@attribute) != e.dataTransfer.getData(@attribute)
     false

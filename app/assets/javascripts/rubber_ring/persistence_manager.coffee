@@ -1,9 +1,12 @@
 class @PersistenceManager
-  save_path:          null
-  save_image_path:    null
-  remove_path:        null
-  remove_image_path:  null
-  $alert:             null
+  save_path:              null
+  remove_path:            null
+
+  save_image_path:        null
+  save_attachment_path:   null
+  remove_attachment_path: null
+
+  $alert:                 null
 
   post_object:
     page_controller: App.controller
@@ -11,11 +14,12 @@ class @PersistenceManager
     page_path: document.location.pathname
 
   constructor: (@action_btns) ->
-    @save_path         = App.save_path
-    @save_image_path   = App.save_image_path
-    @remove_path       = App.remove_path
-    @remove_image_path = App.remove_image_path
-    @$alert            = $(".alert-saved div")
+    @save_path              = App.save_path
+    @save_image_path        = App.save_image_path
+    @save_attachment_path   = App.save_attachment_path
+    @remove_path            = App.remove_path
+    @remove_attachment_path = App.remove_attachment_path
+    @$alert                 = $(".alert-saved div")
 
     @$alert.bind 'transitionend webkitTransitionEnd', =>
       @$alert.removeClass("show")
@@ -36,7 +40,12 @@ class @PersistenceManager
     @post_object.height       = content.attr("height")
     @post_to_backend(@save_image_path, @post_object)
 
-  # TODO write tests for this method
+  save_attachment: (content) ->
+    key = content.attr("data-cms")
+    @post_object.content = {}
+    @post_object.content[key] = content.attr("href")
+    @post_to_backend(@save_attachment_path, @post_object)
+
   sanitize: (content) ->
     # it is important to sanitize htmlValue or else we will get more and more broken html from database
     # we need to remove any new lines like \r and \n
@@ -52,7 +61,7 @@ class @PersistenceManager
 
   remove_image: (src) ->
     @post_object.src_to_remove = src
-    @post_to_backend(@remove_image_path, @post_object)
+    @post_to_backend(@remove_attachment_path, @post_object)
 
   post_to_backend: (path, post_object) =>
     $.post path, post_object, =>

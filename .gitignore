@@ -17,7 +17,7 @@ vagrantconfig_local.yml
 Gemfile.lock
 
 
-test/dummy/public/images/upload
+test/dummy/public/upload
 
 # public/build goes to customer
 test/dummy/public/build/*

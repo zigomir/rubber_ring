@@ -60,4 +60,14 @@ describe RubberRing::CmsHelper do
     end
   end
 
+  describe 'attachment' do
+    it 'should return editable attachment element' do
+      page = RubberRing::Page.new({controller: 'test', action: 'test', content: {}})
+      page.edit_mode = true
+
+      helper.attachment({key: 'software-architecture', href: '/docs/test.pdf'}, page){raw('<span>Link title</span>')}
+        .should eq '<a class="rubber_ring_attachment" data-cms="software-architecture" download="" href="/docs/test.pdf"><span>Link title</span></a>'
+    end
+  end
+
 end

@@ -8,6 +8,11 @@
   editing page content right away
 <% end %>
 
+<h3>Support for attachments</h3>
+<%= attachment({key: 'software-architecture', href: '/docs/test.pdf'}, @page) do %>
+  <%= editable_field(:span, {key: 'link_title'}, @page) do %>Link to PDF<% end %>
+<% end %>
+
 <h3>Dynamic site? check your ruber_ring.rb initializer</h3>
 <form method="post" action="<%= form_path %>">
   <input name="value" value="" placeholder="Something" />

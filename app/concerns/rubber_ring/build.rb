@@ -10,8 +10,8 @@ module RubberRing
         FileUtils.cp_r("#{Rails.root.to_s}/app/assets/#{asset_dir}/.", assets_dir)
       end
 
-      # copy uploaded images
-      FileUtils.cp_r("#{Rails.root.to_s}/public/images/", "#{Rails.root.to_s}/public/build")
+      # copy attachments
+      FileUtils.cp_r("#{Rails.root.to_s}/public/upload/", "#{Rails.root.to_s}/public/build")
     end
 
   end

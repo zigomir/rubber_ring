@@ -48,17 +48,17 @@
     display: block;
   }
 
-  .images-manager {
+  .attachment-manager {
     display: none; // hide by default
 
-    .already_uploaded_images {
+    .uploaded-images {
       margin-top: 35px;
       img {
         width: 65px;
       }
     }
 
-    .remove_not_used_images {
+    .remove_not_used_attachments {
       margin-top: 7px;
     }
 

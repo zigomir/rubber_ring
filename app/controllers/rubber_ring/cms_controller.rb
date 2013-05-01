@@ -14,7 +14,7 @@ module RubberRing
 
       @page = page.empty? ? Page.new : page.first
       @page.edit_mode = true
-      @images = Util.load_images_for_page(params)
+      @images, @attachments = Util.load_attachments_page(params)
     end
 
     def save

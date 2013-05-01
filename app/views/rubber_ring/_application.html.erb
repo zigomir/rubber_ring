@@ -5,7 +5,7 @@
         <span class="brand">Rubber Ring</span>
         <ul class="nav">
           <li>
-            <a class="dropdown" id="images-manager" href="javascript:void(0);">Image manager</a>
+            <a class="dropdown" id="attachment-manager" href="javascript:void(0);">Attachments</a>
           </li>
           <li>
             <a class="dropdown" id="page-title-manager" href="javascript:void(0);">Set page title</a>
@@ -25,16 +25,21 @@
       </div>
     </div>
 
-    <div class="images-manager well">
+    <div class="attachment-manager well">
       <div class="image_upload_box">
-        <div class="image_upload_text">Drop new images here</div>
+        <div class="image_upload_text">Drop attachments here</div>
       </div>
-      <% unless @images.empty? %>
-        <button class="btn pull-right remove_not_used_images">Remove not used images</button>
+      <% unless @images.empty? and @attachments.empty? %>
+        <button class="btn pull-right remove_not_used_attachments">Remove not used attachments</button>
       <% end %>
-      <div class="already_uploaded_images">
+      <div class="uploaded-images well well-small">
         <% @images.each do |src| %>
           <img src="<%= src %>" draggable="true" class="img-polaroid" />
+        <% end %>
+      </div>
+      <div class="uploaded-attachments well well-small">
+        <% @attachments.each do |src| %>
+          <a href="<%= src %>" draggable="true" download><%= src.split('/').last %></a>
         <% end %>
       </div>
     </div>
@@ -72,10 +77,13 @@
     App.controller        = "<%= params[:controller] %>";
     App.action            = "<%= params[:action] %>";
     App.save_path         = "<%= rubber_ring.cms_save_path %>";
-    App.save_image_path   = "<%= rubber_ring.cms_save_image_path %>";
     App.remove_path       = "<%= rubber_ring.cms_remove_path(':key') %>";
-    App.add_image_path    = "<%= rubber_ring.cms_image_add_path %>";
-    App.remove_image_path = "<%= rubber_ring.cms_image_remove_path %>";
+
+    App.save_image_path      = "<%= rubber_ring.cms_save_image_path %>";
+    App.save_attachment_path = "<%= rubber_ring.cms_save_attachment_path %>";
+
+    App.add_attachment_path    = "<%= rubber_ring.cms_add_attachment_path %>";
+    App.remove_attachment_path = "<%= rubber_ring.cms_remove_attachment_path %>";
   </script>
   <%= javascript_include_tag 'rubber_ring/application' %>
 <% end %>

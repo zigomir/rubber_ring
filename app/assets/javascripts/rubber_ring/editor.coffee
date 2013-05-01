@@ -25,6 +25,9 @@ $ ->
       pm.remove($content_to_remove).then ->
         window.location.reload(true)
 
+  $(".rubber_ring_attachment").click (e) ->
+    e.preventDefault()
+
   # register change event for HTML5 content editable
   $("body").on "focus", "[contenteditable]", ->
     $this = $(this)
