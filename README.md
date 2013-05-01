@@ -23,6 +23,10 @@ sites, where **editor** wants to create new pages and control each part of every
 * Postgres 9.1 with `hstore`
 * imagemagick
 
+## Browser support
+
+Firefox and Chrome. IE drag and drop doesn't work for now.
+
 ## Setup
 
 ### Dependencies

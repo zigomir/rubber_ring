@@ -2,7 +2,6 @@
 - release gem
 	- recreate site before release of gem
 	- use [semantic versioning](http://semver.org/)
-- duplicable order change with drag and drop
 - screen cast tutorial
 - minify assets with grunt or sprockets from build script
 
@@ -12,7 +11,7 @@
 
 ## Development
 - Good demo
-- maybe ditch hstore so that all databases could be used?
+- ditch hstore so that all databases could be used?
 	- if sqlite3 can be used, I should write Rails Girls guide too
 - move vendor assets to vendor directory [link](http://prioritized.net/blog/gemify-assets-for-rails/)
 - add JavaScript tests
