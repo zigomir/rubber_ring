@@ -12,8 +12,8 @@ files = [
   JASMINE_ADAPTER,
 
   {
-  	pattern: 'spec/javascripts/fixtures/*.html',
-  	watched: true,
+    pattern: 'spec/javascripts/fixtures/*.html',
+    watched: true,
     included: false,
     served: true
   },
