@@ -13,6 +13,16 @@ First install software dependencies, listed in [README.md](README.md#dependencie
     rake db:migrate
     rake db:migrate RAILS_ENV=test
 
-## Running tests
+## Running ruby tests
 
     rspec spec
+
+## Running javascript tests
+
+First you need to install `node.js`, `karma` test runner and [phantom.js](http://phantomjs.org/download.html) headless WebKit browser
+
+	npm install -g karma
+
+To run the tests just run
+
+	cd spec && karma start

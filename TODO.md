@@ -1,4 +1,6 @@
 ## Features
+- nesting helpers
+	- for now it is only safe to nest stuff inside attachment helper!
 - release gem
 	- recreate site before release of gem
 	- use [semantic versioning](http://semver.org/)
@@ -14,7 +16,7 @@
 - ditch hstore so that all databases could be used?
 	- if sqlite3 can be used, I should write Rails Girls guide too
 - move vendor assets to vendor directory [link](http://prioritized.net/blog/gemify-assets-for-rails/)
-- add JavaScript tests
+- add more JavaScript tests
 
 ## Future / neat features
 - publish on specific time [cool lib for timepicking](http://amsul.ca/pickadate.js)
