@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 20130503092505) do
     t.datetime "updated_at"
   end
 
-  add_index "rubber_ring_page_contents", ["page_id"], name: "index_rubber_ring_page_contents_on_page_id", using: :btree
+  add_index "rubber_ring_page_contents", ["page_id"], name: "index_rubber_ring_page_contents_on_page_id"
 
   create_table "rubber_ring_pages", force: true do |t|
     t.string   "controller"

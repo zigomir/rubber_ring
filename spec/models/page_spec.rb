@@ -105,8 +105,8 @@ describe RubberRing::Page do
         }
       }
 
-      RubberRing::Page.save_or_update(child2)
       RubberRing::Page.save_or_update(child1)
+      RubberRing::Page.save_or_update(child2)
     end
 
     it 'should be in a group of two' do

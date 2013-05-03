@@ -2,6 +2,9 @@
 
 Please read `TODO.md` file and find something you would like there. Or just add whatever you might think would be useful.
 
+## Environment
+For quick setup you can use [this project](https://github.com/zigomir/rvdb) and build your virtual machine with `vagrant` and `puppet`. Just follow the setup steps in `RVDB` project's readme file. When you are done, change directory to `rubber_ring/vagrant` and run `vagrant up` and you should get working environment soon.
+
 ## Developing Rails Engine
 
 First install software dependencies, listed in [README.md](README.md#dependencies) file.

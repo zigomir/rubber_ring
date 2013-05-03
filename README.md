@@ -29,9 +29,10 @@ Firefox and Chrome. IE drag and drop doesn't work for now.
 ## Setup
 
 ### Dependencies
-To install `imagemagick` on `Ubuntu`
+To install `imagemagick` and `sqlite3` on `Ubuntu`
 	
 	sudo apt-get install imagemagick
+	sudo apt-get install libsqlite3-dev
 
 ### Setting up new Rails project
 Create new rails project and add this to `Gemfile` and then run `bundle`

@@ -1,39 +1,16 @@
 default: &default
-  adapter: postgresql
-  username: vagrant
-  password: vagrant
-  template: template0
-  host: localhost
+  adapter: sqlite3
+  pool: 5
+  timeout: 5000
 
 development:
-  database: rubber_ring_gem_ditch_hstore_development
+  database: db/development.sqlite3
   <<: *default
 
 test:
-  database: rubber_ring_gem_ditch_hstore_test
+  database: db/test.sqlite3
   <<: *default
 
 production:
-  database: rubber_ring_gem_ditch_hstore_production
+  database: db/production.sqlite3
   <<: *default
-
-#default: &default
-#  adapter: postgresql
-#  username: vagrant
-#  password: vagrant
-#  template: template0
-#
-#development:
-#  database: rubber_ring_gem_development
-#  host: localhost
-#  <<: *default
-#
-#test:
-#  database: rubber_ring_gem_test
-#  host: localhost
-#  <<: *default
-#
-#production:
-#  <<: *default
-#  host: localhost
-#  database: rubber_ring_gem_production
