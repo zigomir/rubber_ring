@@ -19,3 +19,4 @@ Gemfile.lock
 
 test/dummy/public/upload
 test/dummy/public/build
+test/dummy/public/assets

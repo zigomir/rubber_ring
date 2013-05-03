@@ -120,7 +120,7 @@ Examples
 	<% end %>
 
 
-	<%= editable_image({key: 'header_image', src: '/assets/baws.jpg', height: '360'}, @page) %>
+	<%= editable_image({key: 'header_image', src: image_path('baws.jpg'), height: '360'}, @page) %>
 
 
 ### Helper options
