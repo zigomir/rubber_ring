@@ -8,8 +8,6 @@ First install software dependencies, listed in [README.md](README.md#dependencie
 
     cd test/dummy
     rake db:create
-    sudo -u postgres psql rubber_ring_gem_development -c 'create extension hstore;'
-    sudo -u postgres psql rubber_ring_gem_test -c 'create extension hstore;'
     rake db:migrate
     rake db:migrate RAILS_ENV=test
 

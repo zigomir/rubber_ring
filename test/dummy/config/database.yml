@@ -3,18 +3,37 @@ default: &default
   username: vagrant
   password: vagrant
   template: template0
+  host: localhost
 
 development:
-  database: rubber_ring_gem_development
-  host: localhost
+  database: rubber_ring_gem_ditch_hstore_development
   <<: *default
 
 test:
-  database: rubber_ring_gem_test
-  host: localhost
+  database: rubber_ring_gem_ditch_hstore_test
   <<: *default
 
 production:
+  database: rubber_ring_gem_ditch_hstore_production
   <<: *default
-  host: localhost
-  database: rubber_ring_gem_production
+
+#default: &default
+#  adapter: postgresql
+#  username: vagrant
+#  password: vagrant
+#  template: template0
+#
+#development:
+#  database: rubber_ring_gem_development
+#  host: localhost
+#  <<: *default
+#
+#test:
+#  database: rubber_ring_gem_test
+#  host: localhost
+#  <<: *default
+#
+#production:
+#  <<: *default
+#  host: localhost
+#  database: rubber_ring_gem_production

@@ -20,7 +20,6 @@ sites, where **editor** wants to create new pages and control each part of every
 
 * Ruby `2.0.0-p0`
 * Rails 4.0.0.rc1
-* Postgres 9.1 with `hstore`
 * imagemagick
 
 ## Browser support
@@ -30,9 +29,8 @@ Firefox and Chrome. IE drag and drop doesn't work for now.
 ## Setup
 
 ### Dependencies
-To install `hstore` and `imagemagick` on `Ubuntu`
+To install `imagemagick` on `Ubuntu`
 	
-	sudo apt-get install postgresql-contrib
 	sudo apt-get install imagemagick
 
 ### Setting up new Rails project
@@ -42,7 +40,6 @@ Create new rails project and add this to `Gemfile` and then run `bundle`
 
 Create/migrate database
 
-    sudo -u postgres psql your_db_dev -c 'create extension hstore;'
     rake rubber_ring:install:migrations
     rake db:migrate
 

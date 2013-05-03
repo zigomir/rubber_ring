@@ -4,7 +4,7 @@ describe RubberRing::CmsHelper do
 
   describe 'editable_field' do
     it 'should return editable element' do
-      page = RubberRing::Page.new({controller: 'test', action: 'test', content: {}})
+      page = RubberRing::Page.new({controller: 'test', action: 'test'})
       page.edit_mode = true
 
       helper.editable_field(:div, {key: 'key'}, page){''}
@@ -14,7 +14,7 @@ describe RubberRing::CmsHelper do
     end
 
     it 'should return non-editable element' do
-      page = RubberRing::Page.new({controller: 'test', action: 'test', content: {}})
+      page = RubberRing::Page.new({controller: 'test', action: 'test'})
 
       helper.editable_field(:div, {key: 'key'}, page){''}
         .should eq '<div data-cms-group="" data-cms="key"></div>'
@@ -25,7 +25,7 @@ describe RubberRing::CmsHelper do
 
   describe 'title' do
     it 'should return editable span element' do
-      page = RubberRing::Page.new({controller: 'test', action: 'test', content: {}})
+      page = RubberRing::Page.new({controller: 'test', action: 'test'})
       page.edit_mode = true
 
       helper.title(page){''}.should eq '<span contenteditable="true" data-cms-group="" data-cms="page_title"></span>'
@@ -33,7 +33,7 @@ describe RubberRing::CmsHelper do
     end
 
     it 'should return non-editable span tag' do
-      page = RubberRing::Page.new({controller: 'test', action: 'test', content: {}})
+      page = RubberRing::Page.new({controller: 'test', action: 'test'})
 
       helper.title(page){''}.should eq '<span data-cms-group="" data-cms="page_title"></span>'
       helper.title(page){'title'}.should eq '<span data-cms-group="" data-cms="page_title">title</span>'
@@ -42,7 +42,7 @@ describe RubberRing::CmsHelper do
 
   describe 'editable_image' do
     it 'should return editable image element' do
-      page = RubberRing::Page.new({controller: 'test', action: 'test', content: {}})
+      page = RubberRing::Page.new({controller: 'test', action: 'test'})
       page.edit_mode = true
 
       helper.editable_image({key: 'key', src: '/images/baws.jpg'}, page)
@@ -52,7 +52,7 @@ describe RubberRing::CmsHelper do
 
   describe 'duplicable_editable_field' do
     it 'should return repeatable element' do
-      page = RubberRing::Page.new({controller: 'test', action: 'test', content: {}})
+      page = RubberRing::Page.new({controller: 'test', action: 'test'})
       page.edit_mode = true
 
       helper.duplicable_editable_field(:ul, {group: 'blog_posts', child_tag: 'li', class: 'multi-line'}, page){raw('<h1>content</h1>')}
@@ -62,7 +62,7 @@ describe RubberRing::CmsHelper do
 
   describe 'attachment' do
     it 'should return editable attachment element' do
-      page = RubberRing::Page.new({controller: 'test', action: 'test', content: {}})
+      page = RubberRing::Page.new({controller: 'test', action: 'test'})
       page.edit_mode = true
 
       helper.attachment({key: 'software-architecture', href: '/docs/test.pdf'}, page){raw('<span>Link title</span>')}

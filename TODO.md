@@ -1,3 +1,7 @@
+# TODO
+- create good demo with tutorial
+- test everything running production environment
+
 ## Features
 - release gem
 	- recreate site before release of gem
@@ -12,10 +16,7 @@
 - maybe use [YARD](http://yardoc.org/) for documenting code
 
 ## Development
-- Good demo
-- ditch hstore so that all databases could be used?
-	- if sqlite3 can be used, I should write Rails Girls guide too
-- move vendor assets to vendor directory [link](http://prioritized.net/blog/gemify-assets-for-rails/)
+- sqlite3
 
 ## Future / neat features
 - publish on specific time [cool lib for timepicking](http://amsul.ca/pickadate.js)

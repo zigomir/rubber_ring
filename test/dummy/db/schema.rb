@@ -11,17 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130414063857) do
+ActiveRecord::Schema.define(version: 20130503092505) do
 
-  create_table "rubber_ring_pages", force: true do |t|
-    t.string   "controller"
-    t.string   "action"
-    t.hstore   "content"
+  create_table "rubber_ring_page_contents", force: true do |t|
+    t.string   "key"
+    t.string   "value"
+    t.integer  "page_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "rubber_ring_pages", ["content"], name: "pages_gin_content"
-  add_index "rubber_ring_pages", ["controller", "action"], name: "index_rubber_ring_pages_on_controller_and_action", unique: true
+  add_index "rubber_ring_page_contents", ["page_id"], name: "index_rubber_ring_page_contents_on_page_id", using: :btree
+
+  create_table "rubber_ring_pages", force: true do |t|
+    t.string   "controller"
+    t.string   "action"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end
