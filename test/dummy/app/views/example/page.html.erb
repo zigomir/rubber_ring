@@ -1,4 +1,4 @@
-<%= editable_image({key: 'header_image', src: '/images/baws.jpg', height: '360'}, @page) %>
+<%= editable_image({key: 'header_image', src: '/assets/baws.jpg', height: '360'}, @page) %>
 
 <%= editable_field(:h1, {key: 'header'}, @page) do %>
   rubber ring cms
@@ -9,7 +9,7 @@
 <% end %>
 
 <h3>Support for attachments</h3>
-<%= attachment({key: 'software-architecture', href: '/docs/test.pdf'}, @page) do %>
+<%= attachment({key: 'software-architecture', href: 'http://www.education.gov.yk.ca/pdf/pdf-test.pdf'}, @page) do %>
   <%= editable_field(:span, {key: 'link_title'}, @page) do %>Link to PDF<% end %>
 <% end %>
 

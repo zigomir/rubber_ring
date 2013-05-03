@@ -9,10 +9,9 @@ Dummy::Application.configure do
   # Do not eager load code on boot.
   config.eager_load = false
 
-  # Show full error reports and Enable caching for Rubber Ring!
+  # Show full error reports and enable caching for Rubber Ring page cache
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = true
-  config.action_controller.page_cache_directory = "#{Rails.root.to_s}/public/build"
 
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false

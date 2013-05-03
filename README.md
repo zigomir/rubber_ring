@@ -36,7 +36,7 @@ To install `hstore` and `imagemagick` on `Ubuntu`
 	sudo apt-get install imagemagick
 
 ### Setting up new Rails project
-Create new rails project and add this to `Gemfile` and run `bundle`
+Create new rails project and add this to `Gemfile` and then run `bundle`
 
 	gem 'rubber_ring', :git => 'git://github.com/zigomir/rubber_ring.git'
 
@@ -46,14 +46,9 @@ Create/migrate database
     rake rubber_ring:install:migrations
     rake db:migrate
 
-Add this route to your `routes.rb`
-
-    mount RubberRing::Engine => '/rubber_ring', :as => 'rubber_ring'
-
-Update `development.rb` and `production.rb` files with this two lines
+Update `development.rb` to enable caching
 
 	config.action_controller.perform_caching = true
-  	config.action_controller.page_cache_directory = "#{Rails.root.to_s}/public/build"
 
 ### Setup config files
 Generate initialize settings file for admin and settings for publishing pages on production server
@@ -122,7 +117,7 @@ Examples
 	  <span>I'm wrapped in a span element</span>
 	<% end %>
 
-	<%= attachment({key: 'software-architecture', href: '/docs/test.pdf'}, @page) do %>
+	<%= attachment({key: 'software-architecture', href: '/todo/upload-and-drop'}, @page) do %>
 	  <%= editable_field(:span, {key: 'link_title'}, @page) do %>Link to PDF<% end %>
 	<% end %>
 

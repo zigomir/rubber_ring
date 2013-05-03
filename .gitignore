@@ -18,7 +18,4 @@ Gemfile.lock
 
 
 test/dummy/public/upload
-
-# public/build goes to customer
-test/dummy/public/build/*
-!test/dummy/public/build/.gitkeep
+test/dummy/public/build
