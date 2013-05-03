@@ -7,11 +7,11 @@ require 'rubber_ring/version'
 Gem::Specification.new do |s|
   s.name        = 'rubber_ring'
   s.version     = RubberRing::VERSION
-  s.authors     = ['Žiga Vidic']
+  s.authors     = ['Ziga Vidic']
   s.email       = ['zigomir@gmail.com']
   s.homepage    = 'https://github.com/zigomir/rubber_ring'
   s.summary     = 'Rubber Ring - easy and limited CMS'
-  s.description = 'Rubber Ring helps your customers edit their web sites. It helps developers to quickly build new ones.'
+  s.description = 'Rubber Ring helps developers to quickly build new sites and customers to easily edit them.'
 
   s.files = Dir['{app,config,db,lib}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.md']
   s.test_files = Dir['test/**/*', 'spec/**/*']
@@ -22,12 +22,12 @@ Gem::Specification.new do |s|
   s.add_dependency 'sass-rails', '~> 4.0.0.rc1'
   s.add_dependency 'coffee-rails', '~> 4.0.0.rc1'
 
-  s.add_dependency 'pg'
   s.add_dependency 'jquery-rails'
   s.add_dependency 'actionpack-page_caching'
   s.add_dependency 'image_sorcery'
   s.add_dependency 'fastimage'
   s.add_dependency 'rr_publish'
 
+  s.add_development_dependency 'sqlite3'
   s.add_development_dependency 'rspec-rails'
 end
