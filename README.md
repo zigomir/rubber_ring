@@ -57,8 +57,11 @@ This will generate
 
 	app/config/publish.yml
 	app/config/initializers/rubber_ring.rb
+	app/views/layouts/rubber_ring/application.html.erb
 
-Set admin password and `app/config/initializers/rubber_ring.rb`
+Set admin password and application type in `app/config/initializers/rubber_ring.rb`.
+
+`app/views/layouts/rubber_ring/application.html.erb` is here for you to override it, so you have complete control over your markup.
 
 ### Static pages or Rails application?
 
@@ -108,26 +111,34 @@ Examples
 	  I'm editable content in 
 	  multi lines...
 	<% end %>
-
-	<%= duplicable_editable_field(:ul, {group: 'blog_posts', child_tag: 'li', class: 'multi-line'}, @page) do %>
-	  I'm text only
-	  <h3>I'm hanging with h3, i'm more important and cooler than you are</h3>
-	  <span>I'm wrapped in a span element</span>
-	<% end %>
-
+	
 	<%= attachment({key: 'software-architecture', href: '/todo/upload-and-drop'}, @page) do %>
 	  <%= editable_field(:span, {key: 'link_title'}, @page) do %>Link to PDF<% end %>
 	<% end %>
 
-
 	<%= editable_image({key: 'header_image', src: image_path('baws.jpg'), height: '360'}, @page) %>
+	
+	<% repeat_template('article', @page) %>
 
+## Repeat template
+
+Allows you to set up repeating templates. Example
+
+	<% repeat_template('article', @page) %>
+	
+This means, that you need to create new view in `app/views/templates/_article.html.erb`. where **templates** and **article** article are important. Create templates directory for the first time, and than put all your repeatable templates inside. As you can see, first parameter to the helper needs to be the same like view name (without "_").
+
+Inside those templates you can of course use all other helpers. BUT, you need to assemble your key correctly or otherwise you will be overwriting your own content. You can use index and parent key to like this:
+
+	<%= editable_field(:p, {key: "#{parent_key}_paragraph_#{index}", class: "multi-line"}, @page) do %>
+		Template content
+    <% end %>
 
 ### Helper options
 
 Each helper need's to specify unique `key`. These are holding values in the database. Also each helper needs to include `@page` object as their last parameter. This object holds all the page's editable content in a hash data structure.
 
-#### Already used keys which you must **not** use
+#### Already used keys which you must not use
 
 - `page_title`
 
@@ -145,9 +156,6 @@ Each helper need's to specify unique `key`. These are holding values in the data
 	- `height` image height
 - `editable_field`
 	- no specific arguments
-- `duplicable_editable_field`
-	- `group` is used to specify group's key prefix. Example: `grup: blog_posts` will produce keys `blog_posts_1`, `blog_posts_2`, `blog_posts_3`, ... based on how many duplication user will do **(must be unique)**
-	- `child_tag` will set tag for child elements of `duplicable_editable_field`
 - `attachment`
 	- `href` specifies link to attached file
 

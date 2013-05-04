@@ -11,6 +11,10 @@ module RubberRing
         copy_file 'settings_template.rb', 'config/initializers/rubber_ring.rb'
       end
 
+      def copy_application_layout
+        copy_file 'application.html.erb', 'app/views/layouts/rubber_ring/application.html.erb'
+      end
+
       def add_engine_mount_route
         route "mount RubberRing::Engine => '/rubber_ring', :as => 'rubber_ring'"
       end

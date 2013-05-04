@@ -12,7 +12,7 @@ class @AttachmentDragger
     @drag_items = document.querySelectorAll(@drag_selector)
     for drag_item in @drag_items
       addEvent drag_item, "dragstart", (e) =>
-        event.dataTransfer.setData(@attribute, e.currentTarget[@attribute])
+        event.dataTransfer.setData(@attribute, $(e.currentTarget).attr(@attribute))
 
     drop_attachment_element = document.querySelector(@drop_selector)
     # Tells the browser that we *can* drop on this target
@@ -24,12 +24,12 @@ class @AttachmentDragger
       e.preventDefault() if e.preventDefault
 
       # this is for chrome so it won't do request if we're trying to drop same image
-      if e.currentTarget[@attribute] != e.dataTransfer.getData(@attribute)
+      if $(e.currentTarget).attr(@attribute) != e.dataTransfer.getData(@attribute)
         new_content = e.dataTransfer.getData(@attribute)
 
         # prevent droping images on attachments and vice versa
         if new_content.length > 0
-          e.currentTarget[@attribute] = e.dataTransfer.getData(@attribute)
+          $(e.currentTarget).attr(@attribute, e.dataTransfer.getData(@attribute))
 
           pm = new PersistenceManager()
           pm.save_image($(e.currentTarget)) if @attribute == "src"
@@ -39,5 +39,5 @@ class @AttachmentDragger
 
   cancel: (e) =>
     # this only works correct in FF :/
-    e.preventDefault() if e.preventDefault and e.currentTarget[@attribute] != e.dataTransfer.getData(@attribute)
+    e.preventDefault() if e.preventDefault and $(e.currentTarget).attr(@attribute) != e.dataTransfer.getData(@attribute)
     false

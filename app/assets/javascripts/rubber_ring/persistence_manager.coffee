@@ -26,7 +26,11 @@ class @PersistenceManager
 
   save: (content) ->
     key = content.attr("data-cms") # data wont work here because of cloning dom
-    value = @sanitize(content)
+
+    if content.is('input')
+      value = content.val()
+    else
+      value = @sanitize(content)
 
     @post_object.content = {}
     @post_object.content[key] = value
@@ -56,7 +60,6 @@ class @PersistenceManager
   remove: (content) ->
     key = content.attr("data-cms")
     path = @remove_path.replace(':key', key)
-    @post_object.key_to_remove = key
     @post_to_backend(path, @post_object)
 
   remove_image: (src) ->
