@@ -14,8 +14,9 @@ module RubberRing
       if Rails.env.production?
         FileUtils.cp_r("#{Rails.root.to_s}/public/assets/.", build_assets_dir)
       else
-        %w(images javascripts stylesheets).each do |asset_dir|
-          FileUtils.cp_r("#{Rails.root.to_s}/app/assets/#{asset_dir}/.", build_assets_dir)
+        app_assets = "#{Rails.root.to_s}/app/assets"
+        Dir.foreach(app_assets) do |asset_dir|
+          FileUtils.cp_r("#{app_assets}/#{asset_dir}/.", build_assets_dir)
         end
       end
 
