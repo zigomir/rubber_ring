@@ -7,3 +7,4 @@ Example:
     This will create
         create app/config/publish.yml
         create app/config/initializers/rubber_ring.rb
+        create app/views/layouts/rubber_ring/application.html.erb

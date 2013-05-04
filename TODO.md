@@ -1,8 +1,5 @@
 # TODO
-- install generator should also copy `views/layout/rubber_ring/- application.html.erb` to host application so it can be customized
-
 - don't save attachments whole url with host and stuff. will break the production!
-
 
 - create demo with tutorial (doing Spruengli site)
 - release gem

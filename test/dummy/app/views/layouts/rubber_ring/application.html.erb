@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= @page.title %> You can override me!</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <%= render 'rubber_ring/head' %>
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+</head>
+<body>
+<%= render 'rubber_ring/application' %>
+
+<!-- page content start -->
+<%= yield %>
+
+<%# Including jQuery for custom pages here, because else we have clashes with rails-jquery which can not be copied to %>
+<%# build because it is inside gem directory %>
+<% if not @admin or @page_caching %>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<% end %>
+<%= javascript_include_tag 'application' %>
+</body>
+</html>

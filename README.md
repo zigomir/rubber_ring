@@ -57,8 +57,11 @@ This will generate
 
 	app/config/publish.yml
 	app/config/initializers/rubber_ring.rb
+	app/views/layouts/rubber_ring/application.html.erb
 
-Set admin password and `app/config/initializers/rubber_ring.rb`
+Set admin password and application type in `app/config/initializers/rubber_ring.rb`.
+
+`app/views/layouts/rubber_ring/application.html.erb` is here for you to override it, so you have complete control over your markup.
 
 ### Static pages or Rails application?
 
