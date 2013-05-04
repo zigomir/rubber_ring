@@ -72,7 +72,7 @@ module RubberRing
       repeat = 1 if repeat.nil? or repeat == 0
 
       repeat.to_i.times do |i|
-        concat(render "templates/#{key}", index: i)
+        concat(render "templates/#{key}", index: i, parent_key: key)
       end
     end
 

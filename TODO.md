@@ -1,8 +1,6 @@
 # TODO
 - install generator should also copy `views/layout/rubber_ring/- application.html.erb` to host application so it can be customized
 
-
-- editable_field helper with first parameter = null should not be wrapped in a tag
 - don't save attachments whole url with host and stuff. will break the production!
 
 
@@ -10,11 +8,6 @@
 - release gem
 	- recreate site before release of gem
 	- use [semantic versioning](http://semver.org/)
-
-## Features
-- nesting helpers
-	- for now it is only safe to nest stuff inside attachment helper!
-- minify assets with grunt or sprockets from build script
 
 ## Documentation
 - document and revise documentation regularly
