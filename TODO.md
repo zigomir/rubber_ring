@@ -1,14 +1,8 @@
 # TODO
-- create good demo with tutorial
+- create demo with tutorial (doing Spruengli site)
 - release gem
 	- recreate site before release of gem
 	- use [semantic versioning](http://semver.org/)
-- tutorial + screencast maybe
-
-## Features
-- nesting helpers
-	- for now it is only safe to nest stuff inside attachment helper!
-- minify assets with grunt or sprockets from build script
 
 ## Documentation
 - document and revise documentation regularly

@@ -2,14 +2,11 @@ $ ->
   # init
   config = {
     action_btns: {
-      reset_btn:            '<button class="reset-content"></button>'
-      duplicate_btn:        '<button class="duplicate-content"></button>'
-      remove_duplicate_btn: '<button class="remove-duplicat"></button>'
+      reset_btn: '<button class="reset-content"></button>'
     }
-    reset_btn_exclusions:   ".duplicable, [data-cms=page_title]"
   }
 
-  $editable_content     = $("[contenteditable]")
+  $editable_content = $("[contenteditable]")
 
   pm = new PersistenceManager(config.action_btns)
   de = new DuplicableEditor(config.action_btns)
@@ -18,7 +15,7 @@ $ ->
   le.init()
 
   # append content editable with buttons
-  $("[contenteditable]").not(config.reset_btn_exclusions).append(config.action_btns.reset_btn)
+  $("[contenteditable]").append(config.action_btns.reset_btn)
   $("body").on "click", ".reset-content", (e) ->
     $content_to_remove = $(e.currentTarget).parent()
     if window.confirm "Really want to reset content?"
