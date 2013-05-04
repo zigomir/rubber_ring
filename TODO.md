@@ -1,6 +1,4 @@
 # TODO
-- don't save attachments whole url with host and stuff. will break the production!
-
 - create demo with tutorial (doing Spruengli site)
 - release gem
 	- recreate site before release of gem
@@ -12,7 +10,6 @@
 
 ## Development
 - test / refactor / refine
-- remove unused attachments is buggy (add js tests!)
 
 ## Future / neat features
 - publish on specific time [cool lib for timepicking](http://amsul.ca/pickadate.js)
