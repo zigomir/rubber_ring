@@ -8,18 +8,18 @@ describe RubberRing::CmsHelper do
       page.edit_mode = true
 
       helper.editable_field(:div, {key: 'key'}, page){''}
-        .should eq '<div contenteditable="true" data-cms-group="" data-cms="key"></div>'
+        .should eq '<div contenteditable="true" data-cms="key"></div>'
       helper.editable_field(:div, {key: 'key'}, page){'content'}
-        .should eq '<div contenteditable="true" data-cms-group="" data-cms="key">content</div>'
+        .should eq '<div contenteditable="true" data-cms="key">content</div>'
     end
 
     it 'should return non-editable element' do
       page = RubberRing::Page.new({controller: 'test', action: 'test'})
 
       helper.editable_field(:div, {key: 'key'}, page){''}
-        .should eq '<div data-cms-group="" data-cms="key"></div>'
+        .should eq '<div data-cms="key"></div>'
       helper.editable_field(:div, {key: 'key'}, page){'content'}
-        .should eq '<div data-cms-group="" data-cms="key">content</div>'
+        .should eq '<div data-cms="key">content</div>'
     end
   end
 
@@ -28,15 +28,15 @@ describe RubberRing::CmsHelper do
       page = RubberRing::Page.new({controller: 'test', action: 'test'})
       page.edit_mode = true
 
-      helper.title(page){''}.should eq '<span contenteditable="true" data-cms-group="" data-cms="page_title"></span>'
-      helper.title(page){'title'}.should eq '<span contenteditable="true" data-cms-group="" data-cms="page_title">title</span>'
+      helper.title(page){''}.should eq '<span contenteditable="true" data-cms="page_title"></span>'
+      helper.title(page){'title'}.should eq '<span contenteditable="true" data-cms="page_title">title</span>'
     end
 
     it 'should return non-editable span tag' do
       page = RubberRing::Page.new({controller: 'test', action: 'test'})
 
-      helper.title(page){''}.should eq '<span data-cms-group="" data-cms="page_title"></span>'
-      helper.title(page){'title'}.should eq '<span data-cms-group="" data-cms="page_title">title</span>'
+      helper.title(page){''}.should eq '<span data-cms="page_title"></span>'
+      helper.title(page){'title'}.should eq '<span data-cms="page_title">title</span>'
     end
   end
 

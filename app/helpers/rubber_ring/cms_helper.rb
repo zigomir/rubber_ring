@@ -9,8 +9,7 @@ module RubberRing
       content_tag_options = {
         :class            => options[:class],
         :id               => options[:id],
-        'data-cms'        => key,
-        'data-cms-group'  => options[:group] || ''
+        'data-cms'        => key
       }
       content_tag_options['contenteditable'] = 'true' if page and page.edit_mode?
 
