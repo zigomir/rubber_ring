@@ -50,16 +50,6 @@ describe RubberRing::CmsHelper do
     end
   end
 
-  describe 'duplicable_editable_field' do
-    it 'should return repeatable element' do
-      page = RubberRing::Page.new({controller: 'test', action: 'test'})
-      page.edit_mode = true
-
-      helper.duplicable_editable_field(:ul, {group: 'blog_posts', child_tag: 'li', class: 'multi-line'}, page){raw('<h1>content</h1>')}
-        .should eq '<ul class="duplicable_holder"><li class="multi-line duplicable" contenteditable="true" data-cms-group="blog_posts" data-cms="blog_posts_0"><h1>content</h1></li></ul>'
-    end
-  end
-
   describe 'attachment' do
     it 'should return editable attachment element' do
       page = RubberRing::Page.new({controller: 'test', action: 'test'})

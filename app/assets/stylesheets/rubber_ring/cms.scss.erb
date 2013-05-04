@@ -1,46 +1,47 @@
 /**
  * rubber ring specific styles. Here you shall not use any general elements or selectors at all.
  */
+
+@mixin rr-button {
+  // https://bugzilla.mozilla.org/show_bug.cgi?id=739396
+  // doesn't work in firefox for "ctrl + a" at the moment. So in firefox user can delete buttons with ctrl + a
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  width: 12px;
+  height: 13px;
+  display: inline-block;
+  outline: none;
+  border: 0;
+  cursor: pointer;
+}
+
+@mixin rr-button-abs {
+  @include rr-button;
+  right: 1px;
+  top: 1px;
+  position: absolute;
+}
+
 *[contenteditable] {
   outline: dashed green 1px;
   position: relative;
 
   // disable selection of those action links
-  .reset-content, .duplicate-content, .remove-duplicat {
-    // https://bugzilla.mozilla.org/show_bug.cgi?id=739396
-    // doesn't work in firefox for "ctrl + a" at the moment. So in firefox user can delete buttons with ctrl + a
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-
-    width: 12px;
-    height: 13px;
-    display: inline-block;
-    outline: none;
-    right: 1px;
-    top: 1px;
-    position: absolute;
-    border: 0;
-    cursor: pointer;
-  }
 
   .reset-content {
+    @include rr-button-abs;
     background: url("<%= image_path('glyphicons-halflings.png') %>") no-repeat -217px -25px;
-  }
-  .duplicate-content {
-    background: url("<%= image_path('glyphicons-halflings.png') %>") no-repeat -1px -97px;
-    margin-right: 13px;
-  }
-  .remove-duplicat {
-    background: url("<%= image_path('glyphicons-halflings.png') %>") no-repeat -25px -97px;
   }
 }
 
 #rubber-ring-application {
 
   a {
-    outline: none; // FF
+    outline: none;
+    // FF
   }
 
   // this is better than to set page_title as div (because of possible <br> with enter
@@ -49,7 +50,8 @@
   }
 
   .attachment-manager {
-    display: none; // hide by default
+    display: none;
+    // hide by default
 
     .uploaded-images {
       img {
@@ -89,7 +91,7 @@
     }
 
     .rubber_cache_preview {
-      font-family: calibri,tahoma,arial,sans-serif;
+      font-family: calibri, tahoma, arial, sans-serif;
       position: fixed;
       right: 0;
       top: 0;
@@ -105,7 +107,8 @@
   }
 
   .page-title-manager {
-    display: none; // hide by default
+    display: none;
+    // hide by default
   }
 
   #edit-link {
@@ -117,14 +120,33 @@
   }
 }
 
+#rr-repeat {
+  input {
+    width: 27px;
+    margin-bottom: 0;
+  }
+
+  [data-action=add] {
+    @include rr-button;
+    background: url("<%= image_path('glyphicons-halflings.png') %>") no-repeat -1px -97px;
+  }
+
+  [data-action=remove] {
+    @include rr-button;
+    background: url("<%= image_path('glyphicons-halflings.png') %>") no-repeat -25px -97px;
+  }
+}
+
 // bootstrap overrides
 .tbs * {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
+
 .tbs .navbar {
   margin-bottom: 0;
   font-size: 15px;
 }
+
 // for smooth slide animation
 .tbs .well {
   min-height: 0;

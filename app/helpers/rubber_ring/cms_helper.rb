@@ -65,23 +65,15 @@ module RubberRing
       tag(:img, content_tag_options)
     end
 
-    def duplicable_editable_field(tag, options = {}, page, &block)
-      # defaults
-      # add duplicable class
-      classes   = options[:class].nil? || options[:class].length == 0 ? 'duplicable' : "#{options[:class]} duplicable"
-      options   = options.merge({class: classes})
-      child_tag = options[:child_tag] || (tag == :ul || tag == :ol) ? 'li' : 'div'
+    def repeat_template(key, page)
+      concat(render 'rubber_ring/repeat_control', key: key)
 
-      group_keys = []
-      group_keys = page.group_keys(options[:group]) unless page.nil?
-      group_keys << "#{options[:group]}_0" if group_keys.empty? # at least one
+      repeat = '1'
+      repeat = page.content[key] unless page.content.nil?
+      repeat = 1 if repeat.nil? or repeat == 0
 
-      content_tag(tag, {class: 'duplicable_holder'}) do
-        group_keys.each do |group_key|
-          options[:key] = group_key
-          element = editable_field(child_tag.to_sym, options, page, &block)
-          concat(element)
-        end
+      repeat.to_i.times do |i|
+        concat(render "templates/#{key}", index: i)
       end
     end
 

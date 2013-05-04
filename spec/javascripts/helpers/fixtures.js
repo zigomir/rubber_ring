@@ -16,9 +16,6 @@ App.remove_attachment_path = "";
 
 config = {
 	action_btns: {
-	  reset_btn:            '<button class="reset-content"></button>',
-	  duplicate_btn:        '<button class="duplicate-content"></button>',
-	  remove_duplicate_btn: '<button class="remove-duplicat"></button>'
-	},
-	reset_btn_exclusions:   ".duplicable, [data-cms=page_title]"
+	  reset_btn:            '<button class="reset-content"></button>'
+	}
 };

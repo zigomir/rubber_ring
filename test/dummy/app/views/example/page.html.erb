@@ -13,21 +13,14 @@
   <%= editable_field(:span, {key: 'link_title'}, @page) do %>Link to PDF<% end %>
 <% end %>
 
-<h3>Dynamic site? check your ruber_ring.rb initializer</h3>
-<form method="post" action="<%= form_path %>">
-  <input name="value" value="" placeholder="Something" />
-  <input type="submit" value="Post this" />
-</form>
+<!--<h3>Dynamic site? check your ruber_ring.rb initializer</h3>-->
+<!--<form method="post" action="<%= form_path %>">-->
+  <!--<input name="value" value="" placeholder="Something" />-->
+  <!--<input type="submit" value="Post this" />-->
+<!--</form>-->
 
 <% if flash[:message] %>
 <h4>Oh my, you typed "<%= flash[:message] %>"</h4>
 <% end %>
 
-<h2>Blog</h2>
-<%= duplicable_editable_field(:ul, {group: 'blog_posts', child_tag: 'li', class: 'multi-line'}, @page) do %>
-  <h3>First time live</h3>
-  <p>
-    Rubber Ring wants to be easy to use. You can listen to me here <a href="http://www.youtube.com/watch?v=Cpf6gJU3520">Rubber Ring</a>
-  </p>
-  <span>post by zigomir</span>
-<% end %>
+<% repeat_template('article', @page) %>

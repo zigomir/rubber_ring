@@ -109,12 +109,8 @@ Examples
 	  multi lines...
 	<% end %>
 
-	<%= duplicable_editable_field(:ul, {group: 'blog_posts', child_tag: 'li', class: 'multi-line'}, @page) do %>
-	  I'm text only
-	  <h3>I'm hanging with h3, i'm more important and cooler than you are</h3>
-	  <span>I'm wrapped in a span element</span>
-	<% end %>
-
+	# TODO repeat template
+	
 	<%= attachment({key: 'software-architecture', href: '/todo/upload-and-drop'}, @page) do %>
 	  <%= editable_field(:span, {key: 'link_title'}, @page) do %>Link to PDF<% end %>
 	<% end %>
