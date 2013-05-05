@@ -43,4 +43,33 @@ $ ->
 
   # disable enter in single line editor
   $editable_content.not(".multi-line").keydown (e) ->
-    e.preventDefault()  if e.keyCode is 13
+    e.preventDefault() if e.keyCode is 13
+
+  getCaretCharacterOffsetWithin = (element) ->
+    caretOffset = 0
+    unless typeof window.getSelection is "undefined"
+      range = window.getSelection().getRangeAt(0)
+      preCaretRange = range.cloneRange()
+      preCaretRange.selectNodeContents element
+      preCaretRange.setEnd range.endContainer, range.endOffset
+      caretOffset = preCaretRange.toString().length
+    else if typeof document.selection isnt "undefined" and document.selection.type isnt "Control"
+      textRange = document.selection.createRange()
+      preCaretTextRange = document.body.createTextRange()
+      preCaretTextRange.moveToElementText element
+      preCaretTextRange.setEndPoint "EndToEnd", textRange
+      caretOffset = preCaretTextRange.text.length
+    caretOffset
+
+  # https://developer.mozilla.org/en-US/docs/Rich-Text_Editing_in_Mozilla#Executing%5FCommands
+  $("[contenteditable].multi-line").keydown (e) ->
+    if e.which == 13
+      lineBreak = "<br />"
+      end = $(this).text().length == getCaretCharacterOffsetWithin(this)
+
+      if end
+        this.insertAdjacentHTML("beforeend", lineBreak)
+      else
+        document.execCommand("insertHTML", false, lineBreak)
+      
+      false
