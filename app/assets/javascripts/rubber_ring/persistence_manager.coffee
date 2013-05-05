@@ -53,8 +53,8 @@ class @PersistenceManager
   sanitize: (content) ->
     # it is important to sanitize htmlValue or else we will get more and more broken html from database
     # we need to remove any new lines like \r and \n
-    content = content.html().trim().replace(/^[ \t\r\n]+/g, '')
-    content = content.replace(value, '').trim() for key, value of @action_btns
+    content = content.html().replace(/^[\s]+$/g, "").trim()
+    content = content.replace(value, "").trim() for key, value of @action_btns
     content
 
   remove: (content) ->
