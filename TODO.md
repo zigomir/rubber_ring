@@ -9,6 +9,7 @@
 - maybe use [YARD](http://yardoc.org/) for documenting code
 
 ## Development
+- add to code climate
 - test / refactor / refine
 
 ## Future / neat features
