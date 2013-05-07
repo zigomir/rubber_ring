@@ -1,5 +1,5 @@
 # TODO
-- create demo with tutorial (doing Spruengli site)
+- extract multi lang features from `daso` project
 - release gem
 	- recreate site before release of gem
 	- use [semantic versioning](http://semver.org/)

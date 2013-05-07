@@ -112,9 +112,9 @@ Examples
 	  multi lines...
 	<% end %>
 	
-	<%= attachment({key: 'software-architecture', href: '/todo/upload-and-drop'}, @page) do %>
-	  <%= editable_field(:span, {key: 'link_title'}, @page) do %>Link to PDF<% end %>
-	<% end %>
+  <%= editable_link({class: 'rubber_ring_attachment', key: 'attachment-link', href: '/link-to-something'}, @page) do %>
+    Link to PDF
+  <% end %>
 
 	<%= editable_image({key: 'header_image', src: image_path('baws.jpg'), height: '360'}, @page) %>
 	
@@ -156,8 +156,9 @@ Each helper need's to specify unique `key`. These are holding values in the data
 	- `height` image height
 - `editable_field`
 	- no specific arguments
-- `attachment`
-	- `href` specifies link to attached file
+- `editable_link`
+	- `href` specifies link to page / file
+	- if you set or add a class called `rubber_ring_attachment` to `editable_link` you can drop new attachments to it
 
 ### Assets (stylesheets and javascripts)
 

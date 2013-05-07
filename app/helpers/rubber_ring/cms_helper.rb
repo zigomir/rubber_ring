@@ -25,21 +25,28 @@ module RubberRing
       editable_field(:span, {key: 'page_title'}, page, &block)
     end
 
-    def attachment(options = {}, page, &block)
+    def editable_link(options = {}, page, &block)
+      content_tag_options, content_value = compose_link(block, options, page)
+      content_tag_options['contenteditable'] = 'true' if page and page.edit_mode?
+      content_tag(:a, raw(content_value), content_tag_options)
+    end
+
+    def compose_link(block, options, page)
       key = options[:key]
-      attachment_href = nil
-      attachment_href = page.content[key] unless page.content.nil?
+      content_value = nil
+      content_value = page.content[key] unless page.content.nil?
+      href_attribute = nil
+      href_attribute = page.content["#{key}_href"] unless page.content.nil?
 
       content_tag_options = {
-        :class     => 'rubber_ring_attachment',
+        :class     => options[:class],
         :id        => options[:id],
-        :href      => attachment_href || options[:href],
+        :href      => href_attribute || options[:href],
         'data-cms' => key,
-        'download' => ''
       }
-      content_value = capture(&block)
 
-      content_tag(:a, raw(content_value), content_tag_options)
+      content_value = capture(&block) if content_value.nil?
+      return content_tag_options, content_value
     end
 
     def editable_image(options = {}, page)
@@ -48,7 +55,7 @@ module RubberRing
       image_source = page.content[key] unless page.content.nil?
 
       content_tag_options = {
-        :class     => 'rubber_ring_image',
+        :class     => "rubber_ring_image #{options[:class]}",
         :src       => image_source || options[:src],
         'data-cms' => options[:key]
       }

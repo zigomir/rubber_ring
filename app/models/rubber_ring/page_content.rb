@@ -2,7 +2,7 @@ module RubberRing
   class PageContent < ActiveRecord::Base
     belongs_to :page
 
-    def self.add_new_page_content(page, page_content, page_content_key)
+    def self.add_page_content(page, page_content, page_content_key)
       RubberRing::PageContent.create(
           key:   page_content_key,
           value: page_content[page_content_key],

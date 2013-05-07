@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe RubberRing::Page do
   it 'should create new page with content' do
-    page = RubberRing::Page.save_or_update({
+    RubberRing::Page.save_or_update({
        controller: 'test',
        action: 'test',
        content: { 'cms_key' => 'cms_value' }
@@ -11,6 +11,7 @@ describe RubberRing::Page do
     RubberRing::Page.all.count.should eq 1
     RubberRing::PageContent.all.count.should eq 1
 
+    page = RubberRing::Page.first
     page.content['cms_key'].should eq 'cms_value'
     page.content['key2'].should eq nil
   end

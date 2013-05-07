@@ -28,12 +28,16 @@ class @LinkEditor
     $("#link-title").bind "change", (e) =>
       $node = $edit_link.data("node")
       $node.text $(e.currentTarget).val()
-      $node.parents("[contenteditable]").trigger "change"
+      triggerChange($node)
 
     $("#link-href").bind "change", (e) =>
       $node = $edit_link.data("node")
       $node.add("#link-preview").attr "href", $(e.currentTarget).val()
-      $node.parents("[contenteditable]").trigger "change"
+      triggerChange($node)
+
+  triggerChange = ($node) ->
+    if $node.attr("contenteditable") == "true"
+      $node.trigger "change"
 
   getSelectionStartNode = ->
     if window.getSelection

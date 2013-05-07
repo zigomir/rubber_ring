@@ -34,6 +34,10 @@ class @PersistenceManager
 
     @post_object.content = {}
     @post_object.content[key] = value
+
+    if content.is("a")
+      @post_object.content["#{key}_href"] = content.attr("href")
+
     @post_to_backend(@save_path, @post_object)
 
   save_image: (content) ->
@@ -47,7 +51,8 @@ class @PersistenceManager
   save_attachment: (content) ->
     key = content.attr("data-cms")
     @post_object.content = {}
-    @post_object.content[key] = content.attr("href")
+    @post_object.content[key]           = content.attr("href").split('/').reverse()[0]
+    @post_object.content["#{key}_href"] = content.attr("href")
     @post_to_backend(@save_attachment_path, @post_object)
 
   sanitize: (content) ->

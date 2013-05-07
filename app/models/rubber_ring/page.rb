@@ -4,25 +4,25 @@ module RubberRing
     has_many :page_contents
 
     def self.save_or_update(options)
-      page = load_first_page(options)
-      page_content_key = options[:content].keys.first
-      page_content     = options[:content]
+      page =       load_first_page(options)
+      page_content = options[:content]
 
       if page.nil?
-        new_page = create(
+        page = create(
           controller: options[:controller],
           action:     options[:action]
         )
-        RubberRing::PageContent.add_new_page_content(new_page, page_content, page_content_key)
-        new_page
-      else
-        if page.content[page_content_key].nil?
-          RubberRing::PageContent.add_new_page_content(page, page_content, page_content_key)
-        else
-          RubberRing::PageContent.update_page_content(page, page_content, page_content_key)
-        end
-        page
       end
+
+      options[:content].keys.each do |key|
+        if page and page.content[key].nil?
+          RubberRing::PageContent.add_page_content(page, page_content, key)
+        else
+          RubberRing::PageContent.update_page_content(page, page_content, key)
+        end
+      end
+
+      page
     end
 
     def self.remove(options, key_to_remove)

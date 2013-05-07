@@ -9,8 +9,8 @@
 <% end %>
 
 <h3>Support for attachments</h3>
-<%= attachment({key: 'software-architecture', href: 'http://www.education.gov.yk.ca/pdf/pdf-test.pdf'}, @page) do %>
-  <%= editable_field(:span, {key: 'link_title'}, @page) do %>Link to PDF<% end %>
+<%= editable_link({class: 'rubber_ring_attachment', key: 'software-architecture', href: 'http://www.education.gov.yk.ca/pdf/pdf-test.pdf'}, @page) do %>
+  Link to PDF
 <% end %>
 
 <br>

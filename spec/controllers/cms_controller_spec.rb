@@ -10,6 +10,17 @@ describe RubberRing::CmsController do
     RubberRing::PageContent.all.size.should eq 1
   end
 
+  it 'should save multiple keys' do
+    xhr :post, :save, { page_controller: 'test',
+                        page_action: 'test',
+                        content: { 'key1' => 'value1', 'key2' => 'value2' }
+    }
+    response.should be_success
+
+    RubberRing::Page.all.size.should eq 1
+    RubberRing::PageContent.all.size.should eq 2
+  end
+
   it 'should remove key from pages content' do
     # create content with key = "key"
     xhr :post, :save, { page_controller: 'test', page_action: 'test', content: { 'key' => 'value' }}

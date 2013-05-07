@@ -45,18 +45,18 @@ describe RubberRing::CmsHelper do
       page = RubberRing::Page.new({controller: 'test', action: 'test'})
       page.edit_mode = true
 
-      helper.editable_image({key: 'key', src: '/images/baws.jpg'}, page)
-        .should eq '<img class="rubber_ring_image" data-cms="key" src="/images/baws.jpg" />'
+      helper.editable_image({key: 'key', src: '/images/baws.jpg', class: 'class'}, page)
+        .should eq '<img class="rubber_ring_image class" data-cms="key" src="/images/baws.jpg" />'
     end
   end
 
-  describe 'attachment' do
-    it 'should return editable attachment element' do
+  describe 'link' do
+    it 'should return editable link element' do
       page = RubberRing::Page.new({controller: 'test', action: 'test'})
       page.edit_mode = true
 
-      helper.attachment({key: 'software-architecture', href: '/docs/test.pdf'}, page){raw('<span>Link title</span>')}
-        .should eq '<a class="rubber_ring_attachment" data-cms="software-architecture" download="" href="/docs/test.pdf"><span>Link title</span></a>'
+      helper.editable_link({key: 'link', href: '/test', class: 'class'}, page){'Link'}
+        .should eq '<a class="class" contenteditable="true" data-cms="link" href="/test">Link</a>'
     end
   end
 

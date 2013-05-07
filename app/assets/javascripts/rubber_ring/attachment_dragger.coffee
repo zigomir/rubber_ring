@@ -27,9 +27,11 @@ class @AttachmentDragger
       if $(e.currentTarget).attr(@attribute) != e.dataTransfer.getData(@attribute)
         new_content = e.dataTransfer.getData(@attribute)
 
-        # prevent droping images on attachments and vice versa
+        # prevent dropping images on attachments and vice versa
         if new_content.length > 0
           $(e.currentTarget).attr(@attribute, e.dataTransfer.getData(@attribute))
+          # also change link if we are dropping attachmeng
+          $(e.currentTarget).html(e.dataTransfer.getData(@attribute).split('/').reverse()[0]) if @attribute == "href"
 
           pm = new PersistenceManager()
           pm.save_image($(e.currentTarget)) if @attribute == "src"
