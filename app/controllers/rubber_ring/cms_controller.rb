@@ -5,16 +5,24 @@ module RubberRing
     include Util
 
     layout 'rubber_ring/application'
-    before_action :load_page_content
+    before_action :load_page_content, :set_locale
     before_filter :admin?, :cache?, :publish? # check if admin before cache
 
     def load_page_content
-      page = Page.where(controller: params[:controller],
-                        action:     params[:action])
+      page = Page.where(
+        controller: params[:controller],
+        action:     params[:action],
+        locale:     params[:locale] || I18n.default_locale.to_s
+      )
 
       @page = page.empty? ? Page.new : page.first
       @page.edit_mode = true
       @images, @attachments = Util.load_attachments_page(params)
+    end
+
+    def set_locale
+      I18n.locale = params[:locale] || I18n.default_locale
+      @locale = I18n.locale.to_s
     end
 
     def save

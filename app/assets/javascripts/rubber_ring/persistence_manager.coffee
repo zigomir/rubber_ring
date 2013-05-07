@@ -10,8 +10,9 @@ class @PersistenceManager
 
   post_object:
     page_controller: App.controller
-    page_action: App.action
-    page_path: document.location.pathname
+    page_action:     App.action
+    page_path:       document.location.pathname
+    page_locale:     App.locale
 
   constructor: (@action_btns) ->
     @save_path              = App.save_path

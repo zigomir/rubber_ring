@@ -48,6 +48,7 @@ module RubberRing
       {
         controller: params[:page_controller],
         action:     params[:page_action],
+        locale:     params[:page_locale] || I18n.default_locale.to_s,
         content:    params[:content]
       }
     end

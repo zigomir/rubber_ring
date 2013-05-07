@@ -4,13 +4,14 @@ module RubberRing
     has_many :page_contents
 
     def self.save_or_update(options)
-      page =       load_first_page(options)
+      page = load_first_page(options)
       page_content = options[:content]
 
       if page.nil?
         page = create(
           controller: options[:controller],
-          action:     options[:action]
+          action:     options[:action],
+          locale:     options[:locale]
         )
       end
 
@@ -56,7 +57,7 @@ module RubberRing
   private
 
     def self.load_first_page(options)
-      where(controller: options[:controller], action: options[:action]).first
+      where(controller: options[:controller], action: options[:action], locale: options[:locale]).first
     end
 
   end

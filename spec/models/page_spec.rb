@@ -5,6 +5,7 @@ describe RubberRing::Page do
     RubberRing::Page.save_or_update({
        controller: 'test',
        action: 'test',
+       locale: 'en',
        content: { 'cms_key' => 'cms_value' }
      })
 
@@ -14,6 +15,7 @@ describe RubberRing::Page do
     page = RubberRing::Page.first
     page.content['cms_key'].should eq 'cms_value'
     page.content['key2'].should eq nil
+    page.locale.should eq 'en'
   end
 
   it 'should update page content' do
