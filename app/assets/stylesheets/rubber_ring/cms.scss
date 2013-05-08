@@ -33,7 +33,7 @@
 
   .reset-content {
     @include rr-button-abs;
-    background: url("<%= image_path('glyphicons-halflings.png') %>") no-repeat -217px -25px;
+    background: image-url("glyphicons-halflings.png") no-repeat -217px -25px;
   }
 }
 
@@ -128,12 +128,12 @@
 
   [data-action=add] {
     @include rr-button;
-    background: url("<%= image_path('glyphicons-halflings.png') %>") no-repeat -1px -97px;
+    background: image-url("glyphicons-halflings.png") no-repeat -1px -97px;
   }
 
   [data-action=remove] {
     @include rr-button;
-    background: url("<%= image_path('glyphicons-halflings.png') %>") no-repeat -25px -97px;
+    background: image-url("glyphicons-halflings.png") no-repeat -25px -97px;
   }
 }
 

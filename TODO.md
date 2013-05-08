@@ -1,6 +1,6 @@
 # TODO
 - login/logout links
-- cache on every page view so publish will always publish everything
+- crawler to cache all pages and publishes all of them
 - release gem
 	- recreate site before release of gem
 	- use [semantic versioning](http://semver.org/)
