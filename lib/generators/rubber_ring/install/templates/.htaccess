@@ -1,0 +1,9 @@
+RewriteEngine on
+
+# Add trailing .html to request
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^ %{REQUEST_URI}.html [L]
+
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteCond /var/www/$1.html -f
+RewriteRule ^(.+)/$ /$1.html [L]

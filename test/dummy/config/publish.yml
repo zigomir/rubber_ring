@@ -2,7 +2,7 @@
 
 site:
   server:
-    source: public/build/*
+    source: public/build/.
     destination: root@enslaved:/var/www
 #    exclude:
 #      - .git

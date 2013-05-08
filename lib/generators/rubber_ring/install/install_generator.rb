@@ -7,6 +7,11 @@ module RubberRing
         copy_file 'publish_template.yml', 'config/publish.yml'
       end
 
+      def generate_htaccess_file
+        FileUtils.mkdir_p 'public/build'
+        copy_file '.htaccess', 'public/build/.htaccess'
+      end
+
       def generate_password_file
         copy_file 'settings_template.rb', 'config/initializers/rubber_ring.rb'
       end
