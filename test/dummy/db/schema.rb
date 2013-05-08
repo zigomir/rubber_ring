@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130507223032) do
+ActiveRecord::Schema.define(version: 20130508071222) do
 
   create_table "rubber_ring_page_contents", force: true do |t|
     t.string   "key"
@@ -26,9 +26,9 @@ ActiveRecord::Schema.define(version: 20130507223032) do
   create_table "rubber_ring_pages", force: true do |t|
     t.string   "controller"
     t.string   "action"
+    t.string   "locale"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "locale"
   end
 
 end
