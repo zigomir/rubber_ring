@@ -1,10 +1,10 @@
 # Rubber Ring - simple content editable CMS
 
-Named by The Smiths [song](http://www.youtube.com/watch?v=Cpf6gJU3520).
-
 ## About
 
-This CMS helps you build editable pages fast. You define which content (`image` or `text`) should be editable for your users. Limitation, that only developer sets what page parts are editable is good for keeping the design intact. It is basically backend for simple `contenteditable`. When done editing, only static assets will be published to production server.
+This CMS helps you build editable pages fast. You define which content (`text`, `image`, `attachment`, ...) should be editable for your users. Limitation, that only developer sets what page parts are editable is good for keeping the design intact. It is basically backend for simple `contenteditable`. When done editing, only static assets will be published to production server. You only need a web server like Apache or Nginx.
+
+Named by The Smiths [song](http://www.youtube.com/watch?v=Cpf6gJU3520).
 
 ## Benefits over other content editable editors
 
@@ -16,10 +16,10 @@ This CMS helps you build editable pages fast. You define which content (`image` 
 sites, where **editor** wants to create new pages and control each part of every page.
 
 ## Used software
-*Current software prerequisites; made with*
+*Current software prerequisites*
 
 * Ruby `2.0.0-p0`
-* Rails 4.0.0.rc1
+* Rails `4.0.0.rc1`
 * imagemagick
 
 ## Browser support
