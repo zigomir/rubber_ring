@@ -2,27 +2,32 @@
 
 ## About
 
-This CMS helps you build editable pages fast. You define which content (`text`, `image`, `attachment`, ...) should be editable for your users. Limitation, that only developer sets what page parts are editable is good for keeping the design intact. It is basically backend for simple `contenteditable`. When done editing, only static assets will be published to production server. You only need a web server like Apache or Nginx.
+This CMS helps you build editable pages fast. You define which content 
+(`text`, `image`, `attachment`, ...) should be editable for your users. 
+Limitation, that only developer sets what page parts are editable is good for 
+keeping the design intact. It is basically backend for saving `contenteditable` content.
+When done editing, only static assets will be published to production server 
+where you only need a web server like Apache or Nginx.
 
 Named by The Smiths [song](http://www.youtube.com/watch?v=Cpf6gJU3520).
 
-## Benefits over other content editable editors
+## Benefits over other content editable CMSes
 
 - optimized for developers and quick setup
-- simple to use for customers. They should not be able to break design (a lot).
-- customer doesn't need application server and/or database. Only plain web server for static HTML serving will do.
+- simple to use for customers. They should not be able to break design (a lot)
+- customer doesn't need application server and/or database. Only plain web server for static HTML serving will do
 
 ### This CMS is not good for
-sites, where **editor** wants to create new pages and control each part of every page.
+sites, where **editor** wants to create new pages and control each part of every page, 
+change fonts and text style
 
-## Used software
-*Current software prerequisites*
+## Software prerequisites
 
 * Ruby `2.0.0-p0`
 * Rails `4.0.0.rc1`
 * imagemagick
 
-## Browser support
+### Browser support
 
 Firefox and Chrome. IE drag and drop doesn't work for now.
 
@@ -35,7 +40,8 @@ To install `imagemagick` and `sqlite3` on `Ubuntu`
 	sudo apt-get install libsqlite3-dev
 
 ### Setting up new Rails project
-Create new rails project and add this to `Gemfile` and then run `bundle`
+
+Add it to your `Gemfile`
 
 	gem 'rubber_ring', :git => 'git://github.com/zigomir/rubber_ring.git'
 
@@ -48,8 +54,13 @@ Update `development.rb` to enable caching
 
 	config.action_controller.perform_caching = true
 
+Remove `//= require jquery` and `//= require jquery_ujs` from `application.js` because 
+Rubber Ring is already including jQuery for you.
+
 ### Setup config files
-Generate initialize settings file for admin and settings for publishing pages on production server
+
+Generate initialize settings file for admin and settings for publishing pages 
+on production server
 
 	rails generate rubber_ring:install
 
@@ -61,13 +72,16 @@ This will generate
 
 Set admin password and application type in `app/config/initializers/rubber_ring.rb`.
 
-`app/views/layouts/rubber_ring/application.html.erb` is here for you to override it, so you have complete control over your markup.
+`app/views/layouts/rubber_ring/application.html.erb` is here for you to override it, 
+so you have complete control over your markup.
 
 ### Static pages or Rails application?
 
-* If you only want to use Rubber Ring to generate static pages, leave `RubberRing.static_only = true` intact. This will leave you with options to `preview` and `publish` html pages and other assets to production server
-* If you want to use Rubber Ring to edit content for your Rails application, than just set `RubberRing.static_only` to false
-* Set remote production server in `app/config/publish.yml` if you are using `static_only` mode
+* If you only want to use Rubber Ring to generate static pages, leave
+`RubberRing.static_only = true` intact. This will leave you with options to 
+`preview` and `publish` html pages and other assets to production server. Otherwise set 
+this option to false
+* Set remote production server in `app/config/publish.yml` for static only mode
 
 # Usage
 
@@ -75,15 +89,19 @@ Set admin password and application type in `app/config/initializers/rubber_ring.
 
 Login (`/rubber_ring`) with password which was set by developer in the install stage.
 
-Editing content is easy as clicking inside green boxes and start editing. Developer decides what can be duplicable/repeatable and what not.
+Editing content is easy as clicking inside green boxes and start editing. 
+Developer sets what content is editable/repeatable/link/multi line...
 
-For changing images click on `Image manager` in the upper menu. Drag&Drop the image you need to drop zone. After uploading the image you can drag and drop it on the image you wanted to change. Image will be automatically resized to the size that was set by developer or page designer.
+For changing images click on `Image manager` in the upper menu. 
+Drag and drop the image you need to drop zone. After uploading the image you can drag 
+and drop it on the image you wanted to change. Image will be automatically resized 
+to the size that was set by developer/designer.
 
 ### Build and publish your pages
 
 `Preview` option in the menu will output entire page to `public/build` directory. `Publish` will upload current page to your production server, set in `publish.yml` file.
 
-## As a developer I want to have quickly setup editable pages
+## As a developer I want to quickly setup editable pages
 
 Rails generator for new pages
 
@@ -112,9 +130,9 @@ Examples
 	  multi lines...
 	<% end %>
 	
-  <%= editable_link({class: 'rubber_ring_attachment', key: 'attachment-link', href: '/link-to-something'}, @page) do %>
-    Link to PDF
-  <% end %>
+	<%= editable_link({class: 'rubber_ring_attachment', key: 'attachment-link', href: '/link-to-something'}, @page) do %>
+    	Link to PDF
+	<% end %>
 
 	<%= editable_image({key: 'header_image', src: image_path('baws.jpg'), height: '360'}, @page) %>
 	
@@ -126,9 +144,14 @@ Allows you to set up repeating templates. Example
 
 	<% repeat_template('article', @page) %>
 	
-This means, that you need to create new view in `app/views/templates/_article.html.erb`. where **templates** and **article** article are important. Create templates directory for the first time, and than put all your repeatable templates inside. As you can see, first parameter to the helper needs to be the same like view name (without "_").
+This means, that you need to create new view in `app/views/templates/_article.html.erb` 
+where **templates** and **article** are important as directory and file name. 
+Convention is that the first parameter to the helper needs to be the same as view 
+name without underscore.
 
-Inside those templates you can of course use all other helpers. BUT, you need to assemble your key correctly or otherwise you will be overwriting your own content. You can use index and parent key to like this:
+**Inside repeat templates** you can use all other helpers. **BUT**, you need to 
+assemble your key correctly or otherwise you will be overwriting your own content. 
+You can use index and parent key like this:
 
 	<%= editable_field(:p, {key: "#{parent_key}_paragraph_#{index}", class: "multi-line"}, @page) do %>
 		Template content
@@ -136,9 +159,11 @@ Inside those templates you can of course use all other helpers. BUT, you need to
 
 ### Helper options
 
-Each helper need's to specify unique `key`. These are holding values in the database. Also each helper needs to include `@page` object as their last parameter. This object holds all the page's editable content in a hash data structure.
+Each helper need's to specify unique `key`. These are holding values in the database. 
+Also each helper needs to include `@page` object as their last parameter. 
+This object holds all the editable content of the page in a hash data structure.
 
-#### Already used keys which you must not use
+#### already used keys which you must not use
 
 - `page_title`
 
@@ -162,7 +187,12 @@ Each helper need's to specify unique `key`. These are holding values in the data
 
 ### Assets (stylesheets and javascripts)
 
-You can use, like in any other new Rails application, [Sprockets directives](https://github.com/sstephenson/sprockets#the-directive-processor) to include assets to your app. Please remove `//= require jquery` and `//= require jquery_ujs` from `application.js` because `rubber ring` is already including `jquery` which you can reuse in your pages as well.
+You can use, like in any other Rails application, 
+[sprockets directives](https://github.com/sstephenson/sprockets#the-directive-processor) 
+to include assets to your app. 
+Please remove `//= require jquery` and `//= require jquery_ujs` from `application.js`
+because rubber ring is already including `jquery` which you can reuse in your 
+pages as well.
 
 ## Philosophy
 

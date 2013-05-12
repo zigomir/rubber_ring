@@ -42,7 +42,7 @@ module RubberRing
         :class     => options[:class],
         :id        => options[:id],
         :href      => href_attribute || options[:href],
-        'data-cms' => key,
+        'data-cms' => key
       }
 
       content_value = capture(&block) if content_value.nil?

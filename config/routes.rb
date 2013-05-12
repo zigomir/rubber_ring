@@ -1,7 +1,8 @@
 RubberRing::Engine.routes.draw do
 
-  get '',       :to => 'sessions#new'
-  post 'login', :to => 'sessions#create', :as => 'login'
+  get  '',       :to => 'sessions#new'
+  get  'logout', :to => 'sessions#destroy', :as => 'logout'
+  post 'login',  :to => 'sessions#create',  :as => 'login'
 
   post 'cms/save',         :to => 'cms#save',   :as => 'cms_save'
   post 'cms/remove/:key',  :to => 'cms#remove', :as => 'cms_remove'

@@ -13,7 +13,12 @@ describe RubberRing::SessionsController do
   end
 
   it 'should login with correct password' do
-    post :create, :password =>  RubberRing.admin_password
+    post :create, :password => RubberRing.admin_password
+    response.should redirect_to root_path
+  end
+
+  it 'should log out' do
+    get :destroy
     response.should redirect_to root_path
   end
 

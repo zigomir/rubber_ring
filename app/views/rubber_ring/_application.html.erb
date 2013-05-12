@@ -22,6 +22,11 @@
             <div class="alert alert-success">Saved!</div>
           </li>
         </ul>
+        <ul class="nav pull-right">
+          <li>
+            <a href="<%= rubber_ring.logout_path %>">Logout</a>
+          </li>
+        </ul>
       </div>
     </div>
 
@@ -43,7 +48,10 @@
       <h5>Other file attachments</h5>
       <div class="uploaded-attachments well well-small">
         <% @attachments.each do |src| %>
-          <a href="<%= src %>" draggable="true" download><i class="icon-file"></i> <%= src.split('/').last %></a>
+          <a href="<%= src %>" draggable="true" download>
+            <i class="icon-file"></i>
+            <%= src.split('/').last %>
+          </a>
         <% end %>
       </div>
     </div>
@@ -77,16 +85,16 @@
   </div>
 
   <script type="text/javascript">
-    var App = App || {};
-    App.controller        = "<%= params[:controller] %>";
-    App.action            = "<%= params[:action] %>";
-    App.locale            = "<%= params[:locale] || I18n.default_locale.to_s %>";
+    var App                    = App || {};
+    App.controller             = "<%= params[:controller] %>";
+    App.action                 = "<%= params[:action] %>";
+    App.locale                 = "<%= params[:locale] || I18n.default_locale.to_s %>";
 
-    App.save_path         = "<%= rubber_ring.cms_save_path %>";
-    App.remove_path       = "<%= rubber_ring.cms_remove_path(':key') %>";
+    App.save_path              = "<%= rubber_ring.cms_save_path %>";
+    App.remove_path            = "<%= rubber_ring.cms_remove_path(':key') %>";
 
-    App.save_image_path      = "<%= rubber_ring.cms_save_image_path %>";
-    App.save_attachment_path = "<%= rubber_ring.cms_save_attachment_path %>";
+    App.save_image_path        = "<%= rubber_ring.cms_save_image_path %>";
+    App.save_attachment_path   = "<%= rubber_ring.cms_save_attachment_path %>";
 
     App.add_attachment_path    = "<%= rubber_ring.cms_add_attachment_path %>";
     App.remove_attachment_path = "<%= rubber_ring.cms_remove_attachment_path %>";

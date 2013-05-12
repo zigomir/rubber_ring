@@ -1,16 +1,11 @@
 # TODO
-- login/logout links
-- crawler to cache all pages and publishes all of them
-- release gem
-	- recreate site before release of gem
+- application.js without jquer and jquery-ui
+- responsive menu
+- way to cache all pages and publish them all
+- release gem after project is doing ok on at least one project
 	- use [semantic versioning](http://semver.org/)
 
-## Documentation
-- document and revise documentation regularly
-- maybe use [YARD](http://yardoc.org/) for documenting code
-
 ## Development
-- add to code climate
 - test / refactor / refine
 
 ## Future / neat features
