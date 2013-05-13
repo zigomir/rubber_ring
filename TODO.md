@@ -1,4 +1,6 @@
 # TODO
+- add https://codeclimate.com/github/zigomir/rubber_ring (badge) to readme
+	- correct all smells
 - application.js without jquer and jquery-ui
 - responsive menu
 - way to cache all pages and publish them all
