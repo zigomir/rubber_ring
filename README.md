@@ -1,4 +1,5 @@
 # Rubber Ring - simple content editable CMS
+[![Code Climate](https://codeclimate.com/github/zigomir/rubber_ring.png)](https://codeclimate.com/github/zigomir/rubber_ring)
 
 ## About
 
