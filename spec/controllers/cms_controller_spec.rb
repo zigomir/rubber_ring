@@ -3,10 +3,11 @@ require 'spec_helper'
 describe RubberRing::CmsController do
 
   it 'should save content for the page' do
-    xhr :post, :save, { page_controller: 'test',
-                        page_action: 'test',
-                        page_locale: 'fr',
-                        content: { 'key' => 'value' }
+    xhr :post, :save, {
+      page_controller: 'test',
+      page_action: 'test',
+      page_locale: 'fr',
+      content: { 'key' => 'value' }
     }
     response.should be_success
 
@@ -16,9 +17,10 @@ describe RubberRing::CmsController do
   end
 
   it 'should save multiple keys' do
-    xhr :post, :save, { page_controller: 'test',
-                        page_action: 'test',
-                        content: { 'key1' => 'value1', 'key2' => 'value2' }
+    xhr :post, :save, {
+      page_controller: 'test',
+      page_action: 'test',
+      content: { 'key1' => 'value1', 'key2' => 'value2' }
     }
     response.should be_success
 

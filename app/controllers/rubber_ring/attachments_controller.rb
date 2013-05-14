@@ -3,25 +3,29 @@ module RubberRing
     include Util
 
     def save_image
-      page   = Util.save_page_content(params)
-      width  = params[:width] || ''
-      height = params[:height] || ''
+      page = Util.save_page_content(params)
+      width, height = params[:width], params[:height]
 
-      unless width == '' and height == ''
-        key = params[:content].keys.first
+      unless width.nil? and height.nil?
+        key  = params[:content].keys.first
         path = "public/#{page.content[key]}"
-        image = ImageSorcery.new(path)
-        #http://www.imagemagick.org/script/command-line-processing.php#geometry
-        #widthxheight>	Shrinks an image with dimension(s) larger than the corresponding width and/or height argument(s).
-        image.convert(path, quality: 90, resize: "#{width}x#{height}>")
+        convert_image(path, width, height) if File.exist?(path)
       end
 
-      expire_page(params[:page_path])
-      render :json => { controller: page.controller, action: page.action, content: page.content }
+      expire_page_and_render(page)
+    end
+
+    def convert_image(path, width, height)
+      image = ImageSorcery.new(path)
+      image.convert(path, quality: 90, resize: "#{width}x#{height}>")
     end
 
     def save_attachment
       page = Util.save_page_content(params)
+      expire_page_and_render(page)
+    end
+
+    def expire_page_and_render(page)
       expire_page(params[:page_path])
       render :json => { controller: page.controller, action: page.action, content: page.content }
     end
@@ -33,14 +37,12 @@ module RubberRing
 
       uploaded_file_path = File.join(temp_dir, name)
       dir_config = Util.get_attachment_directories(params)
-      # check if we have image or another type of attachemnt
-      if FastImage.type(uploaded_file_path).nil?
-        Util.move_file(uploaded_file_path, dir_config.att_dir)
-        render :json => { src: File.join(dir_config.att_src_dir, name), type: 'file' }
-      else
-        Util.move_file(uploaded_file_path, dir_config.img_dir)
-        render :json => { src: File.join(dir_config.img_src_dir, name), type: 'image' }
-      end
+
+      type = FastImage.type(uploaded_file_path).nil? ? 'file' : 'image'
+      dir, src_dir = "#{type}_dir", "#{type}_src_dir"
+      Util.move_file(uploaded_file_path, dir_config[dir])
+
+      render :json => { src: File.join(dir_config[src_dir], name), type: type }
     end
 
     def remove
@@ -51,6 +53,5 @@ module RubberRing
 
       render :json => { src: params[:src_to_remove] }
     end
-
   end
 end

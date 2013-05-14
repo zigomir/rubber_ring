@@ -1,6 +1,6 @@
 module RubberRing
   module Util
-    Struct.new('AttachmentsDir', :img_src_dir, :att_src_dir, :img_dir, :att_dir)
+    Struct.new('AttachmentsDir', :image_src_dir, :file_src_dir, :image_dir, :file_dir)
 
     def Util.save_page_content(params)
       options = get_options_from_params(params)
@@ -10,14 +10,14 @@ module RubberRing
     def Util.get_attachment_directories(params)
       controller  = params[:page_controller] || params[:controller]
       action      = params[:page_action]     || params[:action]
-      img_src_dir = "upload/#{controller}/#{action}/images"
-      att_src_dir = "upload/#{controller}/#{action}/attachments"
+      image_src_dir = "upload/#{controller}/#{action}/images"
+      file_src_dir = "upload/#{controller}/#{action}/attachments"
 
       return Struct::AttachmentsDir.new(
-        img_src_dir,
-        att_src_dir,
-        "public/#{img_src_dir}",
-        "public/#{att_src_dir}"
+        image_src_dir,
+        file_src_dir,
+        "public/#{image_src_dir}",
+        "public/#{file_src_dir}"
       )
     end
 
@@ -25,17 +25,17 @@ module RubberRing
       images = []
       attachments = []
       dir_config = get_attachment_directories(params)
-      dirs_to_crawl = [dir_config.img_dir, dir_config.att_dir]
+      dirs_to_crawl = [dir_config.image_dir, dir_config.file_dir]
 
       dirs_to_crawl.each do |dir|
         if File.directory?(dir)
           Dir.foreach(dir) do |file|
             next if file == '.' or file == '..'
 
-            if dir == dir_config.img_dir
-              images << File.join(dir_config.img_src_dir, file)
+            if dir == dir_config.image_dir
+              images << File.join(dir_config.image_src_dir, file)
             else
-              attachments << File.join(dir_config.att_src_dir, file)
+              attachments << File.join(dir_config.file_src_dir, file)
             end
           end
         end
