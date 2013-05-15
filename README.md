@@ -67,22 +67,31 @@ on production server
 
 This will generate
 
-	app/config/publish.yml
-	app/config/initializers/rubber_ring.rb
-	app/views/layouts/rubber_ring/application.html.erb
+	1. app/config/publish.yml
+	2. app/config/initializers/rubber_ring.rb
+	3. app/views/layouts/rubber_ring/layout.html.erb
+	4. app/assets/javascripts/application.js
+	5. public/.htaccess
 
-Set admin password and application type in `app/config/initializers/rubber_ring.rb`.
-
-`app/views/layouts/rubber_ring/application.html.erb` is here for you to override it, 
+1. Set your production server name and path. You will need SSH access and your public key 
+on server. If you tend to use Rubber Ring as part of web application you can ignore this 
+file.
+2. Set admin password and application type in `app/config/initializers/rubber_ring.rb`.
+3. `app/views/layouts/rubber_ring/layout.html.erb` is here for you to override it, 
 so you have complete control over your markup.
+4. This is copied because default Rails `application.js` includes `jquery` which is 
+already included for you by Rubber Ring (avoiding clashes).
+5. Apaches access config. Including rules so you can access all published pages. It will 
+look for `.html` files first and enter sub directories later. Example: we have page with 
+route `/en` and `/en/example`. When published, `en.html` and `en/example.html` will be 
+generated and synced with production server. To serve them both we need this `.htaccess` file.
 
 ### Static pages or Rails application?
 
 * If you only want to use Rubber Ring to generate static pages, leave
 `RubberRing.static_only = true` intact. This will leave you with options to 
 `preview` and `publish` html pages and other assets to production server. Otherwise set 
-this option to false
-* Set remote production server in `app/config/publish.yml` for static only mode
+this option to false.
 
 # Usage
 

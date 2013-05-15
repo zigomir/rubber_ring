@@ -1,5 +1,4 @@
 # TODO
-- generate application.js without jquery and jquery-ui
 - way to cache all pages and publish them all
 - release gem after project is doing ok on at least one project
 	- use [semantic versioning](http://semver.org/)

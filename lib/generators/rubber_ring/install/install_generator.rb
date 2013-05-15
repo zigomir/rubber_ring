@@ -8,8 +8,7 @@ module RubberRing
       end
 
       def generate_htaccess_file
-        FileUtils.mkdir_p 'public/build'
-        copy_file '.htaccess', 'public/build/.htaccess'
+        copy_file '.htaccess', 'public/.htaccess'
       end
 
       def generate_password_file
@@ -17,7 +16,11 @@ module RubberRing
       end
 
       def copy_application_layout
-        copy_file 'application.html.erb', 'app/views/layouts/rubber_ring/application.html.erb'
+        copy_file 'layout.html.erb', 'app/views/layouts/rubber_ring/layout.html.erb'
+      end
+
+      def override_application_js
+        copy_file 'application.js', 'app/assets/javascripts/application.js'
       end
 
       def add_engine_mount_route

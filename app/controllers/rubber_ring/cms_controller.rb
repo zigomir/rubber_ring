@@ -4,7 +4,7 @@ module RubberRing
     include Publish
     include Util
 
-    layout 'rubber_ring/application'
+    layout 'rubber_ring/layout'
     before_action :load_page_content, :set_locale
     before_filter :admin?, :cache?, :publish? # check if admin before cache
 
