@@ -14,6 +14,7 @@ class @AttachmentUploader
       form_data.append(csrf_param, csrf_token)
       form_data.append('page_controller', App.controller)
       form_data.append('page_action', App.action)
+      form_data.append('locale', App.locale)
 
     dz.on "success", (file, response) ->
       if response.type == "image"
