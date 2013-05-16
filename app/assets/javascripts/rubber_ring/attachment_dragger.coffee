@@ -14,12 +14,12 @@ class @AttachmentDragger
       addEvent drag_item, "dragstart", (e) =>
         event.dataTransfer.setData(@attribute, $(e.currentTarget).attr(@attribute))
 
-    drop_attachment_element = document.querySelector(@drop_selector)
+    drop_attachment_elements = document.querySelectorAll(@drop_selector)
     # Tells the browser that we *can* drop on this target
-    addEvent(drop_attachment_element, "dragover", @cancel)
-    addEvent(drop_attachment_element, "dragenter", @cancel)
+    addEvent(drop_attachment_elements, "dragover", @cancel)
+    addEvent(drop_attachment_elements, "dragenter", @cancel)
 
-    addEvent drop_attachment_element, "drop", (e) =>
+    addEvent drop_attachment_elements, "drop", (e) =>
       # stops the browser from redirecting off to the text
       e.preventDefault() if e.preventDefault
 

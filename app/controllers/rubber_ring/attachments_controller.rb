@@ -42,7 +42,7 @@ module RubberRing
       dir, src_dir = "#{type}_dir", "#{type}_src_dir"
       Util.move_file(uploaded_file_path, dir_config[dir])
 
-      render :json => { src: File.join(dir_config[src_dir], name), type: type }
+      render :json => { src: '/' + File.join(dir_config[src_dir], name), type: type }
     end
 
     def remove

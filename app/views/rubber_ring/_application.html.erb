@@ -41,14 +41,14 @@
       <h5>Images</h5>
       <div class="uploaded-images well well-small">
         <% @images.each do |src| %>
-          <img src="<%= src %>" draggable="true" class="img-polaroid" />
+          <img src="/<%= src %>" draggable="true" class="img-polaroid" />
         <% end %>
       </div>
 
       <h5>Other file attachments</h5>
       <div class="uploaded-attachments well well-small">
         <% @attachments.each do |src| %>
-          <a href="<%= src %>" draggable="true" download>
+          <a href="/<%= src %>" draggable="true" download>
             <i class="icon-file"></i>
             <%= src.split('/').last %>
           </a>

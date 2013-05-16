@@ -10,8 +10,10 @@ module RubberRing
     def Util.get_attachment_directories(params)
       controller  = params[:page_controller] || params[:controller]
       action      = params[:page_action]     || params[:action]
-      image_src_dir = "upload/#{controller}/#{action}/images"
-      file_src_dir = "upload/#{controller}/#{action}/attachments"
+      locale      = params[:locale]          || I18n.default_locale.to_s
+
+      image_src_dir = "upload/#{locale}/#{controller}/#{action}/images"
+      file_src_dir  = "upload/#{locale}/#{controller}/#{action}/attachments"
 
       return Struct::AttachmentsDir.new(
         image_src_dir,
