@@ -1,8 +1,13 @@
 # TODO
+- template helper
+	- save array of templates
+	- adding new template to array
+	- templates array sorting + GUI for sorting
 - don't show saved button when reloading page(s)
 - better way for handling attachments for different languages
     - maybe each language should not have different directory for storing them...
 - way to cache all pages in one step and publish them all
+	- save path in page table and make crawler that goes through all of them
 - release gem after project is doing ok on at least one project
 	- use [semantic versioning](http://semver.org/)
 

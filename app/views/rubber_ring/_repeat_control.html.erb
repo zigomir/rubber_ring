@@ -1,11 +1,12 @@
 <% if @admin and not @page_caching %>
-  <div id="rr-repeat" class="tbs">
+<!-- TODO: do me like dropdown! -->
+  <div id="rr-repeat" class="tbs rr-control">
     <div class="well well-small">
       <span>Repeat control for <strong><%= key %></strong> key</span>
 
       <input id="<%= key %>" type="number" data-cms="<%= key %>" value="<%= @page.content[key] || 1 %>" min="1" max="99" disabled/>
-      <button class="repeat" data-action="add" data-cms="<%= key %>"></button>
-      <button class="repeat" data-action="remove" data-cms="<%= key %>"></button>
+      <button class="repeat" data-action="add"></button>
+      <button class="repeat" data-action="remove"></button>
     </div>
   </div>
 <% end %>

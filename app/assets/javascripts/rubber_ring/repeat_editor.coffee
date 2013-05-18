@@ -1,4 +1,4 @@
-class @DuplicableEditor
+class @RepeatEditor
 
   constructor: (@action_btns) ->
     @pm = new PersistenceManager(action_btns)

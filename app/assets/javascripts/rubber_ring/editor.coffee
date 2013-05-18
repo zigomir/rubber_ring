@@ -8,8 +8,13 @@ $ ->
 
   $editable_content = $("[contenteditable]")
 
+  util = new Util()
+  # first check for any duplicated keys
+  duplicates = util.find_duplicated_keys($('[data-cms]'))
+  alert "Correct key duplicates: '#{duplicates}'" if duplicates.length > 0
+
   pm = new PersistenceManager(config.action_btns)
-  de = new DuplicableEditor(config.action_btns)
+  de = new RepeatEditor(config.action_btns)
   le = new LinkEditor($editable_content)
   de.init()
   le.init()
@@ -71,5 +76,5 @@ $ ->
         this.insertAdjacentHTML("beforeend", lineBreak)
       else
         document.execCommand("insertHTML", false, lineBreak)
-      
+
       false

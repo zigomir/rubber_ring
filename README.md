@@ -161,9 +161,9 @@ name without underscore.
 
 **Inside repeat templates** you can use all other helpers. **BUT**, you need to 
 assemble your key correctly or otherwise you will be overwriting your own content. 
-You can use index and parent key like this:
+You can use `key_prefix`, which is assembled from index and parent key, like this:
 
-	<%= editable_field(:p, {key: "#{parent_key}_paragraph_#{index}", class: "multi-line"}, @page) do %>
+	<%= editable_field(:p, {key: "#{key_prefix}_paragraph", class: "multi-line"}, @page) do %>
 		Template content
     <% end %>
 

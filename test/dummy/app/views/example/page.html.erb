@@ -8,11 +8,11 @@
   editing page content right away
 <% end %>
 
-<h3>Support for attachments</h3>
-<%= editable_link({class: 'rubber_ring_attachment', key: 'software-architecture', href: 'http://www.education.gov.yk.ca/pdf/pdf-test.pdf'}, @page) do %>
+<%= editable_link({class: 'rubber_ring_attachment', key: 'software_architecture', href: 'http://www.education.gov.yk.ca/pdf/pdf-test.pdf'}, @page) do %>
   Link to PDF
 <% end %>
 
+<!--
 <br>
 <br>
 
@@ -21,11 +21,15 @@
   <input name="value" value="" placeholder="Something" />
   <input type="submit" value="Post this" />
 </form>
-<% if flash[:message] %>
-  <h4>Oh my, you typed "<%= flash[:message] %>"</h4>
-<% end %>
+<%# if flash[:message] %>
+  <h4>Oh my, you typed "<%#= flash[:message] %>"</h4>
+<%# end %>
+-->
 
-<br>
-<br>
+<!-- <div class="articles">
+  <%# repeat_template('article', @page) %>
+</div> -->
 
-<% repeat_template('article', @page) %>
+<div class="blog-posts">
+  <% template(['article', 'blog_post'], {key: 'template_key'}, @page) %>
+</div>

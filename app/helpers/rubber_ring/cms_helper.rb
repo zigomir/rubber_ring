@@ -79,7 +79,20 @@ module RubberRing
       repeat = 1 if repeat.nil? or repeat == 0
 
       repeat.to_i.times do |i|
-        concat(render "templates/#{key}", index: i, parent_key: key)
+        concat(render "templates/#{key}", key_prefix: "#{i}_#{key}")
+      end
+    end
+
+    def template(templates, options = {}, page)
+      key = options[:key]
+      concat(render 'rubber_ring/template_control', key: key, templates: templates)
+
+      templates_with_order = page.content[key] unless page.content.nil?
+      # if nothing is saved yet
+      templates_with_order = templates if templates_with_order.nil?
+
+      templates_with_order.each_with_index do |template, i|
+        concat(render "templates/#{template}", key_prefix: "#{i}_#{key}_#{template}")
       end
     end
 
