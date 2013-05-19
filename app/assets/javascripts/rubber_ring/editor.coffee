@@ -14,10 +14,8 @@ $ ->
   alert "Correct key duplicates: '#{duplicates}'" if duplicates.length > 0
 
   pm = new PersistenceManager(config.action_btns)
-  de = new RepeatEditor(pm)
   te = new TemplateEditor(pm, util)
   le = new LinkEditor($editable_content)
-  de.init()
   te.init()
   le.init()
 

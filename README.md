@@ -145,15 +145,16 @@ Examples
 	<% end %>
 
 	<%= editable_image({key: 'header_image', src: image_path('baws.jpg'), height: '360'}, @page) %>
-	
-	<% repeat_template('article', @page) %>
 
-## Repeat template
+## Template
 
 Allows you to set up repeating templates. Example
 
-	<% repeat_template('article', @page) %>
+	<% template(['article', 'blog_post', 'article'],
+  		{key: 'template_key', wrap_element: 'div', wrap_class: 'templates'}, @page)
+	%>
 	
+<!-- TODO: re document
 This means, that you need to create new view in `app/views/templates/_article.html.erb` 
 where **templates** and **article** are important as directory and file name. 
 Convention is that the first parameter to the helper needs to be the same as view 
@@ -162,10 +163,11 @@ name without underscore.
 **Inside repeat templates** you can use all other helpers. **BUT**, you need to 
 assemble your key correctly or otherwise you will be overwriting your own content. 
 You can use `key_prefix`, which is assembled from index and parent key, like this:
+-->
 
-	<%= editable_field(:p, {key: "#{key_prefix}_paragraph", class: "multi-line"}, @page) do %>
-		Template content
-    <% end %>
+	<%= editable_field(:h2, {key: "#{key_prefix}_title"}, @page) do %>
+		Article Title
+	<% end %>
 
 ### Helper options
 

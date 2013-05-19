@@ -1,16 +1,17 @@
-# TODO
-# describe 'TemplateEditor', ->
+describe 'TemplateEditor', ->
 
-#   beforeEach ->
-#     loadFixtures('template_control.html')
+  it 'should add new template to data attribute', ->
+    loadFixtures('templates.html')
 
-#   it 'should add new template to data attribute', ->
-#     pm = new PersistenceManager(config.action_btns)
-#     te = new TemplateEditor(pm)
-#     te.init()
+    pm   = new PersistenceManager(config.action_btns)
+    util = new Util()
+    te   = new TemplateEditor(pm, util)
+    te.init()
 
-#     templates = $('select').data('templates')
-#     expect(templates.length).toBe(2)
+    templates = $('[template]')
+    expect(templates.length).toBe(4)
 
-#     $('[data-action=add]').click()
-#     expect(templates.length).toBe(3)
+    $('[data-action=add]').click()
+
+    templates = $('[template]')
+    expect(templates.length).toBe(5)

@@ -1,7 +1,5 @@
 # TODO
-- template helper (combine with repeat at one point)
-	- save array of templates
-	- adding new template to array
+- template helper
 	- templates array sorting + GUI for sorting
 - don't show saved button when reloading page(s)
 - pm save should take content + key for more consistent API

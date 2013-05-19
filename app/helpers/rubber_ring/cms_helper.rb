@@ -71,19 +71,6 @@ module RubberRing
       tag(:img, content_tag_options)
     end
 
-    # TODO deprecate this one when template is finished
-    # def repeat_template(key, page)
-    #   concat(render 'rubber_ring/repeat_control', key: key)
-
-    #   repeat = '1'
-    #   repeat = page.content[key] unless page.content.nil?
-    #   repeat = 1 if repeat.nil? or repeat == 0
-
-    #   repeat.to_i.times do |i|
-    #     concat(render "templates/#{key}", key_prefix: "#{i}_#{key}")
-    #   end
-    # end
-
     def template(templates, options = {}, page)
       key = options[:key]
       templates_from_content = page.content[key] unless page.content.nil?
