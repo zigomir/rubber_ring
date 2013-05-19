@@ -20,3 +20,12 @@ class @Util
       i++
 
     duplicats
+
+  create_template_keys: ->
+    $('[template]').each (order, element) ->
+      $(element).attr('order', order)
+      editable_fields = $(this).find('[data-cms]')
+
+      editable_fields.each ->
+        key = $(this).data('cms').split('|')[1]
+        $(this).attr('data-cms', "#{order}|#{key}")

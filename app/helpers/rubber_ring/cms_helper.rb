@@ -71,29 +71,41 @@ module RubberRing
       tag(:img, content_tag_options)
     end
 
-    def repeat_template(key, page)
-      concat(render 'rubber_ring/repeat_control', key: key)
+    # TODO deprecate this one when template is finished
+    # def repeat_template(key, page)
+    #   concat(render 'rubber_ring/repeat_control', key: key)
 
-      repeat = '1'
-      repeat = page.content[key] unless page.content.nil?
-      repeat = 1 if repeat.nil? or repeat == 0
+    #   repeat = '1'
+    #   repeat = page.content[key] unless page.content.nil?
+    #   repeat = 1 if repeat.nil? or repeat == 0
 
-      repeat.to_i.times do |i|
-        concat(render "templates/#{key}", key_prefix: "#{i}_#{key}")
-      end
-    end
+    #   repeat.to_i.times do |i|
+    #     concat(render "templates/#{key}", key_prefix: "#{i}_#{key}")
+    #   end
+    # end
 
     def template(templates, options = {}, page)
       key = options[:key]
       templates_from_content = page.content[key] unless page.content.nil?
-      # if nothing is saved yet
+      # if nothing is saved yet, use templates from helper defined in erb
       templates_from_content = templates if templates_from_content.nil?
 
       concat(render 'rubber_ring/template_control', key: key, templates: templates_from_content)
 
+      templates_concatenated = ''
       templates_from_content.each_with_index do |template, i|
-        concat(render "templates/#{template}", key_prefix: "#{i}_#{key}_#{template}")
+        rendered_template = render "templates/#{template}", key_prefix: "#{i}|#{key}_#{template}"
+        # surround with div and class as template name
+        templates_concatenated +=
+          content_tag(:div, rendered_template, {template: template, order: i})
       end
+
+      concat(content_tag(
+          options[:wrap_element],
+          raw(templates_concatenated),
+          {class: "#{options[:wrap_class]} #{key}"}
+        )
+      )
     end
 
   end

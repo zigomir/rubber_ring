@@ -1,25 +1,38 @@
 class @TemplateEditor
 
-  constructor: (@pm) ->
+  constructor: (@pm, @util) ->
 
   init: ->
     $('.rr-control button').click (e) =>
-      $select = $('select')
-      key     = $select.data('cms')
-      content = $select.data('templates')
-      action  = $(e.currentTarget).data('action')
+      $select  = $('select')
+      key      = $select.data('cms')
+      action   = $(e.currentTarget).data('action')
+      template = $select.val()
+
+      templates_selector      = ".#{key} > *"
+      same_templates_selector = ".#{key} [template=#{template}]"
+
+      $templates      = $(templates_selector)
+      $same_templates = $(same_templates_selector)
+      $parent         = $templates.first().parent()
+
+      # prevent removing last one
+      if $same_templates.length is 1 and action is 'remove'
+        return
 
       if action is 'add'
-        content.push($select.val())
+        $same_templates.first().clone(true).appendTo($parent)
       else
-        i = content.indexOf($select.val())
-        content.splice(i, 1)
+        $same_templates.last().remove()
 
-      # console.log content
-      # $select.data(content)
-      console.log $select.data('templates')
+      # refresh templates arrays
+      $templates      = $(templates_selector)
+      $same_templates = $(".#{key} [template=#{template}]")
 
-      # $select.attr('data-templates', content)
-      console.log $select.attr('data-templates')
-      # @pm.save_template(key, content).then ->
-        # window.location.reload(true)
+      @util.create_template_keys()
+
+      templates = []
+      $templates.each ->
+        templates.push($(this).attr('template'))
+
+      @pm.save_template(key, templates)

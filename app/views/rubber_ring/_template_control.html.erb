@@ -4,8 +4,8 @@
     <div class="well well-small">
       <span>Template for <strong><%= key %></strong></span>
 
-      <select name="template" data-cms="<%= key %>" data-templates="<%= templates %>">
-        <% templates.each do |template| %>
+      <select data-cms="<%= key %>">
+        <% templates.uniq.each do |template| %>
           <option value="<%= template %>"><%= template %></option>
         <% end %>
       </select>

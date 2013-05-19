@@ -16,4 +16,5 @@
 ## Future / neat features
 - publish on specific time [cool lib for timepicking](http://amsul.ca/pickadate.js)
 - use shadow dom for encapsulating application menu [link](http://www.html5rocks.com/en/tutorials/webcomponents/shadowdom/) or even better, use [polymer](http://polymer-project.appspot.com/)
+	- [web components](http://www.webcomponentsshift.com)
 - better GUI design (responsive menu)

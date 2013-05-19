@@ -12,24 +12,8 @@
   Link to PDF
 <% end %>
 
-<!--
-<br>
-<br>
-
-<h3>Dynamic site? check your ruber_ring.rb initializer</h3>
-<form method="post" action="<%= form_path %>">
-  <input name="value" value="" placeholder="Something" />
-  <input type="submit" value="Post this" />
-</form>
-<%# if flash[:message] %>
-  <h4>Oh my, you typed "<%#= flash[:message] %>"</h4>
-<%# end %>
--->
-
-<!-- <div class="articles">
-  <%# repeat_template('article', @page) %>
-</div> -->
-
-<div class="blog-posts">
-  <% template(['article', 'blog_post'], {key: 'template_key'}, @page) %>
-</div>
+<% template(
+  # TODO for more controll pass something like {name: 'article', class: 'article', element: 'div'}
+  ['article', 'blog_post', 'article'],
+  {key: 'template_key', wrap_element: 'div', wrap_class: 'templates'}, @page)
+%>
