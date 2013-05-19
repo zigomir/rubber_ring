@@ -5,7 +5,7 @@
       <span>Template for <strong><%= key %></strong></span>
 
       <select data-cms="<%= key %>">
-        <% templates.uniq.each do |template| %>
+        <% templates.each do |template| %>
           <option value="<%= template %>"><%= template %></option>
         <% end %>
       </select>

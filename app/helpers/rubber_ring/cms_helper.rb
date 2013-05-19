@@ -77,14 +77,19 @@ module RubberRing
       # if nothing is saved yet, use templates from helper defined in erb
       templates_from_content = templates if templates_from_content.nil?
 
-      concat(render 'rubber_ring/template_control', key: key, templates: templates_from_content)
+      concat(render 'rubber_ring/template_control', key: key, templates: templates)
 
       templates_concatenated = ''
-      templates_from_content.each_with_index do |template, i|
-        rendered_template = render "templates/#{template}", key_prefix: "#{i}|#{key}_#{template}"
+
+      # templates_from_content = templates_from_content.sort{ |a, b| a.split('|').first <=> b.split('|').first }
+      # in database should already be right order
+      templates_from_content.each do |template|
+        index    = template.split('|').first
+        template = template.split('|').last
+        rendered_template = render "templates/#{template}", key_prefix: "#{index}|#{key}_#{template}"
         # surround with div and class as template name
         templates_concatenated +=
-          content_tag(:div, rendered_template, {template: template, order: i})
+          content_tag(:div, rendered_template, {template: template, order: index})
       end
 
       concat(content_tag(

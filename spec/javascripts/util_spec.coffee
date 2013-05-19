@@ -19,7 +19,7 @@ describe 'Util', ->
     duplicates = util.find_duplicated_keys($('[data-cms]'))
     expect(duplicates.length).toBe(2)
 
-    util.create_template_keys()
+    util.create_template_field_keys()
     duplicates = util.find_duplicated_keys($('[data-cms]'))
     expect(duplicates.length).toBe(0)
 

@@ -25,6 +25,8 @@ class @PersistenceManager
     @$alert.bind 'transitionend webkitTransitionEnd', =>
       @$alert.removeClass("show")
 
+  # TODO refactor
+  # all pm methods should have key and content parameters
   save: (content) ->
     key = content.attr("data-cms") # data wont work here because of cloning dom
 
@@ -45,6 +47,10 @@ class @PersistenceManager
     @post_object.content = {}
     @post_object.content[key] = content
     @post_to_backend(@save_path, @post_object)
+
+  remove_template: (key) ->
+    path = @remove_path.replace(':key', key)
+    @post_to_backend(path, @post_object)
 
   save_image: (content) ->
     key = content.attr("data-cms")
