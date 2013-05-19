@@ -4,16 +4,14 @@
     <div class="well well-small">
       <span>Template for <strong><%= key %></strong></span>
 
-      <select name="template" data-cms="<%= key %>">
+      <select name="template" data-cms="<%= key %>" data-templates="<%= templates %>">
         <% templates.each do |template| %>
           <option value="<%= template %>"><%= template %></option>
         <% end %>
       </select>
 
-      <!-- TODO: test this, because I will remove data-cms attribute from those buttons -->
-      <!-- data-cms="<%#= key %>" -->
-      <button class="repeat" data-action="add"></button>
-      <button class="repeat" data-action="remove" ></button>
+      <button data-action="add"></button>
+      <button data-action="remove" ></button>
     </div>
   </div>
 <% end %>

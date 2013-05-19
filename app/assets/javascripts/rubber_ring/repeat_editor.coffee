@@ -1,10 +1,9 @@
 class @RepeatEditor
 
-  constructor: (@action_btns) ->
-    @pm = new PersistenceManager(action_btns)
+  constructor: (@pm) ->
 
   init: ->
-    $("#rr-repeat .repeat").click (e) =>
+    $(".rr-control button").click (e) =>
       key = $(e.currentTarget).data("cms")
       action = $(e.currentTarget).data("action")
 

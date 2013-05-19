@@ -13,10 +13,13 @@ $ ->
   duplicates = util.find_duplicated_keys($('[data-cms]'))
   alert "Correct key duplicates: '#{duplicates}'" if duplicates.length > 0
 
+  # TODO maybe inject pm instead of action btns!
   pm = new PersistenceManager(config.action_btns)
-  de = new RepeatEditor(config.action_btns)
+  de = new RepeatEditor(pm)
+  te = new TemplateEditor(pm)
   le = new LinkEditor($editable_content)
   de.init()
+  te.init()
   le.init()
 
   # append content editable with buttons

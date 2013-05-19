@@ -1,9 +1,11 @@
 # TODO
-- template helper
+- template helper (combine with repeat at one point)
 	- save array of templates
 	- adding new template to array
 	- templates array sorting + GUI for sorting
 - don't show saved button when reloading page(s)
+- pm save should take content + key for more consistent API
+- ember rewrite
 - better way for handling attachments for different languages
     - maybe each language should not have different directory for storing them...
 - way to cache all pages in one step and publish them all

@@ -85,13 +85,13 @@ module RubberRing
 
     def template(templates, options = {}, page)
       key = options[:key]
-      concat(render 'rubber_ring/template_control', key: key, templates: templates)
-
-      templates_with_order = page.content[key] unless page.content.nil?
+      templates_from_content = page.content[key] unless page.content.nil?
       # if nothing is saved yet
-      templates_with_order = templates if templates_with_order.nil?
+      templates_from_content = templates if templates_from_content.nil?
 
-      templates_with_order.each_with_index do |template, i|
+      concat(render 'rubber_ring/template_control', key: key, templates: templates_from_content)
+
+      templates_from_content.each_with_index do |template, i|
         concat(render "templates/#{template}", key_prefix: "#{i}_#{key}_#{template}")
       end
     end

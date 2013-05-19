@@ -41,6 +41,11 @@ class @PersistenceManager
 
     @post_to_backend(@save_path, @post_object)
 
+  save_template: (key, content) ->
+    @post_object.content = {}
+    @post_object.content[key] = content
+    @post_to_backend(@save_path, @post_object)
+
   save_image: (content) ->
     key = content.attr("data-cms")
     @post_object.content = {}
