@@ -1,6 +1,7 @@
 # TODO
 - template helper
 	- templates array sorting + GUI for sorting
+	- save cloned values too
 - don't show saved button when reloading page(s)
 - pm save should take content + key for more consistent API
 - ember rewrite

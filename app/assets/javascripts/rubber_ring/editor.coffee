@@ -15,8 +15,10 @@ $ ->
 
   pm = new PersistenceManager(config.action_btns)
   te = new TemplateEditor(pm, util)
-  le = new LinkEditor($editable_content)
   te.init()
+  te.init_sortable()
+
+  le = new LinkEditor($editable_content)
   le.init()
 
   # append content editable with buttons
