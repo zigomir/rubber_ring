@@ -24,10 +24,11 @@ module RubberRing
     end
 
     def self.save_or_update_templates(options)
-      page, templates = get_page_and_content(options, :template)
+      page, templates = get_page_and_content(options, :content)
 
       templates.keys.each do |key|
         templates[key].each do |template|
+          template = template.last
           pt = RubberRing::PageTemplate
             .where('page_id = ? AND key = ? AND "index" = ?', page.id, key, template['index'])
             .first_or_initialize()

@@ -33,11 +33,11 @@ module RubberRing
     end
 
     def save_template
-      # TODO
-      # page = Util.save_page_content(params)
+      options = Util.get_options_from_params(params)
+      page = Page.save_or_update_templates(options)
 
-      # expire_page(params[:page_path])
-      # render :json => { controller: page.controller, action: page.action, content: page.content }
+      expire_page(params[:page_path])
+      render :json => { controller: page.controller, action: page.action, content: page.content }
     end
 
     def remove

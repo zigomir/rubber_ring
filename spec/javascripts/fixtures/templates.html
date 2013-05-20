@@ -1,61 +1,16 @@
-<div class="tbs rr-control">
-  <div class="well well-small">
-    <span>Template for <strong>template_key</strong></span>
-
-    <select data-cms="template_key">
-      <option value="article" selected>article</option>
-      <option value="blog_post">blog_post</option>
-    </select>
-
-    <span class='add-remove'>
-      <button data-action="add"></button>
-      <button data-action="remove"></button>
-    </span>
-  </div>
-</div>
-
-<div class="templates template_key">
-  <div order="0" template="article">
+<div class="templates" data-cms="template_key">
+  <div data-template-index="0" data-template="article">
     <article>
-      <h2 contenteditable="true" data-cms="0|template_key_article_title">
+      <h2 contenteditable="true" data-cms="0_template_key_article_title">
         Article Title
-        <button class="reset-content"></button>
-      </h2>
-      <p contenteditable="true" data-cms="0|template_key_article_paragraph">
+      <button class="reset-content"></button></h2>
+      <p contenteditable="true" data-cms="0_template_key_article_paragraph">
         Article content
         <button class="reset-content"></button>
       </p>
     </article>
   </div>
-
-  <div order="1" template="blog_post">
+  <div data-template-index="1" data-template="blog_post">
     I'm just a tiny little blog post.
-  </div>
-
-  <div order="2" template="article">
-    <article>
-      <h2 contenteditable="true" data-cms="2|template_key_article_title">
-        Article Title
-        <button class="reset-content"></button>
-      </h2>
-      <p contenteditable="true" data-cms="2|template_key_article_paragraph">
-        Article content
-        <button class="reset-content"></button>
-      </p>
-    </article>
-  </div>
-
-  <!-- cloned to the dom on user click -->
-  <div order="3" template="article">
-    <article>
-      <h2 contenteditable="true" data-cms="0|template_key_article_title">
-        Article Title
-        <button class="reset-content"></button>
-      </h2>
-      <p contenteditable="true" data-cms="0|template_key_article_paragraph">
-        Article content
-        <button class="reset-content"></button>
-      </p>
-    </article>
   </div>
 </div>

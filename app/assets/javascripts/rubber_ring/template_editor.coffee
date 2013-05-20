@@ -29,30 +29,26 @@ class @TemplateEditor
       $templates      = $(templates_selector)
       $same_templates = $(".#{key} [data-template=#{template}]")
 
-      @util.create_template_field_keys()
-
       if action is 'add'
         # create object to save
-        key = get_templates_key($templates)
-        templates_to_save = get_templates_array($templates)
+        key = @get_templates_key($templates)
+        templates_to_save = @get_templates_array($templates)
         @pm.save_template(key, templates_to_save)
         # @pm.save_template(key, $templates).then ->
         #   window.reload(true)
-      else
-        @pm.remove_template(get_templates_key($templates)).then ->
-          window.reload(true)
 
-  get_templates_array = ($templates) ->
+  get_templates_array: ($templates) ->
     list = []
     $templates.each (index, element) ->
-      list.push {
+      list.push({
         index:    $(element).data('template-index'),
         template: $(element).data('template')
-      }
+        # sort:     $(element).data('sort') # TODO sort
+      })
 
     list
 
-  get_templates_key = ($templates) ->
+  get_templates_key: ($templates) ->
     $templates.parents('[data-cms]').first().data('cms')
 
   init_sortable: ->

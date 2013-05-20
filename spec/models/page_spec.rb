@@ -128,16 +128,19 @@ describe RubberRing::Page do
         controller: 'test',
         action: 'test',
         locale: 'en',
-        template: {
-          'template_key' => [{
-            'index'    => 0,
-            'template' => 'article',
-            'sort'     => 0
-          }, {
-            'index'    => 1,
-            'template' => 'blog_post',
-            'sort'     => 1
-          }]
+        content: {
+          'template_key' => {
+            '0' => {
+              'index'    => 0,
+              'template' => 'article',
+              'sort'     => 1
+            },
+            '1' => {
+              'index'    => 1,
+              'template' => 'blog_post',
+              'sort'     => 2
+            }
+          }
         }
        })
     end
@@ -150,11 +153,11 @@ describe RubberRing::Page do
       page = RubberRing::Page.first
       page.page_templates[0].template.should eq 'article'
       page.page_templates[0].index.should eq 0
-      page.page_templates[0].sort.should eq 0
+      page.page_templates[0].sort.should eq 1
 
       page.page_templates[1].template.should eq 'blog_post'
       page.page_templates[1].index.should eq 1
-      page.page_templates[1].sort.should eq 1
+      page.page_templates[1].sort.should eq 2
     end
 
     it 'should update page templates' do
@@ -162,12 +165,14 @@ describe RubberRing::Page do
         controller: 'test',
         action: 'test',
         locale: 'en',
-        template: {
-            'template_key' => [{
-            'index'    => 0,
-            'template' => 'blog_post',
-            'sort'     => 1
-          }]
+        content: {
+          'template_key' => {
+            '0' => {
+              'index'    => 0,
+              'template' => 'blog_post',
+              'sort'     => 1
+            }
+          }
         }
        })
 
