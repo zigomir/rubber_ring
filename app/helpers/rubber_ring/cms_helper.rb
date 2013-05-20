@@ -80,22 +80,22 @@ module RubberRing
       concat(render 'rubber_ring/template_control', key: key, templates: templates)
 
       templates_concatenated = ''
-
-      # templates_from_content = templates_from_content.sort{ |a, b| a.split('|').first <=> b.split('|').first }
-      # in database should already be right order
-      templates_from_content.each do |template|
-        index    = template.split('|').first
-        template = template.split('|').last
-        rendered_template = render "templates/#{template}", key_prefix: "#{index}|#{key}_#{template}"
-        # surround with div and class as template name
-        templates_concatenated +=
-          content_tag(:div, rendered_template, {template: template, order: index})
+      templates_from_content.each_with_index do |template, index|
+        rendered_template = render "templates/#{template}", key_prefix: "#{index}_#{key}_#{template}"
+        templates_concatenated += content_tag(:div,
+          rendered_template,
+          {'data-template' => template, 'data-template-index' => index}
+        )
       end
 
-      concat(content_tag(
+      concat(
+        content_tag(
           options[:wrap_element],
           raw(templates_concatenated),
-          {class: "#{options[:wrap_class]} #{key}"}
+          {
+            class: "#{options[:wrap_class]}",
+            'data-cms' => key
+          }
         )
       )
     end

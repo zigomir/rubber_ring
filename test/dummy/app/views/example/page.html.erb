@@ -1,19 +1,5 @@
-<%= editable_image({key: 'header_image', src: image_path('baws.jpg'), height: '360'}, @page) %>
-
-<%= editable_field(:h1, {key: 'header'}, @page) do %>
-  rubber ring cms
-<% end %>
-
-<%= editable_field(:div, {key: 'first_content', class: 'multi-line'}, @page) do %>
-  editing page content right away
-<% end %>
-
-<%= editable_link({class: 'rubber_ring_attachment', key: 'software_architecture', href: 'http://www.education.gov.yk.ca/pdf/pdf-test.pdf'}, @page) do %>
-  Link to PDF
-<% end %>
-
 <% template(
   # TODO for more controll pass something like {name: 'article', class: 'article', element: 'div'}
-  ['article', 'blog_post', 'article'],
+  ['article', 'blog_post'],
   {key: 'template_key', wrap_element: 'div', wrap_class: 'templates'}, @page)
 %>

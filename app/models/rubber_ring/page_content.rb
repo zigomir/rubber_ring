@@ -1,7 +1,6 @@
 module RubberRing
   class PageContent < ActiveRecord::Base
     belongs_to :page
-    serialize :value
 
     def self.add_page_content(page, page_content, page_content_key)
       RubberRing::PageContent.create(

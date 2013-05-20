@@ -4,8 +4,9 @@ RubberRing::Engine.routes.draw do
   get  'logout', :to => 'sessions#destroy', :as => 'logout'
   post 'login',  :to => 'sessions#create',  :as => 'login'
 
-  post 'cms/save',         :to => 'cms#save',   :as => 'cms_save'
-  post 'cms/remove/:key',  :to => 'cms#remove', :as => 'cms_remove'
+  post 'cms/save',          :to => 'cms#save',          :as => 'cms_save'
+  post 'cms/save_template', :to => 'cms#save_template', :as => 'cms_save_template'
+  post 'cms/remove/:key',   :to => 'cms#remove',        :as => 'cms_remove'
 
 
   post 'cms/save_image',      :to => 'attachments#save_image',      :as => 'cms_save_image' # convert and set image to page content

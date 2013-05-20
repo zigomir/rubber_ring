@@ -39,6 +39,34 @@ describe RubberRing::Page do
     page.content['cms_key'].should eq 'cms_value_new'
   end
 
+  it 'should create page templates' do
+    RubberRing::Page.save_or_update_templates({
+      controller: 'test',
+      action: 'test',
+      locale: 'en',
+      template: {
+          'template_key' => [{
+          'index'    => 0,
+          'template' => 'article'
+        }, {
+          'index'    => 1,
+          'template' => 'blog_post'
+        }]
+      }
+     })
+
+    RubberRing::Page.all.count.should eq 1
+    RubberRing::PageContent.all.count.should eq 0
+    RubberRing::PageTemplate.all.count.should eq 2
+
+    page = RubberRing::Page.first
+    page.page_templates[0].template.should eq 'article'
+    page.page_templates[0].index.should eq 0
+
+    page.page_templates[1].template.should eq 'blog_post'
+    page.page_templates[1].index.should eq 1
+  end
+
   it 'should add page content' do
     RubberRing::Page.save_or_update({
        controller: 'test',

@@ -8,3 +8,17 @@
 <%= duplicable_editable_field(:ul, {group: 'blog_posts', child_tag: 'li', class: 'multi-line'}, @page) do %>
     <p>Blog post 1</p>
 <% end %>
+
+<%= editable_image({key: 'header_image', src: image_path('baws.jpg'), height: '360'}, @page) %>
+
+<%= editable_field(:h1, {key: 'header'}, @page) do %>
+  rubber ring cms
+<% end %>
+
+<%= editable_field(:div, {key: 'first_content', class: 'multi-line'}, @page) do %>
+  editing page content right away
+<% end %>
+
+<%= editable_link({class: 'rubber_ring_attachment', key: 'software_architecture', href: 'http://www.education.gov.yk.ca/pdf/pdf-test.pdf'}, @page) do %>
+  Link to PDF
+<% end %>

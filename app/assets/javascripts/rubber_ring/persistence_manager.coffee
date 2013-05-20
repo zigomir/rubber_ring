@@ -1,13 +1,4 @@
 class @PersistenceManager
-  save_path:              null
-  remove_path:            null
-
-  save_image_path:        null
-  save_attachment_path:   null
-  remove_attachment_path: null
-
-  $alert:                 null
-
   post_object:
     page_controller: App.controller
     page_action:     App.action
@@ -16,8 +7,11 @@ class @PersistenceManager
 
   constructor: (@action_btns) ->
     @save_path              = App.save_path
+    @save_template_path     = App.save_template_path
+
     @save_image_path        = App.save_image_path
     @save_attachment_path   = App.save_attachment_path
+
     @remove_path            = App.remove_path
     @remove_attachment_path = App.remove_attachment_path
     @$alert                 = $(".alert-saved div")
@@ -43,10 +37,12 @@ class @PersistenceManager
 
     @post_to_backend(@save_path, @post_object)
 
-  save_template: (key, content) ->
-    @post_object.content = {}
-    @post_object.content[key] = content
-    @post_to_backend(@save_path, @post_object)
+  save_template: (key, template) ->
+    @post_object.template      = {}
+    @post_object.template[key] = template
+    console.log @save_template_path
+    console.log @post_object
+    @post_to_backend(@save_template_path, @post_object)
 
   remove_template: (key) ->
     path = @remove_path.replace(':key', key)
@@ -74,6 +70,7 @@ class @PersistenceManager
     content = content.replace(value, "").trim() for key, value of @action_btns
     content
 
+  # TODO remove by key
   remove: (content) ->
     key = content.attr("data-cms")
     path = @remove_path.replace(':key', key)

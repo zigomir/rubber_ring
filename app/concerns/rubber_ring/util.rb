@@ -7,6 +7,11 @@ module RubberRing
       Page.save_or_update(options)
     end
 
+    def Util.save_page_templates(params)
+      options = get_options_from_params(params)
+      Page.save_or_update_templates(options)
+    end
+
     def Util.get_attachment_directories(params)
       controller  = params[:page_controller] || params[:controller]
       action      = params[:page_action]     || params[:action]

@@ -32,6 +32,14 @@ module RubberRing
       render :json => { controller: page.controller, action: page.action, content: page.content }
     end
 
+    def save_template
+      # TODO
+      # page = Util.save_page_content(params)
+
+      # expire_page(params[:page_path])
+      # render :json => { controller: page.controller, action: page.action, content: page.content }
+    end
+
     def remove
       options = Util.get_options_from_params(params)
       page = Page.remove(options, params[:key])
