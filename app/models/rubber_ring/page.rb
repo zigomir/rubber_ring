@@ -5,40 +5,26 @@ module RubberRing
     has_many :page_templates
 
     def self.save_or_update(options)
-      page = load_first_page(options)
-      page_content = options[:content]
+      page, page_content = get_page_and_content(options, :content)
 
-      if page.nil?
-        page = create(
-          controller: options[:controller],
-          action:     options[:action],
-          locale:     options[:locale]
+      page_content.keys.each do |key|
+        pc = RubberRing::PageContent.where('page_id = ? AND key = ?', page.id, key)
+          .first_or_initialize()
+
+        pc.update_attributes(
+          key:   key,
+          value: page_content[key],
+          page:  page
         )
-      end
 
-      options[:content].keys.each do |key|
-        if page and page.content[key].nil?
-          RubberRing::PageContent.add_page_content(page, page_content, key)
-        else
-          RubberRing::PageContent.update_page_content(page, page_content, key)
-        end
+        pc.save
       end
 
       page
     end
 
-    # TODO refactor, similar to save_or_update
     def self.save_or_update_templates(options)
-      page = load_first_page(options)
-      templates = options[:template]
-
-      if page.nil?
-        page = create(
-          controller: options[:controller],
-          action:     options[:action],
-          locale:     options[:locale]
-        )
-      end
+      page, templates = get_page_and_content(options, :template)
 
       templates.keys.each do |key|
         templates[key].each do |template|
@@ -50,6 +36,7 @@ module RubberRing
             key:      key,
             index:    template['index'],
             template: template['template'],
+            sort:     template['sort'],
             page:     page
           )
 
@@ -62,7 +49,9 @@ module RubberRing
 
     def self.remove(options, key_to_remove)
       page = load_first_page(options)
-      RubberRing::PageContent.remove_page_content(page, key_to_remove)
+      RubberRing::PageContent
+        .where('page_id = ? AND key = ?', page.id, key_to_remove)
+        .delete_all()
       page
     end
 
@@ -100,6 +89,21 @@ module RubberRing
 
     def self.load_first_page(options)
       where(controller: options[:controller], action: options[:action], locale: options[:locale]).first
+    end
+
+    def self.get_page_and_content(options, content_key)
+      page = load_first_page(options)
+      content = options[content_key]
+
+      if page.nil?
+        page = create(
+          controller: options[:controller],
+          action:     options[:action],
+          locale:     options[:locale]
+        )
+      end
+
+      return page, content
     end
 
   end

@@ -39,34 +39,6 @@ describe RubberRing::Page do
     page.content['cms_key'].should eq 'cms_value_new'
   end
 
-  it 'should create page templates' do
-    RubberRing::Page.save_or_update_templates({
-      controller: 'test',
-      action: 'test',
-      locale: 'en',
-      template: {
-          'template_key' => [{
-          'index'    => 0,
-          'template' => 'article'
-        }, {
-          'index'    => 1,
-          'template' => 'blog_post'
-        }]
-      }
-     })
-
-    RubberRing::Page.all.count.should eq 1
-    RubberRing::PageContent.all.count.should eq 0
-    RubberRing::PageTemplate.all.count.should eq 2
-
-    page = RubberRing::Page.first
-    page.page_templates[0].template.should eq 'article'
-    page.page_templates[0].index.should eq 0
-
-    page.page_templates[1].template.should eq 'blog_post'
-    page.page_templates[1].index.should eq 1
-  end
-
   it 'should add page content' do
     RubberRing::Page.save_or_update({
        controller: 'test',
@@ -106,10 +78,12 @@ describe RubberRing::Page do
     RubberRing::PageContent.all.count.should eq 2
 
     RubberRing::Page.remove({
-       controller: 'test',
-       action: 'test',
-       content: {}
-     }, 'cms_key')
+     controller: 'test',
+     action: 'test',
+     content: {}
+     },
+     'cms_key'
+    )
 
     RubberRing::Page.all.count.should eq 1
     RubberRing::PageContent.all.count.should eq 1
@@ -147,4 +121,65 @@ describe RubberRing::Page do
       page.content['child_key_1'].should eq 'child_value_1'
     end
   end
+
+  describe 'page templates' do
+    before do
+      RubberRing::Page.save_or_update_templates({
+        controller: 'test',
+        action: 'test',
+        locale: 'en',
+        template: {
+          'template_key' => [{
+            'index'    => 0,
+            'template' => 'article',
+            'sort'     => 0
+          }, {
+            'index'    => 1,
+            'template' => 'blog_post',
+            'sort'     => 1
+          }]
+        }
+       })
+    end
+
+    it 'should create page templates' do
+      RubberRing::Page.all.count.should eq 1
+      RubberRing::PageContent.all.count.should eq 0
+      RubberRing::PageTemplate.all.count.should eq 2
+
+      page = RubberRing::Page.first
+      page.page_templates[0].template.should eq 'article'
+      page.page_templates[0].index.should eq 0
+      page.page_templates[0].sort.should eq 0
+
+      page.page_templates[1].template.should eq 'blog_post'
+      page.page_templates[1].index.should eq 1
+      page.page_templates[1].sort.should eq 1
+    end
+
+    it 'should update page templates' do
+      RubberRing::Page.save_or_update_templates({
+        controller: 'test',
+        action: 'test',
+        locale: 'en',
+        template: {
+            'template_key' => [{
+            'index'    => 0,
+            'template' => 'blog_post',
+            'sort'     => 1
+          }]
+        }
+       })
+
+      RubberRing::Page.all.count.should eq 1
+      RubberRing::PageContent.all.count.should eq 0
+      RubberRing::PageTemplate.all.count.should eq 2
+
+      page = RubberRing::Page.first
+      page.page_templates[0].template.should eq 'blog_post'
+      page.page_templates[0].index.should eq 0
+      page.page_templates[0].sort.should eq 1
+    end
+  end
+
 end
