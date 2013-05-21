@@ -146,24 +146,30 @@ Examples
 
 	<%= editable_image({key: 'header_image', src: image_path('baws.jpg'), height: '360'}, @page) %>
 
-## Template
+## Templates
 
-Allows you to set up repeating templates. Example
+Allows you to set up repeating and sortable templates. Example
 
-	<% template(['article', 'blog_post', 'article'],
-  		{key: 'template_key', wrap_element: 'div', wrap_class: 'templates'}, @page)
+	<% template([
+	    {template: 'article',   tclass: 'article', element: 'article'},
+	    {template: 'blog_post', tclass: 'blog',    element: 'div'}
+	  ],
+	  {key: 'template_key', wrap_element: 'div', wrap_class: 'templates'}, @page)
 	%>
 	
-<!-- TODO: re document
-This means, that you need to create new view in `app/views/templates/_article.html.erb` 
-where **templates** and **article** are important as directory and file name. 
-Convention is that the first parameter to the helper needs to be the same as view 
-name without underscore.
 
-**Inside repeat templates** you can use all other helpers. **BUT**, you need to 
+This means, that you need to create new view for each template in 
+`app/views/templates/`. Example
+
+	`app/views/templates/_article.html.erb` 
+
+**templates** and **article** are important as directory and file name. 
+Convention is that the `template` name needs to be the same as `view 
+name` without underscore.
+
+**Inside templates** you can use all other helpers. **BUT**, you need to 
 assemble your key correctly or otherwise you will be overwriting your own content. 
-You can use `key_prefix`, which is assembled from index and parent key, like this:
--->
+You can use `key_prefix`, which is assembled the way which will help you to prevent key overwites. Example:
 
 	<%= editable_field(:h2, {key: "#{key_prefix}_title"}, @page) do %>
 		Article Title

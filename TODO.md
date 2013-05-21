@@ -1,13 +1,9 @@
 # TODO
-- template helper
-	- templates array sorting + GUI for sorting
-	- save cloned values too
 - don't show saved button when reloading page(s)
 - reset images
 - remove data attributes from final markup
 - multiple template helper on same page
 - template GUI as drop down menu
-- production environment where images need to be saved in shared directory
 - release gem after at least one live project
 	- use [semantic versioning](http://semver.org/)
 
