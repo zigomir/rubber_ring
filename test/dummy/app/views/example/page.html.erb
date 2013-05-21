@@ -1,5 +1,7 @@
 <% template(
-  # TODO for more controll pass something like {name: 'article', class: 'article', element: 'div'}
-  ['article', 'blog_post'],
+  [
+    {template: 'article',   tclass: 't-article', element: 'article'},
+    {template: 'blog_post', tclass: 't-blog',    element: 'div'}
+  ],
   {key: 'template_key', wrap_element: 'div', wrap_class: 'templates'}, @page)
 %>

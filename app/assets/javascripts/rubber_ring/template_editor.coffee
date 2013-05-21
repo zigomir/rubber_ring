@@ -3,53 +3,51 @@ class @TemplateEditor
   constructor: (@pm, @util) ->
 
   init: ->
+    # save templates to database immediately
+    # TODO for each of those
+    $templates = $('[data-template]')
+    unless ($('[data-cms-template]').data('from-db'))
+      key = $templates.parents('[data-cms]').first().data('cms')
+      templates_to_save = @get_templates_array($templates)
+      @pm.save_template(key, templates_to_save)
+
     $('.rr-control .add-remove').click (e) =>
-      $select  = $(e.currentTarget).parents('.rr-control').find('select')
-      key      = $select.data('cms-template')
-      action   = $(e.target).data('action')
+      $select = $(e.currentTarget).parents('.rr-control').find('select')
+      action = $(e.target).data('action')
+
       template = $select.val()
+      key = $select.data('cms-template')
+      add_index = $("[data-cms=#{key}]").find("[data-template=#{template}]:first").data('template-index')
+      remove_index = $("[data-cms=#{key}]").find("[data-template=#{template}]:last").data('template-index')
 
-      templates_selector      = "[data-cms=#{key}] > *"
-      same_templates_selector = ".#{key} [data-template=#{template}]"
-
-      $templates      = $(templates_selector)
-      $same_templates = $(same_templates_selector)
-      $parent         = $templates.first().parent()
-
-      # prevent removing last one
-      if $same_templates.length is 1 and action is 'remove'
-        return
+      content = {
+        key: key
+        template: template
+        index: add_index
+      }
 
       if action is 'add'
-        $same_templates.first().clone(true).appendTo($parent)
+        @pm.add_template(content).then ->
+          window.location.reload(true)
       else
-        $same_templates.last().remove()
+        if add_index isnt remove_index
+          content.index = remove_index
 
-      # refresh templates arrays
-      $templates      = $(templates_selector)
-      $same_templates = $(".#{key} [data-template=#{template}]")
-
-      if action is 'add'
-        # create object to save
-        key = @get_templates_key($templates)
-        templates_to_save = @get_templates_array($templates)
-        @pm.save_template(key, templates_to_save)
-        # @pm.save_template(key, $templates).then ->
-        #   window.reload(true)
+          @pm.remove_template(content).then ->
+            window.location.reload(true)
 
   get_templates_array: ($templates) ->
     list = []
     $templates.each (index, element) ->
       list.push({
-        index:    $(element).data('template-index'),
+        index:    $(element).data('template-index')
         template: $(element).data('template')
-        # sort:     $(element).data('sort') # TODO sort
+        tclass:   $(element).attr('class')
+        element:  $(element).prop('tagName').toLowerCase()
+        sort:     index
       })
 
     list
-
-  get_templates_key: ($templates) ->
-    $templates.parents('[data-cms]').first().data('cms')
 
   init_sortable: ->
     # init sortable and disable it by default
@@ -84,7 +82,7 @@ class @TemplateEditor
   #   $templates.each (index, element) ->
   #     # TODO better tests
   #     # read index from children cms keys
-  #     # if no index could be foind, just add index from order
+  #     # if no index could be found, just add index from order
   #     if $(element).find('[data-cms]').length > 0
   #       i = $(element).find('[data-cms]').first().data('cms').split('|')[0]
   #     else

@@ -1,3 +1,4 @@
+# TODO refactor me
 class @PersistenceManager
   post_object:
     page_controller: App.controller
@@ -42,9 +43,13 @@ class @PersistenceManager
     @post_object.content[key] = template
     @post_to_backend(@save_template_path, @post_object)
 
-  remove_template: (key) ->
-    path = @remove_path.replace(':key', key)
-    @post_to_backend(path, @post_object)
+  add_template: (content) ->
+    @post_object.content = content
+    @post_to_backend(App.add_template_path, @post_object)
+
+  remove_template: (content) ->
+    @post_object.content = content
+    @post_to_backend(App.remove_template_path, @post_object)
 
   save_image: (content) ->
     key = content.attr("data-cms")

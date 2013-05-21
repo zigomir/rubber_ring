@@ -133,12 +133,16 @@ describe RubberRing::Page do
             '0' => {
               'index'    => 0,
               'template' => 'article',
-              'sort'     => 1
+              'sort'     => 1,
+              'tclass'   => 'article_class',
+              'element'  => 'article'
             },
             '1' => {
               'index'    => 1,
               'template' => 'blog_post',
-              'sort'     => 2
+              'sort'     => 2,
+              'tclass'   => 'blog_post_class',
+              'element'  => 'div'
             }
           }
         }
@@ -154,10 +158,14 @@ describe RubberRing::Page do
       page.page_templates[0].template.should eq 'article'
       page.page_templates[0].index.should eq 0
       page.page_templates[0].sort.should eq 1
+      page.page_templates[0].tclass.should eq 'article_class'
+      page.page_templates[0].element.should eq 'article'
 
       page.page_templates[1].template.should eq 'blog_post'
       page.page_templates[1].index.should eq 1
       page.page_templates[1].sort.should eq 2
+      page.page_templates[1].tclass.should eq 'blog_post_class'
+      page.page_templates[1].element.should eq 'div'
     end
 
     it 'should update page templates' do

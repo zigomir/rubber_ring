@@ -16,29 +16,6 @@ describe RubberRing::CmsController do
     RubberRing::Page.first.locale.should eq 'fr'
   end
 
-  it 'should save templates for the page' do
-    xhr :post, :save_template, {
-      page_controller: 'test',
-      page_action: 'test',
-      page_locale: 'fi',
-      content: {
-          'template_key' => {
-            '0' => {
-              'index'    => 0,
-              'template' => 'blog_post',
-              'sort'     => 1
-            }
-          }
-        }
-      }
-    response.should be_success
-
-    RubberRing::Page.all.size.should eq 1
-    RubberRing::PageContent.all.size.should eq 0
-    RubberRing::PageTemplate.all.size.should eq 1
-    RubberRing::Page.first.locale.should eq 'fi'
-  end
-
   it 'should save multiple keys' do
     xhr :post, :save, {
       page_controller: 'test',
@@ -70,6 +47,78 @@ describe RubberRing::CmsController do
     RubberRing::PageContent.all.size.should eq 0
 
     response.should be_success
+  end
+
+  describe 'templates' do
+    before do
+      xhr :post, :save_template, {
+        page_controller: 'test',
+        page_action: 'test',
+        page_locale: 'en',
+        content: {
+          'template_key' => {
+            '0' => {
+              'index'    => 0,
+              'template' => 'article',
+              'sort'     => 1,
+              'tclass'   => 'article_class',
+              'element'  => 'article'
+            }
+          }
+        }
+      }
+      response.should be_success
+
+      RubberRing::Page.all.size.should eq 1
+      RubberRing::PageContent.all.size.should eq 0
+      RubberRing::PageTemplate.all.size.should eq 1
+    end
+
+    it 'should save templates for the page' do
+      page = RubberRing::Page.first
+      page.page_templates[0].template.should eq 'article'
+      page.page_templates[0].index.should eq 0
+      page.page_templates[0].sort.should eq 1
+      page.page_templates[0].tclass.should eq 'article_class'
+      page.page_templates[0].element.should eq 'article'
+    end
+
+    it 'should create new template instance' do
+      # content of this post request tells which
+      # template we want to duplicate
+      xhr :post, :add_template, {
+        page_controller: 'test',
+        page_action: 'test',
+        page_locale: 'en',
+        content: {
+          'key'      => 'template_key',
+          'template' => 'article',
+          'index'    => 0,
+        }
+      }
+
+      RubberRing::PageTemplate.all.size.should eq 2
+      page_template = RubberRing::PageTemplate.last
+      page_template.index.should eq 1
+      page_template.sort.should eq 2
+    end
+
+    it 'should remove template instances' do
+      # content of this post request tells which
+      # template we want to remove
+      xhr :post, :remove_template, {
+        page_controller: 'test',
+        page_action: 'test',
+        page_locale: 'en',
+        content: {
+          'key'      => 'template_key',
+          'template' => 'article',
+          'index'    => 0,
+        }
+      }
+
+      RubberRing::PageTemplate.all.size.should eq 0
+    end
   end
 
 end

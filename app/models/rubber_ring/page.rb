@@ -2,7 +2,7 @@ module RubberRing
   class Page < ActiveRecord::Base
     attr_accessor :edit_mode, :title
     has_many :page_contents
-    has_many :page_templates
+    has_many :page_templates, -> { order(:sort) }
 
     def self.save_or_update(options)
       page, page_content = get_page_and_content(options, :content)
@@ -38,12 +38,48 @@ module RubberRing
             index:    template['index'],
             template: template['template'],
             sort:     template['sort'],
+            tclass:   template['tclass'],
+            element:  template['element'],
             page:     page
           )
 
           pt.save
         end
       end
+
+      page
+    end
+
+    def self.add_template(options)
+      page, content = get_page_and_content(options, :content)
+
+      last = RubberRing::PageTemplate.last
+      pt = RubberRing::PageTemplate
+            .where('page_id = ? AND key = ? AND "index" = ? AND template = ?',
+              page.id,
+              content['key'],
+              content['index'],
+              content['template']
+            ).first_or_initialize()
+
+      new_pt       = pt.dup
+      new_pt.index = last.index + 1
+      new_pt.sort  = last.sort + 1
+      new_pt.save
+
+      page
+    end
+
+    def self.remove_template(options)
+      page, content = get_page_and_content(options, :content)
+
+      pt = RubberRing::PageTemplate
+            .where('page_id = ? AND key = ? AND "index" = ? AND template = ?',
+              page.id,
+              content['key'],
+              content['index'],
+              content['template']
+            ).first.destroy
 
       page
     end
@@ -73,14 +109,6 @@ module RubberRing
       end
       result
     end
-
-    # def templates
-    #   result = {}
-    #   page_templates.each do |template|
-    #     result[template.key] = template.value
-    #   end
-    #   result
-    # end
 
     def title
       self.content['page_title'] unless self.content.nil?

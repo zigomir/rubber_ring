@@ -72,19 +72,29 @@ module RubberRing
     end
 
     def template(templates, options = {}, page)
-      key = options[:key]
-      templates_from_content = page.content[key] unless page.content.nil?
-      # if nothing is saved yet, use templates from helper defined in erb
-      templates_from_content = templates if templates_from_content.nil?
+      if page.page_templates.empty?
+        # if nothing is saved yet, use templates from helper defined in erb
+        # convert array of hashes to open struct which will provide template and index methods like AR
+        page_templates = templates.inject([]) { |pt, t| pt << OpenStruct.new(t) }
+        grouped_templates = page_templates
+        from_db = false
+      else
+        page_templates = page.page_templates
+        grouped_templates = page.page_templates.group(:template)
+        from_db = true
+      end
 
-      concat(render 'rubber_ring/template_control', key: key, templates: templates)
+      key = options[:key]
+      concat(render 'rubber_ring/template_control', key: key, template_types: grouped_templates, from_db: from_db)
 
       templates_concatenated = ''
-      templates_from_content.each_with_index do |template, index|
-        rendered_template = render "templates/#{template}", key_prefix: "#{index}_#{key}_#{template}"
-        templates_concatenated += content_tag(:div,
+      page_templates.each_with_index do |t, index|
+        t.index = index if t.index.nil?
+
+        rendered_template = render "templates/#{t.template}", key_prefix: "#{t.index}_#{key}_#{t.template}"
+        templates_concatenated += content_tag(t.element,
           rendered_template,
-          {'data-template' => template, 'data-template-index' => index}
+          {'data-template' => t.template, 'data-template-index' => t.index, 'class' => t.tclass}
         )
       end
 

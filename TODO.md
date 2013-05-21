@@ -3,14 +3,20 @@
 	- templates array sorting + GUI for sorting
 	- save cloned values too
 - don't show saved button when reloading page(s)
+- reset images
+- remove data attributes from final markup
+- multiple template helper on same page
+- template GUI as drop down menu
+- production environment where images need to be saved in shared directory
+- release gem after at least one live project
+	- use [semantic versioning](http://semver.org/)
+
+# Should
 - pm save should take content + key for more consistent API
-- ember rewrite
 - better way for handling attachments for different languages
     - maybe each language should not have different directory for storing them...
 - way to cache all pages in one step and publish them all
 	- save path in page table and make crawler that goes through all of them
-- release gem after project is doing ok on at least one project
-	- use [semantic versioning](http://semver.org/)
 
 ## Future / neat features
 - publish on specific time [cool lib for timepicking](http://amsul.ca/pickadate.js)

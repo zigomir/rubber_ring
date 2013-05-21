@@ -1,12 +1,12 @@
 <% if @admin and not @page_caching %>
-  <!-- TODO: do me like dropdown! -->
+  <!-- TODO: do me like drop down! -->
   <div class="tbs rr-control">
     <div class="well well-small">
       <span>Template for <strong><%= key %></strong></span>
 
-      <select data-cms-template="<%= key %>">
-        <% templates.each do |template| %>
-          <option value="<%= template %>"><%= template %></option>
+      <select data-cms-template="<%= key %>" data-from-db="<%= from_db %>">
+        <% template_types.sort_by(&:template).each do |t| %>
+          <option value="<%= t.template %>"><%= t.template %></option>
         <% end %>
       </select>
 

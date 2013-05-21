@@ -1,3 +1,4 @@
+# TODO refactor me
 module RubberRing
   class CmsController < ActionController::Base
     include Build
@@ -35,6 +36,22 @@ module RubberRing
     def save_template
       options = Util.get_options_from_params(params)
       page = Page.save_or_update_templates(options)
+
+      expire_page(params[:page_path])
+      render :json => { controller: page.controller, action: page.action, content: page.content }
+    end
+
+    def add_template
+      options = Util.get_options_from_params(params)
+      page = Page.add_template(options)
+
+      expire_page(params[:page_path])
+      render :json => { controller: page.controller, action: page.action, content: page.content }
+    end
+
+    def remove_template
+      options = Util.get_options_from_params(params)
+      page = Page.remove_template(options)
 
       expire_page(params[:page_path])
       render :json => { controller: page.controller, action: page.action, content: page.content }

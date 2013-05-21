@@ -1,9 +1,7 @@
-<article>
-  <%= editable_field(:h2, {key: "#{key_prefix}_title"}, @page) do %>
-    Article Title
-  <% end %>
+<%= editable_field(:h2, {key: "#{key_prefix}_title"}, @page) do %>
+  Article Title
+<% end %>
 
-  <%= editable_field(:p, {key: "#{key_prefix}_paragraph"}, @page) do %>
-    Article content
-  <% end %>
-</article>
+<%= editable_field(:p, {key: "#{key_prefix}_paragraph"}, @page) do %>
+  Article content
+<% end %>
