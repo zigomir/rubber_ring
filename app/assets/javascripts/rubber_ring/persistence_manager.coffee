@@ -7,16 +7,7 @@ class @PersistenceManager
     page_locale:     App.locale
 
   constructor: (@action_btns) ->
-    @save_path              = App.save_path
-    @save_template_path     = App.save_template_path
-
-    @save_image_path        = App.save_image_path
-    @save_attachment_path   = App.save_attachment_path
-
-    @remove_path            = App.remove_path
-    @remove_attachment_path = App.remove_attachment_path
-    @$alert                 = $(".alert-saved div")
-
+    @$alert = $(".alert-saved div")
     @$alert.bind 'transitionend webkitTransitionEnd', =>
       @$alert.removeClass("show")
 
@@ -36,12 +27,12 @@ class @PersistenceManager
     if content.is("a")
       @post_object.content["#{key}_href"] = content.attr("href")
 
-    @post_to_backend(@save_path, @post_object)
+    @post_to_backend(App.save_path, @post_object)
 
   save_template: (key, template) ->
     @post_object.content      = {}
     @post_object.content[key] = template
-    @post_to_backend(@save_template_path, @post_object)
+    @post_to_backend(App.save_template_path, @post_object)
 
   add_template: (content) ->
     @post_object.content = content
@@ -57,14 +48,14 @@ class @PersistenceManager
     @post_object.content[key] = content.attr("src")
     @post_object.width        = content.attr("width")
     @post_object.height       = content.attr("height")
-    @post_to_backend(@save_image_path, @post_object)
+    @post_to_backend(App.save_image_path, @post_object)
 
   save_attachment: (content) ->
     key = content.attr("data-cms")
     @post_object.content = {}
     @post_object.content[key] = content.attr("href").split('/').reverse()[0]
     @post_object.content["#{key}_href"] = content.attr("href")
-    @post_to_backend(@save_attachment_path, @post_object)
+    @post_to_backend(App.save_attachment_path, @post_object)
 
   sanitize: (content) ->
     # it is important to sanitize htmlValue or else we will get more and more broken html from database
@@ -76,12 +67,12 @@ class @PersistenceManager
   # TODO remove by key
   remove: (content) ->
     key = content.attr("data-cms")
-    path = @remove_path.replace(':key', key)
+    path = App.remove_path.replace(':key', key)
     @post_to_backend(path, @post_object)
 
   remove_image: (src) ->
     @post_object.src_to_remove = src
-    @post_to_backend(@remove_attachment_path, @post_object)
+    @post_to_backend(App.remove_attachment_path, @post_object)
 
   post_to_backend: (path, post_object) =>
     $.post path, post_object, =>
