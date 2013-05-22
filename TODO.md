@@ -1,7 +1,6 @@
 # TODO
 - ajax for adding/removing templates (add new action to cms_controller)
 - reset images
-- remove data attributes from final markup
 - multiple template helper on same page
 - template GUI as drop down menu
 - release gem after at least one live project
