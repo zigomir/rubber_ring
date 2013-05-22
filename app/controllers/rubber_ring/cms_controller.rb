@@ -1,104 +1,40 @@
-# TODO refactor me
 module RubberRing
-  class CmsController < ActionController::Base
+  class CmsController < RubberRingController
     include Build
     include Publish
     include Util
 
-    layout 'rubber_ring/layout'
-    before_action :load_page_content, :set_locale
-    before_filter :admin?, :cache?, :publish? # check if admin before cache
-
-    def load_page_content
-      page = Page.where(
-        controller: params[:controller],
-        action:     params[:action],
-        locale:     params[:locale] || I18n.default_locale.to_s
-      )
-
-      @page = page.empty? ? Page.new : page.first
-      @page.edit_mode = true
-      @images, @attachments = Util.load_attachments_page(params)
-    end
-
-    def set_locale
-      I18n.locale = params[:locale] || I18n.default_locale
-      @locale = I18n.locale.to_s
-    end
+    before_action :get_options, :except => [:save]
 
     def save
       page = Util.save_page_content(params)
-
-      expire_page(params[:page_path])
-      render :json => { controller: page.controller, action: page.action, content: page.content }
-    end
-
-    def save_template
-      options = Util.get_options_from_params(params)
-      page = Page.save_or_update_templates(options)
-
-      expire_page(params[:page_path])
-      render :json => { controller: page.controller, action: page.action, content: page.content }
-    end
-
-    def add_template
-      options = Util.get_options_from_params(params)
-      page = Page.add_template(options)
-
-      expire_page(params[:page_path])
-      render :json => { controller: page.controller, action: page.action, content: page.content }
-    end
-
-    def remove_template
-      options = Util.get_options_from_params(params)
-      page = Page.remove_template(options)
-
-      expire_page(params[:page_path])
-      render :json => { controller: page.controller, action: page.action, content: page.content }
+      expire_and_respond(page)
     end
 
     def remove
-      options = Util.get_options_from_params(params)
-      page = Page.remove(options, params[:key])
-      expire_page(params[:page_path])
+      page = Page.remove(@options, params[:key])
+      expire_and_respond(page)
+    end
 
-      render :json => { controller: page.controller, action: page.action, content: page.content }
+    def save_template
+      page = Page.save_or_update_templates(@options)
+      expire_and_respond(page)
+    end
+
+    def add_template
+      page = Page.add_template(@options)
+      expire_and_respond(page)
+    end
+
+    def remove_template
+      page = Page.remove_template(@options)
+      expire_and_respond(page)
     end
 
   private
 
-    def admin?
-      if session[:password] == RubberRing.admin_password
-        @admin = true
-        @page.edit_mode = true
-      else
-        @admin = false
-        @page.edit_mode = false
-      end
-    end
-
-    def cache?
-      if params[:cache] == '1' and params[:publish].nil?
-        disable_edit_mode
-        Thread::new{
-          Build.assets!
-        }
-      end
-    end
-
-    def publish?
-      if params[:publish] == '1' and params[:cache] == '1'
-        disable_edit_mode
-        Thread::new{
-          Build.assets!
-          Publish.assets!
-        }
-      end
-    end
-
-    def disable_edit_mode
-      @page_caching = true
-      @page.edit_mode = false
+    def get_options
+      @options = Util.get_options_from_params(params)
     end
 
   end

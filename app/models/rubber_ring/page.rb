@@ -29,9 +29,11 @@ module RubberRing
       templates.keys.each do |key|
         templates[key].each do |template|
           template = template.last
-          pt = RubberRing::PageTemplate
-            .where('page_id = ? AND key = ? AND "index" = ?', page.id, key, template['index'])
-            .first_or_initialize()
+          pt = RubberRing::PageTemplate.where('page_id = ? AND key = ? AND "index" = ?',
+            page.id, key,
+            template['index']
+          )
+          .first_or_initialize()
 
           pt.update_attributes(
             key:      key,
@@ -54,13 +56,13 @@ module RubberRing
       page, content = get_page_and_content(options, :content)
 
       last = RubberRing::PageTemplate.last
-      pt = RubberRing::PageTemplate
-            .where('page_id = ? AND key = ? AND "index" = ? AND template = ?',
-              page.id,
-              content['key'],
-              content['index'],
-              content['template']
-            ).first_or_initialize()
+      pt = RubberRing::PageTemplate.where('page_id = ? AND key = ? AND "index" = ? AND template = ?',
+        page.id,
+        content['key'],
+        content['index'],
+        content['template']
+      )
+      .first_or_initialize()
 
       new_pt       = pt.dup
       new_pt.index = last.index + 1
@@ -73,13 +75,13 @@ module RubberRing
     def self.remove_template(options)
       page, content = get_page_and_content(options, :content)
 
-      pt = RubberRing::PageTemplate
-            .where('page_id = ? AND key = ? AND "index" = ? AND template = ?',
-              page.id,
-              content['key'],
-              content['index'],
-              content['template']
-            ).first.destroy
+      RubberRing::PageTemplate.where('page_id = ? AND key = ? AND "index" = ? AND template = ?',
+        page.id,
+        content['key'],
+        content['index'],
+        content['template']
+      )
+      .first.destroy
 
       page
     end
