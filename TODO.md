@@ -1,5 +1,4 @@
 # TODO
-- don't show saved button when reloading page(s)
 - ajax for adding/removing templates (add new action to cms_controller)
 - reset images
 - remove data attributes from final markup

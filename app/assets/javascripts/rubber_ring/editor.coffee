@@ -7,13 +7,14 @@ $ ->
   }
 
   $editable_content = $("[contenteditable]")
+  $alert = $(".alert-saved div")
 
   util = new Util()
   # first check for any duplicated keys
   duplicates = util.find_duplicated_keys($('[data-cms]'))
   alert "Correct key duplicates: '#{duplicates}'" if duplicates.length > 0
 
-  pm = new PersistenceManager(config.action_btns)
+  pm = new PersistenceManager(config.action_btns, $alert)
   te = new TemplateEditor(pm, util)
   te.init()
   te.init_sortable()

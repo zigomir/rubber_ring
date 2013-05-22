@@ -4,7 +4,7 @@ class @TemplateEditor
 
   init: ->
     # save templates to database immediately
-    unless ($('[data-cms-template]').data('from-db'))
+    unless ($('[data-cms-template]').data('from-db') or $('[data-cms-template]').length == 0)
       @save_all_templates()
 
     $('.rr-control .add-remove').click (e) =>

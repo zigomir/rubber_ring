@@ -6,10 +6,7 @@ class @PersistenceManager
     page_path:       document.location.pathname
     page_locale:     App.locale
 
-  constructor: (@action_btns) ->
-    @$alert = $(".alert-saved div")
-    @$alert.bind 'transitionend webkitTransitionEnd', =>
-      @$alert.removeClass("show")
+  constructor: (@action_btns, @alert) ->
 
   # TODO refactor
   # all pm methods should have key and content parameters
@@ -76,4 +73,6 @@ class @PersistenceManager
 
   post_to_backend: (path, post_object) =>
     $.post path, post_object, =>
-      @$alert.addClass("show")
+      @alert.addClass("animate")
+      @alert.on "transitionend", =>
+        @alert.removeClass("animate")

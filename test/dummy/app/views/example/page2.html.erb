@@ -1,14 +1,3 @@
-<h2>News</h2>
-<%= duplicable_editable_field(:ul, {group: 'news', child_tag: 'li', class: 'multi-line'}, @page) do %>
-    <p>News 1</p>
-    <a href="http://www.youtube.com/watch?v=Cpf6gJU3520">Rubber Ring</a>
-<% end %>
-
-<h2>Blog</h2>
-<%= duplicable_editable_field(:ul, {group: 'blog_posts', child_tag: 'li', class: 'multi-line'}, @page) do %>
-    <p>Blog post 1</p>
-<% end %>
-
 <%= editable_image({key: 'header_image', src: image_path('baws.jpg'), height: '360'}, @page) %>
 
 <%= editable_field(:h1, {key: 'header'}, @page) do %>

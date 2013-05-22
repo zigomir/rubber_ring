@@ -28,9 +28,9 @@
 *[contenteditable] {
   outline: dashed green 1px;
   position: relative;
+  cursor: text;
 
   // disable selection of those action links
-
   .reset-content {
     @include rr-button-abs;
     background: image-url("glyphicons-halflings.png") no-repeat -217px -25px;
@@ -161,12 +161,11 @@
   padding: 0;
   margin: 9px 0;
   font-weight: bold;
-
   opacity: 0;
-  transition: opacity 1s ease-in;
 
-  &.show {
+  &.animate {
     opacity: 1;
+    transition: opacity 1s ease-in-out;
   }
 }
 
