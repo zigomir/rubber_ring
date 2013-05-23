@@ -75,15 +75,16 @@ module RubberRing
     end
 
     def template(templates, options = {}, page)
-      if page.page_templates.empty?
+      page_templates = page.page_templates.where(key: options[:key])
+
+      if page_templates.empty?
         # if nothing is saved yet, use templates from helper defined in erb
         # convert array of hashes to open struct which will provide template and index methods like AR
         page_templates = templates.inject([]) { |pt, t| pt << OpenStruct.new(t) }
         grouped_templates = page_templates
         from_db = false
       else
-        page_templates = page.page_templates
-        grouped_templates = page.page_templates.group(:template)
+        grouped_templates = page_templates.group(:template)
         from_db = true
       end
 

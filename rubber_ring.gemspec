@@ -32,5 +32,4 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rspec-rails'
   s.add_development_dependency 'spork'
   s.add_development_dependency 'uglifier'
-  s.add_development_dependency 'debugger-pry'
 end

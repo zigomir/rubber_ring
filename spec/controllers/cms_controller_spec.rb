@@ -56,14 +56,13 @@ describe RubberRing::CmsController do
         page_action: 'test',
         page_locale: 'en',
         content: {
-          'template_key' => {
-            '0' => {
-              'index'    => 0,
-              'template' => 'article',
-              'sort'     => 1,
-              'tclass'   => 'article_class',
-              'element'  => 'article'
-            }
+          '0' => {
+            'key'      => 'template_key',
+            'index'    => 0,
+            'template' => 'article',
+            'sort'     => 1,
+            'tclass'   => 'article_class',
+            'element'  => 'article'
           }
         }
       }

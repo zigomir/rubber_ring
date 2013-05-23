@@ -26,9 +26,8 @@ class @PersistenceManager
 
     @post_to_backend(App.save_path, @post_object)
 
-  save_template: (key, template) ->
-    @post_object.content      = {}
-    @post_object.content[key] = template
+  save_template: (templates) ->
+    @post_object.content = templates
     @post_to_backend(App.save_template_path, @post_object)
 
   add_template: (content) ->

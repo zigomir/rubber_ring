@@ -27,26 +27,25 @@ module RubberRing
       page, templates = get_page_and_content(options, :content)
 
       templates.keys.each do |key|
-        templates[key].each do |template|
-          template = template.last
-          pt = RubberRing::PageTemplate.where('page_id = ? AND key = ? AND "index" = ?',
-            page.id, key,
-            template['index']
-          )
-          .first_or_initialize()
+        template = templates[key]
+        pt = RubberRing::PageTemplate.where('page_id = ? AND key = ? AND "index" = ?',
+          page.id,
+          template['key'],
+          template['index']
+        )
+        .first_or_initialize()
 
-          pt.update_attributes(
-            key:      key,
-            index:    template['index'],
-            template: template['template'],
-            sort:     template['sort'],
-            tclass:   template['tclass'],
-            element:  template['element'],
-            page:     page
-          )
+        pt.update_attributes(
+          key:      template['key'],
+          index:    template['index'],
+          template: template['template'],
+          sort:     template['sort'],
+          tclass:   template['tclass'],
+          element:  template['element'],
+          page:     page
+        )
 
-          pt.save
-        end
+        pt.save
       end
 
       page
@@ -55,7 +54,7 @@ module RubberRing
     def self.add_template(options)
       page, content = get_page_and_content(options, :content)
 
-      last = RubberRing::PageTemplate.last
+      last = RubberRing::PageTemplate.all.order(:sort).last
       pt = RubberRing::PageTemplate.where('page_id = ? AND key = ? AND "index" = ? AND template = ?',
         page.id,
         content['key'],

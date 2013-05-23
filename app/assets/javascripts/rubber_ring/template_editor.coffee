@@ -4,7 +4,10 @@ class @TemplateEditor
 
   init: ->
     # save templates to database immediately
-    unless ($('[data-cms-template]').data('from-db') or $('[data-cms-template]').length == 0)
+    not_saved_yet = $('[data-cms-template]').filter (index, element) ->
+      $(element).data('from-db') == false
+
+    if not_saved_yet.length > 0
       @save_all_templates()
 
     $('.rr-control .add-remove').click (e) =>
@@ -33,15 +36,15 @@ class @TemplateEditor
             window.location.reload(true)
 
   save_all_templates: ->
-    $templates = $('[data-template]')
-    key = $templates.parents('[data-cms]').first().data('cms')
-    templates_to_save = @get_templates_array($templates)
-    @pm.save_template(key, templates_to_save)
+      $templates = $('[data-template]')
+      templates_to_save = @get_templates_array($templates)
+      @pm.save_template(templates_to_save)
 
   get_templates_array: ($templates) ->
     list = []
     $templates.each (index, element) ->
       list.push({
+        key:      $(element).parents('[data-cms]').first().data('cms')
         index:    $(element).data('template-index')
         template: $(element).data('template')
         tclass:   $(element).attr('class')

@@ -1,7 +1,6 @@
 # TODO
-- ajax for adding/removing templates (add new action to cms_controller)
 - reset images
-- multiple template helper on same page
+- try AJAX for adding/removing templates (add new action to cms_controller)
 - template GUI as drop down menu
 - release gem after at least one live project
 	- use [semantic versioning](http://semver.org/)
@@ -15,6 +14,5 @@
 
 ## Future / neat features
 - publish on specific time [cool lib for timepicking](http://amsul.ca/pickadate.js)
-- use shadow dom for encapsulating application menu [link](http://www.html5rocks.com/en/tutorials/webcomponents/shadowdom/) or even better, use [polymer](http://polymer-project.appspot.com/)
-	- [web components](http://www.webcomponentsshift.com)
+- encapsulating application menu try [polymer](http://polymer-project.appspot.com/) or [x-tags](http://x-tags.org/)
 - better GUI design (responsive menu)

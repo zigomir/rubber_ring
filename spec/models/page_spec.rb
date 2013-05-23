@@ -129,21 +129,21 @@ describe RubberRing::Page do
         action: 'test',
         locale: 'en',
         content: {
-          'template_key' => {
-            '0' => {
-              'index'    => 0,
-              'template' => 'article',
-              'sort'     => 1,
-              'tclass'   => 'article_class',
-              'element'  => 'article'
-            },
-            '1' => {
-              'index'    => 1,
-              'template' => 'blog_post',
-              'sort'     => 2,
-              'tclass'   => 'blog_post_class',
-              'element'  => 'div'
-            }
+          '0' => {
+            'key'      => 'template_key',
+            'index'    => 0,
+            'template' => 'article',
+            'sort'     => 1,
+            'tclass'   => 'article_class',
+            'element'  => 'article'
+          },
+          '1' => {
+            'key'      => 'template_key',
+            'index'    => 1,
+            'template' => 'blog_post',
+            'sort'     => 2,
+            'tclass'   => 'blog_post_class',
+            'element'  => 'div'
           }
         }
        })
@@ -174,12 +174,11 @@ describe RubberRing::Page do
         action: 'test',
         locale: 'en',
         content: {
-          'template_key' => {
-            '0' => {
-              'index'    => 0,
-              'template' => 'blog_post',
-              'sort'     => 1
-            }
+          '0' => {
+            'key'      => 'template_key',
+            'index'    => 0,
+            'template' => 'blog_post',
+            'sort'     => 1
           }
         }
        })
