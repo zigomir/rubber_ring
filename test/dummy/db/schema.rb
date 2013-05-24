@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130520195231) do
+ActiveRecord::Schema.define(version: 20130524163156) do
 
   create_table "rubber_ring_page_contents", force: true do |t|
     t.string   "key"
@@ -28,7 +28,6 @@ ActiveRecord::Schema.define(version: 20130520195231) do
     t.string   "template"
     t.string   "element"
     t.string   "tclass"
-    t.integer  "index"
     t.integer  "sort"
     t.integer  "page_id"
     t.datetime "created_at"

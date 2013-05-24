@@ -131,7 +131,7 @@ describe RubberRing::Page do
         content: {
           '0' => {
             'key'      => 'template_key',
-            'index'    => 0,
+            'index'    => 1,
             'template' => 'article',
             'sort'     => 1,
             'tclass'   => 'article_class',
@@ -139,7 +139,7 @@ describe RubberRing::Page do
           },
           '1' => {
             'key'      => 'template_key',
-            'index'    => 1,
+            'index'    => 2,
             'template' => 'blog_post',
             'sort'     => 2,
             'tclass'   => 'blog_post_class',
@@ -156,19 +156,19 @@ describe RubberRing::Page do
 
       page = RubberRing::Page.first
       page.page_templates[0].template.should eq 'article'
-      page.page_templates[0].index.should eq 0
+      page.page_templates[0].id.should eq 1
       page.page_templates[0].sort.should eq 1
       page.page_templates[0].tclass.should eq 'article_class'
       page.page_templates[0].element.should eq 'article'
 
       page.page_templates[1].template.should eq 'blog_post'
-      page.page_templates[1].index.should eq 1
+      page.page_templates[1].id.should eq 2
       page.page_templates[1].sort.should eq 2
       page.page_templates[1].tclass.should eq 'blog_post_class'
       page.page_templates[1].element.should eq 'div'
     end
 
-    it 'should update page templates' do
+    it 'should update page templates sort' do
       RubberRing::Page.save_or_update_templates({
         controller: 'test',
         action: 'test',
@@ -176,21 +176,20 @@ describe RubberRing::Page do
         content: {
           '0' => {
             'key'      => 'template_key',
-            'index'    => 0,
-            'template' => 'blog_post',
-            'sort'     => 1
+            'template' => 'article',
+            'index'    => 2,
+            'sort'     => 123,
+            'tclass'   => 'a',
+            'element'  => 'b'
           }
         }
        })
 
       RubberRing::Page.all.count.should eq 1
-      RubberRing::PageContent.all.count.should eq 0
       RubberRing::PageTemplate.all.count.should eq 2
 
-      page = RubberRing::Page.first
-      page.page_templates[0].template.should eq 'blog_post'
-      page.page_templates[0].index.should eq 0
-      page.page_templates[0].sort.should eq 1
+      page_template = RubberRing::PageTemplate.find(2)
+      page_template.sort.should eq 123
     end
   end
 

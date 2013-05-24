@@ -6,7 +6,6 @@ class CreateRubberRingPageTemplates < ActiveRecord::Migration
       t.string :template
       t.string :element
       t.string :tclass
-      t.integer :index
       t.integer :sort
       t.references :page, index: true
 

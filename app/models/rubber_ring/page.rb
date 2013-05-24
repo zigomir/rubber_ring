@@ -28,22 +28,23 @@ module RubberRing
 
       templates.keys.each do |key|
         template = templates[key]
-        pt = RubberRing::PageTemplate.where('page_id = ? AND key = ? AND "index" = ?',
-          page.id,
-          template['key'],
-          template['index']
-        )
-        .first_or_initialize()
+        pt = RubberRing::PageTemplate.where('id = ?', template['index']).first_or_initialize()
 
-        pt.update_attributes(
-          key:      template['key'],
-          index:    template['index'],
-          template: template['template'],
-          sort:     template['sort'],
-          tclass:   template['tclass'],
-          element:  template['element'],
-          page:     page
-        )
+        if pt.id.nil?
+          pt.update_attributes(
+            key:      template['key'],
+            template: template['template'],
+            sort:     template['sort'],
+            tclass:   template['tclass'],
+            element:  template['element'],
+            page:     page
+          )
+        else
+          # when updating, only sort is allowed to change
+          pt.update_attributes(
+            sort: template['sort']
+          )
+        end
 
         pt.save
       end
@@ -55,17 +56,10 @@ module RubberRing
       page, content = get_page_and_content(options, :content)
 
       last = RubberRing::PageTemplate.all.order(:sort).last
-      pt = RubberRing::PageTemplate.where('page_id = ? AND key = ? AND "index" = ? AND template = ?',
-        page.id,
-        content['key'],
-        content['index'],
-        content['template']
-      )
-      .first_or_initialize()
+      pt = RubberRing::PageTemplate.where('id = ?', content['index']).first_or_initialize()
 
-      new_pt       = pt.dup
-      new_pt.index = last.index + 1
-      new_pt.sort  = last.sort + 1
+      new_pt      = pt.dup
+      new_pt.sort = last.sort + 1
       new_pt.save
 
       page
@@ -73,15 +67,7 @@ module RubberRing
 
     def self.remove_template(options)
       page, content = get_page_and_content(options, :content)
-
-      RubberRing::PageTemplate.where('page_id = ? AND key = ? AND "index" = ? AND template = ?',
-        page.id,
-        content['key'],
-        content['index'],
-        content['template']
-      )
-      .first.destroy
-
+      RubberRing::PageTemplate.where('id = ?', content['index']).delete_all
       page
     end
 
@@ -89,7 +75,7 @@ module RubberRing
       page = load_first_page(options)
       RubberRing::PageContent
         .where('page_id = ? AND key = ?', page.id, key_to_remove)
-        .delete_all()
+        .delete_all
       page
     end
 

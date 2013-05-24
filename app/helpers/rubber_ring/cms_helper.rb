@@ -93,14 +93,14 @@ module RubberRing
 
       templates_concatenated = ''
       page_templates.each_with_index do |t, index|
-        t.index = index if t.index.nil?
+        t.id = t.id.nil? ? index : t.id
 
-        rendered_template = render "templates/#{t.template}", key_prefix: "#{t.index}_#{key}_#{t.template}"
+        rendered_template = render "templates/#{t.template}", key_prefix: "#{t.id}_#{key}_#{t.template}"
 
         content_tag_options = {'class' => t.tclass}
         if page and page.edit_mode?
           content_tag_options['data-template'] = t.template
-          content_tag_options['data-template-index'] = t.index
+          content_tag_options['data-template-index'] = t.id
         end
 
         templates_concatenated += content_tag(t.element, rendered_template, content_tag_options)
