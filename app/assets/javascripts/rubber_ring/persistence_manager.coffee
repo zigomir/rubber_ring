@@ -1,4 +1,3 @@
-# TODO refactor me
 class @PersistenceManager
   post_object:
     page_controller: App.controller
@@ -8,7 +7,6 @@ class @PersistenceManager
 
   constructor: (@action_btns, @alert) ->
 
-  # TODO refactor
   # all pm methods should have key and content parameters
   save: (content) ->
     key = content.attr("data-cms") # data wont work here because of cloning dom
@@ -60,7 +58,6 @@ class @PersistenceManager
     content = content.replace(value, "").trim() for key, value of @action_btns
     content
 
-  # TODO remove by key
   remove: (content) ->
     key = content.attr("data-cms")
     path = App.remove_path.replace(':key', key)

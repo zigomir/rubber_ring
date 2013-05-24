@@ -1,5 +1,4 @@
 # TODO
-- reset images
 - try AJAX for adding/removing templates (add new action to cms_controller)
 - template GUI as drop down menu
 - release gem after at least one live project
@@ -7,6 +6,7 @@
 
 # Should
 - pm save should take content + key for more consistent API
+	- refactor and add js tests
 - better way for handling attachments for different languages
     - maybe each language should not have different directory for storing them...
 - way to cache all pages in one step and publish them all

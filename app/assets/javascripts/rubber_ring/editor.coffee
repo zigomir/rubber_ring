@@ -2,7 +2,8 @@ $ ->
   # init
   config = {
     action_btns: {
-      reset_btn: '<button class="reset-content"></button>'
+      reset_btn: '<button class="reset-content"></button>',
+      reset_img: '<button class="reset-image"></button>'
     }
   }
 
@@ -22,12 +23,20 @@ $ ->
   le = new LinkEditor($editable_content)
   le.init()
 
-  # append content editable with buttons
+  # append reset button to editable contents
   $("[contenteditable]").append(config.action_btns.reset_btn)
+  $("img[data-cms]").after(config.action_btns.reset_img)
+
   $("body").on "click", ".reset-content", (e) ->
-    $content_to_remove = $(e.currentTarget).parent()
-    if window.confirm "Really want to reset content?"
-      pm.remove($content_to_remove).then ->
+    $content_to_reset = $(e.currentTarget).parent()
+    if window.confirm "Really want reset content?"
+      pm.remove($content_to_reset).then ->
+        window.location.reload(true)
+
+  $("body").on "click", ".reset-image", (e) ->
+    $image_to_reset = $(e.currentTarget).prev()
+    if window.confirm "Really want reset image?"
+      pm.remove($image_to_reset).then ->
         window.location.reload(true)
 
   $(".rubber_ring_attachment").click (e) ->

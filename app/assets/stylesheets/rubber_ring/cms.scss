@@ -25,7 +25,7 @@
   position: absolute;
 }
 
-*[contenteditable] {
+*[contenteditable], img[data-cms] {
   outline: dashed green 1px;
   position: relative;
 
@@ -34,6 +34,12 @@
     @include rr-button-abs;
     background: image-url("glyphicons-halflings.png") no-repeat -217px -25px;
   }
+}
+
+.reset-image {
+  @include rr-button-abs;
+  position: relative;
+  background: image-url("glyphicons-halflings.png") no-repeat -217px -25px;
 }
 
 .ui-sortable-disabled *[contenteditable] {
