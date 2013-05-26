@@ -1,31 +1,20 @@
-<%= editable_image({key: 'header_image', src: image_path('baws.jpg'), height: '360'}, @page) %>
+<h1>Templates #1</h1>
 
-<%= editable_field(:h1, {key: 'header'}, @page) do %>
-  rubber ring cms
-<% end %>
+<% template(
+  [
+    {template: 'article',   tclass: 't-article', element: 'article'},
+    {template: 'blog_post', tclass: 't-blog',    element: 'div'}
+  ],
+  {key: 'template_key_1', wrap_element: 'div', wrap_class: 'templates'}, @page)
+%>
 
-<%= editable_field(:div, {key: 'first_content', class: 'multi-line'}, @page) do %>
-  editing page content right away
-<% end %>
+<h1>Templates #2</h1>
 
-<h3>Support for attachments</h3>
-<%= editable_link({class: 'rubber_ring_attachment', key: 'software-architecture', href: 'http://www.education.gov.yk.ca/pdf/pdf-test.pdf'}, @page) do %>
-  Link to PDF
-<% end %>
+<% template(
+   [
+       {template: 'article',   tclass: 't-article', element: 'article'}
+   ],
+   {key: 'template_key_2', wrap_element: 'div', wrap_class: 'templates'}, @page)
+%>
 
-<br>
-<br>
-
-<h3>Dynamic site? check your ruber_ring.rb initializer</h3>
-<form method="post" action="<%= form_path %>">
-  <input name="value" value="" placeholder="Something" />
-  <input type="submit" value="Post this" />
-</form>
-<% if flash[:message] %>
-  <h4>Oh my, you typed "<%= flash[:message] %>"</h4>
-<% end %>
-
-<br>
-<br>
-
-<% repeat_template('article', @page) %>
+<%= link_to 'Second page', page2_path %>

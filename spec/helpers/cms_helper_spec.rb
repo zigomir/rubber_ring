@@ -17,9 +17,9 @@ describe RubberRing::CmsHelper do
       page = RubberRing::Page.new({controller: 'test', action: 'test'})
 
       helper.editable_field(:div, {key: 'key'}, page){''}
-        .should eq '<div data-cms="key"></div>'
+        .should eq '<div></div>'
       helper.editable_field(:div, {key: 'key'}, page){'content'}
-        .should eq '<div data-cms="key">content</div>'
+        .should eq '<div>content</div>'
     end
   end
 
@@ -35,8 +35,8 @@ describe RubberRing::CmsHelper do
     it 'should return non-editable span tag' do
       page = RubberRing::Page.new({controller: 'test', action: 'test'})
 
-      helper.title(page){''}.should eq '<span data-cms="page_title"></span>'
-      helper.title(page){'title'}.should eq '<span data-cms="page_title">title</span>'
+      helper.title(page){''}.should eq '<span></span>'
+      helper.title(page){'title'}.should eq '<span>title</span>'
     end
   end
 

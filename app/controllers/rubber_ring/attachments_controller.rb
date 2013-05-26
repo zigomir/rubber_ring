@@ -1,5 +1,5 @@
 module RubberRing
-  class AttachmentsController < ActionController::Base
+  class AttachmentsController < RubberRingController
     include Util
 
     def save_image
@@ -12,7 +12,7 @@ module RubberRing
         convert_image(path, width, height) if File.exist?(path)
       end
 
-      expire_page_and_render(page)
+      expire_and_respond(page)
     end
 
     def convert_image(path, width, height)
@@ -22,12 +22,7 @@ module RubberRing
 
     def save_attachment
       page = Util.save_page_content(params)
-      expire_page_and_render(page)
-    end
-
-    def expire_page_and_render(page)
-      expire_page(params[:page_path])
-      render :json => { controller: page.controller, action: page.action, content: page.content }
+      expire_and_respond(page)
     end
 
     def add

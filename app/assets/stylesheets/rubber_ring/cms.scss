@@ -25,16 +25,25 @@
   position: absolute;
 }
 
-*[contenteditable] {
+*[contenteditable], img[data-cms] {
   outline: dashed green 1px;
   position: relative;
 
   // disable selection of those action links
-
   .reset-content {
     @include rr-button-abs;
     background: image-url("glyphicons-halflings.png") no-repeat -217px -25px;
   }
+}
+
+.reset-image {
+  @include rr-button-abs;
+  position: relative;
+  background: image-url("glyphicons-halflings.png") no-repeat -217px -25px;
+}
+
+.ui-sortable-disabled *[contenteditable] {
+  cursor: text;
 }
 
 #rubber-ring-application {
@@ -120,7 +129,7 @@
   }
 }
 
-#rr-repeat {
+.rr-control {
   input {
     width: 27px;
     margin-bottom: 0;
@@ -142,6 +151,11 @@
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
+.tbs select {
+  height: 25px;
+  margin-bottom: 0px;
+}
+
 .tbs .navbar {
   margin-bottom: 0;
   font-size: 15px;
@@ -156,12 +170,11 @@
   padding: 0;
   margin: 9px 0;
   font-weight: bold;
-
   opacity: 0;
-  transition: opacity 1s ease-in;
 
-  &.show {
+  &.animate {
     opacity: 1;
+    transition: opacity 1s ease-in-out;
   }
 }
 

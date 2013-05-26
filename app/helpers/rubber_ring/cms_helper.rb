@@ -8,10 +8,13 @@ module RubberRing
 
       content_tag_options = {
         :class            => options[:class],
-        :id               => options[:id],
-        'data-cms'        => key
+        :id               => options[:id]
       }
-      content_tag_options['contenteditable'] = 'true' if page and page.edit_mode?
+
+      if page and page.edit_mode?
+        content_tag_options['data-cms']        = key
+        content_tag_options['contenteditable'] = 'true'
+      end
 
       # if no content passed from @content (view - controller - model)
       # this means it is not yet in database and we will create tag with
@@ -41,9 +44,9 @@ module RubberRing
       content_tag_options = {
         :class     => options[:class],
         :id        => options[:id],
-        :href      => href_attribute || options[:href],
-        'data-cms' => key
+        :href      => href_attribute || options[:href]
       }
+      content_tag_options['data-cms'] = key if page and page.edit_mode?
 
       content_value = capture(&block) if content_value.nil?
       return content_tag_options, content_value
@@ -56,9 +59,9 @@ module RubberRing
 
       content_tag_options = {
         :class     => "rubber_ring_image #{options[:class]}",
-        :src       => image_source || options[:src],
-        'data-cms' => options[:key]
+        :src       => image_source || options[:src]
       }
+      content_tag_options['data-cms'] = key if page and page.edit_mode?
 
       unless options[:width].nil?
         content_tag_options.merge!({width: options[:width]})
@@ -71,16 +74,48 @@ module RubberRing
       tag(:img, content_tag_options)
     end
 
-    def repeat_template(key, page)
-      concat(render 'rubber_ring/repeat_control', key: key)
+    def template(templates, options = {}, page)
+      page_templates = page.page_templates.where(key: options[:key])
 
-      repeat = '1'
-      repeat = page.content[key] unless page.content.nil?
-      repeat = 1 if repeat.nil? or repeat == 0
-
-      repeat.to_i.times do |i|
-        concat(render "templates/#{key}", index: i, parent_key: key)
+      if page_templates.empty?
+        # if nothing is saved yet, use templates from helper defined in erb
+        # convert array of hashes to open struct which will provide template and index methods like AR
+        page_templates = templates.inject([]) { |pt, t| pt << OpenStruct.new(t) }
+        grouped_templates = page_templates
+        from_db = false
+      else
+        grouped_templates = page_templates.group(:template)
+        from_db = true
       end
+
+      key = options[:key]
+      concat(render 'rubber_ring/template_control', key: key, template_types: grouped_templates, from_db: from_db)
+
+      templates_concatenated = ''
+      page_templates.each_with_index do |t, index|
+        t.id = t.id.nil? ? index : t.id
+
+        rendered_template = render "templates/#{t.template}", key_prefix: "#{t.id}_#{key}_#{t.template}"
+
+        content_tag_options = {'class' => t.tclass}
+        if page and page.edit_mode?
+          content_tag_options['data-template'] = t.template
+          content_tag_options['data-template-index'] = t.id
+        end
+
+        templates_concatenated += content_tag(t.element, rendered_template, content_tag_options)
+      end
+
+      content_tag_options = { class: "#{options[:wrap_class]}" }
+      content_tag_options['data-cms'] = key if page and page.edit_mode?
+
+      concat(
+        content_tag(
+          options[:wrap_element],
+          raw(templates_concatenated),
+          content_tag_options
+        )
+      )
     end
 
   end

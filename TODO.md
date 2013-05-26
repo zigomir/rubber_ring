@@ -1,12 +1,18 @@
 # TODO
-- don't show saved button when reloading page(s)
+- try AJAX for adding/removing templates (add new action to cms_controller)
+- template GUI as drop down menu
+- release gem after at least one live project
+	- use [semantic versioning](http://semver.org/)
+
+# Should
+- pm save should take content + key for more consistent API
+	- refactor and add js tests
 - better way for handling attachments for different languages
     - maybe each language should not have different directory for storing them...
 - way to cache all pages in one step and publish them all
-- release gem after project is doing ok on at least one project
-	- use [semantic versioning](http://semver.org/)
+	- save path in page table and make crawler that goes through all of them
 
 ## Future / neat features
 - publish on specific time [cool lib for timepicking](http://amsul.ca/pickadate.js)
-- use shadow dom for encapsulating application menu [link](http://www.html5rocks.com/en/tutorials/webcomponents/shadowdom/) or even better, use [polymer](http://polymer-project.appspot.com/)
+- encapsulating application menu try [polymer](http://polymer-project.appspot.com/) or [x-tags](http://x-tags.org/)
 - better GUI design (responsive menu)

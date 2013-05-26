@@ -23,6 +23,8 @@ files = [
 
   // code to test
   'app/assets/javascripts/rubber_ring/persistence_manager.coffee',
+  'app/assets/javascripts/rubber_ring/util.coffee',
+  'app/assets/javascripts/rubber_ring/template_editor.coffee',
   // specs
   'spec/javascripts/*_spec.*'
 ];
