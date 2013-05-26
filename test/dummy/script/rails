@@ -1,7 +1,5 @@
 #!/usr/bin/env ruby
-# TODO remove this script directory when you have RubyMine 5.4.1
-# fixed in build 130.250
-# http://youtrack.jetbrains.com/issue/RUBY-13469#tab=Linked%20Issues
+# wait until RubyMine fixes this
 
 APP_PATH = File.expand_path('../../config/application',  __FILE__)
 require_relative '../config/boot'

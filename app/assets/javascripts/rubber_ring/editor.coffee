@@ -2,24 +2,41 @@ $ ->
   # init
   config = {
     action_btns: {
-      reset_btn: '<button class="reset-content"></button>'
+      reset_btn: '<button class="reset-content"></button>',
+      reset_img: '<button class="reset-image"></button>'
     }
   }
 
   $editable_content = $("[contenteditable]")
+  $alert = $(".alert-saved div")
 
-  pm = new PersistenceManager(config.action_btns)
-  de = new DuplicableEditor(config.action_btns)
+  util = new Util()
+  # first check for any duplicated keys
+  duplicates = util.find_duplicated_keys($('[data-cms]'))
+  alert "Correct key duplicates: '#{duplicates}'" if duplicates.length > 0
+
+  pm = new PersistenceManager(config.action_btns, $alert)
+  te = new TemplateEditor(pm, util)
+  te.init()
+  te.init_sortable()
+
   le = new LinkEditor($editable_content)
-  de.init()
   le.init()
 
-  # append content editable with buttons
+  # append reset button to editable contents
   $("[contenteditable]").append(config.action_btns.reset_btn)
+  $("img[data-cms]").after(config.action_btns.reset_img)
+
   $("body").on "click", ".reset-content", (e) ->
-    $content_to_remove = $(e.currentTarget).parent()
-    if window.confirm "Really want to reset content?"
-      pm.remove($content_to_remove).then ->
+    $content_to_reset = $(e.currentTarget).parent()
+    if window.confirm "Really want reset content?"
+      pm.remove($content_to_reset).then ->
+        window.location.reload(true)
+
+  $("body").on "click", ".reset-image", (e) ->
+    $image_to_reset = $(e.currentTarget).prev()
+    if window.confirm "Really want reset image?"
+      pm.remove($image_to_reset).then ->
         window.location.reload(true)
 
   $(".rubber_ring_attachment").click (e) ->
@@ -71,5 +88,5 @@ $ ->
         this.insertAdjacentHTML("beforeend", lineBreak)
       else
         document.execCommand("insertHTML", false, lineBreak)
-      
+
       false

@@ -1,5 +1,5 @@
 module RubberRing
-  class PageContent < ActiveRecord::Base
+  class PageTemplate < ActiveRecord::Base
     belongs_to :page
   end
 end

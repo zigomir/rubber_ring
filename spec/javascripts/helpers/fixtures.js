@@ -5,8 +5,9 @@ App.controller        = "jasmine_test";
 App.action            = "jasmine_test";
 // Here you can use real values to see if they land into database, but tests will be slower then
 //App.save_path         = "http://localhost:3000/rubber_ring/cms/save";
-App.save_path         = "";
-App.remove_path       = "";
+App.save_path          = "";
+App.save_template_path = "";
+App.remove_path        = "";
 
 App.save_image_path      = "";
 App.save_attachment_path = "";

@@ -1,0 +1,20 @@
+<% if @admin and not @page_caching %>
+  <!-- TODO: do me like drop down! -->
+  <div class="tbs rr-control">
+    <div class="well well-small">
+      <span>Template for <strong><%= key %></strong></span>
+
+      <select data-cms-template="<%= key %>" data-from-db="<%= from_db %>">
+        <% template_types.sort_by(&:template).each do |t| %>
+          <option value="<%= t.template %>"><%= t.template %></option>
+        <% end %>
+      </select>
+
+      <span class='add-remove'>
+        <button data-action="add"></button>
+        <button data-action="remove"></button>
+      </span>
+      <button data-action="sort">Enable sort</button>
+    </div>
+  </div>
+<% end %>
