@@ -44,7 +44,7 @@ To install `imagemagick` and `sqlite3` on `Ubuntu`
 
 Add it to your `Gemfile`
 
-	gem 'rubber_ring', :git => 'git://github.com/zigomir/rubber_ring.git'
+	gem 'rubber_ring'
 
 Create/migrate database
 

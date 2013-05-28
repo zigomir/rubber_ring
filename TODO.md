@@ -1,8 +1,6 @@
 # TODO
 - try AJAX for adding/removing templates (add new action to cms_controller)
 - template GUI as drop down menu
-- release gem after at least one live project
-	- use [semantic versioning](http://semver.org/)
 
 # Should
 - pm save should take content + key for more consistent API
