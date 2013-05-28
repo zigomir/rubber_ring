@@ -163,9 +163,15 @@ This means, that you need to create new view for each template in
 
 	`app/views/templates/_article.html.erb` 
 
-**templates** and **article** are important as directory and file name. 
-Convention is that the `template` name needs to be the same as `view 
-name` without underscore.
+Convention
+
+	...
+	{template: 'article', ...
+	...
+
+means that you need a view, saved like:
+
+	`app/views/templates/_article.html.erb`
 
 **Inside templates** you can use all other helpers. **BUT**, you need to 
 assemble your key correctly or otherwise you will be overwriting your own content. 
@@ -177,7 +183,7 @@ You can use `key_prefix`, which is assembled the way which will help you to prev
 
 ### Helper options
 
-Each helper need's to specify unique `key`. These are holding values in the database. 
+Each helper needs to specify unique `key`. These are holding values in the database. 
 Also each helper needs to include `@page` object as their last parameter. 
 This object holds all the editable content of the page in a hash data structure.
 
