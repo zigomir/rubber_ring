@@ -77,9 +77,9 @@ module RubberRing
     def template(templates, options = {}, page)
       page_templates = page.page_templates.where(key: options[:key])
 
+      # if nothing is saved yet, use templates from helper defined in erb
+      # convert array of hashes to open struct which will provide template and index methods like AR
       if page_templates.empty?
-        # if nothing is saved yet, use templates from helper defined in erb
-        # convert array of hashes to open struct which will provide template and index methods like AR
         page_templates = templates.inject([]) { |pt, t| pt << OpenStruct.new(t) }
         grouped_templates = page_templates
         from_db = false
@@ -91,13 +91,23 @@ module RubberRing
       key = options[:key]
       concat(render 'rubber_ring/template_control', key: key, template_types: grouped_templates, from_db: from_db)
 
+      content_tag_options = { class: "#{options[:wrap_class]}" }
+      content_tag_options['data-cms'] = key if page and page.edit_mode?
+      built_templates = build_templates(page_templates, page, key)
+
+      concat(content_tag(options[:wrap_element], raw(built_templates), content_tag_options))
+    end
+
+    private
+
+    def build_templates(page_templates, page, key)
       templates_concatenated = ''
+
       page_templates.each_with_index do |t, index|
         t.id = t.id.nil? ? index : t.id
-
         rendered_template = render "templates/#{t.template}", key_prefix: "#{t.id}_#{key}_#{t.template}"
-
         content_tag_options = {'class' => t.tclass}
+
         if page and page.edit_mode?
           content_tag_options['data-template'] = t.template
           content_tag_options['data-template-index'] = t.id
@@ -106,16 +116,7 @@ module RubberRing
         templates_concatenated += content_tag(t.element, rendered_template, content_tag_options)
       end
 
-      content_tag_options = { class: "#{options[:wrap_class]}" }
-      content_tag_options['data-cms'] = key if page and page.edit_mode?
-
-      concat(
-        content_tag(
-          options[:wrap_element],
-          raw(templates_concatenated),
-          content_tag_options
-        )
-      )
+      templates_concatenated
     end
 
   end

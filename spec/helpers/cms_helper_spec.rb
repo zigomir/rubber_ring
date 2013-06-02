@@ -60,4 +60,27 @@ describe RubberRing::CmsHelper do
     end
   end
 
+  describe 'template' do
+    it 'should render editable template element' do
+      @page = RubberRing::Page.new({controller: 'test', action: 'test'})
+      @page.edit_mode = true
+
+      helper.template(
+        [{template: 'test_article', tclass: 't-article', element: 'article'}],
+        {key: 'template_key_1', wrap_element: 'div', wrap_class: 'templates'},
+        @page
+      ).should eq '<div class="templates" data-cms="template_key_1"><article class="t-article" data-template-index="0" data-template="test_article"><h2 contenteditable="true" data-cms="0_template_key_1_test_article_title">Article Title</h2></article></div>'
+    end
+
+    it 'should render non-editable template element' do
+      @page = RubberRing::Page.new({controller: 'test', action: 'test'})
+
+      helper.template(
+        [{template: 'test_article', tclass: 't-article', element: 'article'}],
+        {key: 'template_key_1', wrap_element: 'div', wrap_class: 'templates'},
+        @page
+      ).should eq '<div class="templates"><article class="t-article"><h2>Article Title</h2></article></div>'
+    end
+  end
+
 end
