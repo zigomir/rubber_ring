@@ -25,8 +25,7 @@ module RubberRing
     def add_template
       page, new_pt = Page.add_template(@options)
 
-      # TODO move to same method as for cms_helper
-      key_prefix = "#{new_pt.id}_#{new_pt.key}_#{new_pt.template}"
+      key_prefix = view_context.build_key_prefix(new_pt, new_pt.key)
       template = render_to_string :partial => "templates/#{new_pt.template}",
                                   :layout => false,
                                   :locals => {:page => page, :key_prefix => key_prefix}
@@ -45,7 +44,6 @@ module RubberRing
 
     def remove_template
       page = Page.remove_template(@options)
-      # TODO try to return HTML for templates here
       expire_and_respond(page)
     end
 
