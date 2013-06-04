@@ -56,13 +56,12 @@ module RubberRing
       page, content = get_page_and_content(options, :content)
 
       last = RubberRing::PageTemplate.all.order(:sort).last
-      pt = RubberRing::PageTemplate.where('id = ?', content['index']).first_or_initialize()
 
-      new_pt      = pt.dup
+      new_pt      = last.dup
       new_pt.sort = last.sort + 1
       new_pt.save
 
-      page
+      return page, new_pt
     end
 
     def self.remove_template(options)

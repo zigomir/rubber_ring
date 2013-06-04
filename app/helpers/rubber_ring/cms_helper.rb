@@ -75,7 +75,8 @@ module RubberRing
     end
 
     def template(templates, options = {}, page)
-      page_templates = page.page_templates.where(key: options[:key])
+      key = options[:key]
+      page_templates = page.page_templates.where(key: key)
 
       # if nothing is saved yet, use templates from helper defined in erb
       # convert array of hashes to open struct which will provide template and index methods like AR
@@ -88,7 +89,6 @@ module RubberRing
         from_db = true
       end
 
-      key = options[:key]
       concat(render 'rubber_ring/template_control', key: key, template_types: grouped_templates, from_db: from_db)
 
       content_tag_options = { class: "#{options[:wrap_class]}" }

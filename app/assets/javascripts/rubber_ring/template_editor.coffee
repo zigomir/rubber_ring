@@ -26,8 +26,10 @@ class @TemplateEditor
       }
 
       if action is 'add'
-        @pm.add_template(content).then ->
-          window.location.reload(true)
+        @pm.add_template(content).then (data) ->
+#          window.location.reload(true)
+          $(data.new_template).appendTo("[data-cms=#{key}]");
+          App.init()
       else
         if add_index isnt remove_index
           content.index = remove_index
