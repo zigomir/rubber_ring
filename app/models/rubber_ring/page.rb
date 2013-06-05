@@ -58,11 +58,11 @@ module RubberRing
       last = RubberRing::PageTemplate.all.order(:sort).last
       pt = RubberRing::PageTemplate.where('id = ?', content['index']).first_or_initialize()
 
-      new_pt      = pt.dup
+      new_pt      = pt.id.nil? ? last.dup : pt.dup
       new_pt.sort = last.sort + 1
       new_pt.save
 
-      page
+      return page, new_pt
     end
 
     def self.remove_template(options)

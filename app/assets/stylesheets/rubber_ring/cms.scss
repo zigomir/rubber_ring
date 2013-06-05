@@ -166,6 +166,23 @@
   min-height: 0;
 }
 
+.tbs .well-small {
+  padding: 2px;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+}
+
+.tbs .navbar-inner {
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+}
+
+.tbs .navbar .brand {
+  padding: 8px 20px 8px;
+}
+
 .tbs .alert-saved .alert {
   padding: 0;
   margin: 9px 0;

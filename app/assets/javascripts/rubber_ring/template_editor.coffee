@@ -22,18 +22,18 @@ class @TemplateEditor
       content = {
         key: key
         template: template
-        index: add_index
       }
 
       if action is 'add'
-        @pm.add_template(content).then ->
-          window.location.reload(true)
+        content.index = add_index
+        @pm.add_template(content).then (data) ->
+          $(data.new_template).appendTo("[data-cms=#{key}]");
+          App.init()
       else
         if add_index isnt remove_index
           content.index = remove_index
-
           @pm.remove_template(content).then ->
-            window.location.reload(true)
+            $("[data-template-index=#{remove_index}]").remove()
 
   save_all_templates: ->
       $templates = $('[data-template]')

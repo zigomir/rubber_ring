@@ -7,9 +7,4 @@ class ExampleController < RubberRing::CmsController
 
   def page2
   end
-
-  def form
-    flash[:message] = params[:value]
-    redirect_to root_path
-  end
 end

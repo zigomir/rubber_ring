@@ -7,7 +7,6 @@ class @PersistenceManager
 
   constructor: (@action_btns, @alert) ->
 
-  # all pm methods should have key and content parameters
   save: (content) ->
     key = content.attr("data-cms") # data wont work here because of cloning dom
 
@@ -55,7 +54,11 @@ class @PersistenceManager
     # it is important to sanitize htmlValue or else we will get more and more broken html from database
     # we need to remove any new lines like \r and \n
     content = content.html().replace(/^[\s]+$/g, "").trim()
-    content = content.replace(value, "").trim() for key, value of @action_btns
+
+    for key, value of @action_btns
+      regex = new RegExp(value, "g");
+      content = content.replace(regex, "").trim()
+
     content
 
   remove: (content) ->
