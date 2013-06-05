@@ -4,7 +4,7 @@ describe 'TemplateEditor', ->
     loadFixtures('templates.html')
     pm   = new PersistenceManager(config.action_btns)
     util = new Util()
-    @te   = new TemplateEditor(pm, util)
+    @te  = new TemplateEditor(pm, util)
     @te.init()
 
   it 'should build list of templates and their data', ->

@@ -41,3 +41,40 @@ describe "Peristance Manager", ->
 
     path = $.post.mostRecentCall.args[0]
     expect(path).toBe('cms/remove/link')
+
+  it "should save attachment", ->
+    spyOn($, "post")
+    @pm.save_attachment($(".rubber_ring_attachment"))
+
+    content = $.post.mostRecentCall.args[1].content
+
+    expect(content.attachment_key).toBe('file.pdf')
+    expect(content.attachment_key_href).toBe('http://www.example.com/file.pdf')
+
+  it "should add template", ->
+    spyOn($, "post")
+    template = {
+      key: 'key'
+      template: 'template'
+      index: '13'
+    }
+    @pm.add_template(template)
+
+    content = $.post.mostRecentCall.args[1].content
+    expect(content.key).toBe('key')
+    expect(content.template).toBe('template')
+    expect(content.index).toBe('13')
+
+  it "should remove template", ->
+    spyOn($, "post")
+    template = {
+      key: 'key'
+      template: 'template'
+      index: '23'
+    }
+    @pm.remove_template(template)
+
+    content = $.post.mostRecentCall.args[1].content
+    expect(content.key).toBe('key')
+    expect(content.template).toBe('template')
+    expect(content.index).toBe('23')
