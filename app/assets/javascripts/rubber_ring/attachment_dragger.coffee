@@ -33,7 +33,7 @@ class @AttachmentDragger
           # also change link if we are dropping attachmeng
           $(e.currentTarget).html(e.dataTransfer.getData(@attribute).split('/').reverse()[0]) if @attribute == "href"
 
-          pm = new PersistenceManager()
+          pm = new PersistenceManager(App.config.action_btns, $(".alert-saved div"))
           pm.save_image($(e.currentTarget)) if @attribute == "src"
           pm.save_attachment($(e.currentTarget)) if @attribute == "href"
 

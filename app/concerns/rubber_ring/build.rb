@@ -16,7 +16,10 @@ module RubberRing
         FileUtils.cp_r("#{prod_assets_dir}/.", build_assets_dir)
       else
         %w(images javascripts stylesheets fonts).each do |asset_dir|
-          FileUtils.cp_r("#{Rails.root.to_s}/app/assets/#{asset_dir}/.", build_assets_dir)
+          dir = "#{Rails.root.to_s}/app/assets/#{asset_dir}"
+          if File.directory?(dir)
+            FileUtils.cp_r("#{dir}/.", build_assets_dir)
+          end
         end
       end
 

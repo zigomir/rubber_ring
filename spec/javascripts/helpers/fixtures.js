@@ -15,7 +15,7 @@ App.save_attachment_path = "cms/save_attachment";
 App.add_attachment_path    = "cms/attachments/add";
 App.remove_attachment_path = "cms/attachments/remove";
 
-config = {
+App.config = {
 	action_btns: {
 	  reset_btn: '<button class="reset-content"></button>',
     reset_img: '<button class="reset-image"></button>'

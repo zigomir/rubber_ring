@@ -101,6 +101,13 @@
 
     App.add_attachment_path    = "<%= rubber_ring.cms_add_attachment_path %>";
     App.remove_attachment_path = "<%= rubber_ring.cms_remove_attachment_path %>";
+
+    App.config = {
+      action_btns: {
+        reset_btn: '<button class="reset-content"></button>',
+        reset_img: '<button class="reset-image"></button>'
+      }
+    }
   </script>
   <%= javascript_include_tag 'rubber_ring/application' %>
 <% end %>

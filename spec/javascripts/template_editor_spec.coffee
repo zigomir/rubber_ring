@@ -2,7 +2,7 @@ describe 'TemplateEditor', ->
 
   beforeEach ->
     loadFixtures('templates.html')
-    pm   = new PersistenceManager(config.action_btns)
+    pm   = new PersistenceManager(App.config.action_btns)
     util = new Util()
     @te  = new TemplateEditor(pm, util)
     @te.init()

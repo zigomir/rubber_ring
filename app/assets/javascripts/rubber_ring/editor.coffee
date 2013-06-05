@@ -1,18 +1,10 @@
 $ ->
-  # init
-  config = {
-    action_btns: {
-      reset_btn: '<button class="reset-content"></button>',
-      reset_img: '<button class="reset-image"></button>'
-    }
-  }
-
   util = new Util()
   # first check for any duplicated keys
   duplicates = util.find_duplicated_keys($('[data-cms]'))
   alert "Correct key duplicates: '#{duplicates}'" if duplicates.length > 0
 
-  pm = new PersistenceManager(config.action_btns, $(".alert-saved div"))
+  pm = new PersistenceManager(App.config.action_btns, $(".alert-saved div"))
   te = new TemplateEditor(pm, util)
   te.init()
   te.init_sortable()
@@ -22,8 +14,8 @@ $ ->
 
   App.init = ->
     # append reset button to editable contents
-    $("[contenteditable]").append(config.action_btns.reset_btn)
-    $("img[data-cms]").after(config.action_btns.reset_img)
+    $("[contenteditable]").append(App.config.action_btns.reset_btn)
+    $("img[data-cms]").after(App.config.action_btns.reset_img)
 
     $("body").on "click", ".reset-content", (e) ->
       $content_to_reset = $(e.currentTarget).parent()

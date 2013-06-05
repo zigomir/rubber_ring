@@ -6,7 +6,7 @@ $ ->
 
   # remove all unused images action
   $(".remove_not_used_attachments").on "click", ->
-    pm = new PersistenceManager()
+    pm = new PersistenceManager(App.config.action_btns, $(".alert-saved div"))
     uploaded_images      = ($(item).attr("src")  for item in $(".uploaded-images img"))
     uploaded_attachments = ($(item).attr("href") for item in $(".uploaded-attachments a"))
     used_images          = ($(item).attr("src")  for item in $(".rubber_ring_image"))

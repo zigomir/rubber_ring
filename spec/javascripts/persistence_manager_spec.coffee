@@ -2,7 +2,7 @@ describe "Peristance Manager", ->
 
   beforeEach ->
     loadFixtures('editable_fields.html')
-    @pm = new PersistenceManager(config.action_btns)
+    @pm = new PersistenceManager(App.config.action_btns)
 
   it "should be able to sanitize html and get raw content", ->
     sanitized = @pm.sanitize($('h1'))
