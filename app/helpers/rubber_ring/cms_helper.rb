@@ -75,7 +75,8 @@ module RubberRing
     end
 
     def template(templates, options = {}, page)
-      page_templates = page.page_templates.where(key: options[:key])
+      key = options[:key]
+      page_templates = page.page_templates.where(key: key)
 
       # if nothing is saved yet, use templates from helper defined in erb
       # convert array of hashes to open struct which will provide template and index methods like AR
@@ -88,7 +89,6 @@ module RubberRing
         from_db = true
       end
 
-      key = options[:key]
       concat(render 'rubber_ring/template_control', key: key, template_types: grouped_templates, from_db: from_db)
 
       content_tag_options = { class: "#{options[:wrap_class]}" }
@@ -98,26 +98,30 @@ module RubberRing
       concat(content_tag(options[:wrap_element], raw(built_templates), content_tag_options))
     end
 
+    def build_key_prefix(page_content, key)
+      "#{page_content.id}_#{key}_#{page_content.template}"
+    end
+
     private
 
-    def build_templates(page_templates, page, key)
-      templates_concatenated = ''
+      def build_templates(page_templates, page, key)
+        templates_concatenated = ''
 
-      page_templates.each_with_index do |t, index|
-        t.id = t.id.nil? ? index : t.id
-        rendered_template = render "templates/#{t.template}", key_prefix: "#{t.id}_#{key}_#{t.template}"
-        content_tag_options = {'class' => t.tclass}
+        page_templates.each_with_index do |t, index|
+          t.id = t.id.nil? ? index : t.id
+          rendered_template = render "templates/#{t.template}", key_prefix: build_key_prefix(t, key)
+          content_tag_options = {'class' => t.tclass}
 
-        if page and page.edit_mode?
-          content_tag_options['data-template'] = t.template
-          content_tag_options['data-template-index'] = t.id
+          if page and page.edit_mode?
+            content_tag_options['data-template'] = t.template
+            content_tag_options['data-template-index'] = t.id
+          end
+
+          templates_concatenated += content_tag(t.element, rendered_template, content_tag_options)
         end
 
-        templates_concatenated += content_tag(t.element, rendered_template, content_tag_options)
+        templates_concatenated
       end
-
-      templates_concatenated
-    end
 
   end
 end

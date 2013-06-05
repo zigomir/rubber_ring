@@ -3,6 +3,7 @@ module RubberRing
     include Build
     include Publish
     include Util
+    #require CmsHelper
 
     before_action :get_options, :except => [:save]
 
@@ -22,8 +23,23 @@ module RubberRing
     end
 
     def add_template
-      page = Page.add_template(@options)
-      expire_and_respond(page)
+      page, new_pt = Page.add_template(@options)
+
+      key_prefix = view_context.build_key_prefix(new_pt, new_pt.key)
+      template = render_to_string :partial => "templates/#{new_pt.template}",
+                                  :layout => false,
+                                  :locals => {:page => page, :key_prefix => key_prefix}
+
+      content_tag_options = {
+        'class'               => new_pt.tclass,
+        'data-template-index' => new_pt.id,
+        'data-template'       => new_pt.template
+      }
+
+      response = view_context.content_tag(new_pt.element, view_context.raw(template), content_tag_options)
+
+      expire_page(params[:page_path])
+      render :json => {new_template: response}
     end
 
     def remove_template
