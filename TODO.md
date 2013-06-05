@@ -1,8 +1,3 @@
-# TODO
-- try AJAX for adding/removing templates (add new action to cms_controller)
-- template GUI as drop down menu
-
-# Should
 - pm save should take content + key for more consistent API
 	- refactor and add js tests
 - better way for handling attachments for different languages
