@@ -131,37 +131,40 @@ CMS fields are made of tag, key and `@page` which holds content for all the page
 
 Examples
 
-	<%= editable_field(:h1, {key: 'header'}, @page) do %>
-	  I'm editable content in one line.
-	<% end %>
+```erb
+<%= editable_field(:h1, {key: 'header'}, @page) do %>
+  I'm editable content in one line.
+<% end %>
 
-	<%= editable_field(:div, {key: 'first_content', class: 'multi-line'}, @page) do %>
-	  I'm editable content in 
-	  multi lines...
-	<% end %>
-	
-	<%= editable_link({class: 'rubber_ring_attachment', key: 'attachment-link', href: '/link-to-something'}, @page) do %>
-    	Link to PDF
-	<% end %>
+<%= editable_field(:div, {key: 'first_content', class: 'multi-line'}, @page) do %>
+  I'm editable content in 
+  multi lines...
+<% end %>
 
-	<%= editable_image({key: 'header_image', src: image_path('baws.jpg'), height: '360'}, @page) %>
+<%= editable_link({class: 'rubber_ring_attachment', key: 'attachment-link', href: '/link-to-something'}, @page) do %>
+	Link to PDF
+<% end %>
+
+<%= editable_image({key: 'header_image', src: image_path('baws.jpg'), height: '360'}, @page) %>
+```
 
 ## Templates
 
 Allows you to set up repeating and sortable templates. Example
 
-	<% template([
-	    {template: 'article',   tclass: 'article', element: 'article'},
-	    {template: 'blog_post', tclass: 'blog',    element: 'div'}
-	  ],
-	  {key: 'template_key', wrap_element: 'div', wrap_class: 'templates'}, @page)
-	%>
-	
+```erb
+<% template([
+    {template: 'article',   tclass: 'article', element: 'article'},
+    {template: 'blog_post', tclass: 'blog',    element: 'div'}
+  ],
+  {key: 'template_key', wrap_element: 'div', wrap_class: 'templates'}, @page)
+%>
+```
 
 This means, that you need to create new view for each template in 
 `app/views/templates/`. Example
 
-	`app/views/templates/_article.html.erb` 
+    app/views/templates/_article.html.erb
 
 Convention
 
@@ -169,17 +172,19 @@ Convention
 	{template: 'article', ...
 	...
 
-means that you need a view, saved like:
+means that you need a view, saved in a file
 
-	`app/views/templates/_article.html.erb`
+    app/views/templates/_article.html.erb
 
 **Inside templates** you can use all other helpers. **BUT**, you need to 
 assemble your key correctly or otherwise you will be overwriting your own content. 
 You can use `key_prefix`, which is assembled the way which will help you to prevent key overwites. Example:
 
-	<%= editable_field(:h2, {key: "#{key_prefix}_title"}, @page) do %>
-		Article Title
-	<% end %>
+```erb
+<%= editable_field(:h2, {key: "#{key_prefix}_title"}, @page) do %>
+	Article Title
+<% end %>
+```
 
 ### Helper options
 
