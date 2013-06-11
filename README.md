@@ -24,13 +24,13 @@ change fonts and text style
 
 ## Software prerequisites
 
-* Ruby `2.0.0-p0`
-* Rails `4.0.0.rc1`
+* Ruby 2
+* Rails 4
 * imagemagick
 
 ### Browser support
 
-Firefox and Chrome. IE drag and drop doesn't work for now.
+Firefox, Chrome and Safari.
 
 ## Setup
 
@@ -40,28 +40,22 @@ To install `imagemagick` and `sqlite3` on `Ubuntu`
 	sudo apt-get install imagemagick
 	sudo apt-get install libsqlite3-dev
 
-### Setting up new Rails project
+## Setting up a new project
 
-Add it to your `Gemfile`
+Add this to your `Gemfile`
 
 	gem 'rubber_ring'
 
-Create/migrate database
+Create and migrate database
 
     rake rubber_ring:install:migrations
-    rake db:migrate
+    rake db:create db:migrate
 
 Update `development.rb` to enable caching
 
 	config.action_controller.perform_caching = true
 
-Remove `//= require jquery` and `//= require jquery_ujs` from `application.js` because 
-Rubber Ring is already including jQuery for you.
-
-### Setup config files
-
-Generate initialize settings file for admin and settings for publishing pages 
-on production server
+### Generate config files
 
 	rails generate rubber_ring:install
 
@@ -74,8 +68,7 @@ This will generate
 	5. public/.htaccess
 
 1. Set your production server name and path. You will need SSH access and your public key 
-on server. If you tend to use Rubber Ring as part of web application you can ignore this 
-file.
+on server. If you tend to use Rubber Ring as part of web application, or you don't want/need to publish only static HTML files, you can ignore this file.
 2. Set admin password and application type in `app/config/initializers/rubber_ring.rb`.
 3. `app/views/layouts/rubber_ring/layout.html.erb` is here for you to override it, 
 so you have complete control over your markup.
@@ -88,24 +81,25 @@ generated and synced with production server. To serve them both we need this `.h
 
 ### Static pages or Rails application?
 
-* If you only want to use Rubber Ring to generate static pages, leave
-`RubberRing.static_only = true` intact. This will leave you with options to 
-`preview` and `publish` html pages and other assets to production server. Otherwise set 
+If you only want to use Rubber Ring to generate static pages, leave
+`RubberRing.static_only = true` inside `app/config/initializers/rubber_ring.rb` intact.
+This will leave you with options to `preview` and `publish` html pages and other 
+assets to production server. Otherwise set 
 this option to false.
 
 # Usage
 
 ## As an editor I want to easily edit content on my site
 
-Login (`/rubber_ring`) with password which was set by developer in the install stage.
+Login at URL `/rubber_ring` with password which was set by developer in the install stage.
 
-Editing content is easy as clicking inside green boxes and start editing. 
+Just edit content inside green boxes. 
 Developer sets what content is editable/repeatable/link/multi line...
 
 For changing images click on `Image manager` in the upper menu. 
-Drag and drop the image you need to drop zone. After uploading the image you can drag 
-and drop it on the image you wanted to change. Image will be automatically resized 
-to the size that was set by developer/designer.
+Drag and drop the image(s) you need to drop zone. After uploading the 
+image(s) you can drag and drop them on the image you wanted to change. 
+Image will be automatically re-sized to the size that was set by developer/designer.
 
 ### Build and publish your pages
 
@@ -192,7 +186,7 @@ Each helper needs to specify unique `key`. These are holding values in the datab
 Also each helper needs to include `@page` object as their last parameter. 
 This object holds all the editable content of the page in a hash data structure.
 
-#### already used keys which you must not use
+#### reserved key(s) - don't use them
 
 - `page_title`
 
@@ -219,9 +213,9 @@ This object holds all the editable content of the page in a hash data structure.
 You can use, like in any other Rails application, 
 [sprockets directives](https://github.com/sstephenson/sprockets#the-directive-processor) 
 to include assets to your app. 
-Please remove `//= require jquery` and `//= require jquery_ujs` from `application.js`
-because rubber ring is already including `jquery` which you can reuse in your 
-pages as well.
+Please don't use `//= require jquery` and `//= require jquery-ui` 
+in your `application.js` file, because rubber ring is already including `jquery` 
+which you can reuse in your pages as well.
 
 ## Philosophy
 
@@ -229,7 +223,7 @@ pages as well.
 * you can not build robust system without limitations
 * system may stretch only to certain point until it breaks. Like a rubber ring!
 
-## Inspired by
+## Inspired by (aka ideas stolen from)
 
 - [Mercury Editor](http://jejacks0n.github.io/mercury/)
 - [Raptor Editor](http://www.raptor-editor.com/)
