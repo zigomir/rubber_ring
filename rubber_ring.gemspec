@@ -18,9 +18,9 @@ Gem::Specification.new do |s|
 
   s.required_ruby_version = '~> 2.0.0'
 
-  s.add_dependency 'rails', '~> 4.0.0.rc2'
-  s.add_dependency 'sass-rails', '~> 4.0.0.rc2'
-  s.add_dependency 'coffee-rails', '~> 4.0.0.rc2'
+  s.add_dependency 'rails', '~> 4.0.0'
+  s.add_dependency 'sass-rails', '~> 4.0.0'
+  s.add_dependency 'coffee-rails', '~> 4.0.0'
 
   s.add_dependency 'jquery-rails', '~> 2.3.0'
   s.add_dependency 'actionpack-page_caching'
