@@ -3,11 +3,19 @@
 # Don't change this; use vagrantconfig_local.yml to override these
 # settings instead.
 
-name: "rubber_ring"
+conf:
+  ruby_version: "2.0.0-p247"
+  databases:
+    - "sqlite3"
 
-ruby: "mri"
-ruby_version: "2.0.0-p0"
-database: "sqlite" # or "mysql" or "postgres"
+  packages:
+    - "vim"
+    - "git"
+    - "nodejs"
+    # - "postgresql-contrib"
+    # - ...
+
+name: "rubber_ring"
 
 box_name: "precise64"
 box_url: "http://files.vagrantup.com/precise64.box"
@@ -15,7 +23,7 @@ box_url: "http://files.vagrantup.com/precise64.box"
 memory: 512 # megabytes for VM
 guest_ip: "192.168.2.60"
 
-host_development_dir: "~/development/rubber_ring"
+host_development_dir: "~/development/gems/rubber_ring"
 guest_development_dir: "/home/vagrant/rubber_ring"
 
 ports:
