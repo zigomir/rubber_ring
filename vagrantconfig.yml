@@ -28,5 +28,6 @@ guest_development_dir: "/home/vagrant/rubber_ring"
 
 ports:
   - {guest: 3000, host: 3000}
+  - {guest: 5000, host: 5000} # for static ruby server: ruby -run -e httpd . -p5000
 
 timezone: "Europe/Ljubljana"
