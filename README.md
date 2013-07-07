@@ -3,11 +3,11 @@
 
 ## About
 
-This CMS helps you build editable pages fast. You define which content 
-(`text`, `image`, `attachment`, ...) should be editable for your users. 
-Limitation, that only developer sets what page parts are editable is good for 
+This CMS helps you build editable pages fast. You define which content
+(`text`, `image`, `attachment`, ...) should be editable for your users.
+Limitation, that only developer sets what page parts are editable is good for
 keeping the design intact. It is basically backend for saving `contenteditable` content.
-When done editing, only static assets will be published to production server 
+When done editing, only static assets will be published to production server
 where you only need a web server like Apache or Nginx.
 
 Named by The Smiths [song](http://www.youtube.com/watch?v=Cpf6gJU3520).
@@ -19,7 +19,7 @@ Named by The Smiths [song](http://www.youtube.com/watch?v=Cpf6gJU3520).
 - customer doesn't need application server and/or database. Only plain web server for static HTML serving will do
 
 ### This CMS is not good for
-sites, where **editor** wants to create new pages and control each part of every page, 
+sites, where **editor** wants to create new pages and control each part of every page,
 change fonts and text style
 
 ## Software prerequisites
@@ -27,6 +27,7 @@ change fonts and text style
 * Ruby 2
 * Rails 4
 * imagemagick
+* wget
 
 ### Browser support
 
@@ -36,7 +37,7 @@ Firefox, Chrome and Safari.
 
 ### Dependencies
 To install `imagemagick` and `sqlite3` on `Ubuntu`
-	
+
 	sudo apt-get install imagemagick
 	sudo apt-get install libsqlite3-dev
 
@@ -51,10 +52,6 @@ Create and migrate database
     rake rubber_ring:install:migrations
     rake db:create db:migrate
 
-Update `development.rb` to enable caching
-
-	config.action_controller.perform_caching = true
-
 ### Generate config files
 
 	rails generate rubber_ring:install
@@ -67,24 +64,24 @@ This will generate
 	4. app/assets/javascripts/application.js
 	5. public/.htaccess
 
-1. Set your production server name and path. You will need SSH access and your public key 
+1. Set your production server name and path. You will need SSH access and your public key
 on server. If you tend to use Rubber Ring as part of web application, or you don't want/need to publish only static HTML files, you can ignore this file.
 2. Set admin password and application type in `app/config/initializers/rubber_ring.rb`.
-3. `app/views/layouts/rubber_ring/layout.html.erb` is here for you to override it, 
+3. `app/views/layouts/rubber_ring/layout.html.erb` is here for you to override it,
 so you have complete control over your markup.
-4. This is copied because default Rails `application.js` includes `jquery` which is 
+4. This is copied because default Rails `application.js` includes `jquery` which is
 already included for you by Rubber Ring (avoiding clashes).
-5. Apaches access config. Including rules so you can access all published pages. It will 
-look for `.html` files first and enter sub directories later. Example: we have page with 
-route `/en` and `/en/example`. When published, `en.html` and `en/example.html` will be 
+5. Apaches access config. Including rules so you can access all published pages. It will
+look for `.html` files first and enter sub directories later. Example: we have page with
+route `/en` and `/en/example`. When published, `en.html` and `en/example.html` will be
 generated and synced with production server. To serve them both we need this `.htaccess` file.
 
 ### Static pages or Rails application?
 
 If you only want to use Rubber Ring to generate static pages, leave
 `RubberRing.static_only = true` inside `app/config/initializers/rubber_ring.rb` intact.
-This will leave you with options to `preview` and `publish` html pages and other 
-assets to production server. Otherwise set 
+This will leave you with options to `preview` and `publish` html pages and other
+assets to production server. Otherwise set
 this option to false.
 
 # Usage
@@ -93,12 +90,12 @@ this option to false.
 
 Login at URL `/rubber_ring` with password which was set by developer in the install stage.
 
-Just edit content inside green boxes. 
+Just edit content inside green boxes.
 Developer sets what content is editable/repeatable/link/multi line...
 
-For changing images click on `Image manager` in the upper menu. 
-Drag and drop the image(s) you need to drop zone. After uploading the 
-image(s) you can drag and drop them on the image you wanted to change. 
+For changing images click on `Image manager` in the upper menu.
+Drag and drop the image(s) you need to drop zone. After uploading the
+image(s) you can drag and drop them on the image you wanted to change.
 Image will be automatically re-sized to the size that was set by developer/designer.
 
 ### Build and publish your pages
@@ -131,7 +128,7 @@ Examples
 <% end %>
 
 <%= editable_field(:div, {key: 'first_content', class: 'multi-line'}, @page) do %>
-  I'm editable content in 
+  I'm editable content in
   multi lines...
 <% end %>
 
@@ -155,7 +152,7 @@ Allows you to set up repeating and sortable templates. Example
 %>
 ```
 
-This means, that you need to create new view for each template in 
+This means, that you need to create new view for each template in
 `app/views/templates/`. Example
 
     app/views/templates/_article.html.erb
@@ -170,8 +167,8 @@ means that you need a view, saved in a file
 
     app/views/templates/_article.html.erb
 
-**Inside templates** you can use all other helpers. **BUT**, you need to 
-assemble your key correctly or otherwise you will be overwriting your own content. 
+**Inside templates** you can use all other helpers. **BUT**, you need to
+assemble your key correctly or otherwise you will be overwriting your own content.
 You can use `key_prefix`, which is assembled the way which will help you to prevent key overwites. Example:
 
 ```erb
@@ -182,8 +179,8 @@ You can use `key_prefix`, which is assembled the way which will help you to prev
 
 ### Helper options
 
-Each helper needs to specify unique `key`. These are holding values in the database. 
-Also each helper needs to include `@page` object as their last parameter. 
+Each helper needs to specify unique `key`. These are holding values in the database.
+Also each helper needs to include `@page` object as their last parameter.
 This object holds all the editable content of the page in a hash data structure.
 
 #### reserved key(s) - don't use them
@@ -210,11 +207,11 @@ This object holds all the editable content of the page in a hash data structure.
 
 ### Assets (stylesheets and javascripts)
 
-You can use, like in any other Rails application, 
-[sprockets directives](https://github.com/sstephenson/sprockets#the-directive-processor) 
-to include assets to your app. 
-Please don't use `//= require jquery` and `//= require jquery-ui` 
-in your `application.js` file, because rubber ring is already including `jquery` 
+You can use, like in any other Rails application,
+[sprockets directives](https://github.com/sstephenson/sprockets#the-directive-processor)
+to include assets to your app.
+Please don't use `//= require jquery` and `//= require jquery-ui`
+in your `application.js` file, because rubber ring is already including `jquery`
 which you can reuse in your pages as well.
 
 ## Philosophy

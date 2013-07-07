@@ -1,33 +1,18 @@
 module RubberRing
   module Build
 
-    def Build.assets!
-      # clear old assets and copy new ones
-      build_assets_dir = "#{Rails.root.to_s}/public/build/assets"
-      if File.directory?(build_assets_dir)
-        FileUtils.rm_rf("#{build_assets_dir}/*")
-      else
-        FileUtils.mkdir_p(build_assets_dir)
-      end
+    def Build.run!(request)
+      # wget -m -p -E -k -np http://localhost:3000 -P build -nH
+      # -nH: no host directories
+      # -p: prefix with directory
+      # -E: adjust extension, save as .html
+      # -k: convert links suitable for local viewing
 
-      # if running on production copy assets from precompiled files from public directory
-      prod_assets_dir = "#{Rails.root.to_s}/public/assets"
-      if Rails.env.production? and File.directory?(prod_assets_dir)
-        FileUtils.cp_r("#{prod_assets_dir}/.", build_assets_dir)
-      else
-        %w(images javascripts stylesheets fonts).each do |asset_dir|
-          dir = "#{Rails.root.to_s}/app/assets/#{asset_dir}"
-          if File.directory?(dir)
-            FileUtils.cp_r("#{dir}/.", build_assets_dir)
-          end
-        end
-      end
+      root_url = request.protocol + request.host_with_port
+      build_dir = "#{Rails.root.to_s}/public/build"
 
-      # copy attachments
-      upload_dir = "#{Rails.root.to_s}/public/upload"
-      if File.directory?(upload_dir)
-        FileUtils.cp_r(upload_dir, "#{Rails.root.to_s}/public/build")
-      end
+      cmd = "wget -m -p -E -k -np #{root_url} -P #{build_dir} -nH"
+      system(cmd)
     end
 
   end

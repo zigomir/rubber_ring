@@ -26,10 +26,6 @@ module RubberRing
       def add_engine_mount_route
         route "mount RubberRing::Engine => '/rubber_ring', :as => 'rubber_ring'"
       end
-
-      def set_page_cache_directory
-        application('config.action_controller.page_cache_directory = "#{Rails.root.to_s}/public/build"')
-      end
     end
   end
 end

@@ -2,7 +2,9 @@
   <div class="tbs" id="rubber-ring-application">
     <div class="navbar">
       <div class="navbar-inner">
-        <span class="brand">Rubber Ring</span>
+        <span class="brand">
+          <a href="/">Rubber Ring</a>
+        </span>
         <ul class="nav">
           <li>
             <a class="dropdown" id="attachment-manager" href="javascript:void(0);">Attachments</a>
@@ -12,10 +14,7 @@
           </li>
           <% if RubberRing.static_only %>
             <li>
-              <a href="?cache=1" target="_blank">Preview</a>
-            </li>
-            <li>
-              <a href="?cache=1&publish=1" target="_blank">Publish</a>
+              <%= link_to 'Build', rubber_ring.build_path %>
             </li>
           <% end %>
           <li class="alert-saved">
@@ -24,7 +23,7 @@
         </ul>
         <ul class="nav pull-right">
           <li>
-            <a href="<%= rubber_ring.logout_path %>">Logout</a>
+            <%= link_to 'Logout', rubber_ring.logout_path %>
           </li>
         </ul>
       </div>

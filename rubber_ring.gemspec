@@ -23,7 +23,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'coffee-rails', '~> 4.0.0'
 
   s.add_dependency 'jquery-rails', '~> 2.3.0'
-  s.add_dependency 'actionpack-page_caching'
   s.add_dependency 'image_sorcery'
   s.add_dependency 'fastimage'
   s.add_dependency 'rr_publish'

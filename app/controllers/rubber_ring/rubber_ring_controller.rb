@@ -3,7 +3,7 @@ module RubberRing
     layout 'rubber_ring/layout'
 
     before_action :load_page_content, :set_locale
-    before_filter :admin?, :cache?, :publish? # check if admin before cache
+    before_filter :admin?
 
     def load_page_content
       page = Page.where(
@@ -15,6 +15,18 @@ module RubberRing
       @page = page.empty? ? Page.new : page.first
       @page.edit_mode = true
       @images, @attachments = Util.load_attachments_page(params)
+    end
+
+    def build
+      Thread::new{
+        Build.run!(request)
+      }
+    end
+
+    def publish
+      Thread::new{
+        Publish.assets!
+      }
     end
 
     def set_locale
@@ -38,30 +50,5 @@ module RubberRing
           @page.edit_mode = false
         end
       end
-
-      def cache?
-        if params[:cache] == '1' and params[:publish].nil?
-          disable_edit_mode
-          Thread::new{
-            Build.assets!
-          }
-        end
-      end
-
-      def publish?
-        if params[:publish] == '1' and params[:cache] == '1'
-          disable_edit_mode
-          Thread::new{
-            Build.assets!
-            Publish.assets!
-          }
-        end
-      end
-
-      def disable_edit_mode
-        @page_caching = true
-        @page.edit_mode = false
-      end
-
   end
 end

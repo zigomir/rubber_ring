@@ -4,6 +4,9 @@ RubberRing::Engine.routes.draw do
   get  'logout', :to => 'sessions#destroy', :as => 'logout'
   post 'login',  :to => 'sessions#create',  :as => 'login'
 
+  get  'build',    :to => 'rubber_ring#build',   :as => 'build'
+  get  'publish',  :to => 'rubber_ring#publish', :as => 'publish'
+
   post 'cms/save', :to => 'cms#save', :as => 'cms_save'
   post 'cms/remove/:key', :to => 'cms#remove', :as => 'cms_remove'
   post 'cms/save_template', :to => 'cms#save_template', :as => 'cms_save_template'
