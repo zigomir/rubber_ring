@@ -104,9 +104,14 @@ Drag and drop the image(s) you need to drop zone. After uploading the
 image(s) you can drag and drop them on the image you wanted to change.
 Image will be automatically re-sized to the size that was set by developer/designer.
 
+### Preview
+
+The easiest way to preview your current work is to log out or even better, open it in 
+a new browser where you are not logged in. 
+
 ### Build and publish your pages
 
-`Preview` option in the menu will output entire page to `public/build` directory. `Publish` will upload current page to your production server, set in `publish.yml` file.
+`Build & Publish` option in the menu will first output entire page to `public/build` directory. `Publish` will upload/copy whole site to your production server, set in `publish.yml` file.
 
 ## As a developer I want to quickly setup editable pages
 

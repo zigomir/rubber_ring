@@ -1,10 +1,12 @@
-<h1>Site was build. You can publish it now.</h1>
+<div class="tbs">
+  <div class="alert alert-success">
+    Site is building...
+  </div>
 
-<p>
-  # TODO
-  # prompt user that if some pages are not linked, they won't be built
-</p>
+  <!-- TODO: display when actually built -->
+  <div class="alert alert-info">
+    All linked pages will be built and ready for publishing...
+  </div>
 
-<p>
-  <a href="<%= publish_path %>">Publish</a>
-</p>
+  <%= link_to 'Publish', publish_path, class: 'btn btn-primary' %>
+</div>

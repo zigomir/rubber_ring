@@ -24,9 +24,13 @@ module RubberRing
     end
 
     def publish
-      Thread::new{
+      begin
         Publish.assets!
-      }
+      rescue Errno::EACCES
+        flash.now[:error] =
+          'Rubber Ring is trying to copy files on to path which is not writable.
+           Please tell developers to check publish.yml file.'
+      end
     end
 
     def set_locale

@@ -1,3 +1,13 @@
-<h1>Site published.</h1>
+<div class="tbs">
+  <% if flash[:error] %>
+    <div class="alert alert-error">
+      <%= flash[:error] %>
+    </div>
+  <% else %>
+    <div class="alert alert-success">
+      Site published.
+    </div>
+  <% end %>
 
-# TODO - try to output errors from rr_publish gem.
+  <%= link_to 'Go home', main_app.root_path %>
+</div>
