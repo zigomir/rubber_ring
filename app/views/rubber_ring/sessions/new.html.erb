@@ -1,8 +1,13 @@
-<h2>Login</h2>
-<form method="post" action="<%= login_path %>">
-  <input name="password" type="password" value="" tabindex="0" />
-  <input type="submit" value="Login" />
+<form method="post" action="<%= login_path %>" class="form-inline">
+  <fieldset>
+    <legend>Login</legend>
+    <input type="password" name="password" placeholder="Password">
+    <button type="submit" class="btn">Login</button>
+  </fieldset>
 </form>
-<% if flash[:wrong_password] %>
-  <%= flash[:wrong_password] %>
+
+<% if flash[:error] %>
+  <div class="alert alert-error">
+    <%= flash[:error] %>
+  </div>
 <% end %>

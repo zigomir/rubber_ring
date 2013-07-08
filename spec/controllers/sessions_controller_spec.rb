@@ -5,11 +5,17 @@ describe RubberRing::SessionsController do
   it 'should display login page' do
     get :new
     response.should be_success
+    flash[:error].should be nil
   end
 
-  it 'should not login without a passowrd' do
+  it 'should not login without a password' do
     post :create
-    response.code.should == '200' # no password, no login
+    flash[:error].should == 'Wrong password'
+  end
+
+  it 'should not login without a password' do
+    post :create, :password => 'wrong_password'
+    flash[:error].should == 'Wrong password'
   end
 
   it 'should login with correct password' do

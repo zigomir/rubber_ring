@@ -198,3 +198,13 @@
 .tbs [class^="icon-"], .tbs [class*=" icon-"] {
   margin: 3px 0 0 5px;
 }
+
+.tbs .brand a {
+  color: #777777;
+
+  &:hover {
+    color: #333333;
+    text-decoration: none;
+    background-color: transparent;
+  }
+}

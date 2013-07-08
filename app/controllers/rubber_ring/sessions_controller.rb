@@ -13,7 +13,7 @@ module RubberRing
         session[:password] = params[:password]
         redirect_to main_app.root_path
       else
-        flash[:wrong_password] = 'Wrong password'
+        flash.now[:error] = 'Wrong password'
         render :new
       end
     end
