@@ -26,6 +26,7 @@ change fonts and text style
 
 * Ruby 2
 * Rails 4
+* multi process web server like `puma`
 * imagemagick
 * wget
 
@@ -52,7 +53,7 @@ Create and migrate database
     rake rubber_ring:install:migrations
     rake db:create db:migrate
 
-Update `development.rb` to enable build. This will disable rails to add `body=1` to every asset link.
+Update `development.rb` to enable build for development mode. This will disable rails to add `body=1` to every asset link.
 
 ```ruby
 config.assets.debug = false
@@ -69,6 +70,7 @@ This will generate
 	3. app/views/layouts/rubber_ring/layout.html.erb
 	4. app/assets/javascripts/application.js
 	5. public/.htaccess
+	6. app/puma.rb
 
 1. Set your production server name and path. You will need SSH access and your public key
 on server. If you tend to use Rubber Ring as part of web application, or you don't want/need to publish only static HTML files, you can ignore this file.
@@ -81,6 +83,17 @@ already included for you by Rubber Ring (avoiding clashes).
 look for `.html` files first and enter sub directories later. Example: we have page with
 route `/en` and `/en/example`. When published, `en.html` and `en/example.html` will be
 generated and synced with production server. To serve them both we need this `.htaccess` file.
+6. We need to run `Rubber Ring` as `Rails Application` with at least two workers. This is 
+because when doing a request to `/rubber_ring/build` there will also run a `wget` program 
+which will download all `html` files and save them into `public/build` directory. Without 
+more workers we need to must use threads, but with threads we can not accurately tell 
+user when `wget` program finishes its job.
+
+### Run
+
+```bash
+puma -p 3000 -C config/puma.rb
+```
 
 ### Static pages or Rails application?
 
@@ -106,8 +119,8 @@ Image will be automatically re-sized to the size that was set by developer/desig
 
 ### Preview
 
-The easiest way to preview your current work is to log out or even better, open it in 
-a new browser where you are not logged in. 
+The easiest way to preview your current work is to log out or even better, open it in
+a new browser where you are not logged in.
 
 ### Build and publish your pages
 

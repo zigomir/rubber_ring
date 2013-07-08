@@ -8,3 +8,6 @@ Example:
         create app/config/publish.yml
         create app/config/initializers/rubber_ring.rb
         create app/views/layouts/rubber_ring/application.html.erb
+        create app/assets/javascripts/application.js
+        create public/.htaccess
+        create app/puma.rb

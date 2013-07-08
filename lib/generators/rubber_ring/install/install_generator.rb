@@ -15,6 +15,10 @@ module RubberRing
         copy_file 'settings_template.rb', 'config/initializers/rubber_ring.rb'
       end
 
+      def generate_puma_config_file
+        copy_file 'puma_template.rb', 'config/puma.rb'
+      end
+
       def copy_application_layout
         copy_file 'layout.html.erb', 'app/views/layouts/rubber_ring/layout.html.erb'
       end
