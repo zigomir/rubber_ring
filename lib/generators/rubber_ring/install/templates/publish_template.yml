@@ -1,12 +1,13 @@
 # you need to copy your server's keys to destination server authorized_keys
+# be sure to have permissions to write on directories
 
 site:
   build:
     source: public/build/.
-    destination: root@enslaved:/var/www
+    destination: root@server:/var/www
   htaccess:
     source: public/.htaccess
-    destination: root@enslaved:/var/www
+    destination: root@server:/var/www
 #    exclude:
 #      - .git
 #      - database.yml

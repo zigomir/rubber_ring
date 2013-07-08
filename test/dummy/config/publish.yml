@@ -3,10 +3,10 @@
 site:
   build:
     source: public/build/.
-    destination: root@enslaved:/var/www
+    destination: /var/www
   htaccess:
     source: public/.htaccess
-    destination: root@enslaved:/var/www
+    destination: /var/www
 #    exclude:
 #      - .git
 #      - database.yml

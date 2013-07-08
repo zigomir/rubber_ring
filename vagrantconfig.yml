@@ -12,6 +12,7 @@ conf:
     - "vim"
     - "git"
     - "nodejs"
+    - "apache2"
     # - "postgresql-contrib"
     # - ...
 
@@ -29,5 +30,6 @@ guest_development_dir: "/home/vagrant/rubber_ring"
 ports:
   - {guest: 3000, host: 3000}
   - {guest: 5000, host: 5000} # for static ruby server: ruby -run -e httpd . -p5000
+  - {guest:   80, host:   80} # for static apache server to test .htaccess file
 
 timezone: "Europe/Ljubljana"
