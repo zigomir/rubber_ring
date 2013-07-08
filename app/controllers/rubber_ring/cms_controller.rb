@@ -9,17 +9,17 @@ module RubberRing
 
     def save
       page = Util.save_page_content(params)
-      expire_and_respond(page)
+      respond(page)
     end
 
     def remove
       page = Page.remove(@options, params[:key])
-      expire_and_respond(page)
+      respond(page)
     end
 
     def save_template
       page = Page.save_or_update_templates(@options)
-      expire_and_respond(page)
+      respond(page)
     end
 
     def add_template
@@ -38,13 +38,12 @@ module RubberRing
 
       response = view_context.content_tag(new_pt.element, view_context.raw(template), content_tag_options)
 
-      expire_page(params[:page_path])
       render :json => {new_template: response}
     end
 
     def remove_template
       page = Page.remove_template(@options)
-      expire_and_respond(page)
+      respond(page)
     end
 
   private

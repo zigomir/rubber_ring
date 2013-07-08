@@ -11,6 +11,9 @@ module RubberRing
       root_url = request.protocol + request.host_with_port
       build_dir = "#{Rails.root.to_s}/public/build"
 
+      # clear previous build
+      FileUtils.rm_rf(build_dir)
+
       cmd = "wget -m -p -E -k -np #{root_url} -P #{build_dir} -nH"
       system(cmd)
     end

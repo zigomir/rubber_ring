@@ -12,7 +12,7 @@ module RubberRing
         convert_image(path, width, height) if File.exist?(path)
       end
 
-      expire_and_respond(page)
+      respond(page)
     end
 
     def convert_image(path, width, height)
@@ -22,7 +22,7 @@ module RubberRing
 
     def save_attachment
       page = Util.save_page_content(params)
-      expire_and_respond(page)
+      respond(page)
     end
 
     def add

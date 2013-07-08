@@ -34,8 +34,7 @@ module RubberRing
       @locale = I18n.locale.to_s
     end
 
-    def expire_and_respond(page)
-      expire_page(params[:page_path])
+    def respond(page)
       render :json => {controller: page.controller, action: page.action, content: page.content}
     end
 

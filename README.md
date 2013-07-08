@@ -52,6 +52,12 @@ Create and migrate database
     rake rubber_ring:install:migrations
     rake db:create db:migrate
 
+Update `development.rb` to enable build. This will disable rails to add `body=1` to every asset link.
+
+```ruby
+config.assets.debug = false
+```
+
 ### Generate config files
 
 	rails generate rubber_ring:install
