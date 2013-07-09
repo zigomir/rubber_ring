@@ -48,7 +48,6 @@ Spork.prefork do
 
     # routes
     config.include Rails.application.routes.url_helpers
-    config.before(:each) { @routes = RubberRing::Engine.routes }
   end
 
 end

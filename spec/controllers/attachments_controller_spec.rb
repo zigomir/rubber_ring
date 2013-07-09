@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe RubberRing::AttachmentsController do
+  before(:each) { @routes = RubberRing::Engine.routes }
 
   it 'should save attachment for the page' do
     xhr :post, :save_image, {

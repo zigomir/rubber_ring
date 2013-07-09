@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe RubberRing::CmsController do
+  before(:each) { @routes = RubberRing::Engine.routes }
 
   it 'should save content for the page' do
     xhr :post, :save, {

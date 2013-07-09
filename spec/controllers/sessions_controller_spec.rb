@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe RubberRing::SessionsController do
+  before(:each) { @routes = RubberRing::Engine.routes }
 
   it 'should display login page' do
     get :new
