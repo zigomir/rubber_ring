@@ -26,9 +26,17 @@ change fonts and text style
 
 * Ruby 2
 * Rails 4
-* multi process web server like `puma`
+* ruby web server running at least 2 processes (puma, unicorn, thin) - I only tested with puma for now
 * imagemagick
 * wget
+
+## Versions
+
+Use `gem 'rubber_ring', '~> 0.1.2'` if you don't want to run multiple processes. Instead you will need to publish each
+change of any page separately.
+
+Use `gem 'rubber_ring', '~> 1.0.0'` if you can have two or more processes of web server. In this version whole site
+will be built in one step.
 
 ### Browser support
 
@@ -83,10 +91,10 @@ already included for you by Rubber Ring (avoiding clashes).
 look for `.html` files first and enter sub directories later. Example: we have page with
 route `/en` and `/en/example`. When published, `en.html` and `en/example.html` will be
 generated and synced with production server. To serve them both we need this `.htaccess` file.
-6. We need to run `Rubber Ring` as `Rails Application` with at least two workers. This is 
-because when doing a request to `/rubber_ring/build` there will also run a `wget` program 
-which will download all `html` files and save them into `public/build` directory. Without 
-more workers we need to must use threads, but with threads we can not accurately tell 
+6. We need to run `Rubber Ring` as `Rails Application` with at least two workers. This is
+because when doing a request to `/rubber_ring/build` there will also run a `wget` program
+which will download all `html` files and save them into `public/build` directory. Without
+more workers we need to must use threads, but with threads we can not accurately tell
 user when `wget` program finishes its job.
 
 ### Run
