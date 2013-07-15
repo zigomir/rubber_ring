@@ -3,9 +3,8 @@ module RubberRing
     include Build
     include Publish
     include Util
-    #require CmsHelper
 
-    before_action :get_options, :except => [:save]
+    before_filter :get_options, :except => [:save]
 
     def save
       page = Util.save_page_content(params)

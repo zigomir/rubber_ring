@@ -9,4 +9,9 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Dummy::Application.config.secret_key_base = 'eff71ab5cfd10a4ae5c68fc8b39bebaa64979e21ed76b6c369727bf82d5907f0e026d1e7cb57e7185717fdda784aca091af4139cdd4bdf529519439af33bf784'
+
+# Rails 4
+#Dummy::Application.config.secret_key_base = 'eff71ab5cfd10a4ae5c68fc8b39bebaa64979e21ed76b6c369727bf82d5907f0e026d1e7cb57e7185717fdda784aca091af4139cdd4bdf529519439af33bf784'
+
+# Rails 3
+Dummy::Application.config.secret_token  = 'eff71ab5cfd10a4ae5c68fc8b39bebaa64979e21ed76b6c369727bf82d5907f0e026d1e7cb57e7185717fdda784aca091af4139cdd4bdf529519439af33bf784'

@@ -2,7 +2,7 @@ module RubberRing
   class Page < ActiveRecord::Base
     attr_accessor :edit_mode, :title
     has_many :page_contents
-    has_many :page_templates, -> { order(:sort) }
+    has_many :page_templates, :order => 'sort'
 
     def self.save_or_update(options)
       page, page_content = get_page_and_content(options, :content)
@@ -55,7 +55,7 @@ module RubberRing
     def self.add_template(options)
       page, content = get_page_and_content(options, :content)
 
-      last = RubberRing::PageTemplate.all.order(:sort).last
+      last = RubberRing::PageTemplate.order(:sort).last
       pt = RubberRing::PageTemplate.where('id = ?', content['index']).first_or_initialize()
 
       new_pt      = pt.id.nil? ? last.dup : pt.dup

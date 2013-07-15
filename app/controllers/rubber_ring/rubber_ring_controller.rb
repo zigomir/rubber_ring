@@ -2,8 +2,7 @@ module RubberRing
   class RubberRingController < ActionController::Base
     layout 'rubber_ring/layout'
 
-    before_action :load_page_content, :set_locale
-    before_filter :admin?
+    before_filter :load_page_content, :set_locale, :admin?
 
     def load_page_content
       page = Page.where(
