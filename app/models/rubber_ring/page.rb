@@ -1,5 +1,7 @@
 module RubberRing
   class Page < ActiveRecord::Base
+    attr_accessible :controller, :action, :locale
+
     attr_accessor :edit_mode, :title
     has_many :page_contents
     has_many :page_templates, :order => 'sort'

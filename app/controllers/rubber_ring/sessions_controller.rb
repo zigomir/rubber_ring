@@ -5,13 +5,16 @@ module RubberRing
 
     def destroy
       session[:password] = nil
-      redirect_to main_app.root_path
+
+      # because main_app.root_path might not be defined
+      redirect_to '/'
     end
 
     def create
       if params[:password] == RubberRing.admin_password
         session[:password] = params[:password]
-        redirect_to main_app.root_path
+
+        redirect_to '/'
       else
         flash.now[:error] = 'Wrong password'
         render :new

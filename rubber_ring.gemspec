@@ -22,7 +22,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'sass-rails', '~> 3.2.3'
   s.add_dependency 'coffee-rails', '~> 3.2.1'
 
-  s.add_dependency 'jquery-rails', '~> 2.3.0'
+  s.add_dependency 'jquery-rails', '~> 2.2.1'
   s.add_dependency 'image_sorcery'
   s.add_dependency 'fastimage'
   s.add_dependency 'rr_publish'

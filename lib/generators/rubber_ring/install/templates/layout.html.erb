@@ -14,7 +14,7 @@
 
 <%# Including jQuery for custom pages here, because else we have clashes with rails-jquery which can not be copied to %>
 <%# build because it is inside gem directory %>
-<% if not @admin or @page_caching %>
+<% unless @admin %>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.0/jquery.min.js"></script>
 <% end %>
 <%= javascript_include_tag 'application' %>
