@@ -13,3 +13,5 @@ gemspec
 # To use debugger
 # gem 'debugger'
 
+gem 'spring', path: 'spring'
+gem 'spring-commands-rspec'

@@ -27,9 +27,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'fastimage'
   s.add_dependency 'rr_publish'
 
-  s.add_development_dependency 'puma'
   s.add_development_dependency 'sqlite3'
   s.add_development_dependency 'rspec-rails'
-  s.add_development_dependency 'spork'
-  s.add_development_dependency 'uglifier'
+  s.add_development_dependency 'therubyracer'
 end

@@ -1,0 +1,1 @@
+cookbook 'rainbox', path: '~/.rainbox'

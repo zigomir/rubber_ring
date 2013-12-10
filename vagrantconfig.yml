@@ -1,35 +1,19 @@
-# Default config for Vagrant
-
-# Don't change this; use vagrantconfig_local.yml to override these
-# settings instead.
-
-conf:
-  ruby_version: "2.0.0-p247"
-  databases:
-    - "sqlite3"
-
-  packages:
-    - "vim"
-    - "git"
-    - "nodejs"
-    - "apache2"
-    # - "postgresql-contrib"
-    # - ...
-
-name: "rubber_ring"
-
-box_name: "precise64"
-box_url: "http://files.vagrantup.com/precise64.box"
-
-memory: 512 # megabytes for VM
-guest_ip: "192.168.2.60"
-
-host_development_dir: "~/development/rubber_ring"
-guest_development_dir: "/home/vagrant/rubber_ring"
+project_name: rubber_ring
+box_name: precise64
+box_url: http://files.vagrantup.com/precise64.box
+memory: 512
+guest_ip: 3.3.3.3
 
 ports:
   - {guest: 3000, host: 3000}
-  - {guest: 5000, host: 5000} # for static ruby server: ruby -run -e httpd . -p5000
-  - {guest:   80, host:   80} # for static apache server to test .htaccess file
 
-timezone: "Europe/Ljubljana"
+chef_conf:
+  databases:
+    - sqlite3
+
+  packages:
+    - vim
+
+  languages:
+    ruby:
+      version: 2.0.0-p353

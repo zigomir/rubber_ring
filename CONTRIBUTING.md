@@ -9,21 +9,27 @@ For quick setup you can use [this project](https://github.com/zigomir/rvdb) and 
 
 First install software dependencies, listed in [README.md](README.md#dependencies) file.
 
-    cd test/dummy
-    rake db:create
-    rake db:migrate
-    rake db:migrate RAILS_ENV=test
+```bash
+cd test/dummy
+RAILS_ENV=test rake db:create db:migrate db:migrate
+```
 
 ## Running ruby tests
 
-    rspec spec
+```bash
+spring rspec spec
+```
 
 ## Running javascript tests
 
 First you need to install `node.js`, `karma` test runner and [phantom.js](http://phantomjs.org/download.html) headless WebKit browser
 
-	npm install -g karma
+```bash
+npm install -g karma
+```
 
 To run the tests just run
 
-	cd spec && karma start
+```bash
+cd spec && karma start
+```
