@@ -14,7 +14,7 @@
           </li>
           <% if RubberRing.static_only %>
             <li>
-              <%= link_to 'Build & Publish', rubber_ring.build_path %>
+              <%= link_to 'Build & Publish', rubber_ring.build_path, target: '_blank' %>
             </li>
           <% end %>
           <li class="alert-saved">
@@ -100,6 +100,8 @@
 
     App.add_attachment_path    = "<%= rubber_ring.cms_add_attachment_path %>";
     App.remove_attachment_path = "<%= rubber_ring.cms_remove_attachment_path %>";
+
+    App.check_build_finished_path = "<%= rubber_ring.check_build_finished_path %>";
 
     App.config = {
       action_btns: {

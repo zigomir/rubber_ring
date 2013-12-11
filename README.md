@@ -26,6 +26,7 @@ change fonts and text style
 
 * Ruby 2
 * Rails 4
+* sqlite3
 * imagemagick
 * wget
 

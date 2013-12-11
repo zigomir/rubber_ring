@@ -5,14 +5,19 @@ memory: 512
 guest_ip: 3.3.3.3
 
 ports:
+  - {guest: 80,   host: 80}
   - {guest: 3000, host: 3000}
 
 chef_conf:
+  servers:
+    - apache2
+
   databases:
     - sqlite3
 
   packages:
     - vim
+    - imagemagick
 
   languages:
     ruby:

@@ -1,3 +1,9 @@
+<div class="tbs loading">
+  <div class="alert alert-success">
+    Building...
+  </div>
+</div>
+
 <div class="tbs hide">
   <div class="alert alert-success">
     Site was build and saved.
@@ -9,21 +15,4 @@
   <%= link_to 'Publish', publish_path, class: 'btn btn-primary' %>
 </div>
 
-<!--TODO: move to coffee!-->
-<script>
-  $(function() {
-
-    var check = function() {
-      // TODO: remove hard coded url
-      $.get('/rubber_ring/check', function(buildFinished) {
-
-        if (buildFinished) {
-          window.clearInterval(intervalId);
-          $(".tbs").removeClass("hide");
-        }
-      });
-    };
-
-    var intervalId = window.setInterval(check, 500);
-  });
-</script>
+<%= javascript_include_tag 'extra/build' %>

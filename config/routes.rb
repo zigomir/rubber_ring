@@ -5,7 +5,7 @@ RubberRing::Engine.routes.draw do
   post 'login',  :to => 'sessions#create',  :as => 'login'
 
   get  'build',    :to => 'rubber_ring#build',   :as => 'build'
-  get  'check',    :to => 'rubber_ring#check',   :as => 'check'
+  get  'check',    :to => 'rubber_ring#check',   :as => 'check_build_finished'
   get  'publish',  :to => 'rubber_ring#publish', :as => 'publish'
 
   post 'cms/save', :to => 'cms#save', :as => 'cms_save'
