@@ -15,7 +15,10 @@ module RubberRing
       FileUtils.rm_rf(build_dir)
 
       cmd = "wget -m -p -E -k -np #{root_url} -P #{build_dir} -nH"
-      system(cmd)
+      thread = Thread.new do
+        system(cmd)
+      end
+      thread
     end
 
   end

@@ -18,15 +18,12 @@ module RubberRing
     end
 
     def build
-      # when running with puma and multiple workers this is the best option
-      Build.run!(request)
+      @@thread = Build.run!(request)
+    end
 
-      # when running with single process server, new thread needs to be spawn
-      # downside of this option is, that we can not know when build is completed
-
-      #Thread::new{
-      #  Build.run!(request)
-      #}
+    # Check if build has finished
+    def check
+      render json: !@@thread.alive?
     end
 
     def publish

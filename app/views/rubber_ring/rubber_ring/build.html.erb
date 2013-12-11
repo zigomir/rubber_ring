@@ -1,4 +1,10 @@
-<div class="tbs">
+<div class="tbs loading">
+  <div class="alert alert-success">
+    Building...
+  </div>
+</div>
+
+<div class="tbs hide">
   <div class="alert alert-success">
     Site was build and saved.
   </div>
@@ -6,6 +12,7 @@
   <div class="alert alert-info">
     All linked pages are now ready for publishing...
   </div>
-
   <%= link_to 'Publish', publish_path, class: 'btn btn-primary' %>
 </div>
+
+<%= javascript_include_tag 'extra/build' %>

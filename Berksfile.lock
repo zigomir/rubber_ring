@@ -1,0 +1,46 @@
+{
+  "sources": {
+    "rainbox": {
+      "path": "../../.rainbox"
+    },
+    "postgresql": {
+      "locked_version": "3.3.4"
+    },
+    "apt": {
+      "locked_version": "2.3.0"
+    },
+    "build-essential": {
+      "locked_version": "1.4.2"
+    },
+    "openssl": {
+      "locked_version": "1.1.0"
+    },
+    "rbenv": {
+      "locked_version": "1.6.5"
+    },
+    "git": {
+      "locked_version": "2.7.0"
+    },
+    "dmg": {
+      "locked_version": "2.0.8"
+    },
+    "yum": {
+      "locked_version": "2.4.2"
+    },
+    "windows": {
+      "locked_version": "1.11.0"
+    },
+    "chef_handler": {
+      "locked_version": "1.1.4"
+    },
+    "runit": {
+      "locked_version": "1.4.0"
+    },
+    "ohai": {
+      "locked_version": "1.1.12"
+    },
+    "apache2": {
+      "locked_version": "1.8.4"
+    }
+  }
+}
