@@ -1,4 +1,4 @@
-<div class="tbs">
+<div class="tbs hide">
   <div class="alert alert-success">
     Site was build and saved.
   </div>
@@ -6,6 +6,24 @@
   <div class="alert alert-info">
     All linked pages are now ready for publishing...
   </div>
-
   <%= link_to 'Publish', publish_path, class: 'btn btn-primary' %>
 </div>
+
+<!--TODO: move to coffee!-->
+<script>
+  $(function() {
+
+    var check = function() {
+      // TODO: remove hard coded url
+      $.get('/rubber_ring/check', function(buildFinished) {
+
+        if (buildFinished) {
+          window.clearInterval(intervalId);
+          $(".tbs").removeClass("hide");
+        }
+      });
+    };
+
+    var intervalId = window.setInterval(check, 500);
+  });
+</script>
